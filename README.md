@@ -53,6 +53,10 @@ From within R, run
 
 to install packages used by the code in this repository
 
+## Python version
+
+This code was developed using Python 3.11
+
 
 ## Reproducing BILA data set
 
