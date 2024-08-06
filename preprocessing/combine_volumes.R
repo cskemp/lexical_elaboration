@@ -12,11 +12,8 @@ pos <- args[1]
 
 expect_true(pos == "noun" | pos == "nounverbadj")
 
-# XXX: CK changed on 5/13/24
-#counts_path <- here("data", "biladataset", paste0("dictionary_counts_", pos, ".csv"))
 counts_path <- here("data/forpreprocessing", paste0("dictionary_counts_", pos, ".csv"))
 
-# XXX: are these files written to the right place? (5/13/24)
 out_path <- here("data", "biladataset", paste0("bila_long_", pos, "_unfiltered_full.csv"))
 out_path_wide <- here("data", "biladataset", paste0("bila_matrix_", pos, "_unfiltered_full.csv"))
 

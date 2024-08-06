@@ -31,7 +31,7 @@ where `htid2rsync` is a command line utility installed as part of the htrc-featu
 
 5. Counts for all volumes in `02_with_gcodes.csv` were downloaded using
 
-    `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/ hathi_trust_raw/`
+    `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/ ../../rawdata/downloaded/hathi_raw/`
 
 # Phase 2 coding process
 

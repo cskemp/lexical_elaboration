@@ -4,13 +4,15 @@ See `hathitrust/README.md` for the process we followed to assemble the set of di
 
 For each dictionary, we then assembled counts for the set of tokens including nouns, verb, adjectives (`nounverbadj`), and the set of tokens including nouns only (`noun`). In what follows, we illustrate the steps using `nounverbadj` as an example. 
 
-1. Phase 1: go through all dictionaries and keep the most frequent 1500 English forms in each dictionary that have noun, verb or adj as their most common POS tag according to COCA:
+1. Run `make_whitelist.R` and `python add_pos_to_whitelist.py` to make a whitelist `../data/forpreprocessing/whitelist_pos.csv` of words to keep even if they fall below the threshold `mincounts` used in `read_ht_file.py` (step 2). All words on the whitelist are relevant to the analysis of existing claims and case studies. 
+
+2. Phase 1: go through all dictionaries and keep the most frequent 1500 English forms in each dictionary that have noun, verb or adj as their most common POS tag according to COCA:
 
 `find ../rawdata/downloaded/hathi_raw/*.json.bz2| parallel --eta --jobs 90% -n 50 python read_ht_file.py --phase 1 --pos nounverbadj`
 
-POS tags and COCA frequencies are stored in `../data/forpreprocessing/wordpos.p` and `../data/forpreprocessing/wordposcounts.p`, and were created using `readcoca.py`.
+(where `parallel` is a UNIX command-line utility)
 
-2. Run `make_whitelist.R` and `python add_pos_to_whitelist.py` to make a whitelist `../data/forpreprocessing/whitelist_pos.csv` of words to keep even if they fall below the threshold `mincounts` used in `read_ht_file.py` (step 1). All words on the whitelist are relevant to the analysis of existing claims and case studies. 
+POS tags and COCA frequencies are stored in `../data/forpreprocessing/wordpos.p` and `../data/forpreprocessing/wordposcounts.p`, and were created using `readcoca.py`.
 
 3. Assemble the complete set of forms recorded during Phase 1, and add UK variant spellings for all forms and forms from the whitelist. Tokens that have missing POS tags are added to both `nounverbadj` and `noun` versions.
 

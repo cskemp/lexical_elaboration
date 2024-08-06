@@ -77,16 +77,16 @@ B. Assemble the set of dictionaries from HathiTrust (see `../preprocessing/hathi
 
 6) Convert the IDs of all volumes in the final list using `htid2rsync --from-file 02_hathi_ids.txt > 02_hathi_ids_sanitized.txt`, where `htid2rsync` is a command line utility installed as part of the htrc-feature-reader package.
 
-7) Download counts for all volumes in the final list using `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/ C:/Users/tkhishigsure/OneDrive - The University of Melbourne/Documents/github/lexical_elaboration/rawdata/downloaded/hathi_raw/`. Change the file path as needed.
+7) Download counts for all volumes in the final list using `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/ ../../rawdata/downloaded/hathi_raw/`. Change the path as needed.
 
 
-C. Assemble unigram frequencies (see `../preprocessing/README.md`).
+C. Assemble unigram frequencies (see `../preprocessing/README.md`). Steps 3 through 8 assemble counts for nouns, verbs and adjectives -- the same steps should be repeated using "--pos noun" to assemble counts for nouns alone.
 
-1) First run `readcoca.py` to create POS tags and COCA frequencies.
+1) First run `python readcoca.py` to create POS tags and COCA frequencies.
 
-2) Run `find ../rawdata/downloaded/hathi_raw/*.json.bz2| parallel --eta --jobs 90% -n 50 python read_ht_file.py --phase 1 --pos nounverbadj` to go through all dictionaries and keep the most frequent 1500 English forms ("Phase 1 vocabulary") in each dictionary that have noun, verb or adj as their most common POS tag according to COCA.
+2) Run `make_whitelist.R` and `python add_pos_to_whitelist.py` to make a whitelist of words relevant to the analysis of existing claims and case studies.
 
-3) Run `make_whitelist.R` and `python add_pos_to_whitelist.py` to make a whitelist of words relevant to the analysis of existing claims and case studies.
+3) Run `find ../rawdata/downloaded/hathi_raw/*.json.bz2| parallel --eta --jobs 90% -n 50 python read_ht_file.py --phase 1 --pos nounverbadj` to go through all dictionaries and keep the most frequent 1500 English forms ("Phase 1 vocabulary") in each dictionary that have noun, verb or adj as their most common POS tag according to COCA. Note that `parallel` is a UNIX command-line utility.
 
 4) Run `python make_vocab.py --pos nounverbadj ../data/forpreprocessing/nounverbadj_counts_phase1/*.csv` to assemble the complete set of forms recorded during Phase 1, and add UK variant spellings for all forms and forms from the whitelist.
 

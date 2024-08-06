@@ -6,7 +6,7 @@ import pickle
 # Make dictionary with Phase one vocabulary and words on whitelist
 
 def make_dict(args):
-    outfile= '../data/forpreprocessing/nounverbadj_counts_phase1/' + args.pos + '_vocab.p'
+    outfile= '../data/forpreprocessing/' + args.pos + '_vocab.p'
 
     uk_us_file= '../rawdata/downloaded/uk_us_spelling.csv'
     uk_us= pd.read_csv(uk_us_file)
