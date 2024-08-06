@@ -1,0 +1,949 @@
+---
+title: "Analysis of claims"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(janitor)
+library(igraph)
+library(kableExtra)
+library(tidylo)
+library(glmmTMB)
+library(broom.mixed)
+library(furrr)
+source("bind_weights_par.R", local = knitr::knit_global())
+library(data.table)
+library(dplyr)
+library(readxl)
+library(lme4)
+library(gridExtra)
+library(tibble)
+library(lingtypology)
+library(testthat)
+library(patchwork)
+library(ggplot2)
+library(ggrepel)
+library(grid)
+library(xtable)
+library(see)
+library(lemon)
+
+select <- dplyr::select
+```
+
+This notebook contains analysis of existing claims (see the main text section called "Testing 163 proposed examples of lexical elaboration"). It generates Figure 1 in the main text, and Table S1 and Figure S3 in the Supporting Material.
+
+
+##Assign glottocodes for language groups
+
+We'll create a list of glottocodes for language groups from the list of dictionaries in BILA.
+
+Load BILA master file and collection of existing claims:
+
+```{r loaddata, include=TRUE}
+dict_path <- here("data", "biladataset", "bila_dictionaries.csv")
+claims_path <- here("rawdata", "manuallycreated", "examples_of_lexical_elaboration.csv")
+
+# we'll use WALS to assign country codes to the dictionaries in BILA
+wals <- read_csv(here("rawdata", "downloaded", "wals_languages.csv"), show_col_types = FALSE) %>%
+  rename(glottocode=Glottocode, countries=Country_ID) %>%
+  group_by(glottocode) %>%
+  summarize(countries = paste(countries, collapse = " ")) %>%
+  filter(!is.na(glottocode))
+
+dict <- read_csv(dict_path, show_col_types = FALSE) %>%
+  select("glottolog_langname", "langfamily", "glottocode", "area", "affiliation") %>%
+  unique() %>%
+  left_join(wals %>% select(glottocode, countries), by = "glottocode") %>%
+  rename(gcode = glottocode, langname = glottolog_langname) %>%
+  mutate(langname_parts = str_split(langname, pattern = " "),
+         affiliation_parts = str_split(affiliation, pattern = ", "),
+         countries_list = map(str_split(countries, pattern = " "), ~ unique(.)))
+
+claims_full <- read_csv(claims_path, show_col_types = FALSE) 
+```
+
+Explore and check consistency of the collection:
+
+```{r consistencycheck, include=TRUE}
+# the collection includes 122 unique concepts in 182 language or language groups
+expect_equal(length(unique(claims_full$combo_name)), 122)
+expect_equal(length(unique(subset(claims_full %>% filter(basic == 1))$combo_name)), 102)
+expect_equal(length(unique(subset(claims_full %>% filter(basic == 0))$combo_name)), 20)
+
+singlelangs <- claims_full %>% filter(level=="single") %>% select(gcode) %>% unique()
+langroups <- claims_full %>% filter(level=="group") %>% select(gcode_rule, ref_name) %>% unique()
+expect_equal(nrow(singlelangs), 136)
+expect_equal(nrow(langroups), 46)
+expect_equal(sum(nrow(singlelangs), nrow(langroups)), 182)
+
+# let's check consistency, no missing values should be expected for following
+expect_equal(claims_full %>% filter(is.na(langname)) %>% nrow(), 0)
+expect_equal(claims_full %>% filter(is.na(level)) %>% nrow(), 0)
+expect_equal(claims_full %>% filter(is.na(concept)) %>% nrow(), 0)
+expect_equal(claims_full %>% filter(is.na(domain)) %>% nrow(), 0)
+expect_equal(claims_full %>% filter(is.na(basic)) %>% nrow(), 0)
+# no missing values in combo_name and source columns should be expected for those with lists of words
+withwordlist <- claims_full %>% filter(!is.na(word_list))
+expect_equal(sum(is.na(withwordlist$combo_name)), 0)
+expect_equal(sum(is.na(withwordlist$source)), 0)
+
+# 95 unique concepts have word lists, out of which 81 basic and 14 superordinates
+expect_equal(length(unique(withwordlist$combo_name)), 95)
+expect_equal(length(unique(subset(withwordlist %>% filter(basic == 1))$combo_name)), 81)
+expect_equal(length(unique(subset(withwordlist %>% filter(basic == 0))$combo_name)), 14)
+
+# we'd expect each unique combo_name must correspond to a unique word_list, no duplicates must be found
+expect_equal(length(unique(withwordlist$combo_name)), length(unique(withwordlist$word_list)))
+# no missing values should be expected for following
+expect_equal(claims_full %>% filter(is.na(sign)) %>% nrow(), 0)
+expect_equal(claims_full %>% filter(is.na(reference)) %>% nrow(), 0)
+expect_equal(claims_full %>% filter(is.na(scholarly)) %>% nrow(), 0)
+```
+
+We'll first assign glottocodes for language groups that don't rely on country codes:
+
+```{r assignglottocode, include=TRUE}
+claims <- claims_full %>%
+  filter(level == "group") %>%
+  #remove country cases for now, we'll add them later
+  filter(!(gcode_rule %in% c("region_equals_to", "subregion_equals_to", "country_equals_to")))
+
+gcode_list <- list()
+
+for (i in seq_len(nrow(claims))) {
+  if (claims$gcode_rule[i] == "langfamily_equals_to") {
+    gcode_list[[i]] <- dict$gcode[dict$langfamily == claims$ref_name[i]]
+  } else if (claims$gcode_rule[i] == "area_equals_to") {
+    gcode_list[[i]] <- dict$gcode[dict$area == claims$ref_name[i]]
+  } else if (claims$gcode_rule[i] == "langname_contains") {
+    contains_language <- sapply(dict$langname_parts, function(x) claims$ref_name[i] %in% x)
+    indices <- which(contains_language)
+    gcode_list[[i]] <- if (length(indices) == 0) { NA } 
+    else {dict$gcode[indices]}
+  } else if (claims$gcode_rule[i] == "affiliation_contains") {
+    contains_affiliation <- sapply(dict$affiliation_parts, function(x) claims$ref_name[i] %in% x)
+    indices <- which(contains_affiliation)
+    gcode_list[[i]] <- if (length(indices) == 0) {NA} 
+    else {dict$gcode[indices]}
+  } else {
+    gcode_list[[i]] <- NULL
+  }}
+
+claims$gcode_list <- gcode_list
+
+# let's create a list for cases that rely on country codes
+countries <- read.csv2(here("rawdata", "downloaded", "un_countries.csv")) %>%
+  rename(region="Region.Name", subregion="Sub.region.Name", country="Country.or.Area", code="ISO.alpha2.Code") %>%
+  select(region, subregion, country, code)
+
+country_cases <- claims_full %>%
+  filter(level=="group") %>%
+  filter(gcode_rule %in% c("region_equals_to", "subregion_equals_to", "country_equals_to")) %>%
+  mutate(ref_name_list = map(ref_name, ~str_split(.x, ",\\s*")[[1]]))
+
+countries_list <- list()
+
+for (i in seq_len(nrow(country_cases))) {
+  if (country_cases$gcode_rule[i] == "region_equals_to") {
+    countries_list[[i]] <- countries$code[countries$region == country_cases$ref_name[i]]
+  } else if (country_cases$gcode_rule[i] == "subregion_equals_to") {
+    countries_list[[i]] <- countries$code[countries$subregion %in% unlist(country_cases$ref_name_list[i])]
+  } else if (country_cases$gcode_rule[i] == "country_equals_to") {
+    countries_list[[i]] <- countries$code[countries$country == country_cases$ref_name[i]]
+  } else {
+    countries_list[[i]] <- NULL
+  }
+}
+
+country_cases$countries_list <- countries_list
+
+gcode_list <- list()
+
+for (i in seq_len(nrow(country_cases))) {
+  gcode_list[[i]] <- dict$gcode[sapply(dict$countries_list, function(x) any(x %in% unlist(country_cases$countries_list[i])))]
+}
+
+gcode_list <- lapply(gcode_list, function(x) if (length(x) == 0) NA else x)
+
+country_cases$gcode_list <- gcode_list
+
+country_cases <- country_cases %>%
+  select(-ref_name_list, -countries_list)
+
+# add back country cases
+groups_all <- bind_rows(claims, country_cases)
+
+# we'd expect 15 language groups assigned with no glottocode because no language belonging these language groups is found in BILA
+no_gcodes <- groups_all %>%
+  filter(is.na(gcode_list))
+expect_equal(nrow(no_gcodes), 18)
+expect_equal(nrow(no_gcodes %>% select(gcode_rule, ref_name) %>% unique()), 15)
+```
+
+Remove language groups with no glottocode assigned and single languages absent from BILA.
+
+```{r prepare dataframe, include=TRUE}
+# remove language groups with no glottocode
+groups_with_gcodes <- groups_all %>%
+  filter(!is.na(gcode_list))
+
+# remove single languages which are absent from BILA
+singles_with_gcodes <- claims_full %>%
+  filter(level=="single") %>%
+  filter(gcode %in% dict$gcode) %>%
+  mutate(gcode_list = str_split(gcode, " "))
+expect_equal(length(unique(singles_with_gcodes$gcode)),65)
+
+# 123 claims are excluded due to absent language and groups
+bind_claims <- bind_rows(singles_with_gcodes, groups_with_gcodes) 
+expect_equal(nrow(claims_full) - nrow(bind_claims), 123)
+expect_equal(length(unique(bind_claims$combo_name)), 96)
+
+# 37 claims are further excluded due to concepts where no word list was assigned
+d_claims <- bind_claims %>%
+  filter(!is.na(word_list)) %>%
+  mutate(word_list = str_split(str_replace_all(word_list, "\\s+", ""), ",")) %>%
+  select(langname, level, gcode_list, domain, basic, combo_name, word_list, sign, scholarly)
+expect_equal(nrow(bind_claims) - nrow(d_claims), 37)
+
+d_claims <- d_claims %>%
+  # filter claims that appear more than once in the collection, drawn from different sources
+  unique()
+```
+
+Take out dictionaries where Wiktionary filter was applied.
+
+```{r wiktionaryfilter, include=TRUE}
+
+wikfilter <- read_csv(here("data", "foranalyses", "wiktionary_filtered_combinations.csv"), show_col_types = FALSE)
+
+d_claims_unnested <- d_claims %>%
+  tidyr::unnest(gcode_list) %>%
+  tidyr::unnest(word_list)
+
+filter_single <- d_claims_unnested %>%
+  rename(glottocode=gcode_list, word=word_list) %>%
+  left_join(wikfilter, by = c("glottocode", "word")) %>%
+  filter(!is.na(sum_count), level == "single") %>%
+  select(langname, glottocode, combo_name) %>%
+  unique()
+
+d_claims_unnested <- d_claims_unnested %>%
+  anti_join(filter_single, by=c("langname", "combo_name"))
+
+filter_group <- d_claims_unnested %>%
+  rename(glottocode=gcode_list, word=word_list) %>%
+  left_join(wikfilter, by = c("glottocode", "word")) %>%
+  filter(!is.na(sum_count), level == "group") %>%
+  select(langname, glottocode, combo_name) %>%
+  rename(gcode_list=glottocode) %>%
+  unique() 
+
+d_claims_unnested <- d_claims_unnested %>%
+  anti_join(filter_group, by=c("langname", "gcode_list", "combo_name"))
+
+# we'll use following data frames in subsequent analyses
+d_claims <- d_claims_unnested %>%
+  group_by(langname, level, domain, basic, combo_name, gcode_list, sign, scholarly) %>%
+  mutate(word_list = list(word_list)) %>%
+  ungroup()  %>%
+  unique() %>%
+  group_by(langname, level, domain, basic, combo_name, word_list, sign, scholarly) %>%
+  mutate(gcode_list = list(gcode_list)) %>%
+  ungroup() %>%
+  unique()
+# after wiktionary filtering, 164 claims will be further analyzed
+expect_equal(nrow(d_claims), 164)
+
+# 74 unique combinations of words will be further analyzed
+d_claims_distinct <- d_claims %>%
+  select(combo_name, word_list) %>%
+  unique()
+expect_equal(nrow(d_claims_distinct), 73)
+```
+
+
+##Run hierarchical model
+
+We'll run hierarchical model to compute zeta scores for unique combinations of words. 
+
+Load word count file:
+
+```{r wordcount, include=TRUE}
+
+d_long_path <- here("data", "foranalyses", "d_long.csv")
+#d_long_path <- here("data", "foranalyses", "d_long_robust.csv")
+d_long <- read_csv(d_long_path, show_col_types = FALSE)
+
+d_wide <- d_long %>% 
+  mutate(dict = id, lang = gcode_data, langname = langname_data, family = langfamily_data, population = population_data) %>% 
+  select(dict, lang, langname, family, word, count) %>% 
+  group_by(dict) %>% 
+  # apply smoothing
+  mutate(count = count + 1) %>% 
+  mutate(total = sum(count)) %>% 
+  ungroup()
+
+```
+
+Before combining counts for combinations of words, let's see which words in word lists will be filtered out.
+
+```{r words in stopwords, include=TRUE}
+
+stopwords <- readLines(here("data", "foranalyses", "stopwords.txt"))
+allwords <- d_wide %>%
+  select(word) %>% unique() %>% pull(word)
+
+filter_words_in_stopwords <- function(word_list) {
+  word_list[word_list %in% stopwords]
+}
+
+filter_words_not_in_allwords <- function(word_list) {
+  word_list[!(word_list %in% allwords) & !(word_list %in% stopwords) ]
+}
+
+filter_remaining_words <- function(word_list) {
+  words_in_stopwords <- filter_words_in_stopwords(word_list)
+  words_not_in_allwords <- filter_words_not_in_allwords(word_list)
+  words_filtered <- c(words_in_stopwords, words_not_in_allwords)
+  remaining_words <- setdiff(word_list, words_filtered)
+  if (length(remaining_words) == 0) {
+    return(NA)
+  } else {
+    return(remaining_words)
+  }
+}
+
+wordsinlist <- d_claims_distinct %>%
+  mutate(wordsinstop = map(word_list, filter_words_in_stopwords),
+         wordsabsent = map(word_list, filter_words_not_in_allwords),
+         remainingwords = map(word_list, filter_remaining_words),
+         nwordsinitial = lengths(word_list),
+         nwordsleft = lengths(word_list) - lengths(wordsinstop) - lengths(wordsabsent),
+         nwordsfiltered = lengths(word_list) - nwordsleft) %>%
+  arrange(nwordsleft) %>%
+  filter(nwordsfiltered != 0)
+
+```
+
+Combine counts for combinations of words.
+
+```{r combine counts, include=TRUE}
+# combine counts for each combination of words 
+compute_combo <- function(terms, combo) {
+   result <- d_wide %>%
+     filter(word %in% terms) %>%
+     group_by(dict, lang, langname, family, total) %>%
+     summarise(!!combo := sum(count), .groups = 'drop') %>%
+     pivot_longer(cols = -c(dict, lang, langname, family, total), names_to = "word", values_to = "count") %>%
+     unique()
+   
+   return(result)
+ }
+
+df_list <- list()
+
+for (i in seq_len(nrow(d_claims_distinct))) {
+    terms <- unlist(d_claims_distinct$word_list[i])
+    combo_name <- d_claims_distinct$combo_name[i]
+    df_list[[i]] <- compute_combo(terms, combo_name)
+}
+
+# combine all to single dataframe
+d_combos <- bind_rows(df_list)
+
+# take out wiktionary filtered combos
+comboterm <- suppressWarnings(
+  d_claims_distinct %>%
+    unnest(word_list) %>%
+    rename(word = word_list) %>%
+    left_join(wikfilter, by = "word") %>%
+    filter(!is.na(glottocode)) %>%
+    select(combo_name, glottocode) %>%
+    rename(word = combo_name, lang = glottocode) %>%
+    distinct()
+)
+
+d_combos <- d_combos %>%
+  anti_join(comboterm, by=c("lang", "word"))
+
+# cases of words in stopwords result in 1 missing combinations, which reduces unique combinations to 72 in size. 
+combos <- d_combos %>%
+  rename(combo_name = word) %>%
+  group_by(combo_name) %>%
+  slice(1) %>%
+  select(combo_name)
+missing_combos <- d_claims_distinct %>%
+  anti_join(combos, by="combo_name")
+expect_equal(nrow(missing_combos), 1)
+expect_equal(nrow(combos), 72)
+
+# this further reduces claims to be analyzed to 163 in size.
+d_claims <- d_claims %>%
+  filter(!combo_name %in% missing_combos$combo_name)
+expect_equal(nrow(d_claims), 163)
+```
+
+Run hierarchical model to compute L^lang score.
+
+```{r logisticregression, include=TRUE, eval=FALSE}
+
+weights_lr_combos <- bind_weights_par(d_combos)
+
+# write results for all languages in BILA
+claims_lr_full <- weights_lr_combos %>%
+  rename(gcode = lang) %>%
+  left_join(dict %>% select(gcode, langname, langfamily, area), by = "gcode") %>%
+  rename(glottocode=gcode, combo_name=word) %>%
+  arrange(desc(zeta)) %>%
+  #write_csv(here("output", "results", "claims_lr_lang_full.csv"))
+  write_csv(here("output", "results", "claims_lr_lang_full_robust.csv"))
+
+# write results for languages that appear in the collection of claims
+claims_lr <- d_claims %>%
+  rename(groupname=langname) %>%
+  tidyr::unnest(gcode_list) %>%
+  rename(glottocode=gcode_list) %>%
+  left_join(claims_lr_full %>% select(glottocode, langname, combo_name, convergence, convergence_set, zeta), by=c("glottocode", "combo_name")) %>%
+  unique() %>%
+  arrange(desc(zeta)) %>%
+  mutate(words = map_chr(word_list, str_c, collapse = ", ")) %>%
+  select(-word_list) %>%
+  #write_csv(here("output", "results", "claims_lr_lang.csv"))
+  write_csv(here("output", "results", "claims_lr_lang_robust.csv"))
+
+```
+
+
+##Explore results
+
+We'll make summary tables in three forms--expanded, default, and compressed. Expanded table contains rank scores for single languages (those in the collection as well those comprising language groups). Default table contains 191 cases of claims, with average score calculated for each language group. Compressed table is a unique combination of sign and concept, with mean rank calculated for each combination.
+
+```{r make tables, include=TRUE}
+
+claims_lr_full <- read_csv(here("output", "results", "claims_lr_lang_full.csv"))
+
+# no convergence issues must be found
+expect_equal(nrow(claims_lr_full %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
+
+# compute ranking
+claims_nested <- claims_lr_full %>%
+  group_by(combo_name) %>%
+  nest()
+
+rank_within_nest <- function(df) {
+  df %>%
+    mutate(rank = frank(zeta, ties.method = "random") / max(frank(zeta, ties.method = "random"))) %>%
+    ungroup()
+}
+
+claims_nested <- claims_nested %>%
+  mutate(data = map(data, rank_within_nest))
+
+claims_with_rank <- claims_nested %>%
+  unnest(data)
+
+claims_lr <- read_csv(here("output", "results", "claims_lr_lang.csv"))
+
+# combine all scores
+allscores <- claims_lr %>%
+  left_join(claims_with_rank %>% select(glottocode, combo_name, rank), by=c("glottocode", "combo_name")) %>%
+  unique()
+
+# expanded table
+expanded <- allscores %>%
+  select(sign, combo_name, scholarly, groupname, level, langname, glottocode, zeta, rank) %>%
+  rename(concept=combo_name) %>%
+  unique()  %>%
+  mutate(concept = str_replace(concept, "combo$", ""),
+         scholarly = ifelse(scholarly == 1, "scholarly", "non-scholarly")) %>%
+  arrange(desc(rank)) %>%
+  arrange(desc(sign))
+
+# default table
+default_first <- expanded %>%
+  group_by(sign, concept, scholarly, groupname, level) %>%
+  summarise(
+    rank = mean(rank, na.rm = TRUE), .groups = "drop"
+  ) %>%
+  ungroup() %>%
+  arrange(desc(rank)) %>%
+  arrange(desc(sign))
+
+# add glottlog langname to default table
+default_single <- default_first %>%
+  filter(level == "single") %>%
+  left_join(expanded %>% select(groupname, langname), by = "groupname") %>%
+  unique() %>% select(-groupname) %>%
+  rename(groupname=langname)
+
+default_group <- default_first %>% filter(level == "group")
+default <- bind_rows(default_single, default_group)
+
+# compressed table by concept
+compressed <- default %>%
+  group_by(sign, concept) %>%
+  summarise(
+    rank = mean(rank, na.rm = TRUE), .groups = "drop"
+  ) %>%
+   ungroup() %>%
+  arrange(desc(rank)) %>%
+  arrange(desc(sign))
+```
+
+Create a main figure:
+
+```{r final plot, include=TRUE}
+
+wordsincase <- c("snowcombo", "icecombo", "raincombo", "windcombo", "smellcombo", "tastecombo", "dancecombo")
+
+set.seed(123) # for reproducibility when using geom_jitter
+
+theme_font <- theme(
+  text = element_text(size = 10),  # Font size for all text elements
+  axis.title = element_text(size = 10),  # Font size for axis titles
+  axis.text = element_text(size = 9),  # Font size for axis labels
+) 
+update_geom_defaults("text", list(size = 3))
+
+langsnotinclaims_zeta <- claims_lr_full %>%
+  filter(combo_name %in% wordsincase) %>%
+  anti_join(claims_lr, by = c("glottocode", "combo_name")) %>%
+  rename(concept=combo_name) %>%
+  mutate(concept = str_replace(concept, "combo$", "")) %>%
+  select(concept, langname, glottocode, zeta) %>%
+  mutate(sign="not in claims")
+
+langsinclaims_zeta <- claims_lr %>%
+  filter(combo_name %in% wordsincase) %>%
+  select(sign, combo_name, langname, zeta) %>%
+  rename(concept=combo_name) %>%
+  unique()  %>%
+  mutate(concept = str_replace(concept, "combo$", ""))
+
+allincases_zeta <- bind_rows(langsnotinclaims_zeta, langsinclaims_zeta) %>%
+  filter(sign != "negative")
+
+  snowcases <- allincases_zeta %>% 
+    filter(concept == "snow") %>%
+  mutate(concept = "")
+zmedian <- median(snowcases$zeta)
+
+# make alternative with 5 Inuit languages
+
+inuit_languages <- c("Eastern Canadian Inuktitut", "Western Canadian Inuktitut", "Aleut", "Central Siberian Yupik", "North Alaskan Inupiatun")
+other_snow <- c("Plains Cree", "Lakota", "Japanese", "Scots", "Navajo", "Dakota", "Ahtena", "Mi'kmaq", "North Saami", "Dena'ina", "Tibetan", "Central Carrier", "Tanacross", "Tamil", "Cebuano", "Amharic", "Sinhala")
+
+snowcases_inuit <- snowcases %>% 
+  filter( langname %in% inuit_languages)
+  
+snowcases_labeled<- snowcases %>% 
+  filter( langname %in% inuit_languages | langname %in% other_snow) %>% 
+  mutate(tcolor = if_else(langname %in% inuit_languages, "red", "black"))
+
+plot_snow_zeta_half <- snowcases %>%
+  ggplot(aes(x=1, y = zeta)) +
+  geom_violinhalf(flip = TRUE) +
+  xlim(-1, 4)+
+  #ggplot(aes(x=zeta)) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth= 0.3)  +
+  geom_dotplot(data = snowcases_inuit, binaxis = "y", stackdir = "down", dotsize = 1, binwidth= 0.3, fill="red", color="red")  +
+  theme_classic() +
+  geom_text_repel(data = snowcases_labeled, aes(x=1,y = zeta, label = langname, color = tcolor), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  scale_color_manual(values = c("black", "red")) +
+  theme(legend.position="none") + 
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
+  labs(x="", y=expression(L^{lang} * " for SNOW"), title = "") +
+  theme_font 
+plot_snow_zeta_half
+
+default_p <- default %>%
+  filter(sign == "positive" & scholarly == "scholarly") %>%
+  mutate(concept = case_when(
+    concept == "timeofday" ~ "time of day",
+    concept == "bodyparts" ~ "body parts",
+    TRUE ~ as.character(concept)),
+         groupname = case_when(
+      groupname == "Australian languages" ~ "Australian",
+      groupname == "Southeast asian" ~ "Southeast Asian",
+      groupname == "East and southeast asian" ~ "East & Southeast Asian",
+      groupname == "Oceanic languages" ~ "Oceanic",
+      groupname == "Suahili"  ~ "Swahili",
+      TRUE ~ as.character(groupname)))
+
+default_p_all <- default_p %>% 
+  mutate(claim = paste0(toupper(concept), ", ", groupname))
+
+labela <- default_p_all %>% filter(rank < 0.48) %>% select(claim) %>% pull(claim)
+
+labelb <- c("SMELL, Yue Chinese", "DOCTOR, Hindi", "DANCE, Hindi",
+             "TASTE, Lao", "EMOTION, Thai", "SNAKE, Arabic", "INSECTS, Navajo",
+             "TREE, Venda", "EMOTION, Southeast Asian",
+             "ACORN, Yana", "BODY PARTS, Aleut", "FRIEND, Russian",
+             "SNOW, Eskimo-Aleut", "WIND, Oceanic",
+             "ICE, Yupik", "SMELL, Thao", "TASTE, Japanese", "GLANCE, Hindi",
+             "JUDGE, Swahili", "SIGHT, Yana", "ANT, Mizo", "TREE, Mi'kmaq",
+            "BIRD, Papua New Guinea", "GARDENING, Oceanic", "TOGETHERNESS, Iraqw",
+            "STARS, Australian", "TIME OF DAY, Hausa")
+
+labeled <- unique(c(labela, labelb))
+
+drop <- c("WEATHER, East & Southeast Asian", "SMELL, Arabic", "SMELL, French", "SMELL, Jehai")
+
+default_p_unlabeled <- default_p_all %>% 
+  filter( !(claim %in% labeled) )
+
+default_p_labeled <- default_p_all %>% 
+  filter( claim %in% labeled & !(claim %in% drop)) %>% 
+  mutate(dot_color= if_else(claim == "SNOW, Eskimo-Aleut", "red", "black")) 
+
+eskimosnow <- default_p_all %>% 
+  filter( claim %in% "SNOW, Eskimo-Aleut" )
+
+# make alternative with dotplot rather than jitter
+
+default_plot_dot <- default_p %>%
+  ggplot(aes(x=1, y=rank)) +
+  geom_segment( aes(x=0.5, xend=1,y=0.5,yend=0.5), linetype = "dashed", size = 0.5, color = "gray") +
+  geom_segment( aes(x=0.5, xend=1,y=0.95,yend=0.95), linetype = "dashed", size = 0.5, color = "gray") +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  xlim(0.5, 1.7) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth= 0.025)  +
+  geom_dotplot(data = eskimosnow, binaxis = "y", stackdir = "down", dotsize = 0.05, binwidth= 0.3, fill="red", color="red")  +
+  geom_text_repel(data = default_p_labeled, aes(x=1,y = rank, label = claim, color=dot_color), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  scale_color_manual(values = c("black", "red")) +
+  labs(x="", y="rank", title = "") +
+  theme_classic() +
+  theme(legend.position="none") + 
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
+  #scale_y_continuous(limits = c(0, 1), expand = expansion(add = c(0, 0.2)))  +
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.25, 0.5, 0.75, 1), expand = expansion(add = c(0, 0.1))) +
+  coord_capped_cart(left='top') +
+  theme_font 
+default_plot_dot
+```
+
+Plot results broken down by semantic domain
+
+```{r final plot, include=TRUE}
+# Look at results by IDS chapter
+ids_features <- read_csv(here("rawdata", "downloaded", "ids_parameters.csv")) %>% 
+  separate_wider_delim(ID, "-", names=c("chapter", "conceptID")) %>% 
+  mutate(concept = str_replace(Name, "\\s*\\(.*\\)", "")) %>% 
+  mutate(concept = str_replace(concept, "\\s*[=|,].*", ""))  %>% 
+  mutate(chapter = as.numeric(chapter)) 
+
+ids_chapters <- read_csv(here("rawdata", "downloaded", "ids_chapters.csv")) %>%  
+  rename(chapter = ID, chapter_name = "Description")
+
+default_p_ids <- default_p %>%
+  left_join(ids_features, by = "concept") %>% 
+  mutate(chapter = if_else(concept %in% c("rock", "soil", "lava", "stars", "wind"), 1, chapter)) %>% 
+  mutate(chapter = if_else(concept %in% c("reindeer", "terrestrialmammals", "insects", "kangaroo", "crustaceans", "mollusc", "emus", "chrysalis", "locust", "eels"), 3, chapter)) %>% 
+  mutate(chapter = if_else(concept %in% c("tree", "pandanus", "breadfruit", "taro", "corn", "shrub", "banana", "gardening", "fruit"), 8, chapter)) %>% 
+  left_join(ids_chapters, by = "chapter") %>% 
+  mutate(chapter_name = case_when(
+    chapter_name == "Animals" ~ "Animals",
+    chapter_name == "Agriculture and vegetation" ~ "Plants",
+    chapter_name == "The physical world" ~ "Physical world",
+    TRUE ~ "Other"
+  )) %>%
+  group_by(chapter_name, concept) %>%
+  summarise(
+    rank = mean(rank, na.rm = TRUE), .groups = "drop"
+  ) %>%
+  ungroup() %>%
+  arrange(desc(rank)) %>% 
+  mutate(concept = toupper(concept))  %>% 
+  mutate(concept = case_when(
+    concept == "BODYPARTS" ~ "BODY PARTS",
+    concept == "TIMEOFDAY" ~ "TIME OF DAY",
+    #concept == "INSECTS" ~ "INSECT",
+    concept == "EMUS" ~ "EMU",
+    concept == "EELS" ~ "EEL",
+    TRUE ~ concept
+  )) 
+  
+ids_chapter_counts <- default_p_ids %>% 
+  select(concept, chapter_name) %>% 
+  unique() %>% 
+  group_by(chapter_name) %>% 
+  summarize(count = n())
+
+default_p_ids$chapter_name <- as.character(default_p_ids$chapter_name)
+default_p_ids$chapter_name <- factor(default_p_ids$chapter_name, levels=c("Physical world", "Animals", "Plants", "Other"))
+
+concept_labels_drop <- c("TERRESTRIALMAMMALS", "OBLIGATION", "TOGETHERNESS", "CRUSTACEANS")
+
+default_p_ids_labeled <- default_p_ids%>% 
+  filter( !( concept %in% concept_labels_drop) ) 
+
+set.seed(0) # for reproducibility when using geom_jitter
+compressed_plot_ids <- default_p_ids %>%
+  ggplot(aes(x=chapter_name, y=rank)) +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  geom_segment( aes(x=0.5, xend=4,y=0.5,yend=0.5), linetype = "dashed", size = 0.5, color = "grey") +
+  geom_segment( aes(x=0.5, xend=4,y=0.95,yend=0.95), linetype = "dashed", size = 0.5, color = "grey") +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.4, binwidth= 0.025)  +
+  #geom_text_repel(aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 5, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0, size = 3) +
+  geom_text_repel(data = default_p_ids_labeled, aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  labs(x="", y="rank", title = "") +
+  coord_cartesian(xlim = c(1.2,4), clip = "off") +
+  theme_classic() +
+  theme(legend.position="none") + 
+  theme(axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
+  theme(axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.25, 0.5, 0.75, 1), expand = expansion(add = c(0, 0.1)))  +
+  coord_capped_cart(xlim = c(1.2, 4), left='top') +
+  theme_font
+
+compressed_plot_ids
+
+plot_width <- c(0.25,0.27,0.48) 
+combined_plots <- plot_snow_zeta_half + default_plot_dot + compressed_plot_ids +
+  plot_layout(widths = plot_width) + plot_annotation(tag_levels = 'a',  tag_suffix = ')')
+
+# Save the combined plot as a PDF
+ggsave(filename = here::here("output", "figures", "main", "claims.pdf"), plot = combined_plots, device = "pdf", width = 15, height = 7)
+
+```
+
+Run permutation test to compare ranks for "other" chapter with the remaining three chapters (here called "nature")
+
+```{r run permutation, include= TRUE}
+
+permtest_data <- default_p_ids %>% 
+  mutate(category = if_else(chapter_name == "Other", "non_nature", "nature")) %>% 
+  select(category, rank)
+
+cat_diff <- function(d) {
+  d %>% group_by(category) %>% 
+    summarize(meanrank = mean(rank))
+}
+
+perm_diff <- function(d) {
+  cd <- d %>% 
+    mutate(category = sample(category)) %>% 
+    cat_diff()
+  return (cd$meanrank[1] - cd$meanrank[2])
+}
+perms <- cross_join(tibble(i=1:10000), permtest_data) %>% 
+  nest(d = c(category, rank)) %>% 
+  mutate(cat_diff = map_dbl(d, perm_diff))
+thresh_95 <- quantile(perms$cat_diff, probs = c(0.95))
+
+attested_means <- cat_diff(permtest_data)
+attested_diff <- attested_means$meanrank[1] - attested_means$meanrank[2] 
+f <- ecdf(perms$cat_diff)
+p_val = 1 - f( attested_diff )
+
+print(paste0("attested = ", as.character(round(attested_diff, 3)), ", 95th percentile = ", as.character(round(thresh_95, 3)), ", p val = ", as.character(round(p_val, 3))))
+
+```
+
+##Supplementary tables and figures:
+
+Create a table on a sample of existing claims.
+
+```{r createtable existing claims, include=TRUE}
+selected_rows <- c(1, 10, 15, 16, 19, 38, 46, 51, 53, 192, 74, 102, 107, 26, 
+                   116, 118, 124, 133, 149, 140, 143, 170, 198, 251, 255, 273, 284, 292, 326, 327)
+
+claimssample <- claims_full %>%
+  arrange(combo_name) %>%
+  mutate(gcode = ifelse(is.na(gcode), gcode_rule, gcode)) %>%
+  select(langname, level, gcode, concept, word_list, sign, reference) %>%
+  filter(!is.na(word_list)) %>%
+  rename("Language/Group"=langname, Level=level, Glottocode=gcode, Concept=concept, "Word list"=word_list, Sign=sign, Reference=reference) %>%
+  arrange(Concept) %>%
+  slice(selected_rows)
+
+latex_table <- xtable(claimssample)
+print(latex_table, file = here("output", "tables", "claimstable.tex"), include.rownames=FALSE)
+```
+
+We make similar tables for L^lang scores computed on robustness set.
+
+```{r make tables, include=TRUE}
+claims_lr_full_robust <- read_csv(here("output", "results", "claims_lr_lang_full_robust.csv"), show_col_types = FALSE)
+
+# no convergence issue must be found
+expect_equal(length(unique(subset(claims_lr_full_robust %>% filter(convergence != "converged" | convergence_set != "converged"))$combo_name)), 0)
+
+# compute ranking
+claims_nested_robust <- claims_lr_full_robust %>%
+  group_by(combo_name) %>%
+  nest()
+
+claims_nested_robust <- claims_nested_robust %>%
+  mutate(data = map(data, rank_within_nest))
+
+claims_with_rank_robust <- claims_nested_robust %>%
+  unnest(data)
+
+claims_lr_robust <- read_csv(here("output", "results", "claims_lr_lang_robust.csv"), show_col_types = FALSE)
+
+# combine all scores
+allscores_robust <- claims_lr_robust %>%
+  left_join(claims_with_rank_robust %>% select(glottocode, combo_name, rank), by=c("glottocode", "combo_name")) %>%
+  unique()
+
+# expanded table
+expanded_robust <- allscores_robust %>%
+  select(sign, combo_name, scholarly, groupname, level, langname, zeta, rank) %>%
+  rename(concept=combo_name) %>%
+  unique()  %>%
+  mutate(concept = str_replace(concept, "combo$", ""),
+         scholarly = ifelse(scholarly == 1, "scholarly", "non-scholarly")) %>%
+  arrange(desc(rank)) %>%
+  arrange(desc(zeta)) %>%
+  arrange(desc(sign))
+
+# default table
+default_first <- expanded_robust %>%
+  group_by(sign, concept, scholarly, groupname, level) %>%
+  summarise(
+    rank = mean(rank, na.rm = TRUE), .groups = "drop"
+  ) %>%
+  ungroup() %>%
+  arrange(desc(rank)) %>%
+  arrange(desc(sign))
+
+# add glottlog langname to default table
+default_single <- default_first %>%
+  filter(level == "single") %>%
+  left_join(expanded %>% select(groupname, langname), by = "groupname") %>%
+  unique() %>% select(-groupname) %>%
+  rename(groupname=langname)
+
+default_group <- default_first %>% filter(level == "group")
+default_robust <- bind_rows(default_single, default_group)
+
+# compressed table by concept
+compressed_robust <- default_robust %>%
+  group_by(sign, concept) %>%
+  summarise(
+    rank = mean(rank, na.rm = TRUE), .groups="drop"
+  ) %>%
+  ungroup() %>%
+  arrange(desc(rank))
+```
+
+Create a figure on the full set:
+
+```{r plot with labels, include=TRUE}
+
+default_f <- default %>%
+  mutate(concept = case_when(
+      concept == "nonportableartefacts" ~ "nonportable art.",
+      concept == "landscapefeatures" ~ "landscape",
+      concept == "mechanicalartifacts" ~ "mechanical art.",
+      concept == "terrestrialmammals" ~ "mammals",
+      concept == "timeofday" ~ "time of day",
+      TRUE ~ as.character(concept)),
+    groupname = case_when(
+      groupname == "Australian languages" ~ "Australian",
+      groupname == "Southeast asian" ~ "Southeast Asian",
+      groupname == "East and southeast asian" ~ "East & Southeast Asian",
+      groupname == "Oceanic languages" ~ "Oceanic",
+      TRUE ~ as.character(groupname)),
+    claim = paste0(toupper(concept), ", ", groupname))
+
+labelsb <- default_f %>% filter(rank <= 0.6) %>% select(claim) %>% pull(claim)
+labelsc <- default_f %>% select(claim) %>% slice(1:20) %>% pull(claim)
+labelsd <- c("SOIL, Venda", "RICE, East & Southeast Asian", "SHRUB, Venda", "TREE, Lau", "ANT, Lushei", "DEER, Lushei", "FISH, Xârâcùù", "SMELL, Paiwan", "HONEY, Arabic", "RAIN, East & Southeast Asian",
+             "BEER, German", "WIND, Oceanic", "INSECTS, East & Southeast Asian", "STARS, Australian", "FISH, East & Southeast Asian", "SMELL, Khmer", "SAND, Australian", "RICE, Asian",
+             "HORSE, Portuguese", "LOCUST, Arabic")
+
+labels <- c(labelsb, labelsc, labelsd)
+
+default_labeled <- default_f %>%
+  filter(claim %in% labels)
+
+set.seed(0) # for reproducibility when using geom_jitter
+default_plot <- default_f %>%
+  ggplot(aes(x = 1, y = rank)) +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  geom_segment( aes(x=0.5, xend=4,y=0.5,yend=0.5), linetype = "dashed", size = 0.5, color = "grey") +
+  geom_segment( aes(x=0.5, xend=4,y=0.95,yend=0.95), linetype = "dashed", size = 0.5, color = "grey") +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth = 0.025) +
+  geom_text_repel(data = default_labeled, aes(x=1, y = rank, label = claim), direction = "y", force = 1, hjust = 0, nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  labs(x = "", y = "rank", title = "") +
+  coord_cartesian(xlim = c(1.2, 3), clip = "off") +
+  theme_classic() +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.25, 0.5, 0.75, 1), expand = expansion(add = c(0, 0.1))) +
+  coord_capped_cart(xlim = c(0.5, 1.5), left = 'top') +
+  theme_font
+
+default_plot
+
+```
+
+Create a similar figure on robustness set and combine plots:
+
+```{r plots, include=TRUE, eval=FALSE}
+
+default_robust <- default_robust %>%
+  filter(rank != "NaN")  %>%
+  mutate(concept = case_when(
+      concept == "nonportableartefacts" ~ "nonportable art.",
+      concept == "landscapefeatures" ~ "landscape",
+      concept == "mechanicalartifacts" ~ "mechanical art.",
+      concept == "terrestrialmammals" ~ "mammals",
+      TRUE ~ as.character(concept)),
+    groupname = case_when(
+      groupname == "Australian languages" ~ "Australian",
+      groupname == "Southeast asian" ~ "Southeast Asian",
+      groupname == "East and southeast asian" ~ "East & Southeast Asian",
+      groupname == "Oceanic languages" ~ "Oceanic",
+      TRUE ~ as.character(groupname)),
+    claim = paste0(toupper(concept), ", ", groupname))
+
+labelsb <- default_robust %>% filter(rank <= 0.7) %>% select(claim) %>% pull(claim)
+labelsc <- default_robust %>% select(claim) %>% slice(1:20) %>% pull(claim)
+labelse <- c("COCONUT, Fijian", "FISH, Carolinian", "TREE, Niuean", "BASKET, Lushei")
+
+labels <- c(labelsb, labelsc, labelsd, labelse)
+
+default_robust_labeled <- default_robust %>%
+  filter(claim %in% labels)
+
+set.seed(0) # for reproducibility when using geom_jitter
+default_robust_plot <- default_robust %>%
+  ggplot(aes(x = 1, y = rank)) +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  geom_segment( aes(x=0.5, xend=4,y=0.5,yend=0.5), linetype = "dashed", size = 0.5, color = "grey") +
+  geom_segment( aes(x=0.5, xend=4,y=0.95,yend=0.95), linetype = "dashed", size = 0.5, color = "grey") +
+  geom_violinhalf(flip = TRUE, fill = NA) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth = 0.025) +
+  #geom_text_repel(aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 5, hjust = 0, nudge_x = 0.05, segment.color= "gray", box.padding = 0, size = 3) +
+  geom_text_repel(data = default_robust_labeled, aes(x=1, y = rank, label = claim), direction = "y", force = 1, hjust = 0, nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  labs(x = "", y = "rank", title = "") +
+  coord_cartesian(xlim = c(1.2, 3), clip = "off") +
+  theme_classic() +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.25, 0.5, 0.75, 1), expand = expansion(add = c(0, 0.1))) +
+  coord_capped_cart(xlim = c(0.5, 1.5), left = 'top') +
+  theme_font
+
+default_robust_plot
+
+plot_width <- c(0.5,0.5) 
+combined_plots <- default_plot + default_robust_plot +
+  plot_layout(widths = plot_width) + plot_annotation(tag_levels = 'a',  tag_suffix = ')')
+
+# Save the combined plot as a PDF
+ggsave(filename = here::here("output", "figures", "supplementary", "claimsfull.pdf"), plot = combined_plots, device = "pdf", width = 15, height = 9)
+```

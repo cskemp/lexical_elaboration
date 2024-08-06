@@ -1,0 +1,1379 @@
+groupname,level,glottocode,domain,basic,combo_name,sign,scholarly,langname,convergence,convergence_set,zeta,words
+Dalabon,single,ngal1292,noun,1,kangaroocombo,positive,1,Ngalkbun,converged,converged,71.1579233248047,kangaroo
+North Saami,single,nort2671,noun,1,reindeercombo,positive,1,North Saami,converged,converged,41.533961959562035,"caribou, reindeer"
+Saami,group,nort2671,noun,1,reindeercombo,positive,1,North Saami,converged,converged,41.533961959562035,"caribou, reindeer"
+Yana,single,yana1271,noun,1,acorncombo,positive,1,Yana,converged,converged,24.990975670173484,acorn
+Marshallese,single,mars1254,noun,1,pandanuscombo,positive,1,Marshallese,converged,converged,24.923023062390875,"pandanus, pandani"
+Marshallese,single,mars1254,noun,1,breadfruitcombo,positive,1,Marshallese,converged,converged,24.250715807654657,breadfruit
+Arabic,group,stan1318,noun,1,camelcombo,positive,1,Standard Arabic,converged,converged,23.006337040560144,camel
+Polynesian,group,hawa1245,noun,1,tarocombo,positive,1,Hawaiian,converged,converged,19.015649523422987,"taro, cocoyam, dasheen, eddo"
+Polynesian,group,samo1305,noun,1,tarocombo,positive,1,Samoan,converged,converged,18.949044434715,"taro, cocoyam, dasheen, eddo"
+Mandarin,single,mand1415,noun,1,obligationcombo,positive,1,Mandarin Chinese,converged,converged,18.29544623060826,"obligation, duty, responsibility"
+Eskimo-Aleut,group,east2534,noun,1,snowcombo,positive,1,Eastern Canadian Inuktitut,converged,converged,17.59232945152104,"snow, snowfall"
+German,group,stan1295,noun,1,beercombo,positive,1,German,converged,converged,14.893806212838477,beer
+Aneityum,single,anei1239,noun,1,tarocombo,positive,1,Aneityum,converged,converged,14.4129732972598,"taro, cocoyam, dasheen, eddo"
+Kalam,single,kala1397,noun,0,terrestrialmammalscombo,positive,1,Kalam,converged,converged,13.625186990447112,mammal
+Polynesian,group,maor1246,noun,1,tarocombo,positive,1,Maori,converged,converged,13.196111929640503,"taro, cocoyam, dasheen, eddo"
+Polynesian,group,samo1305,noun,1,bananacombo,positive,1,Samoan,converged,converged,12.891633744495557,banana
+Old English,single,olde1238,noun,1,warriorcombo,positive,1,Old English,converged,converged,12.887984759318364,warrior
+Zulu,single,zulu1248,noun,1,cattlecombo,positive,1,Zulu,converged,converged,12.782238041361456,"cattle, cow, ox, kine, oxen"
+Tuvaluan,single,tuva1244,noun,1,coconutcombo,positive,1,Tuvalu,converged,converged,12.78147778846841,"coconut, cocoanut"
+Oceanic languages,group,tuva1244,noun,1,coconutcombo,positive,1,Tuvalu,converged,converged,12.78147778846841,"coconut, cocoanut"
+Oceanic languages,group,hawa1245,noun,1,coconutcombo,positive,1,Hawaiian,converged,converged,12.750420912872267,"coconut, cocoanut"
+Oceanic languages,group,chuu1238,noun,1,coconutcombo,positive,1,Chuukese,converged,converged,12.734367494071476,"coconut, cocoanut"
+Japanese,single,nucl1643,noun,1,obligationcombo,positive,1,Japanese,converged,converged,12.024946072269845,"obligation, duty, responsibility"
+Polynesian,group,taku1257,noun,1,tarocombo,positive,1,Takuu,converged,converged,11.645698633971993,"taro, cocoyam, dasheen, eddo"
+Malay,group,stan1306,noun,1,ricecombo,positive,1,Standard Malay,converged,converged,11.097907269269356,rice
+Asian,group,stan1306,noun,1,ricecombo,positive,1,Standard Malay,converged,converged,11.097907269269356,rice
+East and southeast asian,group,stan1306,noun,1,ricecombo,positive,1,Standard Malay,converged,converged,11.097907269269356,rice
+Polynesian,group,hawa1245,noun,1,bananacombo,positive,1,Hawaiian,converged,converged,10.948751689291,banana
+Japanese,single,nucl1643,noun,1,ricecombo,positive,1,Japanese,converged,converged,10.942942989384594,rice
+Asian,group,nucl1643,noun,1,ricecombo,positive,1,Japanese,converged,converged,10.942942989384594,rice
+East and southeast asian,group,nucl1643,noun,1,ricecombo,positive,1,Japanese,converged,converged,10.942942989384594,rice
+Oceanic languages,group,tahi1242,noun,1,coconutcombo,positive,1,Tahitian,converged,converged,10.767072315135042,"coconut, cocoanut"
+Inuktitut,group,east2534,noun,1,icecombo,positive,1,Eastern Canadian Inuktitut,converged,converged,10.728331324204921,ice
+Eskimo-Aleut,group,east2534,noun,1,icecombo,positive,1,Eastern Canadian Inuktitut,converged,converged,10.728331324204921,ice
+Oceanic languages,group,samo1305,noun,1,coconutcombo,positive,1,Samoan,converged,converged,10.69617600140144,"coconut, cocoanut"
+Polynesian,group,tiko1237,noun,1,tarocombo,positive,1,Tikopia,converged,converged,10.679521497073432,"taro, cocoyam, dasheen, eddo"
+Marshallese,single,mars1254,noun,1,coconutcombo,positive,1,Marshallese,converged,converged,10.633482725336561,"coconut, cocoanut"
+Oceanic languages,group,mars1254,noun,1,coconutcombo,positive,1,Marshallese,converged,converged,10.633482725336561,"coconut, cocoanut"
+Oceanic languages,group,gilb1244,noun,1,coconutcombo,positive,1,Gilbertese,converged,converged,10.570839334953758,"coconut, cocoanut"
+Australian languages,group,ngaa1240,noun,1,chrysaliscombo,positive,1,Ngaanyatjarra,converged,converged,10.56209604690406,chrysalis
+Arabic,group,stan1318,noun,1,lioncombo,positive,1,Standard Arabic,converged,converged,10.508965668300593,lion
+Polynesian,group,renn1242,noun,1,tarocombo,positive,1,Rennell-Bellona,converged,converged,10.32086480390758,"taro, cocoyam, dasheen, eddo"
+Polynesian,group,raro1241,noun,1,tarocombo,positive,1,Southern Cook Island Maori,converged,converged,10.298454671352232,"taro, cocoyam, dasheen, eddo"
+Oceanic languages,group,toke1240,noun,1,coconutcombo,positive,1,Tokelau,converged,converged,10.257504119000307,"coconut, cocoanut"
+Oceanic languages,group,yape1248,noun,1,coconutcombo,positive,1,Yapese,converged,converged,10.2342324954599,"coconut, cocoanut"
+Asian,group,ilok1237,noun,1,ricecombo,positive,1,Iloko,converged,converged,10.21263944305967,rice
+East and southeast asian,group,ilok1237,noun,1,ricecombo,positive,1,Iloko,converged,converged,10.21263944305967,rice
+Oceanic languages,group,pulu1242,noun,1,coconutcombo,positive,1,Puluwatese,converged,converged,10.194546039030193,"coconut, cocoanut"
+Polynesian,group,futu1245,noun,1,tarocombo,positive,1,Futuna-Aniwa,converged,converged,10.194186101414996,"taro, cocoyam, dasheen, eddo"
+Hawaiian,single,hawa1245,noun,1,raincombo,positive,1,Hawaiian,converged,converged,10.190672433262806,"rain, rainfall, rainwater"
+Oceanic languages,group,renn1242,noun,1,coconutcombo,positive,1,Rennell-Bellona,converged,converged,10.157740093013798,"coconut, cocoanut"
+Oceanic languages,group,taku1257,noun,1,coconutcombo,positive,1,Takuu,converged,converged,9.896016572927925,"coconut, cocoanut"
+North Saami,single,nort2671,noun,1,snowcombo,positive,1,North Saami,converged,converged,9.864979243355647,"snow, snowfall"
+Saami,group,nort2671,noun,1,snowcombo,positive,1,North Saami,converged,converged,9.864979243355647,"snow, snowfall"
+Oceanic languages,group,anei1239,noun,1,coconutcombo,positive,1,Aneityum,converged,converged,9.800319923132937,"coconut, cocoanut"
+Polynesian,group,niue1239,noun,1,tarocombo,positive,1,Niuean,converged,converged,9.753299777485886,"taro, cocoyam, dasheen, eddo"
+Kalam,single,kala1397,noun,1,frogcombo,positive,1,Kalam,converged,converged,9.736270169159607,"frog, toad, anuran, batrachian, salientian"
+Oceanic languages,group,fiji1243,noun,1,coconutcombo,positive,1,Fijian,converged,converged,9.642275746238186,"coconut, cocoanut"
+Oceanic languages,group,kapi1249,noun,1,coconutcombo,positive,1,Kapingamarangi,converged,converged,9.587239026943484,"coconut, cocoanut"
+Maori,group,maor1246,noun,1,ferncombo,positive,1,Maori,converged,converged,9.496435507379916,fern
+Asian,group,iban1264,noun,1,ricecombo,positive,1,Iban,converged,converged,9.350607058689354,rice
+East and southeast asian,group,iban1264,noun,1,ricecombo,positive,1,Iban,converged,converged,9.350607058689354,rice
+Oceanic languages,group,tiko1237,noun,1,coconutcombo,positive,1,Tikopia,converged,converged,9.336454521011303,"coconut, cocoanut"
+Oceanic languages,group,paam1238,noun,1,coconutcombo,positive,1,Paama,converged,converged,9.294015933445984,"coconut, cocoanut"
+Eskimo-Aleut,group,cent2128,noun,1,snowcombo,positive,1,Central Siberian Yupik,converged,converged,9.280339096755858,"snow, snowfall"
+Oceanic languages,group,niue1239,noun,1,coconutcombo,positive,1,Niuean,converged,converged,9.212208185857822,"coconut, cocoanut"
+Asian,group,mand1415,noun,1,ricecombo,positive,1,Mandarin Chinese,converged,converged,9.128837651147217,rice
+East and southeast asian,group,mand1415,noun,1,ricecombo,positive,1,Mandarin Chinese,converged,converged,9.128837651147217,rice
+Oceanic languages,group,vure1239,noun,1,coconutcombo,positive,1,Vurës,converged,converged,9.084934408392504,"coconut, cocoanut"
+Asian,group,tami1289,noun,1,ricecombo,positive,1,Tamil,converged,converged,9.067670160563594,rice
+Oceanic languages,group,surs1246,noun,1,coconutcombo,positive,1,Sursurunga,converged,converged,9.057344668302205,"coconut, cocoanut"
+Australian languages,group,ngaa1240,noun,1,emuscombo,positive,1,Ngaanyatjarra,converged,converged,8.995967902954298,emu
+Asian,group,newa1246,noun,1,ricecombo,positive,1,Kathmandu Valley Newari,converged,converged,8.989587793616545,rice
+Oceanic languages,group,wole1240,noun,1,coconutcombo,positive,1,Woleaian,converged,converged,8.986072295348444,"coconut, cocoanut"
+Vietnamese,single,viet1252,noun,1,ricecombo,positive,1,Vietnamese,converged,converged,8.960573357758529,rice
+Asian,group,viet1252,noun,1,ricecombo,positive,1,Vietnamese,converged,converged,8.960573357758529,rice
+East and southeast asian,group,viet1252,noun,1,ricecombo,positive,1,Vietnamese,converged,converged,8.960573357758529,rice
+Ponapean,single,pohn1238,noun,1,yamcombo,positive,1,Pohnpeian,converged,converged,8.95365354288038,yam
+Hawaiian,single,hawa1245,noun,1,cloudcombo,positive,1,Hawaiian,converged,converged,8.935855303604075,cloud
+Oceanic languages,group,area1240,noun,1,coconutcombo,positive,1,'Are'are,converged,converged,8.904764428331259,"coconut, cocoanut"
+Yupik,group,cent2128,noun,1,icecombo,positive,1,Central Siberian Yupik,converged,converged,8.896721531713451,ice
+Eskimo-Aleut,group,cent2128,noun,1,icecombo,positive,1,Central Siberian Yupik,converged,converged,8.896721531713451,ice
+Oceanic languages,group,ayiw1239,noun,1,coconutcombo,positive,1,Äiwoo,converged,converged,8.879194542468326,"coconut, cocoanut"
+Asian,group,telu1262,noun,1,ricecombo,positive,1,Telugu,converged,converged,8.876778618926968,rice
+Kwamera,single,kwam1252,noun,1,coconutcombo,positive,1,Kwamera,converged,converged,8.857607709443263,"coconut, cocoanut"
+Oceanic languages,group,kwam1252,noun,1,coconutcombo,positive,1,Kwamera,converged,converged,8.857607709443263,"coconut, cocoanut"
+Australian languages,group,muru1266,noun,1,emuscombo,positive,1,Muruwari,converged,converged,8.85734268956507,emu
+Oceanic languages,group,siee1239,noun,1,coconutcombo,positive,1,Sie,converged,converged,8.807236521201975,"coconut, cocoanut"
+Oceanic languages,group,urip1240,noun,1,coconutcombo,positive,1,Uripiv,converged,converged,8.751487152740866,"coconut, cocoanut"
+Oceanic languages,group,port1286,noun,1,coconutcombo,positive,1,Daakie,converged,converged,8.667060637699368,"coconut, cocoanut"
+Arabic,group,jude1267,noun,1,camelcombo,positive,1,Judeo-Yemeni Arabic,converged,converged,8.657688142780243,camel
+Oceanic languages,group,moki1238,noun,1,coconutcombo,positive,1,Mokilese,converged,converged,8.579240643542832,"coconut, cocoanut"
+Oceanic languages,group,sout2856,noun,1,coconutcombo,positive,1,Nafsan,converged,converged,8.56187157388753,"coconut, cocoanut"
+Oceanic languages,group,tuam1242,noun,1,coconutcombo,positive,1,Tuamotuan,converged,converged,8.550648141354227,"coconut, cocoanut"
+Polynesian,group,kapi1249,noun,1,tarocombo,positive,1,Kapingamarangi,converged,converged,8.519075853111412,"taro, cocoyam, dasheen, eddo"
+Oceanic languages,group,tong1325,noun,1,coconutcombo,positive,1,Tonga,converged,converged,8.459094087327058,"coconut, cocoanut"
+Asian,group,taga1270,noun,1,ricecombo,positive,1,Tagalog,converged,converged,8.453998984927706,rice
+East and southeast asian,group,taga1270,noun,1,ricecombo,positive,1,Tagalog,converged,converged,8.453998984927706,rice
+Australian languages,group,ngal1292,noun,1,emuscombo,positive,1,Ngalkbun,converged,converged,8.449953128541415,emu
+Oceanic languages,group,rotu1241,noun,1,coconutcombo,positive,1,Rotuman,converged,converged,8.418421339320163,"coconut, cocoanut"
+Australian languages,group,nung1290,noun,1,emuscombo,positive,1,Wubuy,converged,converged,8.41496087922834,emu
+Asian,group,minn1241,noun,1,ricecombo,positive,1,Min Nan Chinese,converged,converged,8.411971591375009,rice
+East and southeast asian,group,minn1241,noun,1,ricecombo,positive,1,Min Nan Chinese,converged,converged,8.411971591375009,rice
+Asian,group,laoo1244,noun,1,ricecombo,positive,1,Lao,converged,converged,8.346531442874534,rice
+East and southeast asian,group,laoo1244,noun,1,ricecombo,positive,1,Lao,converged,converged,8.346531442874534,rice
+Oceanic languages,group,aros1241,noun,1,coconutcombo,positive,1,Arosi,converged,converged,8.333704988885232,"coconut, cocoanut"
+Oceanic languages,group,lonw1238,noun,1,coconutcombo,positive,1,Lonwolwol,converged,converged,8.306452599391687,"coconut, cocoanut"
+Oceanic languages,group,teop1238,noun,1,coconutcombo,positive,1,Teop,converged,converged,8.276149973260747,"coconut, cocoanut"
+Mayan,group,tzot1259,noun,1,corncombo,positive,1,Tzotzil,converged,converged,8.23634766745568,"corn, maize"
+Oceanic languages,group,mele1250,noun,1,coconutcombo,positive,1,Mele-Fila,converged,converged,8.233597704925565,"coconut, cocoanut"
+Oceanic languages,group,raro1241,noun,1,coconutcombo,positive,1,Southern Cook Island Maori,converged,converged,8.22693081967189,"coconut, cocoanut"
+Oceanic languages,group,gela1263,noun,1,coconutcombo,positive,1,Gela,converged,converged,8.210130283263094,"coconut, cocoanut"
+Oceanic languages,group,caro1242,noun,1,coconutcombo,positive,1,Carolinian,converged,converged,8.1754661327391709,"coconut, cocoanut"
+Oceanic languages,group,tang1348,"noun, verb",0,gardeningcombo,positive,1,Tangga,converged,converged,8.155311290745825,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,toab1237,"noun, verb",0,gardeningcombo,positive,1,To'abaita,converged,converged,8.125594988542543,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,pohn1238,noun,1,coconutcombo,positive,1,Pohnpeian,converged,converged,8.123697870342639,"coconut, cocoanut"
+Polynesian,group,tuva1244,noun,1,tarocombo,positive,1,Tuvalu,converged,converged,8.0904775894525809,"taro, cocoyam, dasheen, eddo"
+Oceanic languages,group,yabe1254,noun,1,coconutcombo,positive,1,Yabem,converged,converged,8.080917012997249,"coconut, cocoanut"
+Oceanic languages,group,wamp1247,noun,1,coconutcombo,positive,1,Wampar,converged,converged,8.014981022405852,"coconut, cocoanut"
+Oceanic languages,group,fiji1243,"noun, verb",0,gardeningcombo,positive,1,Fijian,converged,converged,7.953728782672761,"garden, gardening, gardener, floriculture"
+Australian languages,group,warl1254,noun,1,emuscombo,positive,1,Warlpiri,converged,converged,7.94799369578443,emu
+Oceanic languages,group,toab1237,noun,1,coconutcombo,positive,1,To'abaita,converged,converged,7.944224727585751,"coconut, cocoanut"
+Australian languages,group,bard1255,noun,1,sandcombo,positive,1,Bardi,converged,converged,7.923063403786655,sand
+Oceanic languages,group,lena1238,noun,1,coconutcombo,positive,1,Lenakel,converged,converged,7.92266860832141,"coconut, cocoanut"
+Polynesian,group,renn1242,noun,1,bananacombo,positive,1,Rennell-Bellona,converged,converged,7.901035411996343,banana
+Aneityum,single,anei1239,noun,1,yamcombo,positive,1,Aneityum,converged,converged,7.896558394433801,yam
+Oceanic languages,group,ralu1237,noun,1,coconutcombo,positive,1,Raluana,converged,converged,7.87643275153093,"coconut, cocoanut"
+Oceanic languages,group,saaa1240,noun,1,coconutcombo,positive,1,Sa'a,converged,converged,7.850063629932591,"coconut, cocoanut"
+Polynesian,group,tahi1242,noun,1,tarocombo,positive,1,Tahitian,converged,converged,7.833580665167675,"taro, cocoyam, dasheen, eddo"
+Oceanic languages,group,sina1266,noun,1,coconutcombo,positive,1,Sinaugoro,converged,converged,7.821448553460321,"coconut, cocoanut"
+Asian,group,hmon1333,noun,1,ricecombo,positive,1,Hmong Daw,converged,converged,7.750033368311042,rice
+East and southeast asian,group,hmon1333,noun,1,ricecombo,positive,1,Hmong Daw,converged,converged,7.750033368311042,rice
+Australian languages,group,djiw1241,noun,1,emuscombo,positive,1,Djiwarli,converged,converged,7.730069376758816,emu
+Oceanic languages,group,naka1262,noun,1,coconutcombo,positive,1,Nakanai,converged,converged,7.72297880439157,"coconut, cocoanut"
+Oceanic languages,group,chek1238,"noun, verb",0,gardeningcombo,positive,1,Cheke Holo,converged,converged,7.699655187747138,"garden, gardening, gardener, floriculture"
+Polynesian,group,futu1245,noun,1,bananacombo,positive,1,Futuna-Aniwa,converged,converged,7.689581584656852,banana
+Thai,group,thai1261,noun,1,ricecombo,positive,1,Thai,converged,converged,7.663780151000094,rice
+Asian,group,thai1261,noun,1,ricecombo,positive,1,Thai,converged,converged,7.663780151000094,rice
+East and southeast asian,group,thai1261,noun,1,ricecombo,positive,1,Thai,converged,converged,7.663780151000094,rice
+Asian,group,cebu1242,noun,1,ricecombo,positive,1,Cebuano,converged,converged,7.649384506038474,rice
+East and southeast asian,group,cebu1242,noun,1,ricecombo,positive,1,Cebuano,converged,converged,7.649384506038474,rice
+Asian,group,kore1280,noun,1,ricecombo,positive,1,Korean,converged,converged,7.637866888999316,rice
+East and southeast asian,group,kore1280,noun,1,ricecombo,positive,1,Korean,converged,converged,7.637866888999316,rice
+Oceanic languages,group,chek1238,noun,1,coconutcombo,positive,1,Cheke Holo,converged,converged,7.627175341873489,"coconut, cocoanut"
+Oceanic languages,group,geda1237,noun,1,coconutcombo,positive,1,Gedaged,converged,converged,7.62466302658949,"coconut, cocoanut"
+Asian,group,nucl1305,noun,1,ricecombo,positive,1,Kannada,converged,converged,7.618843313526168,rice
+Indonesian,group,indo1316,noun,1,ricecombo,positive,1,Standard Indonesian,converged,converged,7.599380571403927,rice
+Oceanic languages,group,kwai1243,noun,1,coconutcombo,positive,1,Kwaio,converged,converged,7.552308583342585,"coconut, cocoanut"
+Oceanic languages,group,kwai1243,"noun, verb",0,gardeningcombo,positive,1,Kwaio,converged,converged,7.543790929767877,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,aros1241,"noun, verb",0,gardeningcombo,positive,1,Arosi,converged,converged,7.539569283719317,"garden, gardening, gardener, floriculture"
+Australian languages,group,nung1290,noun,1,sandcombo,positive,1,Wubuy,converged,converged,7.477849282077494,sand
+Oceanic languages,group,tali1259,noun,1,coconutcombo,positive,1,Talise,converged,converged,7.474426236122879,"coconut, cocoanut"
+Australian languages,group,yand1253,noun,1,emuscombo,positive,1,Yandruwandha,converged,converged,7.437185442821788,emu
+Oceanic languages,group,misi1243,noun,1,coconutcombo,positive,1,Misima-Paneati,converged,converged,7.417091978782076,"coconut, cocoanut"
+Australian languages,group,adny1235,noun,1,emuscombo,positive,1,Adnyamathanha,converged,converged,7.350412117833508,emu
+Oceanic languages,group,lauu1247,noun,1,coconutcombo,positive,1,Lau,converged,converged,7.333741706436367,"coconut, cocoanut"
+Asian,group,bali1278,noun,1,ricecombo,positive,1,Balinese,converged,converged,7.316005685234396,rice
+East and southeast asian,group,bali1278,noun,1,ricecombo,positive,1,Balinese,converged,converged,7.316005685234396,rice
+Nuer,single,nuer1246,noun,1,cattlecombo,positive,1,Nuer,converged,converged,7.314586256123596,"cattle, cow, ox, kine, oxen"
+Asian,group,lush1249,noun,1,ricecombo,positive,1,Mizo,converged,converged,7.293029058290826,rice
+Fijian,group,fiji1243,noun,0,fishcombo,positive,1,Fijian,converged,converged,7.2762823981209195,fish
+Australian languages,group,yank1247,noun,1,emuscombo,positive,1,Yankunytjatjara,converged,converged,7.263776177139607,emu
+Oceanic languages,group,louu1245,noun,1,coconutcombo,positive,1,Lou,converged,converged,7.2345769610657085,"coconut, cocoanut"
+Asian,group,cent2292,noun,1,ricecombo,positive,1,Central Bontoc,converged,converged,7.187662028405672,rice
+East and southeast asian,group,cent2292,noun,1,ricecombo,positive,1,Central Bontoc,converged,converged,7.187662028405672,rice
+Yana,single,yana1271,noun,1,basketcombo,positive,1,Yana,converged,converged,7.112408994172047,"basket, handbasket"
+Australian languages,group,yiry1245,noun,1,emuscombo,positive,1,Yir-Yoront,converged,converged,7.0712148914573385,emu
+Oceanic languages,group,dehu1237,noun,1,coconutcombo,positive,1,Dehu,converged,converged,7.042709675857713,"coconut, cocoanut"
+Oceanic languages,group,daka1243,noun,1,coconutcombo,positive,1,Dakaka,converged,converged,7.011715553764527,"coconut, cocoanut"
+Oceanic languages,group,tang1348,noun,1,coconutcombo,positive,1,Tangga,converged,converged,6.981615861657417,"coconut, cocoanut"
+Australian languages,group,mudb1240,noun,1,emuscombo,positive,1,Mudburra,converged,converged,6.971443193862353,emu
+Oceanic languages,group,surs1246,"noun, verb",0,gardeningcombo,positive,1,Sursurunga,converged,converged,6.9561098226885365,"garden, gardening, gardener, floriculture"
+Asian,group,bata1298,noun,1,ricecombo,positive,1,Batad Ifugao,converged,converged,6.955077482833407,rice
+East and southeast asian,group,bata1298,noun,1,ricecombo,positive,1,Batad Ifugao,converged,converged,6.955077482833407,rice
+Polynesian,group,raro1241,noun,1,bananacombo,positive,1,Southern Cook Island Maori,converged,converged,6.946786277311455,banana
+Arabic,group,gulf1241,noun,1,camelcombo,positive,1,Gulf Arabic,converged,converged,6.934505546336839,camel
+Asian,group,tbol1240,noun,1,ricecombo,positive,1,Tboli,converged,converged,6.918495333238251,rice
+East and southeast asian,group,tbol1240,noun,1,ricecombo,positive,1,Tboli,converged,converged,6.918495333238251,rice
+Asian,group,wara1300,noun,1,ricecombo,positive,1,Waray,converged,converged,6.899481321063905,rice
+East and southeast asian,group,wara1300,noun,1,ricecombo,positive,1,Waray,converged,converged,6.899481321063905,rice
+Mayan,group,yuca1254,noun,1,corncombo,positive,1,Yucatec Maya,converged,converged,6.890058587638599,"corn, maize"
+Arabic,group,stan1318,noun,1,swordcombo,positive,1,Standard Arabic,converged,converged,6.850798105438114,sword
+Palauan,single,pala1344,noun,0,fishcombo,positive,1,Palauan,converged,converged,6.847804222423608,fish
+Asian,group,shan1277,noun,1,ricecombo,positive,1,Shan,converged,converged,6.844775597512557,rice
+East and southeast asian,group,shan1277,noun,1,ricecombo,positive,1,Shan,converged,converged,6.844775597512557,rice
+Oceanic languages,group,futu1245,noun,1,coconutcombo,positive,1,Futuna-Aniwa,converged,converged,6.821480960650124,"coconut, cocoanut"
+Oceanic languages,group,kosr1238,noun,1,coconutcombo,positive,1,Kosraean,converged,converged,6.820614552578519,"coconut, cocoanut"
+Oceanic languages,group,renn1242,"noun, verb",0,gardeningcombo,positive,1,Rennell-Bellona,converged,converged,6.807853449938961,"garden, gardening, gardener, floriculture"
+Polynesian,group,mele1250,noun,1,bananacombo,positive,1,Mele-Fila,converged,converged,6.750971255976294,banana
+Hawaiian,single,hawa1245,noun,1,windcombo,positive,1,Hawaiian,converged,converged,6.749712526839975,wind
+Oceanic,group,hawa1245,noun,1,windcombo,positive,1,Hawaiian,converged,converged,6.749712526839975,wind
+Eskimo-Aleut,group,west2618,noun,1,snowcombo,positive,1,Western Canadian Inuktitut,converged,converged,6.710458869684153,"snow, snowfall"
+Oceanic languages,group,naka1262,"noun, verb",0,gardeningcombo,positive,1,Nakanai,converged,converged,6.706856953772993,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,gela1263,"noun, verb",0,gardeningcombo,positive,1,Gela,converged,converged,6.6831600091885806,"garden, gardening, gardener, floriculture"
+Old English,single,olde1238,noun,1,seacombo,positive,1,Old English,converged,converged,6.634873206659633,sea
+Asian,group,monn1252,noun,1,ricecombo,positive,1,Mon,converged,converged,6.616831745921912,rice
+East and southeast asian,group,monn1252,noun,1,ricecombo,positive,1,Mon,converged,converged,6.616831745921912,rice
+Hindi,single,hind1269,noun,1,lovecombo,positive,1,Hindi,converged,converged,6.592230635512944,"love, passion"
+Maori,group,maor1246,noun,0,birdcombo,positive,1,Maori,converged,converged,6.561672365365668,bird
+Inuktitut,group,west2618,noun,1,icecombo,positive,1,Western Canadian Inuktitut,converged,converged,6.555161211919078,ice
+Eskimo-Aleut,group,west2618,noun,1,icecombo,positive,1,Western Canadian Inuktitut,converged,converged,6.555161211919078,ice
+Russian,single,russ1263,noun,1,snowcombo,positive,1,Russian,converged,converged,6.545154546463671,"snow, snowfall"
+Asian,group,yaka1277,noun,1,ricecombo,positive,1,Yakan,converged,converged,6.536008240281564,rice
+East and southeast asian,group,yaka1277,noun,1,ricecombo,positive,1,Yakan,converged,converged,6.536008240281564,rice
+Asian,group,cent1989,noun,1,ricecombo,positive,1,Central Khmer,converged,converged,6.535696633220216,rice
+East and southeast asian,group,cent1989,noun,1,ricecombo,positive,1,Central Khmer,converged,converged,6.535696633220216,rice
+Asian,group,mara1378,noun,1,ricecombo,positive,1,Marathi,converged,converged,6.479568804496456,rice
+Oceanic languages,group,tean1237,noun,1,coconutcombo,positive,1,Teanu,converged,converged,6.429415635580688,"coconut, cocoanut"
+Asian,group,tulu1258,noun,1,ricecombo,positive,1,Tulu,converged,converged,6.370136387275048,rice
+Oceanic languages,group,wamp1247,"noun, verb",0,gardeningcombo,positive,1,Wampar,converged,converged,6.341348855895741,"garden, gardening, gardener, floriculture"
+Australian languages,group,djin1251,noun,1,emuscombo,positive,1,Jingulu,converged,converged,6.341179015204622,emu
+Asian,group,yuec1235,noun,1,ricecombo,positive,1,Yue Chinese,converged,converged,6.313642292602617,rice
+East and southeast asian,group,yuec1235,noun,1,ricecombo,positive,1,Yue Chinese,converged,converged,6.313642292602617,rice
+Kapingamarangi,single,kapi1249,noun,0,fishcombo,positive,1,Kapingamarangi,converged,converged,6.231998502227453,fish
+Asian,group,hmon1264,noun,1,ricecombo,positive,1,Hmong Njua,converged,converged,6.220538594793492,rice
+East and southeast asian,group,hmon1264,noun,1,ricecombo,positive,1,Hmong Njua,converged,converged,6.220538594793492,rice
+Oceanic languages,group,paam1238,"noun, verb",0,gardeningcombo,positive,1,Paama,converged,converged,6.21691117113729,"garden, gardening, gardener, floriculture"
+Eskimo-Aleut,group,aleu1260,noun,1,snowcombo,positive,1,Aleut,converged,converged,6.2066121263976655,"snow, snowfall"
+Oceanic languages,group,port1286,"noun, verb",0,gardeningcombo,positive,1,Daakie,converged,converged,6.202627745113194,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,kwam1252,"noun, verb",0,gardeningcombo,positive,1,Kwamera,converged,converged,6.192198229333679,"garden, gardening, gardener, floriculture"
+Asian,group,casi1235,noun,1,ricecombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,6.185453773443393,rice
+East and southeast asian,group,casi1235,noun,1,ricecombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,6.185453773443393,rice
+Oceanic languages,group,misi1243,"noun, verb",0,gardeningcombo,positive,1,Misima-Paneati,converged,converged,6.170605418964815,"garden, gardening, gardener, floriculture"
+Old English,single,olde1238,noun,1,battlecombo,positive,1,Old English,converged,converged,6.156897550657369,"battle, fight"
+Australian languages,group,bayu1240,noun,1,emuscombo,positive,1,Bayungu,converged,converged,6.148020553447132,emu
+Roviana,single,rovi1238,noun,0,fishcombo,positive,1,Roviana,converged,converged,6.127906451982661,fish
+Australian languages,group,wikm1247,noun,1,sandcombo,positive,1,Wik-Mungkan,converged,converged,6.101774456077746,sand
+Australian languages,group,pint1250,noun,1,emuscombo,positive,1,Pintupi-Luritja,converged,converged,6.08863152878154,emu
+Takuu,single,taku1257,noun,0,fishcombo,positive,1,Takuu,converged,converged,6.084678761306337,fish
+Gilbertese,single,gilb1244,noun,0,fishcombo,positive,1,Gilbertese,converged,converged,6.082273557996341,fish
+Polynesian,group,niue1239,noun,1,bananacombo,positive,1,Niuean,converged,converged,6.067844462651304,banana
+Arabic,group,anda1287,noun,1,honeycombo,positive,1,Andalusian Arabic,converged,converged,6.035405989670346,honey
+Oceanic languages,group,siee1239,"noun, verb",0,gardeningcombo,positive,1,Sie,converged,converged,6.034805416732188,"garden, gardening, gardener, floriculture"
+Asian,group,mara1382,noun,1,ricecombo,positive,1,Mara Chin,converged,converged,6.0251935623571296,rice
+East and southeast asian,group,mara1382,noun,1,ricecombo,positive,1,Mara Chin,converged,converged,6.0251935623571296,rice
+Thao,single,thao1240,noun,1,smellcombo,positive,1,Thao,converged,converged,5.912324567439884,"smell, odor, odour, aroma, scent, smelling"
+Marshallese,single,mars1254,noun,0,fishcombo,positive,1,Marshallese,converged,converged,5.892970751071793,fish
+Asian,group,bara1370,noun,1,ricecombo,positive,1,Baram Kayan,converged,converged,5.882719646146357,rice
+East and southeast asian,group,bara1370,noun,1,ricecombo,positive,1,Baram Kayan,converged,converged,5.882719646146357,rice
+Oceanic languages,group,lauu1247,"noun, verb",0,gardeningcombo,positive,1,Lau,converged,converged,5.870060339713538,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,ilok1237,noun,0,fishcombo,positive,1,Iloko,converged,converged,5.858587702819167,fish
+East and southeast asian,group,minn1241,noun,0,insectscombo,positive,1,Min Nan Chinese,converged,converged,5.845319922067644,insect
+Dinka,group,sout2832,noun,1,cattlecombo,positive,1,Southwestern Dinka,converged,converged,5.817723956707747,"cattle, cow, ox, kine, oxen"
+Asian,group,kach1280,noun,1,ricecombo,positive,1,Southern Jinghpaw,converged,converged,5.813394763502563,rice
+East and southeast asian,group,kach1280,noun,1,ricecombo,positive,1,Southern Jinghpaw,converged,converged,5.813394763502563,rice
+Asian,group,akha1245,noun,1,ricecombo,positive,1,Akha,converged,converged,5.779622119070549,rice
+East and southeast asian,group,akha1245,noun,1,ricecombo,positive,1,Akha,converged,converged,5.779622119070549,rice
+Australian languages,group,ying1247,noun,1,emuscombo,positive,1,Yinggarda,converged,converged,5.766538434147664,emu
+Oceanic languages,group,rovi1238,noun,1,coconutcombo,positive,1,Roviana,converged,converged,5.758957460386947,"coconut, cocoanut"
+Australian languages,group,dhal1245,noun,1,emuscombo,positive,1,Dhalandji,converged,converged,5.7382303636032015,emu
+Eskimo-Aleut,group,nort2943,noun,1,snowcombo,positive,1,North Alaskan Inupiatun,converged,converged,5.732462977440916,"snow, snowfall"
+Asian,group,sinh1246,noun,1,ricecombo,positive,1,Sinhala,converged,converged,5.724319046805932,rice
+Australian languages,group,ngan1295,noun,1,emuscombo,positive,1,Ngandi,converged,converged,5.703820441084569,emu
+Eskimo-Aleut,group,nort2943,noun,1,icecombo,positive,1,North Alaskan Inupiatun,converged,converged,5.69350497761226,ice
+Asian,group,nepa1254,noun,1,ricecombo,positive,1,Nepali,converged,converged,5.688494976531379,rice
+Oceanic languages,group,sout2856,"noun, verb",0,gardeningcombo,positive,1,Nafsan,converged,converged,5.635651099473644,"garden, gardening, gardener, floriculture"
+Asian,group,mala1464,noun,1,ricecombo,positive,1,Malayalam,converged,converged,5.634463573048013,rice
+Oceanic languages,group,xara1244,noun,1,coconutcombo,positive,1,Xârâcùù,converged,converged,5.632906401361101,"coconut, cocoanut"
+Polynesian,group,tong1325,noun,1,bananacombo,positive,1,Tonga,converged,converged,5.623902429610757,banana
+North Saami,single,nort2671,noun,1,icecombo,positive,1,North Saami,converged,converged,5.599851130337497,ice
+Saami,group,nort2671,noun,1,icecombo,positive,1,North Saami,converged,converged,5.599851130337497,ice
+East and southeast asian,group,mand1415,noun,0,insectscombo,positive,1,Mandarin Chinese,converged,converged,5.587924821087859,insect
+Polynesian,group,tiko1237,noun,1,bananacombo,positive,1,Tikopia,converged,converged,5.5478079775564595,banana
+Oceanic languages,group,ayiw1239,"noun, verb",0,gardeningcombo,positive,1,Äiwoo,converged,converged,5.53084526437932,"garden, gardening, gardener, floriculture"
+Asian,group,beng1280,noun,1,ricecombo,positive,1,Bengali,converged,converged,5.501986942527236,rice
+Oceanic languages,group,bugh1239,noun,1,coconutcombo,positive,1,Bughotu,converged,converged,5.474234463302897,"coconut, cocoanut"
+Polynesian,group,tahi1242,noun,1,bananacombo,positive,1,Tahitian,converged,converged,5.470223550399324,banana
+Oceanic languages,group,mota1237,noun,1,coconutcombo,positive,1,Mota,converged,converged,5.467258621914215,"coconut, cocoanut"
+Asian,group,hooo1248,noun,1,ricecombo,positive,1,Ho,converged,converged,5.432289841912321,rice
+Australian languages,group,pint1250,noun,1,sandcombo,positive,1,Pintupi-Luritja,converged,converged,5.402787411301123,sand
+Oceanic,group,maor1246,noun,1,windcombo,positive,1,Maori,converged,converged,5.389540004224411,wind
+Asian,group,sant1410,noun,1,ricecombo,positive,1,Santali,converged,converged,5.377798156718438,rice
+Asian,group,nucl1310,noun,1,ricecombo,positive,1,Burmese,converged,converged,5.372355552938508,rice
+East and southeast asian,group,nucl1310,noun,1,ricecombo,positive,1,Burmese,converged,converged,5.372355552938508,rice
+Oceanic languages,group,lena1238,"noun, verb",0,gardeningcombo,positive,1,Lenakel,converged,converged,5.343823203301307,"garden, gardening, gardener, floriculture"
+Japanese,single,nucl1643,noun,1,tastecombo,positive,1,Japanese,converged,converged,5.289896677831082,"taste, tasting, gustation"
+Asian,group,lund1271,noun,1,ricecombo,positive,1,Lundayeh,converged,converged,5.2891810597367455,rice
+East and southeast asian,group,lund1271,noun,1,ricecombo,positive,1,Lundayeh,converged,converged,5.2891810597367455,rice
+Asian,group,misi1242,noun,1,ricecombo,positive,1,Mising-Padam-Miri-Minyong,converged,converged,5.284702173452408,rice
+Ponapean,single,pohn1238,noun,0,fishcombo,positive,1,Pohnpeian,converged,converged,5.284428532066865,fish
+Asian,group,aona1235,noun,1,ricecombo,positive,1,Ao Naga,converged,converged,5.281444972474532,rice
+Asian,group,magu1243,noun,1,ricecombo,positive,1,Maguindanao,converged,converged,5.19922936154109,rice
+East and southeast asian,group,magu1243,noun,1,ricecombo,positive,1,Maguindanao,converged,converged,5.19922936154109,rice
+Maori,group,maor1246,noun,0,treecombo,positive,1,Maori,converged,converged,5.1862420383379595,tree
+Asian,group,muna1247,noun,1,ricecombo,positive,1,Muna,converged,converged,5.183372566550992,rice
+East and southeast asian,group,muna1247,noun,1,ricecombo,positive,1,Muna,converged,converged,5.183372566550992,rice
+Oceanic languages,group,tali1259,"noun, verb",0,gardeningcombo,positive,1,Talise,converged,converged,5.169217499910331,"garden, gardening, gardener, floriculture"
+Asian,group,wuch1236,noun,1,ricecombo,positive,1,Wu Chinese,converged,converged,5.12900811997017,rice
+East and southeast asian,group,wuch1236,noun,1,ricecombo,positive,1,Wu Chinese,converged,converged,5.12900811997017,rice
+Mayan,group,maya1287,noun,1,corncombo,positive,1,Mayan,converged,converged,5.118399071942479,"corn, maize"
+Polynesian,group,mele1250,noun,1,tarocombo,positive,1,Mele-Fila,converged,converged,5.103812280291261,"taro, cocoyam, dasheen, eddo"
+Oceanic languages,group,sina1266,"noun, verb",0,gardeningcombo,positive,1,Sinaugoro,converged,converged,5.089795312526081,"garden, gardening, gardener, floriculture"
+Australian languages,group,wikm1247,noun,1,emuscombo,positive,1,Wik-Mungkan,converged,converged,5.08754072916379,emu
+Kalam,single,kala1397,s,0,birdcombo,positive,1,Kalam,converged,converged,5.087191773304556,bird
+Papua New Guinea,group,kala1397,noun,0,birdcombo,positive,1,Kalam,converged,converged,5.087191773304556,bird
+Oceanic languages,group,mota1237,"noun, verb",0,gardeningcombo,positive,1,Mota,converged,converged,5.081027279030331,"garden, gardening, gardener, floriculture"
+Asian,group,hind1269,noun,1,ricecombo,positive,1,Hindi,converged,converged,5.071311667895472,rice
+Oceanic languages,group,sout2859,noun,1,coconutcombo,positive,1,Southeast Ambrym,converged,converged,5.049655761747215,"coconut, cocoanut"
+Polynesian,group,tuva1244,noun,1,bananacombo,positive,1,Tuvalu,converged,converged,5.0245331788898735,banana
+Asian,group,mara1404,noun,1,ricecombo,positive,1,Maranao,converged,converged,5.011049705687915,rice
+East and southeast asian,group,mara1404,noun,1,ricecombo,positive,1,Maranao,converged,converged,5.011049705687915,rice
+Tamil,single,tami1289,noun,1,fruitcombo,positive,1,Tamil,converged,converged,4.990649989573587,fruit
+East and southeast asian,group,wara1300,noun,0,fishcombo,positive,1,Waray,converged,converged,4.967228678904068,fish
+Oceanic languages,group,yabe1254,"noun, verb",0,gardeningcombo,positive,1,Yabem,converged,converged,4.962432966274993,"garden, gardening, gardener, floriculture"
+Australian languages,group,ngal1292,noun,1,sandcombo,positive,1,Ngalkbun,converged,converged,4.9437143475911345,sand
+Asian,group,rade1240,noun,1,ricecombo,positive,1,Rade,converged,converged,4.936213514866455,rice
+East and southeast asian,group,rade1240,noun,1,ricecombo,positive,1,Rade,converged,converged,4.936213514866455,rice
+Asian,group,besi1244,noun,1,ricecombo,positive,1,Besisi,converged,converged,4.919552358406576,rice
+East and southeast asian,group,besi1244,noun,1,ricecombo,positive,1,Besisi,converged,converged,4.919552358406576,rice
+Polynesian,group,mang1401,noun,1,bananacombo,positive,1,Mangareva,converged,converged,4.917192404816984,banana
+Arabic,group,anda1287,noun,1,camelcombo,positive,1,Andalusian Arabic,converged,converged,4.916484880560672,camel
+Oceanic languages,group,tiri1258,noun,1,coconutcombo,positive,1,Tiri-Mea,converged,converged,4.90825368028621,"coconut, cocoanut"
+Asian,group,taus1251,noun,1,ricecombo,positive,1,Tausug,converged,converged,4.902360809352507,rice
+East and southeast asian,group,taus1251,noun,1,ricecombo,positive,1,Tausug,converged,converged,4.902360809352507,rice
+East and southeast asian,group,iban1264,noun,1,raincombo,positive,1,Iban,converged,converged,4.901982067100917,"rain, rainfall, rainwater"
+Polynesian,group,taku1257,noun,1,bananacombo,positive,1,Takuu,converged,converged,4.889811627108149,banana
+Asian,group,hakk1236,noun,1,ricecombo,positive,1,Hakka Chinese,converged,converged,4.8831280028209845,rice
+East and southeast asian,group,hakk1236,noun,1,ricecombo,positive,1,Hakka Chinese,converged,converged,4.8831280028209845,rice
+East and southeast asian,group,temi1246,noun,0,insectscombo,positive,1,Temiar,converged,converged,4.859126995361158,insect
+Kalam,single,kala1397,noun,0,insectscombo,positive,1,Kalam,converged,converged,4.85002387021855,insect
+Australian languages,group,rita1239,noun,1,emuscombo,positive,1,Ritharrngu,converged,converged,4.8416234758852505,emu
+Tikopia,single,tiko1237,noun,0,fishcombo,positive,1,Tikopia,converged,converged,4.8168387436849125,fish
+East and southeast asian,group,cebu1242,noun,0,fishcombo,positive,1,Cebuano,converged,converged,4.814917960222047,fish
+Asian,group,pamp1243,noun,1,ricecombo,positive,1,Pampanga,converged,converged,4.8088435930680085,rice
+East and southeast asian,group,pamp1243,noun,1,ricecombo,positive,1,Pampanga,converged,converged,4.8088435930680085,rice
+Asian,group,nung1283,noun,1,ricecombo,positive,1,Nung,converged,converged,4.808240261251242,rice
+East and southeast asian,group,nung1283,noun,1,ricecombo,positive,1,Nung,converged,converged,4.808240261251242,rice
+Polynesian,group,toke1240,noun,1,tarocombo,positive,1,Tokelau,converged,converged,4.8011762674732825,"taro, cocoyam, dasheen, eddo"
+Asian,group,khas1269,noun,1,ricecombo,positive,1,Khasi,converged,converged,4.798736168192458,rice
+Polynesian,group,mang1401,noun,1,tarocombo,positive,1,Mangareva,converged,converged,4.781565656593288,"taro, cocoyam, dasheen, eddo"
+Lushei,single,lush1249,noun,1,basketcombo,positive,1,Mizo,converged,converged,4.781325773157932,"basket, handbasket"
+Mayan,group,kich1262,noun,1,corncombo,positive,1,K'iche',converged,converged,4.776084290144807,"corn, maize"
+Australian languages,group,ngaa1240,noun,1,sandcombo,positive,1,Ngaanyatjarra,converged,converged,4.754137072882228,sand
+Oceanic,group,samo1305,noun,1,windcombo,positive,1,Samoan,converged,converged,4.748591098050821,wind
+Australian languages,group,yank1247,noun,1,sandcombo,positive,1,Yankunytjatjara,converged,converged,4.701536921958164,sand
+East and southeast asian,group,shan1277,noun,0,insectscombo,positive,1,Shan,converged,converged,4.6998901708482546,insect
+!Xóõ,single,huaa1248,noun,1,smellcombo,positive,1,East Taa,converged,converged,4.671758850277883,"smell, odor, odour, aroma, scent, smelling"
+Asian,group,mind1253,noun,1,ricecombo,positive,1,Min Dong Chinese,converged,converged,4.665539862244539,rice
+East and southeast asian,group,mind1253,noun,1,ricecombo,positive,1,Min Dong Chinese,converged,converged,4.665539862244539,rice
+Asian,group,mait1250,noun,1,ricecombo,positive,1,Maithili,converged,converged,4.651110589301262,rice
+Oceanic,group,tuam1242,noun,1,windcombo,positive,1,Tuamotuan,converged,converged,4.635049062606648,wind
+Australian languages,group,yiry1245,noun,1,sandcombo,positive,1,Yir-Yoront,converged,converged,4.61338424222067,sand
+Oceanic languages,group,neng1238,noun,1,coconutcombo,positive,1,Nengone,converged,converged,4.582200208208166,"coconut, cocoanut"
+Arabic,group,stan1318,noun,1,honeycombo,positive,1,Standard Arabic,converged,converged,4.57819837975051,honey
+Hindi,single,hind1269,noun,1,glancecombo,positive,1,Hindi,converged,converged,4.575885201558106,"glance, glimpse"
+Lau,single,lauu1247,noun,0,fishcombo,positive,1,Lau,converged,converged,4.564905291335957,fish
+Asian,group,biat1246,noun,1,ricecombo,positive,1,Biatah Bidayuh,converged,converged,4.548161126466145,rice
+East and southeast asian,group,biat1246,noun,1,ricecombo,positive,1,Biatah Bidayuh,converged,converged,4.548161126466145,rice
+Asian,group,kash1277,noun,1,ricecombo,positive,1,Kashmiri,converged,converged,4.542588036897506,rice
+Asian,group,west2555,noun,1,ricecombo,positive,1,Western Bukidnon Manobo,converged,converged,4.508196373203188,rice
+East and southeast asian,group,west2555,noun,1,ricecombo,positive,1,Western Bukidnon Manobo,converged,converged,4.508196373203188,rice
+Asian,group,tetu1245,noun,1,ricecombo,positive,1,Tetum,converged,converged,4.503428084314217,rice
+East and southeast asian,group,tetu1245,noun,1,ricecombo,positive,1,Tetum,converged,converged,4.503428084314217,rice
+East and southeast asian,group,casi1235,noun,0,fishcombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,4.502024886715691,fish
+Arabic,group,jude1267,noun,1,honeycombo,positive,1,Judeo-Yemeni Arabic,converged,converged,4.499096441965969,honey
+Asian,group,tang1336,noun,1,ricecombo,positive,1,East-Central Tangkhul Naga,converged,converged,4.4451912703498575,rice
+Asian,group,sund1252,noun,1,ricecombo,positive,1,Sundanese,converged,converged,4.437363840281935,rice
+East and southeast asian,group,sund1252,noun,1,ricecombo,positive,1,Sundanese,converged,converged,4.437363840281935,rice
+Asian,group,lisu1250,noun,1,ricecombo,positive,1,Lisu,converged,converged,4.419692562454321,rice
+East and southeast asian,group,lisu1250,noun,1,ricecombo,positive,1,Lisu,converged,converged,4.419692562454321,rice
+Oceanic languages,group,taku1257,"noun, verb",0,gardeningcombo,positive,1,Takuu,converged,converged,4.418572338675136,"garden, gardening, gardener, floriculture"
+Asian,group,urak1238,noun,1,ricecombo,positive,1,Urak Lawoi',converged,converged,4.417643447887564,rice
+East and southeast asian,group,urak1238,noun,1,ricecombo,positive,1,Urak Lawoi',converged,converged,4.417643447887564,rice
+Arosi,single,aros1241,noun,0,fishcombo,positive,1,Arosi,converged,converged,4.39688329216936,fish
+Oceanic languages,group,malo1243,noun,1,coconutcombo,positive,1,Tamambo,converged,converged,4.395680920092652,"coconut, cocoanut"
+Australian languages,group,dhar1247,noun,1,emuscombo,positive,1,Dhargari,converged,converged,4.39083721512244,emu
+East and southeast asian,group,chan1313,noun,0,insectscombo,positive,1,Chang Naga,converged,converged,4.379000342137532,insect
+Gela,single,gela1263,noun,0,fishcombo,positive,1,Gela,converged,converged,4.373580492305625,fish
+Australian languages,group,mudb1240,noun,1,sandcombo,positive,1,Mudburra,converged,converged,4.362650656083332,sand
+Tupi languages,group,guar1292,noun,1,parrotcombo,positive,1,Guarayu,converged,converged,4.3546954974844,parrot
+Australian languages,group,djin1251,noun,1,sandcombo,positive,1,Jingulu,converged,converged,4.345482947592482,sand
+Old English,single,olde1238,noun,1,herocombo,positive,1,Old English,converged,converged,4.336689539873693,hero
+Asian,group,limb1266,noun,1,ricecombo,positive,1,Limbu,converged,converged,4.319865752031271,rice
+Oceanic languages,group,surs1246,"noun, verb",0,buildingcombo,positive,1,Sursurunga,converged,converged,4.3021963409287665,"build, construct, building, construction, dwelling, house"
+Oceanic,group,fiji1243,noun,1,windcombo,positive,1,Fijian,converged,converged,4.300537889871263,wind
+Arabic,group,sana1295,noun,1,camelcombo,positive,1,Sanaani Arabic,converged,converged,4.2982011864926495,camel
+East and southeast asian,group,iban1264,noun,0,fishcombo,positive,1,Iban,converged,converged,4.287729038504197,fish
+Oceanic languages,group,mele1250,"noun, verb",0,gardeningcombo,positive,1,Mele-Fila,converged,converged,4.28118447680873,"garden, gardening, gardener, floriculture"
+Papua New Guinea,group,tele1256,noun,0,birdcombo,positive,1,Telefol,converged,converged,4.260832255902003,bird
+Asian,group,bond1245,noun,1,ricecombo,positive,1,Bondo,converged,converged,4.231377920747882,rice
+Asian,group,sora1254,noun,1,ricecombo,positive,1,Sora,converged,converged,4.220023438426267,rice
+Oceanic,group,taku1257,noun,1,windcombo,positive,1,Takuu,converged,converged,4.173004405997984,wind
+Malay,group,baba1267,noun,1,ricecombo,positive,1,Baba Malay,converged,converged,4.168777263644182,rice
+Oceanic languages,group,vure1239,"noun, verb",0,gardeningcombo,positive,1,Vurës,converged,converged,4.158263779352752,"garden, gardening, gardener, floriculture"
+Wayan Fijian,single,fiji1243,noun,1,mollusccombo,positive,1,Fijian,converged,converged,4.1530893801231,"mollusk, mollusc, shellfish"
+East and southeast asian,group,iban1264,noun,0,insectscombo,positive,1,Iban,converged,converged,4.151309629096904,insect
+East and southeast asian,group,muna1247,noun,0,fishcombo,positive,1,Muna,converged,converged,4.122528203849496,fish
+Venda,single,vend1245,noun,1,shrubcombo,positive,1,Venda,converged,converged,4.1216597552803975,"shrub, bush"
+Tonga,single,tong1325,noun,0,fishcombo,positive,1,Tonga,converged,converged,4.120720479144813,fish
+Roviana,single,rovi1238,noun,0,treecombo,positive,1,Roviana,converged,converged,4.10833781547959,tree
+Asian,group,dima1251,noun,1,ricecombo,positive,1,Dimasa,converged,converged,4.0745506275871595,rice
+Asian,group,pang1290,noun,1,ricecombo,positive,1,Pangasinan,converged,converged,4.070041997814119,rice
+East and southeast asian,group,pang1290,noun,1,ricecombo,positive,1,Pangasinan,converged,converged,4.070041997814119,rice
+Oceanic languages,group,saaa1240,"noun, verb",0,gardeningcombo,positive,1,Sa'a,converged,converged,4.0339088056931915,"garden, gardening, gardener, floriculture"
+Australian languages,group,wari1262,noun,1,emuscombo,positive,1,Wariyangga,converged,converged,4.033281741076458,emu
+Old English,single,olde1238,noun,1,shipcombo,positive,1,Old English,converged,converged,4.032598341789487,"ship, boat"
+East and southeast asian,group,tbol1240,noun,1,raincombo,positive,1,Tboli,converged,converged,4.023828545983954,"rain, rainfall, rainwater"
+Australian languages,group,wand1263,noun,1,emuscombo,positive,1,Wandarang,converged,converged,4.018762967203168,emu
+East and southeast asian,group,stan1306,noun,0,insectscombo,positive,1,Standard Malay,converged,converged,4.004728655683691,insect
+Aneityum,single,anei1239,noun,0,fishcombo,positive,1,Aneityum,converged,converged,3.9882445080965185,fish
+Papua New Guinea,group,tere1278,noun,0,birdcombo,positive,1,Terei,converged,converged,3.988116549972238,bird
+East and southeast asian,group,kosa1249,noun,1,raincombo,positive,1,Kosarek Yale,converged,converged,3.985221602512951,"rain, rainfall, rainwater"
+Niuean,single,niue1239,noun,0,fishcombo,positive,1,Niuean,converged,converged,3.9845838519249344,fish
+Rarotongan,single,raro1241,noun,0,fishcombo,positive,1,Southern Cook Island Maori,converged,converged,3.982203660254876,fish
+Carolinian,single,caro1242,noun,0,fishcombo,positive,1,Carolinian,converged,converged,3.9804745346957513,fish
+Oceanic languages,group,area1240,"noun, verb",0,gardeningcombo,positive,1,'Are'are,converged,converged,3.978073857166814,"garden, gardening, gardener, floriculture"
+Arabic,group,stan1318,noun,1,horsecombo,positive,1,Standard Arabic,converged,converged,3.973151700113217,horse
+East and southeast asian,group,stan1306,noun,0,fishcombo,positive,1,Standard Malay,converged,converged,3.958640418575005,fish
+Australian languages,group,nugu1241,noun,1,emuscombo,positive,1,Nugunu,converged,converged,3.938863253977533,emu
+Asian,group,lepc1244,noun,1,ricecombo,positive,1,Lepcha,converged,converged,3.92743722420773,rice
+Arosi,single,aros1241,noun,0,treecombo,positive,1,Arosi,converged,converged,3.8712759476469176,tree
+East and southeast asian,group,lari1255,noun,0,fishcombo,positive,1,Larike-Wakasihu,converged,converged,3.8479101049441162,fish
+East and southeast asian,group,besi1244,noun,0,fishcombo,positive,1,Besisi,converged,converged,3.8353183012734196,fish
+To'abaita,single,toab1237,noun,0,fishcombo,positive,1,To'abaita,converged,converged,3.8233947775758845,fish
+East and southeast asian,group,sgaw1245,noun,0,insectscombo,positive,1,S'gaw Karen,converged,converged,3.816992479943636,insect
+East and southeast asian,group,yaka1277,noun,0,fishcombo,positive,1,Yakan,converged,converged,3.8038872163467277,fish
+Arabic,group,moro1292,noun,1,camelcombo,positive,1,Moroccan Arabic,converged,converged,3.793870030237938,camel
+Old English,single,olde1238,noun,1,crosscombo,positive,1,Old English,converged,converged,3.78568413563297,"cross, crisscross"
+East and southeast asian,group,muna1247,noun,1,raincombo,positive,1,Muna,converged,converged,3.7077145791749255,"rain, rainfall, rainwater"
+Asian,group,cent2087,noun,1,ricecombo,positive,1,Coastal-Naga Bikol,converged,converged,3.700144907208255,rice
+East and southeast asian,group,cent2087,noun,1,ricecombo,positive,1,Coastal-Naga Bikol,converged,converged,3.700144907208255,rice
+Asian,group,urdu1245,noun,1,ricecombo,positive,1,Urdu,converged,converged,3.6852291356666003,rice
+Oceanic languages,group,futu1245,"noun, verb",0,gardeningcombo,positive,1,Futuna-Aniwa,converged,converged,3.661685884192032,"garden, gardening, gardener, floriculture"
+Australian languages,group,west2443,noun,1,emuscombo,positive,1,Western Victoria,converged,converged,3.641905357278541,emu
+To'abaita,single,toab1237,noun,0,treecombo,positive,1,To'abaita,converged,converged,3.618340737783168,tree
+East and southeast asian,group,kach1280,noun,0,insectscombo,positive,1,Southern Jinghpaw,converged,converged,3.6042780094114835,insect
+Polynesian,group,tong1325,noun,1,tarocombo,positive,1,Tonga,converged,converged,3.587166763671278,"taro, cocoyam, dasheen, eddo"
+East and southeast asian,group,biat1246,noun,0,fishcombo,positive,1,Biatah Bidayuh,converged,converged,3.585219291177722,fish
+Oceanic languages,group,lonw1238,"noun, verb",0,gardeningcombo,positive,1,Lonwolwol,converged,converged,3.5596545071711816,"garden, gardening, gardener, floriculture"
+Australian languages,group,gami1243,noun,1,emuscombo,positive,1,Yuwaalaraay-Gamilaraay,converged,converged,3.553117692747226,emu
+East and southeast asian,group,bata1298,noun,1,raincombo,positive,1,Batad Ifugao,converged,converged,3.5416036916029583,"rain, rainfall, rainwater"
+Cheke Holo,single,chek1238,noun,0,fishcombo,positive,1,Cheke Holo,converged,converged,3.5138628165498247,fish
+Australian languages,group,pint1250,noun,1,chrysaliscombo,positive,1,Pintupi-Luritja,converged,converged,3.51184537150552,chrysalis
+Cheke Holo,single,chek1238,noun,0,treecombo,positive,1,Cheke Holo,converged,converged,3.488036936786792,tree
+Mota,single,mota1237,noun,1,smellcombo,positive,1,Mota,converged,converged,3.487802907967673,"smell, odor, odour, aroma, scent, smelling"
+Papua New Guinea,group,yaga1260,noun,0,birdcombo,positive,1,Yagaria,converged,converged,3.4344785461076026,bird
+Australian languages,group,thay1249,noun,1,emuscombo,positive,1,Thayore,converged,converged,3.4268334994492116,emu
+Portuguese,group,port1283,noun,1,horsecombo,positive,1,Portuguese,converged,converged,3.415697445350887,horse
+Ilocano,single,ilok1237,noun,1,smellcombo,positive,1,Iloko,converged,converged,3.4112583372715695,"smell, odor, odour, aroma, scent, smelling"
+Oceanic,group,urip1240,noun,1,windcombo,positive,1,Uripiv,converged,converged,3.4059699695169527,wind
+Fijian,group,fiji1243,noun,0,treecombo,positive,1,Fijian,converged,converged,3.3977627067689693,tree
+Asian,group,sgaw1245,noun,1,ricecombo,positive,1,S'gaw Karen,converged,converged,3.3967481870514513,rice
+East and southeast asian,group,sgaw1245,noun,1,ricecombo,positive,1,S'gaw Karen,converged,converged,3.3967481870514513,rice
+East and southeast asian,group,cent2292,noun,1,raincombo,positive,1,Central Bontoc,converged,converged,3.3919735859333153,"rain, rainfall, rainwater"
+Oceanic,group,aros1241,noun,1,windcombo,positive,1,Arosi,converged,converged,3.38131487097871,wind
+Polynesian,group,toke1240,noun,1,bananacombo,positive,1,Tokelau,converged,converged,3.378681848390271,banana
+Oceanic languages,group,anei1239,"noun, verb",0,gardeningcombo,positive,1,Aneityum,converged,converged,3.3734188154455826,"garden, gardening, gardener, floriculture"
+Asian,group,hili1240,noun,1,ricecombo,positive,1,Hiligaynon,converged,converged,3.328608992469144,rice
+East and southeast asian,group,hili1240,noun,1,ricecombo,positive,1,Hiligaynon,converged,converged,3.328608992469144,rice
+East and southeast asian,group,mand1415,noun,1,windcombo,positive,1,Mandarin Chinese,converged,converged,3.3138530906609103,wind
+East and southeast asian,group,west2555,noun,0,insectscombo,positive,1,Western Bukidnon Manobo,converged,converged,3.3131807591282483,insect
+Australian languages,group,mara1385,noun,1,emuscombo,positive,1,Marra,converged,converged,3.2960693529089133,emu
+Papua New Guinea,group,enga1252,noun,0,birdcombo,positive,1,Enga,converged,converged,3.2694517550540296,bird
+Oceanic,group,anei1239,noun,1,windcombo,positive,1,Aneityum,converged,converged,3.255547029618865,wind
+Papua New Guinea,group,sina1266,noun,0,birdcombo,positive,1,Sinaugoro,converged,converged,3.253699892106697,bird
+Australian languages,group,yiry1245,noun,1,starscombo,positive,1,Yir-Yoront,converged,converged,3.245198113402403,star
+East and southeast asian,group,cent2292,noun,0,insectscombo,positive,1,Central Bontoc,converged,converged,3.2109552294567365,insect
+Paama,single,paam1238,noun,0,treecombo,positive,1,Paama,converged,converged,3.209683813232091,tree
+East and southeast asian,group,bara1370,noun,0,fishcombo,positive,1,Baram Kayan,converged,converged,3.209501709009973,fish
+Oceanic languages,group,kwam1252,"noun, verb",0,buildingcombo,positive,1,Kwamera,converged,converged,3.205202665469319,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,rovi1238,"noun, verb",0,gardeningcombo,positive,1,Roviana,converged,converged,3.196979339940231,"garden, gardening, gardener, floriculture"
+Australian languages,group,warl1254,noun,1,starscombo,positive,1,Warlpiri,converged,converged,3.182446045977412,star
+Gela,single,gela1263,noun,0,treecombo,positive,1,Gela,converged,converged,3.177768004153739,tree
+East and southeast asian,group,nung1283,noun,0,insectscombo,positive,1,Nung,converged,converged,3.1757927815577283,insect
+East and southeast asian,group,biat1246,noun,0,insectscombo,positive,1,Biatah Bidayuh,converged,converged,3.1743944925777132,insect
+Eskimo-Aleut,group,aleu1260,noun,1,icecombo,positive,1,Aleut,converged,converged,3.157421080065136,ice
+Lau,single,lauu1247,noun,0,treecombo,positive,1,Lau,converged,converged,3.1512842251380584,tree
+Australian languages,group,bard1255,noun,1,eelscombo,positive,1,Bardi,converged,converged,3.149165227234717,eel
+East and southeast asian,group,magu1243,noun,0,fishcombo,positive,1,Maguindanao,converged,converged,3.130876479296686,fish
+Korean,single,kore1280,noun,1,tastecombo,positive,1,Korean,converged,converged,3.1001373917085346,"taste, tasting, gustation"
+Asian,group,mund1320,noun,1,ricecombo,positive,1,Mundari,converged,converged,3.097512621341073,rice
+East and southeast asian,group,mara1382,noun,0,insectscombo,positive,1,Mara Chin,converged,converged,3.090218996719329,insect
+East and southeast asian,group,tetu1245,noun,0,insectscombo,positive,1,Tetum,converged,converged,3.0836890328291737,insect
+East and southeast asian,group,taus1251,noun,0,fishcombo,positive,1,Tausug,converged,converged,3.0700535963610194,fish
+East and southeast asian,group,sema1266,noun,0,insectscombo,positive,1,Semai,converged,converged,3.0667769106354954,insect
+East and southeast asian,group,yaka1277,noun,1,raincombo,positive,1,Yakan,converged,converged,3.045796577597056,"rain, rainfall, rainwater"
+Papua New Guinea,group,toar1246,noun,0,birdcombo,positive,1,Toaripi,converged,converged,3.0427923229765472,bird
+Asian,group,bada1257,noun,1,ricecombo,positive,1,Badaga,converged,converged,3.040531227509568,rice
+Australian languages,group,wira1265,noun,1,emuscombo,positive,1,Wirangu,converged,converged,3.03405682582015,emu
+Asian,group,chan1310,noun,1,ricecombo,positive,1,Chantyal,converged,converged,3.033882474024154,rice
+Arabic,group,chad1249,noun,1,camelcombo,positive,1,Chadian Arabic,converged,converged,3.024676294215112,camel
+East and southeast asian,group,lund1271,noun,0,fishcombo,positive,1,Lundayeh,converged,converged,3.004627096225908,fish
+East and southeast asian,group,mand1415,noun,0,weathercombo,positive,1,Mandarin Chinese,converged,converged,2.9868071723725853,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Aleut,single,aleu1260,noun,0,bodypartscombo,positive,1,Aleut,converged,converged,2.9826606669286417,"bile, breath, catarrh, pus, defecation, excrement, faeces, fart, gall, menses, mucous, mucus, phlegm, saliva, snot, placenta, semen, shit, spittle, sweat, tear, urine, vernix, vomit, beard, cheek, chin, eye, eyeball, eyebrow, eyelash, eyelid, face, forehead, gum, labium, lip, mandible, masseter, molar, moustache, mouth, mustache, nose, nostril, overlip, philtrum, pupil, iris, spectacle, stubble, tongue, tooth, teeth, whisker, backbone, belly, bicep, bladder, blood, bone, bowel, brain, cartilage, cervix, cheekbone, collarbone, coccyx, fat, flesh, gallbladder, gut, heart, hipbone, intestine, jaw, kidney, knee-cap, kneecap, knuckle, liver, lung, marrow, meat, muscle, navel, nerve, oesophagus, palate, pelvis, rectum, rib, seat-bone, shin, skeleton, skull, spine, spleen, sternum, stomach, tendon, testicle, throat, uvula, uterus, vein, velum, windpipe, womb, abdomen, ankle, anus, arm, armpit, arse, belly, body, breast, bum, buttock, chest, clavicle, clitoris, corpse, crotch, ear, ear-hole, earlobe, elbow, finger, fingernail, finger-tip, fontanel, fontanelle, foot, feet, forearm, foreskin, groin, hair, hand, palm, head, heel, hip, waist, knee, knuckle, leg, limb, nail, nape, spine, navel, neck, throat, nipple, oesophagus, palm, pate, penis, tail, pharynx, rump, scalp, skull, scrotum, shin, shoulder, skin, sole, stomach, testicle, thigh, thorax, thumb, toe, toenail, torso, underarm, uvula, vagina, vulva, wrinkle, wrist, genital"
+East and southeast asian,group,bali1278,noun,0,fishcombo,positive,1,Balinese,converged,converged,2.9592878858540486,fish
+Oceanic,group,chuu1238,noun,1,windcombo,positive,1,Chuukese,converged,converged,2.9574300934482354,wind
+East and southeast asian,group,ilok1237,noun,1,windcombo,positive,1,Iloko,converged,converged,2.9345538706031196,wind
+East and southeast asian,group,thai1261,noun,0,fishcombo,positive,1,Thai,converged,converged,2.927659402896986,fish
+Polynesian,group,tuam1242,noun,1,tarocombo,positive,1,Tuamotuan,converged,converged,2.923462492971225,"taro, cocoyam, dasheen, eddo"
+Oceanic,group,raro1241,noun,1,windcombo,positive,1,Southern Cook Island Maori,converged,converged,2.914016959218178,wind
+Oceanic,group,tiko1237,noun,1,windcombo,positive,1,Tikopia,converged,converged,2.9024834232193757,wind
+Niuean,single,niue1239,noun,0,treecombo,positive,1,Niuean,converged,converged,2.9016878241692186,tree
+East and southeast asian,group,mand1415,noun,1,raincombo,positive,1,Mandarin Chinese,converged,converged,2.8958543152625924,"rain, rainfall, rainwater"
+Oceanic,group,yabe1254,noun,1,windcombo,positive,1,Yabem,converged,converged,2.8857459882513052,wind
+Australian languages,group,twee1234,noun,1,eelscombo,positive,1,Tweed-Albert,converged,converged,2.87995422843582,eel
+Oceanic,group,renn1242,noun,1,windcombo,positive,1,Rennell-Bellona,converged,converged,2.8703033323335996,wind
+Australian languages,group,warl1254,noun,1,sandcombo,positive,1,Warlpiri,converged,converged,2.8694260929151776,sand
+Asian,group,lari1255,noun,1,ricecombo,positive,1,Larike-Wakasihu,converged,converged,2.8515586464332157,rice
+East and southeast asian,group,lari1255,noun,1,ricecombo,positive,1,Larike-Wakasihu,converged,converged,2.8515586464332157,rice
+Oceanic,group,mars1254,noun,1,windcombo,positive,1,Marshallese,converged,converged,2.848665920841451,wind
+Asian,group,sema1266,noun,1,ricecombo,positive,1,Semai,converged,converged,2.844929928025534,rice
+East and southeast asian,group,sema1266,noun,1,ricecombo,positive,1,Semai,converged,converged,2.844929928025534,rice
+East and southeast asian,group,hmon1264,noun,0,insectscombo,positive,1,Hmong Njua,converged,converged,2.836699539144719,insect
+Oceanic,group,mota1237,noun,1,windcombo,positive,1,Mota,converged,converged,2.827314236643001,wind
+Oceanic,group,toke1240,noun,1,windcombo,positive,1,Tokelau,converged,converged,2.824756794619855,wind
+Asian,group,sind1272,noun,1,ricecombo,positive,1,Sindhi,converged,converged,2.824610446516945,rice
+Arabic,group,jude1267,noun,1,swordcombo,positive,1,Judeo-Yemeni Arabic,converged,converged,2.8043129403017777,sword
+East and southeast asian,group,biat1246,noun,1,raincombo,positive,1,Biatah Bidayuh,converged,converged,2.803425764161984,"rain, rainfall, rainwater"
+Oceanic,group,tahi1242,noun,1,windcombo,positive,1,Tahitian,converged,converged,2.8028986467947217,wind
+Oceanic languages,group,suau1242,"noun, verb",0,gardeningcombo,positive,1,Suau,converged,converged,2.798155295235873,"garden, gardening, gardener, floriculture"
+Kwamera,single,kwam1252,noun,0,treecombo,positive,1,Kwamera,converged,converged,2.7785470003939734,tree
+Australian languages,group,yank1247,noun,1,chrysaliscombo,positive,1,Yankunytjatjara,converged,converged,2.776903571580219,chrysalis
+East and southeast asian,group,bara1370,noun,1,raincombo,positive,1,Baram Kayan,converged,converged,2.775402461803487,"rain, rainfall, rainwater"
+Asian,group,chep1245,noun,1,ricecombo,positive,1,Chepang,converged,converged,2.775329561851939,rice
+Oceanic,group,pulu1242,noun,1,windcombo,positive,1,Puluwatese,converged,converged,2.7700788700484367,wind
+Australian languages,group,muru1266,noun,1,starscombo,positive,1,Muruwari,converged,converged,2.7530508680087684,star
+Xârâcùù,single,xara1244,noun,0,fishcombo,positive,1,Xârâcùù,converged,converged,2.7472365492135675,fish
+Oceanic languages,group,urip1240,"noun, verb",0,gardeningcombo,positive,1,Uripiv,converged,converged,2.7406780074242203,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,angg1239,noun,1,raincombo,positive,1,Angguruk Yali,converged,converged,2.733723630378221,"rain, rainfall, rainwater"
+Australian languages,group,twee1234,noun,1,sandcombo,positive,1,Tweed-Albert,converged,converged,2.7321580032616075,sand
+Australian languages,group,kumb1268,noun,1,chrysaliscombo,positive,1,Kumbainggar,converged,converged,2.7101562056406197,chrysalis
+Asian,group,mala1533,noun,1,ricecombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,2.706708151787023,rice
+East and southeast asian,group,mala1533,noun,1,ricecombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,2.706708151787023,rice
+Australian languages,group,kumb1268,noun,1,starscombo,positive,1,Kumbainggar,converged,converged,2.7032959375295706,star
+Oceanic,group,rotu1241,noun,1,windcombo,positive,1,Rotuman,converged,converged,2.697600637289472,wind
+Australian languages,group,yand1253,noun,1,sandcombo,positive,1,Yandruwandha,converged,converged,2.6859101828874388,sand
+Oceanic languages,group,tuva1244,"noun, verb",0,gardeningcombo,positive,1,Tuvalu,converged,converged,2.630470251273017,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,nung1283,noun,1,raincombo,positive,1,Nung,converged,converged,2.6141654267081647,"rain, rainfall, rainwater"
+Oceanic languages,group,xara1244,"noun, verb",0,gardeningcombo,positive,1,Xârâcùù,converged,converged,2.6082088318400545,"garden, gardening, gardener, floriculture"
+Papua New Guinea,group,yabe1254,noun,0,birdcombo,positive,1,Yabem,converged,converged,2.6058075977399273,bird
+Bedouin Arabic,single,nort3139,noun,1,camelcombo,positive,1,Levantine Arabic,converged,converged,2.602598489699503,camel
+Arabic,group,nort3139,noun,1,camelcombo,positive,1,Levantine Arabic,converged,converged,2.602598489699503,camel
+Kwamera,single,kwam1252,noun,0,fishcombo,positive,1,Kwamera,converged,converged,2.593299879123726,fish
+East and southeast asian,group,tbol1240,noun,0,insectscombo,positive,1,Tboli,converged,converged,2.5797286011374294,insect
+Rotuman,single,rotu1241,noun,0,treecombo,positive,1,Rotuman,converged,converged,2.579454487984585,tree
+Lenakel,single,lena1238,noun,0,fishcombo,positive,1,Lenakel,converged,converged,2.5787720093943234,fish
+Oceanic,group,saaa1240,noun,1,windcombo,positive,1,Sa'a,converged,converged,2.5781280704548664,wind
+Papua New Guinea,group,kwom1262,noun,0,birdcombo,positive,1,Kwoma,converged,converged,2.577411278923565,bird
+Oceanic,group,mang1401,noun,1,windcombo,positive,1,Mangareva,converged,converged,2.56810645476286,wind
+Australian languages,group,bard1255,noun,1,emuscombo,positive,1,Bardi,converged,converged,2.5666727859533953,emu
+Oceanic languages,group,teop1238,"noun, verb",0,gardeningcombo,positive,1,Teop,converged,converged,2.565934256299191,"garden, gardening, gardener, floriculture"
+Papua New Guinea,group,surs1246,noun,0,birdcombo,positive,1,Sursurunga,converged,converged,2.565417160390538,bird
+Papua New Guinea,group,kyak1244,noun,0,birdcombo,positive,1,Kyaka,converged,converged,2.557836023266961,bird
+East and southeast asian,group,wara1300,noun,0,insectscombo,positive,1,Waray,converged,converged,2.5448379109832193,insect
+East and southeast asian,group,hakk1236,noun,1,raincombo,positive,1,Hakka Chinese,converged,converged,2.535827136002165,"rain, rainfall, rainwater"
+Oceanic languages,group,louu1245,"noun, verb",0,gardeningcombo,positive,1,Lou,converged,converged,2.5236441524437994,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,hakk1236,noun,0,fishcombo,positive,1,Hakka Chinese,converged,converged,2.514079336195317,fish
+Lenakel,single,lena1238,noun,0,treecombo,positive,1,Lenakel,converged,converged,2.5097265864239238,tree
+Oceanic languages,group,tong1325,"noun, verb",0,gardeningcombo,positive,1,Tonga,converged,converged,2.4803506885876883,"garden, gardening, gardener, floriculture"
+Australian languages,group,kumb1268,noun,1,emuscombo,positive,1,Kumbainggar,converged,converged,2.4623770330134063,emu
+Oceanic,group,gela1263,noun,1,windcombo,positive,1,Gela,converged,converged,2.440944402965308,wind
+East and southeast asian,group,yaka1277,noun,0,insectscombo,positive,1,Yakan,converged,converged,2.4382102015901035,insect
+East and southeast asian,group,casi1235,noun,1,raincombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,2.4258578676252402,"rain, rainfall, rainwater"
+Australian languages,group,twee1234,noun,1,starscombo,positive,1,Tweed-Albert,converged,converged,2.4104931549383815,star
+Venda,single,vend1245,noun,1,grasscombo,positive,1,Venda,converged,converged,2.398046180792941,grass
+Arabic,group,stan1318,noun,1,smellcombo,positive,1,Standard Arabic,converged,converged,2.390195540210868,"smell, odor, odour, aroma, scent, smelling"
+Oceanic languages,group,tiko1237,"noun, verb",0,buildingcombo,positive,1,Tikopia,converged,converged,2.3758358757501026,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,lund1271,"noun, adjective, verb",0,emotioncombo,positive,1,Lundayeh,converged,converged,2.375258905209871,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Asian,group,panj1256,noun,1,ricecombo,positive,1,Eastern Panjabi,converged,converged,2.368204616544441,rice
+East and southeast asian,group,laoo1244,noun,0,fishcombo,positive,1,Lao,converged,converged,2.361979409183593,fish
+East and southeast asian,group,cent1989,noun,0,fishcombo,positive,1,Central Khmer,converged,converged,2.3549777728460715,fish
+East and southeast asian,group,hakk1236,noun,0,weathercombo,positive,1,Hakka Chinese,converged,converged,2.3475216067601656,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Arabic,group,anda1287,noun,1,lioncombo,positive,1,Andalusian Arabic,converged,converged,2.342055760354227,lion
+East and southeast asian,group,pang1290,noun,0,fishcombo,positive,1,Pangasinan,converged,converged,2.317089385508419,fish
+Australian languages,group,bayu1240,noun,1,sandcombo,positive,1,Bayungu,converged,converged,2.310634916548738,sand
+Oceanic,group,geda1237,noun,1,windcombo,positive,1,Gedaged,converged,converged,2.3025186023842803,wind
+Oceanic,group,lonw1238,noun,1,windcombo,positive,1,Lonwolwol,converged,converged,2.291006226789556,wind
+Oceanic languages,group,tiri1258,"noun, verb",0,gardeningcombo,positive,1,Tiri-Mea,converged,converged,2.2784822660026505,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,rotu1241,"noun, verb",0,gardeningcombo,positive,1,Rotuman,converged,converged,2.2697885512304787,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,urak1238,noun,0,fishcombo,positive,1,Urak Lawoi',converged,converged,2.2539526845097266,fish
+Asian,group,gulf1241,noun,1,ricecombo,positive,1,Gulf Arabic,converged,converged,2.2506410642208743,rice
+Wayan Fijian,single,fiji1243,noun,1,crustaceanscombo,positive,1,Fijian,converged,converged,2.2466084060373572,crustacean
+Asian,group,cent1990,noun,1,ricecombo,positive,1,Central Nicobarese,converged,converged,2.2302871722802973,rice
+Arabic,group,egyp1253,noun,1,camelcombo,positive,1,Egyptian Arabic,converged,converged,2.2152027577593323,camel
+East and southeast asian,group,hmon1264,noun,1,raincombo,positive,1,Hmong Njua,converged,converged,2.2076875632192396,"rain, rainfall, rainwater"
+Australian languages,group,mara1385,noun,1,chrysaliscombo,positive,1,Marra,converged,converged,2.202159975272359,chrysalis
+Papua New Guinea,group,kate1253,noun,0,birdcombo,positive,1,Kâte,converged,converged,2.178470570372398,bird
+East and southeast asian,group,bata1298,noun,0,insectscombo,positive,1,Batad Ifugao,converged,converged,2.1676280347237697,insect
+Australian languages,group,ngan1295,noun,1,sandcombo,positive,1,Ngandi,converged,converged,2.1528919119505097,sand
+Oceanic,group,ralu1237,noun,1,windcombo,positive,1,Raluana,converged,converged,2.1466150634535466,wind
+Australian languages,group,kumb1268,noun,1,sandcombo,positive,1,Kumbainggar,converged,converged,2.146213116827051,sand
+East and southeast asian,group,bali1278,noun,0,insectscombo,positive,1,Balinese,converged,converged,2.1432568880430023,insect
+Arabic,group,anda1287,noun,1,smellcombo,positive,1,Andalusian Arabic,converged,converged,2.14290631301929,"smell, odor, odour, aroma, scent, smelling"
+Arabic,group,chad1249,noun,1,lioncombo,positive,1,Chadian Arabic,converged,converged,2.1366604722083817,lion
+East and southeast asian,group,lund1271,noun,1,raincombo,positive,1,Lundayeh,converged,converged,2.129258563499379,"rain, rainfall, rainwater"
+East and southeast asian,group,mara1404,noun,0,fishcombo,positive,1,Maranao,converged,converged,2.1282169659754286,fish
+East and southeast asian,group,halh1238,noun,1,windcombo,positive,1,Halh Mongolian,converged,converged,2.095692937401922,wind
+Papua New Guinea,group,gras1249,noun,0,birdcombo,positive,1,Grass Koiari,converged,converged,2.0942684143804695,bird
+East and southeast asian,group,iban1264,noun,0,weathercombo,positive,1,Iban,converged,converged,2.0931276087240214,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,mara1382,noun,0,fishcombo,positive,1,Mara Chin,converged,converged,2.0790300517718627,fish
+Maori,group,raro1241,noun,0,treecombo,positive,1,Southern Cook Island Maori,converged,converged,2.0748184728564896,tree
+Australian languages,group,kuku1273,noun,1,starscombo,positive,1,Kuku-Yalanji,converged,converged,2.0643810197997214,star
+Australian languages,group,mara1385,noun,1,sandcombo,positive,1,Marra,converged,converged,2.062302307606681,sand
+East and southeast asian,group,mind1253,noun,1,raincombo,positive,1,Min Dong Chinese,converged,converged,2.0590769536773705,"rain, rainfall, rainwater"
+Oceanic languages,group,geda1237,"noun, verb",0,gardeningcombo,positive,1,Gedaged,converged,converged,2.058962716041883,"garden, gardening, gardener, floriculture"
+Papua New Guinea,group,naka1262,noun,0,birdcombo,positive,1,Nakanai,converged,converged,2.0578001820452103,bird
+East and southeast asian,group,mara1382,noun,1,raincombo,positive,1,Mara Chin,converged,converged,2.053366908385603,"rain, rainfall, rainwater"
+East and southeast asian,group,lund1271,noun,0,insectscombo,positive,1,Lundayeh,converged,converged,2.0442411466884853,insect
+Australian languages,group,djin1253,noun,1,emuscombo,positive,1,Djinang,converged,converged,2.038125528151804,emu
+East and southeast asian,group,mala1533,noun,0,fishcombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,2.0350127047929227,fish
+Arabic,group,anda1287,noun,1,swordcombo,positive,1,Andalusian Arabic,converged,converged,2.025746249168925,sword
+Oceanic languages,group,toab1237,"noun, verb",0,buildingcombo,positive,1,To'abaita,converged,converged,2.022916338650156,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,hakk1236,noun,1,windcombo,positive,1,Hakka Chinese,converged,converged,2.019025311079595,wind
+East and southeast asian,group,besi1244,noun,0,insectscombo,positive,1,Besisi,converged,converged,2.0168392520561667,insect
+Oceanic,group,kwam1252,noun,1,windcombo,positive,1,Kwamera,converged,converged,2.0140156822999526,wind
+East and southeast asian,group,ilok1237,noun,0,insectscombo,positive,1,Iloko,converged,converged,2.0114115001776978,insect
+East and southeast asian,group,shan1277,noun,0,fishcombo,positive,1,Shan,converged,converged,2.0096113945073926,fish
+Oceanic,group,niue1239,noun,1,windcombo,positive,1,Niuean,converged,converged,2.0061542173883042,wind
+East and southeast asian,group,hakk1236,noun,0,insectscombo,positive,1,Hakka Chinese,converged,converged,1.9994006657935035,insect
+Fore,single,fore1270,noun,0,birdcombo,positive,1,Fore,converged,converged,1.9824046047981752,bird
+Papua New Guinea,group,fore1270,noun,0,birdcombo,positive,1,Fore,converged,converged,1.9824046047981752,bird
+East and southeast asian,group,west2555,noun,0,fishcombo,positive,1,Western Bukidnon Manobo,converged,converged,1.9789928788058957,fish
+East and southeast asian,group,cent2087,noun,0,fishcombo,positive,1,Coastal-Naga Bikol,converged,converged,1.9765744664597165,fish
+Arabic,group,moro1292,noun,1,honeycombo,positive,1,Moroccan Arabic,converged,converged,1.9707233955859735,honey
+East and southeast asian,group,besi1244,noun,1,raincombo,positive,1,Besisi,converged,converged,1.9617667398200294,"rain, rainfall, rainwater"
+East and southeast asian,group,sund1252,noun,1,raincombo,positive,1,Sundanese,converged,converged,1.9568865121979653,"rain, rainfall, rainwater"
+Venda,single,vend1245,noun,1,raincombo,positive,1,Venda,converged,converged,1.9539886549706307,"rain, rainfall, rainwater"
+East and southeast asian,group,jeha1242,noun,0,insectscombo,positive,1,Jehai,converged,converged,1.9425610350987639,insect
+Oceanic languages,group,bugh1239,"noun, verb",0,gardeningcombo,positive,1,Bughotu,converged,converged,1.9367466378704512,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,rade1240,noun,0,insectscombo,positive,1,Rade,converged,converged,1.9310924864399204,insect
+Paiwan,single,paiw1248,noun,1,smellcombo,positive,1,Paiwan,converged,converged,1.9267253273007354,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,cent2087,noun,0,insectscombo,positive,1,Coastal-Naga Bikol,converged,converged,1.9200749166288242,insect
+Australian languages,group,kuku1273,noun,1,eelscombo,positive,1,Kuku-Yalanji,converged,converged,1.9158838957732196,eel
+East and southeast asian,group,halh1238,noun,0,weathercombo,positive,1,Halh Mongolian,converged,converged,1.911263353438272,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,kach1280,noun,0,fishcombo,positive,1,Southern Jinghpaw,converged,converged,1.9086001790717546,fish
+East and southeast asian,group,sund1252,noun,0,insectscombo,positive,1,Sundanese,converged,converged,1.902931567018844,insect
+East and southeast asian,group,sgaw1245,noun,1,raincombo,positive,1,S'gaw Karen,converged,converged,1.8997670650025806,"rain, rainfall, rainwater"
+Oceanic,group,ayiw1239,noun,1,windcombo,positive,1,Äiwoo,converged,converged,1.8997426504976955,wind
+East and southeast asian,group,nung1283,noun,0,fishcombo,positive,1,Nung,converged,converged,1.8976559366680938,fish
+Australian languages,group,djiw1241,noun,1,sandcombo,positive,1,Djiwarli,converged,converged,1.8914710382764213,sand
+Asian,group,wers1238,noun,1,ricecombo,positive,1,Wersing,converged,converged,1.8912031444971513,rice
+East and southeast asian,group,wers1238,noun,1,ricecombo,positive,1,Wersing,converged,converged,1.8912031444971513,rice
+Papua New Guinea,group,orok1267,noun,0,birdcombo,positive,1,Orokolo,converged,converged,1.8721084903387786,bird
+East and southeast asian,group,thai1261,noun,0,insectscombo,positive,1,Thai,converged,converged,1.8610447179972474,insect
+Australian languages,group,mudb1240,noun,1,chrysaliscombo,positive,1,Mudburra,converged,converged,1.8578922260274526,chrysalis
+East and southeast asian,group,akha1245,noun,0,fishcombo,positive,1,Akha,converged,converged,1.8562846522402048,fish
+Oceanic languages,group,pohn1238,"noun, verb",0,buildingcombo,positive,1,Pohnpeian,converged,converged,1.8560293785076427,"build, construct, building, construction, dwelling, house"
+Asian,group,uigh1240,noun,1,ricecombo,positive,1,Uighur,converged,converged,1.8540305578321916,rice
+East and southeast asian,group,uigh1240,noun,1,ricecombo,positive,1,Uighur,converged,converged,1.8540305578321916,rice
+East and southeast asian,group,pamp1243,noun,0,insectscombo,positive,1,Pampanga,converged,converged,1.8499339082076274,insect
+Australian languages,group,muru1266,noun,1,chrysaliscombo,positive,1,Muruwari,converged,converged,1.8407596229790588,chrysalis
+East and southeast asian,group,angg1239,noun,1,windcombo,positive,1,Angguruk Yali,converged,converged,1.8218740335673596,wind
+Australian languages,group,twee1234,noun,1,emuscombo,positive,1,Tweed-Albert,converged,converged,1.8017740431429146,emu
+East and southeast asian,group,akha1245,noun,0,insectscombo,positive,1,Akha,converged,converged,1.7975155080896839,insect
+East and southeast asian,group,muna1247,noun,1,windcombo,positive,1,Muna,converged,converged,1.7965430654088135,wind
+East and southeast asian,group,temi1246,noun,0,fishcombo,positive,1,Temiar,converged,converged,1.7949318276710553,fish
+Venda,single,vend1245,noun,1,soilcombo,positive,1,Venda,converged,converged,1.7915736376625184,"soil, dirt"
+Oceanic,group,tong1325,noun,1,windcombo,positive,1,Tonga,converged,converged,1.7875709436767766,wind
+Arabic,group,anda1287,noun,1,horsecombo,positive,1,Andalusian Arabic,converged,converged,1.7778681669190106,horse
+East and southeast asian,group,bara1370,noun,0,insectscombo,positive,1,Baram Kayan,converged,converged,1.77737982787421,insect
+East and southeast asian,group,iban1264,noun,1,windcombo,positive,1,Iban,converged,converged,1.777035696252965,wind
+East and southeast asian,group,minn1241,noun,1,raincombo,positive,1,Min Nan Chinese,converged,converged,1.7665828134986463,"rain, rainfall, rainwater"
+East and southeast asian,group,shan1277,noun,1,windcombo,positive,1,Shan,converged,converged,1.7649963325676687,wind
+Southeast asian,group,besi1244,"noun, adjective, verb",0,emotioncombo,positive,1,Besisi,converged,converged,1.7633544786731599,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Asian,group,temi1246,noun,1,ricecombo,positive,1,Temiar,converged,converged,1.7603375172595388,rice
+East and southeast asian,group,temi1246,noun,1,ricecombo,positive,1,Temiar,converged,converged,1.7603375172595388,rice
+East and southeast asian,group,angg1239,noun,0,insectscombo,positive,1,Angguruk Yali,converged,converged,1.72578864033088,insect
+Polish,single,poli1260,noun,1,smellcombo,positive,1,Polish,converged,converged,1.72290936958897,"smell, odor, odour, aroma, scent, smelling"
+Oceanic,group,naka1262,noun,1,windcombo,positive,1,Nakanai,converged,converged,1.7142524373770898,wind
+East and southeast asian,group,monn1252,noun,0,fishcombo,positive,1,Mon,converged,converged,1.7133837927803153,fish
+Old English,single,olde1238,noun,1,bondagecombo,positive,1,Old English,converged,converged,1.6874424307624547,"bondage, slavery, thrall, thralldom, thraldom"
+Australian languages,group,thay1249,noun,1,sandcombo,positive,1,Thayore,converged,converged,1.6763159033143489,sand
+Swahili,group,swah1253,noun,1,smellcombo,positive,1,Swahili,converged,converged,1.6735350997643146,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,laoo1244,noun,0,insectscombo,positive,1,Lao,converged,converged,1.6596453465604712,insect
+East and southeast asian,group,lisu1250,noun,0,insectscombo,positive,1,Lisu,converged,converged,1.659101081093435,insect
+Oceanic,group,paam1238,noun,1,windcombo,positive,1,Paama,converged,converged,1.6510063611132442,wind
+Asian,group,tibe1272,noun,1,ricecombo,positive,1,Tibetan,converged,converged,1.6407088731161652,rice
+East and southeast asian,group,tibe1272,noun,1,ricecombo,positive,1,Tibetan,converged,converged,1.6407088731161652,rice
+Papua New Guinea,group,tang1348,noun,0,birdcombo,positive,1,Tangga,converged,converged,1.6328363152655994,bird
+Oceanic,group,mele1250,noun,1,windcombo,positive,1,Mele-Fila,converged,converged,1.629176609456676,wind
+Oceanic,group,area1240,noun,1,windcombo,positive,1,'Are'are,converged,converged,1.624869579752819,wind
+Oceanic languages,group,niue1239,"noun, verb",0,buildingcombo,positive,1,Niuean,converged,converged,1.6209426456398885,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,monn1252,noun,1,raincombo,positive,1,Mon,converged,converged,1.6009328096624926,"rain, rainfall, rainwater"
+Oceanic languages,group,mang1401,noun,1,coconutcombo,positive,1,Mangareva,converged,converged,1.59947861368032,"coconut, cocoanut"
+Suahili,group,swah1253,noun,1,judgecombo,positive,1,Swahili,converged,converged,1.5972612079972275,"judge, jurist"
+Southeast asian,group,taus1251,"noun, adjective, verb",0,emotioncombo,positive,1,Tausug,converged,converged,1.5754556535579185,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Yupik,group,cent2128,noun,1,windcombo,positive,1,Central Siberian Yupik,converged,converged,1.5723818020675415,wind
+Australian languages,group,ngaa1240,noun,1,starscombo,positive,1,Ngaanyatjarra,converged,converged,1.563629437219058,star
+Asian,group,java1254,noun,1,ricecombo,positive,1,Javanese,converged,converged,1.5634245792325854,rice
+East and southeast asian,group,java1254,noun,1,ricecombo,positive,1,Javanese,converged,converged,1.5634245792325854,rice
+East and southeast asian,group,mind1253,noun,0,weathercombo,positive,1,Min Dong Chinese,converged,converged,1.5626320588742975,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Southeast asian,group,sund1252,"noun, adjective, verb",0,emotioncombo,positive,1,Sundanese,converged,converged,1.5598615876355815,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,yaka1277,noun,1,windcombo,positive,1,Yakan,converged,converged,1.5563380540277965,wind
+Southeast asian,group,bali1278,"noun, adjective, verb",0,emotioncombo,positive,1,Balinese,converged,converged,1.5528007719916725,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic,group,kapi1249,noun,1,windcombo,positive,1,Kapingamarangi,converged,converged,1.547293101459909,wind
+Arabic,group,moro1292,noun,1,horsecombo,positive,1,Moroccan Arabic,converged,converged,1.544367077357369,horse
+Oceanic languages,group,tean1237,"noun, verb",0,gardeningcombo,positive,1,Teanu,converged,converged,1.5404000173660828,"garden, gardening, gardener, floriculture"
+Oceanic,group,rovi1238,noun,1,windcombo,positive,1,Roviana,converged,converged,1.5204901076381176,wind
+Southeast asian,group,biat1246,"noun, adjective, verb",0,emotioncombo,positive,1,Biatah Bidayuh,converged,converged,1.520418983919237,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,tiwi1244,noun,1,sandcombo,positive,1,Tiwi,converged,converged,1.5195914045178442,sand
+European,group,cent2128,noun,0,timecombo,positive,1,Central Siberian Yupik,converged,converged,1.510849674566907,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Australian languages,group,dhar1247,noun,1,sandcombo,positive,1,Dhargari,converged,converged,1.5105277342398387,sand
+ǂHaba,single,naro1249,noun,1,tastecombo,positive,1,Naro,converged,converged,1.4909658706206215,"taste, tasting, gustation"
+Lushei,single,lush1249,noun,1,deercombo,positive,1,Mizo,converged,converged,1.483809394546978,"deer, cervid"
+Lushei,single,lush1249,noun,1,antcombo,positive,1,Mizo,converged,converged,1.458016133026303,"ant, emmet, pismire"
+Oceanic,group,lena1238,noun,1,windcombo,positive,1,Lenakel,converged,converged,1.4566634698794865,wind
+Southeast asian,group,bara1370,"noun, adjective, verb",0,emotioncombo,positive,1,Baram Kayan,converged,converged,1.446558009438479,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,angg1239,noun,0,weathercombo,positive,1,Angguruk Yali,converged,converged,1.4419123785343018,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Yana,single,yana1271,noun,1,sightcombo,positive,1,Yana,converged,converged,1.4416983255978997,"eye, sight, vision, optic, oculus, oculi"
+Asian,group,west2420,noun,1,ricecombo,positive,1,Western Parbate Kham,converged,converged,1.4338687621562693,rice
+Australian languages,group,kumb1268,noun,1,eelscombo,positive,1,Kumbainggar,converged,converged,1.4335950916942046,eel
+East and southeast asian,group,tuvi1240,noun,0,insectscombo,positive,1,Tuvinian,converged,converged,1.4163073990714707,insect
+East and southeast asian,group,stan1306,noun,1,windcombo,positive,1,Standard Malay,converged,converged,1.4090947884704041,wind
+Oceanic languages,group,chuu1238,"noun, verb",0,gardeningcombo,positive,1,Chuukese,converged,converged,1.4077392653830587,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,muna1247,noun,0,weathercombo,positive,1,Muna,converged,converged,1.3905630800931756,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,mind1253,noun,1,windcombo,positive,1,Min Dong Chinese,converged,converged,1.3845760816212367,wind
+Australian languages,group,mara1385,noun,1,eelscombo,positive,1,Marra,converged,converged,1.3577589716027514,eel
+East and southeast asian,group,yaka1277,noun,0,weathercombo,positive,1,Yakan,converged,converged,1.3520695243084646,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,kosa1249,noun,0,weathercombo,positive,1,Kosarek Yale,converged,converged,1.3440453721958776,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,minn1241,noun,1,windcombo,positive,1,Min Nan Chinese,converged,converged,1.3430069294536773,wind
+Arabic,group,sana1295,noun,1,honeycombo,positive,1,Sanaani Arabic,converged,converged,1.3273975910045217,honey
+Oceanic,group,lauu1247,noun,1,windcombo,positive,1,Lau,converged,converged,1.3250162278531354,wind
+Asian,group,kokb1239,noun,1,ricecombo,positive,1,Kok Borok,converged,converged,1.321399091510775,rice
+Australian languages,group,west2443,noun,1,starscombo,positive,1,Western Victoria,converged,converged,1.31435278987378,star
+East and southeast asian,group,ilok1237,noun,1,raincombo,positive,1,Iloko,converged,converged,1.310981965971692,"rain, rainfall, rainwater"
+Southeast asian,group,yaka1277,"noun, adjective, verb",0,emotioncombo,positive,1,Yakan,converged,converged,1.3098932229763276,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,mind1253,noun,0,insectscombo,positive,1,Min Dong Chinese,converged,converged,1.2966143708318707,insect
+East and southeast asian,group,tetu1245,noun,0,fishcombo,positive,1,Tetum,converged,converged,1.2964447487259811,fish
+Asian,group,sana1295,noun,1,ricecombo,positive,1,Sanaani Arabic,converged,converged,1.2943774273105273,rice
+East and southeast asian,group,pamp1243,noun,0,fishcombo,positive,1,Pampanga,converged,converged,1.2883079795535017,fish
+Oceanic languages,group,teop1238,"noun, verb",0,buildingcombo,positive,1,Teop,converged,converged,1.2873355793860053,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,cent1989,noun,1,windcombo,positive,1,Central Khmer,converged,converged,1.2788942116159154,wind
+Asian,group,assa1263,noun,1,ricecombo,positive,1,Assamese,converged,converged,1.2775726540911037,rice
+East and southeast asian,group,yuec1235,noun,0,insectscombo,positive,1,Yue Chinese,converged,converged,1.2716664667958812,insect
+Oceanic,group,surs1246,noun,1,windcombo,positive,1,Sursurunga,converged,converged,1.26065805625143,wind
+East and southeast asian,group,west2555,noun,1,raincombo,positive,1,Western Bukidnon Manobo,converged,converged,1.259303278784649,"rain, rainfall, rainwater"
+Micmac,single,mikm1235,noun,0,treecombo,positive,1,Mi'kmaq,converged,converged,1.2586107462437257,tree
+Thai,group,thai1261,noun,1,smellcombo,positive,1,Thai,converged,converged,1.2532746726723547,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,taus1251,noun,1,raincombo,positive,1,Tausug,converged,converged,1.2517591796895122,"rain, rainfall, rainwater"
+East and southeast asian,group,cent1989,noun,0,insectscombo,positive,1,Central Khmer,converged,converged,1.2505181374731678,insect
+East and southeast asian,group,kosa1249,noun,0,insectscombo,positive,1,Kosarek Yale,converged,converged,1.2497176611543115,insect
+East and southeast asian,group,wers1238,noun,0,insectscombo,positive,1,Wersing,converged,converged,1.2416256415844173,insect
+Southeast asian,group,ilok1237,"noun, adjective, verb",0,emotioncombo,positive,1,Iloko,converged,converged,1.2406674217935179,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,chek1238,"noun, verb",0,buildingcombo,positive,1,Cheke Holo,converged,converged,1.2400518182684914,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,magu1243,noun,0,insectscombo,positive,1,Maguindanao,converged,converged,1.2391369305012028,insect
+Semai,single,sema1266,noun,1,smellcombo,positive,1,Semai,converged,converged,1.2381757760306529,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,hili1240,noun,0,fishcombo,positive,1,Hiligaynon,converged,converged,1.2376947438451535,fish
+East and southeast asian,group,sema1266,noun,0,fishcombo,positive,1,Semai,converged,converged,1.2372447823185977,fish
+Japanese,single,nucl1643,noun,1,windcombo,positive,1,Japanese,converged,converged,1.235307363701802,wind
+East and southeast asian,group,nucl1643,noun,1,windcombo,positive,1,Japanese,converged,converged,1.235307363701802,wind
+East and southeast asian,group,tbol1240,noun,0,weathercombo,positive,1,Tboli,converged,converged,1.2311748066805142,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,mala1479,noun,1,windcombo,positive,1,Central Malay,converged,converged,1.2245379269163112,wind
+Australian languages,group,nugu1241,noun,1,starscombo,positive,1,Nugunu,converged,converged,1.218996461242292,star
+East and southeast asian,group,casi1235,noun,1,windcombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,1.2032306927428789,wind
+Australian languages,group,mart1256,noun,1,emuscombo,positive,1,Martu Wangka,converged,converged,1.1959226870550923,emu
+East and southeast asian,group,kach1280,noun,1,windcombo,positive,1,Southern Jinghpaw,converged,converged,1.1922697101530608,wind
+Oceanic languages,group,sout2859,"noun, verb",0,gardeningcombo,positive,1,Southeast Ambrym,converged,converged,1.1776956972307737,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,tali1259,"noun, verb",0,buildingcombo,positive,1,Talise,converged,converged,1.1716881718462417,"build, construct, building, construction, dwelling, house"
+Australian languages,group,djin1251,noun,1,starscombo,positive,1,Jingulu,converged,converged,1.1695087084279876,star
+East and southeast asian,group,cent2292,noun,0,weathercombo,positive,1,Central Bontoc,converged,converged,1.1694909579628279,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,sgaw1245,noun,0,fishcombo,positive,1,S'gaw Karen,converged,converged,1.1685158119513817,fish
+Oceanic,group,gilb1244,noun,1,windcombo,positive,1,Gilbertese,converged,converged,1.1680563612874686,wind
+East and southeast asian,group,tbol1240,noun,0,fishcombo,positive,1,Tboli,converged,converged,1.1673656706929991,fish
+Oceanic,group,futu1245,noun,1,windcombo,positive,1,Futuna-Aniwa,converged,converged,1.1581905440677203,wind
+Southeast asian,group,taga1270,"noun, adjective, verb",0,emotioncombo,positive,1,Tagalog,converged,converged,1.1526453606054368,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,nung1290,noun,1,starscombo,positive,1,Wubuy,converged,converged,1.1519560181589719,star
+Southeast asian,group,kosa1249,"noun, adjective, verb",0,emotioncombo,positive,1,Kosarek Yale,converged,converged,1.1407201273985488,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,halh1238,noun,1,raincombo,positive,1,Halh Mongolian,converged,converged,1.1391689953717072,"rain, rainfall, rainwater"
+Oceanic languages,group,toke1240,"noun, verb",0,buildingcombo,positive,1,Tokelau,converged,converged,1.125253587067792,"build, construct, building, construction, dwelling, house"
+Australian languages,group,wand1263,noun,1,sandcombo,positive,1,Wandarang,converged,converged,1.1248780432191015,sand
+East and southeast asian,group,magu1243,noun,1,windcombo,positive,1,Maguindanao,converged,converged,1.123421421719919,wind
+East and southeast asian,group,cent2292,noun,0,fishcombo,positive,1,Central Bontoc,converged,converged,1.111953041555179,fish
+Papua New Guinea,group,oksa1245,noun,0,birdcombo,positive,1,Oksapmin,converged,converged,1.1105519076399746,bird
+European,group,lith1251,noun,0,timecombo,positive,1,Lithuanian,converged,converged,1.1068667325742103,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,lisu1250,noun,0,weathercombo,positive,1,Lisu,converged,converged,1.0937924109335475,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Australian languages,group,bayu1240,noun,1,starscombo,positive,1,Bayungu,converged,converged,1.0800741399220988,star
+Australian languages,group,dhar1247,noun,1,eelscombo,positive,1,Dhargari,converged,converged,1.0719944116243325,eel
+Arabic,group,gulf1241,noun,1,lioncombo,positive,1,Gulf Arabic,converged,converged,1.0663465312470488,lion
+European,group,bulg1262,noun,0,timecombo,positive,1,Bulgarian,converged,converged,1.0612273872296567,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,minn1241,noun,0,fishcombo,positive,1,Min Nan Chinese,converged,converged,1.0549989931627028,fish
+Arabic,group,gulf1241,noun,1,swordcombo,positive,1,Gulf Arabic,converged,converged,1.0499602687151763,sword
+Asian,group,ladi1251,noun,1,ricecombo,positive,1,Ladino,converged,converged,1.0491888970842698,rice
+Australian languages,group,mara1385,noun,1,starscombo,positive,1,Marra,converged,converged,1.0480968595767102,star
+East and southeast asian,group,urak1238,noun,1,windcombo,positive,1,Urak Lawoi',converged,converged,1.0477131566406883,wind
+Australian languages,group,dhal1245,noun,1,eelscombo,positive,1,Dhalandji,converged,converged,1.046925230415218,eel
+Papua New Guinea,group,mail1248,noun,0,birdcombo,positive,1,Mailu,converged,converged,1.0448534175740753,bird
+Oceanic,group,wamp1247,noun,1,windcombo,positive,1,Wampar,converged,converged,1.0329760022174108,wind
+Australian languages,group,ngan1295,noun,1,eelscombo,positive,1,Ngandi,converged,converged,1.0200965261937078,eel
+Arabic,group,meso1252,noun,1,horsecombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,1.0138799312173281,horse
+Oceanic,group,toab1237,noun,1,windcombo,positive,1,To'abaita,converged,converged,1.0066220091869107,wind
+East and southeast asian,group,lund1271,noun,1,windcombo,positive,1,Lundayeh,converged,converged,0.9964012589132069,wind
+East and southeast asian,group,akha1245,noun,1,raincombo,positive,1,Akha,converged,converged,0.9853252249796011,"rain, rainfall, rainwater"
+Australian languages,group,mart1256,noun,1,starscombo,positive,1,Martu Wangka,converged,converged,0.9829674487960313,star
+Australian languages,group,adny1235,noun,1,starscombo,positive,1,Adnyamathanha,converged,converged,0.9825532218842128,star
+East and southeast asian,group,sgaw1245,noun,1,windcombo,positive,1,S'gaw Karen,converged,converged,0.9804568362105732,wind
+East and southeast asian,group,stan1306,noun,1,raincombo,positive,1,Standard Malay,converged,converged,0.9605935470401183,"rain, rainfall, rainwater"
+East and southeast asian,group,mind1253,noun,0,fishcombo,positive,1,Min Dong Chinese,converged,converged,0.9570809245261325,fish
+East and southeast asian,group,minn1241,noun,0,weathercombo,positive,1,Min Nan Chinese,converged,converged,0.9470958170543452,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Asian,group,chan1313,noun,1,ricecombo,positive,1,Chang Naga,converged,converged,0.9449723548461925,rice
+East and southeast asian,group,chan1313,noun,1,ricecombo,positive,1,Chang Naga,converged,converged,0.9449723548461925,rice
+Oceanic languages,group,maor1246,noun,1,coconutcombo,positive,1,Maori,converged,converged,0.9394421565343632,"coconut, cocoanut"
+East and southeast asian,group,viet1252,noun,0,fishcombo,positive,1,Vietnamese,converged,converged,0.9327451544955311,fish
+Oceanic languages,group,siee1239,"noun, verb",0,buildingcombo,positive,1,Sie,converged,converged,0.9294607065857821,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,kach1280,"noun, adjective, verb",0,emotioncombo,positive,1,Southern Jinghpaw,converged,converged,0.9280764160101211,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Iraqw,single,iraq1241,noun,1,togethernesscombo,positive,1,Iraqw,converged,converged,0.9252953802308503,togetherness
+Australian languages,group,bayu1240,noun,1,eelscombo,positive,1,Bayungu,converged,converged,0.9219138836739174,eel
+East and southeast asian,group,viet1252,noun,1,raincombo,positive,1,Vietnamese,converged,converged,0.9111962549624605,"rain, rainfall, rainwater"
+Southeast asian,group,hmon1333,"noun, adjective, verb",0,emotioncombo,positive,1,Hmong Daw,converged,converged,0.9087621227320354,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,kore1280,noun,1,raincombo,positive,1,Korean,converged,converged,0.908401878376373,"rain, rainfall, rainwater"
+Polynesian,group,kapi1249,noun,1,bananacombo,positive,1,Kapingamarangi,converged,converged,0.9031307587503071,banana
+East and southeast asian,group,kach1280,noun,1,raincombo,positive,1,Southern Jinghpaw,converged,converged,0.9031113969275636,"rain, rainfall, rainwater"
+Australian languages,group,wari1262,noun,1,chrysaliscombo,positive,1,Wariyangga,converged,converged,0.8942277067972244,chrysalis
+East and southeast asian,group,hmon1333,noun,0,insectscombo,positive,1,Hmong Daw,converged,converged,0.8870919603438734,insect
+Australian languages,group,wand1263,noun,1,chrysaliscombo,positive,1,Wandarang,converged,converged,0.8850704898227848,chrysalis
+Australian languages,group,rita1239,noun,1,sandcombo,positive,1,Ritharrngu,converged,converged,0.8811572419920317,sand
+Australian languages,group,dhar1247,noun,1,chrysaliscombo,positive,1,Dhargari,converged,converged,0.8776402136072174,chrysalis
+Australian languages,group,ying1247,noun,1,chrysaliscombo,positive,1,Yinggarda,converged,converged,0.8754834286448445,chrysalis
+East and southeast asian,group,halh1238,noun,0,fishcombo,positive,1,Halh Mongolian,converged,converged,0.8744955041294397,fish
+Papua New Guinea,group,sele1250,noun,0,birdcombo,positive,1,Selepet,converged,converged,0.8724077970714784,bird
+Australian languages,group,wira1265,noun,1,chrysaliscombo,positive,1,Wirangu,converged,converged,0.8708773813259342,chrysalis
+Australian languages,group,gami1243,noun,1,chrysaliscombo,positive,1,Yuwaalaraay-Gamilaraay,converged,converged,0.8703669079691547,chrysalis
+Khmer,group,oldk1249,noun,1,smellcombo,positive,1,Old Khmer,converged,converged,0.8678624263839904,"smell, odor, odour, aroma, scent, smelling"
+Australian languages,group,djiw1241,noun,1,eelscombo,positive,1,Djiwarli,converged,converged,0.867457599247362,eel
+Oceanic languages,group,chuu1238,"noun, verb",0,buildingcombo,positive,1,Chuukese,converged,converged,0.8659348025275592,"build, construct, building, construction, dwelling, house"
+Asian,group,nort2690,noun,1,ricecombo,positive,1,Northern Uzbek,converged,converged,0.8644748366653465,rice
+Australian languages,group,dhal1245,noun,1,chrysaliscombo,positive,1,Dhalandji,converged,converged,0.8596058609497561,chrysalis
+Maori,group,raro1241,noun,1,ferncombo,positive,1,Southern Cook Island Maori,converged,converged,0.8588298343116759,fern
+East and southeast asian,group,stan1306,noun,0,weathercombo,positive,1,Standard Malay,converged,converged,0.8539179759290444,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,cebu1242,noun,1,windcombo,positive,1,Cebuano,converged,converged,0.8538731992769403,wind
+East and southeast asian,group,casi1235,noun,0,insectscombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,0.8529152215983561,insect
+East and southeast asian,group,bali1278,noun,1,raincombo,positive,1,Balinese,converged,converged,0.8493602524735214,"rain, rainfall, rainwater"
+East and southeast asian,group,pang1290,noun,0,insectscombo,positive,1,Pangasinan,converged,converged,0.8468584389782089,insect
+East and southeast asian,group,rade1240,noun,0,fishcombo,positive,1,Rade,converged,converged,0.8465657219142178,fish
+East and southeast asian,group,ilok1237,noun,0,weathercombo,positive,1,Iloko,converged,converged,0.8463159875627755,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Southeast asian,group,muna1247,"noun, adjective, verb",0,emotioncombo,positive,1,Muna,converged,converged,0.8461620372896212,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,ngan1295,noun,1,chrysaliscombo,positive,1,Ngandi,converged,converged,0.8403056980889179,chrysalis
+Oceanic,group,chek1238,noun,1,windcombo,positive,1,Cheke Holo,converged,converged,0.8358752024326438,wind
+Australian languages,group,nugu1241,noun,1,chrysaliscombo,positive,1,Nugunu,converged,converged,0.8346763143505331,chrysalis
+Oceanic,group,bugh1239,noun,1,windcombo,positive,1,Bughotu,converged,converged,0.8324463647866931,wind
+Oceanic,group,yape1248,noun,1,windcombo,positive,1,Yapese,converged,converged,0.83001093346036,wind
+Maori,group,raro1241,noun,0,birdcombo,positive,1,Southern Cook Island Maori,converged,converged,0.826653450215726,bird
+East and southeast asian,group,bata1298,noun,0,fishcombo,positive,1,Batad Ifugao,converged,converged,0.8018020660567803,fish
+East and southeast asian,group,hmon1333,noun,1,raincombo,positive,1,Hmong Daw,converged,converged,0.7884239496387365,"rain, rainfall, rainwater"
+Papua New Guinea,group,louu1245,noun,0,birdcombo,positive,1,Lou,converged,converged,0.7873034857024405,bird
+East and southeast asian,group,lisu1250,noun,1,windcombo,positive,1,Lisu,converged,converged,0.7848180682854925,wind
+East and southeast asian,group,lari1255,noun,1,raincombo,positive,1,Larike-Wakasihu,converged,converged,0.7788449554922834,"rain, rainfall, rainwater"
+Southeast asian,group,tbol1240,"noun, adjective, verb",0,emotioncombo,positive,1,Tboli,converged,converged,0.7769107095955843,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,biat1246,noun,0,weathercombo,positive,1,Biatah Bidayuh,converged,converged,0.7768687454738591,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic,group,misi1243,noun,1,windcombo,positive,1,Misima-Paneati,converged,converged,0.7726181731163184,wind
+Australian languages,group,bayu1240,noun,1,chrysaliscombo,positive,1,Bayungu,converged,converged,0.7696742612113133,chrysalis
+Australian languages,group,rita1239,noun,1,chrysaliscombo,positive,1,Ritharrngu,converged,converged,0.7677383959320776,chrysalis
+East and southeast asian,group,taga1270,noun,0,fishcombo,positive,1,Tagalog,converged,converged,0.767332747987055,fish
+Oceanic,group,dehu1237,noun,1,windcombo,positive,1,Dehu,converged,converged,0.7641613924482724,wind
+Zapotec,group,isth1244,noun,1,smellcombo,positive,1,Isthmus Zapotec,converged,converged,0.7635339414266842,"smell, odor, odour, aroma, scent, smelling"
+Australian languages,group,kuku1273,noun,1,sandcombo,positive,1,Kuku-Yalanji,converged,converged,0.7592051650561482,sand
+East and southeast asian,group,yuec1235,noun,0,fishcombo,positive,1,Yue Chinese,converged,converged,0.7487313935527613,fish
+Australian languages,group,ngal1292,noun,1,starscombo,positive,1,Ngalkbun,converged,converged,0.7421352495126705,star
+Arabic,group,meso1252,noun,1,lioncombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,0.7359802172701848,lion
+Oceanic languages,group,suau1242,noun,1,coconutcombo,positive,1,Suau,converged,converged,0.7347867041245663,"coconut, cocoanut"
+Arabic,group,suda1236,noun,1,camelcombo,positive,1,Sudanese Arabic,converged,converged,0.7331287833338764,camel
+Southeast asian,group,cent1989,"noun, adjective, verb",0,emotioncombo,positive,1,Central Khmer,converged,converged,0.7319237448066768,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,djiw1241,noun,1,chrysaliscombo,positive,1,Djiwarli,converged,converged,0.7304988313127573,chrysalis
+Asian,group,oriy1255,noun,1,ricecombo,positive,1,Odia,converged,converged,0.7261328546774938,rice
+Australian languages,group,adny1235,noun,1,chrysaliscombo,positive,1,Adnyamathanha,converged,converged,0.7240430628480867,chrysalis
+East and southeast asian,group,shan1277,noun,1,raincombo,positive,1,Shan,converged,converged,0.7235458009424997,"rain, rainfall, rainwater"
+East and southeast asian,group,mala1479,noun,0,weathercombo,positive,1,Central Malay,converged,converged,0.7142522941955562,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,hmon1333,noun,1,windcombo,positive,1,Hmong Daw,converged,converged,0.7119339657570672,wind
+Asian,group,kati1270,noun,1,ricecombo,positive,1,Katë,converged,converged,0.7107015890158522,rice
+East and southeast asian,group,bara1370,noun,1,windcombo,positive,1,Baram Kayan,converged,converged,0.7099304653634769,wind
+Papua New Guinea,group,mali1284,noun,0,birdcombo,positive,1,Mali,converged,converged,0.6991026513409632,bird
+East and southeast asian,group,uigh1240,noun,1,windcombo,positive,1,Uighur,converged,converged,0.6964004672268238,wind
+Asian,group,meso1252,noun,1,ricecombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,0.6943658038762585,rice
+East and southeast asian,group,kach1280,noun,0,weathercombo,positive,1,Southern Jinghpaw,converged,converged,0.6935994666556343,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,pulu1242,"noun, verb",0,gardeningcombo,positive,1,Puluwatese,converged,converged,0.6774889256280641,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,tahi1242,"noun, verb",0,buildingcombo,positive,1,Tahitian,converged,converged,0.6766526290294497,"build, construct, building, construction, dwelling, house"
+Australian languages,group,djin1253,noun,1,eelscombo,positive,1,Djinang,converged,converged,0.6761772933313337,eel
+Arabic,group,sana1295,noun,1,lioncombo,positive,1,Sanaani Arabic,converged,converged,0.6735137676347183,lion
+Oceanic,group,wole1240,noun,1,windcombo,positive,1,Woleaian,converged,converged,0.6673962573203953,wind
+Oceanic languages,group,tang1348,"noun, verb",0,buildingcombo,positive,1,Tangga,converged,converged,0.6630877385671379,"build, construct, building, construction, dwelling, house"
+Venda,single,vend1245,noun,0,treecombo,positive,1,Venda,converged,converged,0.6596845707055747,tree
+Southeast asian,group,shan1277,"noun, adjective, verb",0,emotioncombo,positive,1,Shan,converged,converged,0.6543269311741416,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,west2443,noun,1,chrysaliscombo,positive,1,Western Victoria,converged,converged,0.6473770643933845,chrysalis
+Asian,group,jeha1242,noun,1,ricecombo,positive,1,Jehai,converged,converged,0.6458286164590058,rice
+East and southeast asian,group,jeha1242,noun,1,ricecombo,positive,1,Jehai,converged,converged,0.6458286164590058,rice
+East and southeast asian,group,mara1382,noun,0,weathercombo,positive,1,Mara Chin,converged,converged,0.6448766824500025,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,nung1283,noun,0,weathercombo,positive,1,Nung,converged,converged,0.6442283411136225,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,uigh1240,noun,1,raincombo,positive,1,Uighur,converged,converged,0.6383903169921854,"rain, rainfall, rainwater"
+Southeast asian,group,viet1252,"noun, adjective, verb",0,emotioncombo,positive,1,Vietnamese,converged,converged,0.6160983678003552,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Arabic,group,chad1249,noun,1,honeycombo,positive,1,Chadian Arabic,converged,converged,0.6071852513196575,honey
+Southeast asian,group,cent2087,"noun, adjective, verb",0,emotioncombo,positive,1,Coastal-Naga Bikol,converged,converged,0.6065427852373794,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,djin1253,noun,1,chrysaliscombo,positive,1,Djinang,converged,converged,0.5928920719559803,chrysalis
+East and southeast asian,group,biat1246,noun,1,windcombo,positive,1,Biatah Bidayuh,converged,converged,0.5870998579131608,wind
+East and southeast asian,group,sund1252,noun,1,windcombo,positive,1,Sundanese,converged,converged,0.5841059074685593,wind
+East and southeast asian,group,lisu1250,noun,1,raincombo,positive,1,Lisu,converged,converged,0.581697709958583,"rain, rainfall, rainwater"
+East and southeast asian,group,mala1533,noun,1,raincombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,0.5811974657046598,"rain, rainfall, rainwater"
+Australian languages,group,yand1253,noun,1,chrysaliscombo,positive,1,Yandruwandha,converged,converged,0.5796087933886417,chrysalis
+East and southeast asian,group,wara1300,noun,1,windcombo,positive,1,Waray,converged,converged,0.5771465917171732,wind
+Arabic,group,suda1236,noun,1,honeycombo,positive,1,Sudanese Arabic,converged,converged,0.5771274622922599,honey
+Oceanic,group,siee1239,noun,1,windcombo,positive,1,Sie,converged,converged,0.572192526127459,wind
+Southeast asian,group,magu1243,"noun, adjective, verb",0,emotioncombo,positive,1,Maguindanao,converged,converged,0.5648080680678274,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Malay,group,mala1479,noun,1,ricecombo,positive,1,Central Malay,converged,converged,0.562809844293763,rice
+Asian,group,mala1479,noun,1,ricecombo,positive,1,Central Malay,converged,converged,0.562809844293763,rice
+East and southeast asian,group,mala1479,noun,1,ricecombo,positive,1,Central Malay,converged,converged,0.562809844293763,rice
+East and southeast asian,group,wuch1236,noun,0,fishcombo,positive,1,Wu Chinese,converged,converged,0.561518501244109,fish
+Arabic,group,meso1252,noun,1,camelcombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,0.5600114154394722,camel
+Australian languages,group,muru1266,noun,1,sandcombo,positive,1,Muruwari,converged,converged,0.5585071163163667,sand
+Oceanic languages,group,caro1242,"noun, verb",0,buildingcombo,positive,1,Carolinian,converged,converged,0.5537101649735524,"build, construct, building, construction, dwelling, house"
+Oceanic,group,sout2856,noun,1,windcombo,positive,1,Nafsan,converged,converged,0.5519247894360287,wind
+East and southeast asian,group,bara1370,noun,0,weathercombo,positive,1,Baram Kayan,converged,converged,0.5504023465230283,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Australian languages,group,yiry1245,noun,1,eelscombo,positive,1,Yir-Yoront,converged,converged,0.5495444536014681,eel
+German,group,penn1240,noun,1,beercombo,positive,1,Pennsylvania German,converged,converged,0.5488259256818453,beer
+East and southeast asian,group,mara1404,noun,1,windcombo,positive,1,Maranao,converged,converged,0.5404849945611229,wind
+East and southeast asian,group,sgaw1245,noun,0,weathercombo,positive,1,S'gaw Karen,converged,converged,0.5392541536154375,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,nung1283,noun,1,windcombo,positive,1,Nung,converged,converged,0.536942853050602,wind
+East and southeast asian,group,bata1298,noun,0,weathercombo,positive,1,Batad Ifugao,converged,converged,0.5358200148791019,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Australian languages,group,kuku1273,noun,1,chrysaliscombo,positive,1,Kuku-Yalanji,converged,converged,0.5349359659688306,chrysalis
+Polynesian,group,tuam1242,noun,1,bananacombo,positive,1,Tuamotuan,converged,converged,0.5233880918029363,banana
+Khmer,group,cent1989,noun,1,smellcombo,positive,1,Central Khmer,converged,converged,0.5203830534547311,"smell, odor, odour, aroma, scent, smelling"
+Hausa,single,haus1257,noun,0,timeofdaycombo,positive,1,Hausa,converged,converged,0.5185278294239557,"day, dawn, morning, noon, midday, afternoon, evening"
+East and southeast asian,group,wuch1236,noun,0,weathercombo,positive,1,Wu Chinese,converged,converged,0.5181384626302755,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,daka1243,"noun, verb",0,gardeningcombo,positive,1,Dakaka,converged,converged,0.5166929308379553,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,lisu1250,noun,0,fishcombo,positive,1,Lisu,converged,converged,0.5154994016287502,fish
+Australian languages,group,thay1249,noun,1,chrysaliscombo,positive,1,Thayore,converged,converged,0.5117230850288057,chrysalis
+East and southeast asian,group,casi1235,noun,0,weathercombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,0.5026723317447087,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Australian languages,group,mart1256,noun,1,chrysaliscombo,positive,1,Martu Wangka,converged,converged,0.49961178096954684,chrysalis
+Oceanic languages,group,toke1240,"noun, verb",0,gardeningcombo,positive,1,Tokelau,converged,converged,0.4976096193565181,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,sema1266,noun,1,raincombo,positive,1,Semai,converged,converged,0.48866039570906356,"rain, rainfall, rainwater"
+East and southeast asian,group,viet1252,noun,1,windcombo,positive,1,Vietnamese,converged,converged,0.4883261519271327,wind
+Australian languages,group,djin1251,noun,1,chrysaliscombo,positive,1,Jingulu,converged,converged,0.484797820195876,chrysalis
+European,group,bret1244,noun,0,timecombo,positive,1,Breton,converged,converged,0.4822335519418568,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic languages,group,maor1246,"noun, verb",0,gardeningcombo,positive,1,Maori,converged,converged,0.472111846140331,"garden, gardening, gardener, floriculture"
+European,group,finn1318,noun,0,timecombo,positive,1,Finnish,converged,converged,0.47187287228429303,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,monn1252,noun,1,windcombo,positive,1,Mon,converged,converged,0.46988919633322007,wind
+Oceanic languages,group,raro1241,"noun, verb",0,gardeningcombo,positive,1,Southern Cook Island Maori,converged,converged,0.46192588822863084,"garden, gardening, gardener, floriculture"
+Asian,group,west2369,noun,1,ricecombo,positive,1,Western Farsi,converged,converged,0.4614058066161128,rice
+Oceanic languages,group,ayiw1239,"noun, verb",0,buildingcombo,positive,1,Äiwoo,converged,converged,0.4517682560291107,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,wuch1236,noun,1,raincombo,positive,1,Wu Chinese,converged,converged,0.451317557867972,"rain, rainfall, rainwater"
+Australian languages,group,wand1263,noun,1,eelscombo,positive,1,Wandarang,converged,converged,0.4429216975519178,eel
+Malay,group,stan1306,"noun, adjective, verb",0,emotioncombo,positive,1,Standard Malay,converged,converged,0.44025758465088005,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Southeast asian,group,stan1306,"noun, adjective, verb",0,emotioncombo,positive,1,Standard Malay,converged,converged,0.44025758465088005,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,twee1234,noun,1,chrysaliscombo,positive,1,Tweed-Albert,converged,converged,0.41540868579013834,chrysalis
+Oceanic,group,moki1238,noun,1,windcombo,positive,1,Mokilese,converged,converged,0.3981236422809574,wind
+European,group,manx1243,noun,0,timecombo,positive,1,Manx,converged,converged,0.3968729984983826,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic,group,kwai1243,noun,1,windcombo,positive,1,Kwaio,converged,converged,0.38922947757036785,wind
+Australian languages,group,adny1235,noun,1,sandcombo,positive,1,Adnyamathanha,converged,converged,0.38351310883688783,sand
+Australian languages,group,nung1290,noun,1,chrysaliscombo,positive,1,Wubuy,converged,converged,0.3809086312540629,chrysalis
+Australian languages,group,wikm1247,noun,1,eelscombo,positive,1,Wik-Mungkan,converged,converged,0.37818676493656495,eel
+Arabic,group,sana1295,noun,1,swordcombo,positive,1,Sanaani Arabic,converged,converged,0.37285899391622507,sword
+East and southeast asian,group,lund1271,noun,0,weathercombo,positive,1,Lundayeh,converged,converged,0.3726272746114042,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic,group,sina1266,noun,1,windcombo,positive,1,Sinaugoro,converged,converged,0.37249875836399754,wind
+European,group,swed1254,noun,0,timecombo,positive,1,Swedish,converged,converged,0.37141620823539007,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Arabic,group,jude1267,noun,1,snakecombo,positive,1,Judeo-Yemeni Arabic,converged,converged,0.3681417731377959,"snake, serpent, ophidian"
+East and southeast asian,group,halh1238,noun,0,insectscombo,positive,1,Halh Mongolian,converged,converged,0.36616838143549413,insect
+East and southeast asian,group,wuch1236,noun,0,insectscombo,positive,1,Wu Chinese,converged,converged,0.3648250060823382,insect
+East and southeast asian,group,hmon1264,noun,0,weathercombo,positive,1,Hmong Njua,converged,converged,0.36341673067601754,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Arabic,group,jude1267,noun,1,smellcombo,positive,1,Judeo-Yemeni Arabic,converged,converged,0.3607173487703834,"smell, odor, odour, aroma, scent, smelling"
+Australian languages,group,nung1290,noun,1,eelscombo,positive,1,Wubuy,converged,converged,0.35812913886784503,eel
+European,group,latv1249,noun,0,timecombo,positive,1,Latvian,converged,converged,0.33801441564520296,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic,group,pohn1238,noun,1,windcombo,positive,1,Pohnpeian,converged,converged,0.3377850189119078,wind
+Asian,group,cent1972,noun,1,ricecombo,positive,1,Central Kurdish,converged,converged,0.3268969057837738,rice
+Arabic,group,chad1249,noun,1,swordcombo,positive,1,Chadian Arabic,converged,converged,0.32433739578690585,sword
+Oceanic languages,group,taku1257,"noun, verb",0,buildingcombo,positive,1,Takuu,converged,converged,0.32342229477024137,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,hmon1333,noun,0,weathercombo,positive,1,Hmong Daw,converged,converged,0.3229933000147243,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,taus1251,noun,1,windcombo,positive,1,Tausug,converged,converged,0.32193258608202335,wind
+East and southeast asian,group,magu1243,noun,1,raincombo,positive,1,Maguindanao,converged,converged,0.3209276822891564,"rain, rainfall, rainwater"
+Australian languages,group,kuku1273,noun,1,emuscombo,positive,1,Kuku-Yalanji,converged,converged,0.31690915825955124,emu
+Asian,group,lada1244,noun,1,ricecombo,positive,1,Leh Ladakhi,converged,converged,0.3085490059698743,rice
+Australian languages,group,rita1239,noun,1,eelscombo,positive,1,Ritharrngu,converged,converged,0.3010027387475023,eel
+East and southeast asian,group,taus1251,noun,0,insectscombo,positive,1,Tausug,converged,converged,0.29307438589337953,insect
+East and southeast asian,group,muna1247,noun,0,insectscombo,positive,1,Muna,converged,converged,0.292610779473244,insect
+Oceanic languages,group,rotu1241,"noun, verb",0,buildingcombo,positive,1,Rotuman,converged,converged,0.28403641357583614,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,uigh1240,noun,0,weathercombo,positive,1,Uighur,converged,converged,0.2798218667703785,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,sund1252,noun,0,weathercombo,positive,1,Sundanese,converged,converged,0.27586086881326,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,shan1277,noun,0,weathercombo,positive,1,Shan,converged,converged,0.26249789266122575,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Southeast asian,group,iban1264,"noun, adjective, verb",0,emotioncombo,positive,1,Iban,converged,converged,0.25560524137927143,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Arabic,group,egyp1253,noun,1,horsecombo,positive,1,Egyptian Arabic,converged,converged,0.24691752703782635,horse
+Australian languages,group,pint1250,noun,1,starscombo,positive,1,Pintupi-Luritja,converged,converged,0.23778709524043307,star
+Australian languages,group,west2443,noun,1,sandcombo,positive,1,Western Victoria,converged,converged,0.23457593789563794,sand
+Australian languages,group,bard1255,noun,1,chrysaliscombo,positive,1,Bardi,converged,converged,0.22271863210882212,chrysalis
+East and southeast asian,group,hmon1333,noun,0,fishcombo,positive,1,Hmong Daw,converged,converged,0.21894715576733842,fish
+East and southeast asian,group,wers1238,noun,0,fishcombo,positive,1,Wersing,converged,converged,0.2149592607141252,fish
+East and southeast asian,group,yuec1235,noun,1,windcombo,positive,1,Yue Chinese,converged,converged,0.21041403893623742,wind
+Arabic,group,jude1267,noun,1,lioncombo,positive,1,Judeo-Yemeni Arabic,converged,converged,0.19943512885910158,lion
+Australian languages,group,dhal1245,noun,1,sandcombo,positive,1,Dhalandji,converged,converged,0.19431492563615083,sand
+Oceanic languages,group,tuva1244,"noun, verb",0,buildingcombo,positive,1,Tuvalu,converged,converged,0.18727633208855657,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,tibe1272,noun,0,insectscombo,positive,1,Tibetan,converged,converged,0.17358524279963009,insect
+Australian languages,group,wikm1247,noun,1,starscombo,positive,1,Wik-Mungkan,converged,converged,0.1726742935492173,star
+Australian languages,group,ngal1292,noun,1,eelscombo,positive,1,Ngalkbun,converged,converged,0.168810800581318,eel
+East and southeast asian,group,magu1243,noun,0,weathercombo,positive,1,Maguindanao,converged,converged,0.16206645599576966,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+French,group,stan1290,noun,1,smellcombo,positive,1,French,converged,converged,0.15785798311070126,"smell, odor, odour, aroma, scent, smelling"
+European,group,dani1285,noun,0,timecombo,positive,1,Danish,converged,converged,0.1575509343760045,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic languages,group,tong1325,"noun, verb",0,buildingcombo,positive,1,Tonga,converged,converged,0.1566516524688232,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,java1254,noun,0,insectscombo,positive,1,Javanese,converged,converged,0.15173367410837468,insect
+Australian languages,group,nugu1241,noun,1,sandcombo,positive,1,Nugunu,converged,converged,0.14987958529784096,sand
+Australian languages,group,warl1254,noun,1,chrysaliscombo,positive,1,Warlpiri,converged,converged,0.14276460373046557,chrysalis
+Australian languages,group,tiwi1244,noun,1,chrysaliscombo,positive,1,Tiwi,converged,converged,0.13949828272267975,chrysalis
+East and southeast asian,group,tbol1240,noun,1,windcombo,positive,1,Tboli,converged,converged,0.12330082430915287,wind
+Arabic,group,jude1267,noun,1,horsecombo,positive,1,Judeo-Yemeni Arabic,converged,converged,0.11564305301912164,horse
+Oceanic languages,group,malo1243,"noun, verb",0,gardeningcombo,positive,1,Tamambo,converged,converged,0.11049812022125768,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,cent1989,noun,1,raincombo,positive,1,Central Khmer,converged,converged,0.09517067977750122,"rain, rainfall, rainwater"
+East and southeast asian,group,wers1238,noun,1,raincombo,positive,1,Wersing,converged,converged,0.09454501451160575,"rain, rainfall, rainwater"
+Australian languages,group,yank1247,noun,1,starscombo,positive,1,Yankunytjatjara,converged,converged,0.09108708023073038,star
+Venda,single,vend1245,noun,1,rockcombo,positive,1,Venda,converged,converged,0.08896934417324931,"rock, stone"
+East and southeast asian,group,wuch1236,noun,1,windcombo,positive,1,Wu Chinese,converged,converged,0.07977287483725318,wind
+East and southeast asian,group,besi1244,noun,0,weathercombo,positive,1,Besisi,converged,converged,0.07238113506156317,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,cent1989,noun,0,weathercombo,positive,1,Central Khmer,converged,converged,0.07099055111298372,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,urak1238,noun,1,raincombo,positive,1,Urak Lawoi',converged,converged,0.06206931488505916,"rain, rainfall, rainwater"
+Oceanic languages,group,raro1241,"noun, verb",0,buildingcombo,positive,1,Southern Cook Island Maori,converged,converged,0.061641898837263974,"build, construct, building, construction, dwelling, house"
+Arabic,group,stan1318,noun,1,snakecombo,positive,1,Standard Arabic,converged,converged,0.06033115154788636,"snake, serpent, ophidian"
+Papua New Guinea,group,teop1238,noun,0,birdcombo,positive,1,Teop,converged,converged,0.05879526085552151,bird
+East and southeast asian,group,nucl1310,noun,1,windcombo,positive,1,Burmese,converged,converged,0.05811408494052641,wind
+Oceanic languages,group,wamp1247,"noun, verb",0,buildingcombo,positive,1,Wampar,converged,converged,0.05577863605056511,"build, construct, building, construction, dwelling, house"
+Australian languages,group,tiwi1244,noun,1,eelscombo,positive,1,Tiwi,converged,converged,0.04595317675939704,eel
+East and southeast asian,group,bata1298,noun,1,windcombo,positive,1,Batad Ifugao,converged,converged,0.045454665546889206,wind
+Oceanic languages,group,yabe1254,"noun, verb",0,buildingcombo,positive,1,Yabem,converged,converged,0.044837071384201184,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,kore1280,noun,0,weathercombo,positive,1,Korean,converged,converged,0.03611484234701244,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Malay,group,mala1479,"noun, adjective, verb",0,emotioncombo,positive,1,Central Malay,converged,converged,0.03204653166027469,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Southeast asian,group,mala1479,"noun, adjective, verb",0,emotioncombo,positive,1,Central Malay,converged,converged,0.03204653166027469,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,ying1247,noun,1,starscombo,positive,1,Yinggarda,converged,converged,0.030542239640119595,star
+East and southeast asian,group,cebu1242,noun,1,raincombo,positive,1,Cebuano,converged,converged,0.029201440565936633,"rain, rainfall, rainwater"
+Oceanic languages,group,yape1248,"noun, verb",0,gardeningcombo,positive,1,Yapese,converged,converged,0.027117666519005545,"garden, gardening, gardener, floriculture"
+Oceanic,group,tuva1244,noun,1,windcombo,positive,1,Tuvalu,converged,converged,0.025387223868163052,wind
+Oceanic languages,group,mars1254,"noun, verb",0,buildingcombo,positive,1,Marshallese,converged,converged,0.024590535120594652,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,monn1252,noun,0,weathercombo,positive,1,Mon,converged,converged,0.01917051465070729,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Portuguese,group,braz1246,noun,1,horsecombo,positive,1,Brazilian Portuguese,converged,converged,0.018487134999231394,horse
+Australian languages,group,mudb1240,noun,1,starscombo,positive,1,Mudburra,converged,converged,0.01641289925974239,star
+European,group,ukra1253,noun,0,timecombo,positive,1,Ukrainian,converged,converged,0.014856747035730684,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,urak1238,noun,0,insectscombo,positive,1,Urak Lawoi',converged,converged,0.013613197605773895,insect
+Jehai,single,jeha1242,noun,1,smellcombo,positive,1,Jehai,converged,converged,0.012746489419062212,"smell, odor, odour, aroma, scent, smelling"
+Oceanic languages,group,tuam1242,"noun, verb",0,buildingcombo,positive,1,Tuamotuan,converged,converged,0.01199941494797068,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,mala1533,noun,1,windcombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,0.0013307810985674848,wind
+Oceanic,group,tali1259,noun,1,windcombo,positive,1,Talise,converged,converged,-0.0036302266190787764,wind
+Oceanic languages,group,sout2856,"noun, verb",0,buildingcombo,positive,1,Nafsan,converged,converged,-0.009701315596877001,"build, construct, building, construction, dwelling, house"
+European,group,icel1247,noun,0,timecombo,positive,1,Icelandic,converged,converged,-0.01068617566129427,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic,group,caro1242,noun,1,windcombo,positive,1,Carolinian,converged,converged,-0.011244377459943385,wind
+Southeast asian,group,sema1266,"noun, adjective, verb",0,emotioncombo,positive,1,Semai,converged,converged,-0.012120009468111398,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,thay1249,noun,1,starscombo,positive,1,Thayore,converged,converged,-0.013442267742912633,star
+Arabic,group,sana1295,noun,1,snakecombo,positive,1,Sanaani Arabic,converged,converged,-0.01952708607564886,"snake, serpent, ophidian"
+Australian languages,group,mart1256,noun,1,eelscombo,positive,1,Martu Wangka,converged,converged,-0.023304298277834347,eel
+Oceanic languages,group,yape1248,"noun, verb",0,buildingcombo,positive,1,Yapese,converged,converged,-0.026682126600392226,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,nucl1310,noun,0,fishcombo,positive,1,Burmese,converged,converged,-0.03949920238103505,fish
+Australian languages,group,tiwi1244,noun,1,starscombo,positive,1,Tiwi,converged,converged,-0.03985226193216566,star
+Australian languages,group,tiwi1244,noun,1,emuscombo,positive,1,Tiwi,converged,converged,-0.039943265846990574,emu
+East and southeast asian,group,mara1382,noun,1,windcombo,positive,1,Mara Chin,converged,converged,-0.04172759702008043,wind
+European,group,east2295,noun,0,timecombo,positive,1,Eastern Yiddish,converged,converged,-0.04469857512526575,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Arabic,group,chad1249,noun,1,snakecombo,positive,1,Chadian Arabic,converged,converged,-0.049330315016098004,"snake, serpent, ophidian"
+Southeast asian,group,nucl1310,"noun, adjective, verb",0,emotioncombo,positive,1,Burmese,converged,converged,-0.04975543509393424,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,mala1533,noun,0,weathercombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,-0.05635140999621782,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,pohn1238,"noun, verb",0,gardeningcombo,positive,1,Pohnpeian,converged,converged,-0.06966133989677781,"garden, gardening, gardener, floriculture"
+Oceanic,group,tean1237,noun,1,windcombo,positive,1,Teanu,converged,converged,-0.06973638052849554,wind
+Oceanic languages,group,vure1239,"noun, verb",0,buildingcombo,positive,1,Vurës,converged,converged,-0.07564570862643089,"build, construct, building, construction, dwelling, house"
+Australian languages,group,ngal1292,noun,1,chrysaliscombo,positive,1,Ngalkbun,converged,converged,-0.07567118635131194,chrysalis
+Southeast asian,group,mara1404,"noun, adjective, verb",0,emotioncombo,positive,1,Maranao,converged,converged,-0.07578318563872402,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Arabic,group,suda1236,noun,1,lioncombo,positive,1,Sudanese Arabic,converged,converged,-0.08937154798191964,lion
+Russian,single,russ1263,noun,1,friendcombo,positive,1,Russian,converged,converged,-0.0920862560425397,friend
+Oceanic languages,group,wole1240,"noun, verb",0,gardeningcombo,positive,1,Woleaian,converged,converged,-0.09258042605279464,"garden, gardening, gardener, floriculture"
+Southeast asian,group,chan1313,"noun, adjective, verb",0,emotioncombo,positive,1,Chang Naga,converged,converged,-0.10530765838034455,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,cent2292,noun,1,windcombo,positive,1,Central Bontoc,converged,converged,-0.11892216450448372,wind
+East and southeast asian,group,cent2087,noun,1,raincombo,positive,1,Coastal-Naga Bikol,converged,converged,-0.12715268039890315,"rain, rainfall, rainwater"
+Polynesian,group,maor1246,noun,1,bananacombo,positive,1,Maori,converged,converged,-0.13228527500063947,banana
+Arabic,group,egyp1253,noun,1,honeycombo,positive,1,Egyptian Arabic,converged,converged,-0.14361556384494711,honey
+Papua New Guinea,group,awap1236,noun,0,birdcombo,positive,1,Awa,converged,converged,-0.1455435624044442,bird
+Australian languages,group,djin1253,noun,1,starscombo,positive,1,Djinang,converged,converged,-0.15544879178249077,star
+Oceanic languages,group,sina1266,"noun, verb",0,buildingcombo,positive,1,Sinaugoro,converged,converged,-0.15636042536203,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,west2555,noun,0,weathercombo,positive,1,Western Bukidnon Manobo,converged,converged,-0.15926357475690345,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,taga1270,noun,1,raincombo,positive,1,Tagalog,converged,converged,-0.16149225905289202,"rain, rainfall, rainwater"
+Australian languages,group,wikm1247,noun,1,chrysaliscombo,positive,1,Wik-Mungkan,converged,converged,-0.18020796254928306,chrysalis
+Oceanic languages,group,samo1305,"noun, verb",0,buildingcombo,positive,1,Samoan,converged,converged,-0.18749030437215125,"build, construct, building, construction, dwelling, house"
+German,group,midd1343,noun,1,beercombo,positive,1,Middle High German,converged,converged,-0.19252447369024042,beer
+East and southeast asian,group,mara1404,noun,0,insectscombo,positive,1,Maranao,converged,converged,-0.19699976980995515,insect
+Asian,group,tuvi1240,noun,1,ricecombo,positive,1,Tuvinian,converged,converged,-0.1977281398509836,rice
+East and southeast asian,group,tuvi1240,noun,1,ricecombo,positive,1,Tuvinian,converged,converged,-0.1977281398509836,rice
+East and southeast asian,group,viet1252,noun,0,insectscombo,positive,1,Vietnamese,converged,converged,-0.20816152661724105,insect
+East and southeast asian,group,lari1255,noun,0,insectscombo,positive,1,Larike-Wakasihu,converged,converged,-0.2111589814076047,insect
+Arabic,group,anda1287,noun,1,snakecombo,positive,1,Andalusian Arabic,converged,converged,-0.21431553634012582,"snake, serpent, ophidian"
+East and southeast asian,group,lari1255,noun,1,windcombo,positive,1,Larike-Wakasihu,converged,converged,-0.22097024630148715,wind
+Asian,group,turk1304,noun,1,ricecombo,positive,1,Turkmen,converged,converged,-0.2236100876993501,rice
+Australian languages,group,wari1262,noun,1,sandcombo,positive,1,Wariyangga,converged,converged,-0.22969416948630605,sand
+Southeast asian,group,mara1382,"noun, adjective, verb",0,emotioncombo,positive,1,Mara Chin,converged,converged,-0.23142569540503297,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Southeast asian,group,temi1246,"noun, adjective, verb",0,emotioncombo,positive,1,Temiar,converged,converged,-0.24348543132153952,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic,group,malo1243,noun,1,windcombo,positive,1,Tamambo,converged,converged,-0.24700427272380124,wind
+East and southeast asian,group,west2555,noun,1,windcombo,positive,1,Western Bukidnon Manobo,converged,converged,-0.24849170159275963,wind
+East and southeast asian,group,monn1252,noun,0,insectscombo,positive,1,Mon,converged,converged,-0.2550883180279376,insect
+East and southeast asian,group,viet1252,noun,0,weathercombo,positive,1,Vietnamese,converged,converged,-0.25865511021815235,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Australian languages,group,ying1247,noun,1,sandcombo,positive,1,Yinggarda,converged,converged,-0.25941557529309084,sand
+Oceanic languages,group,neng1238,"noun, verb",0,gardeningcombo,positive,1,Nengone,converged,converged,-0.26239693121774854,"garden, gardening, gardener, floriculture"
+Australian languages,group,gami1243,noun,1,sandcombo,positive,1,Yuwaalaraay-Gamilaraay,converged,converged,-0.2675284482938131,sand
+Oceanic languages,group,maor1246,"noun, verb",0,buildingcombo,positive,1,Maori,converged,converged,-0.27078685334168895,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,taus1251,noun,0,weathercombo,positive,1,Tausug,converged,converged,-0.27442478993292874,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,malo1243,"noun, verb",0,buildingcombo,positive,1,Tamambo,converged,converged,-0.2747116307819724,"build, construct, building, construction, dwelling, house"
+Arabic,group,chad1249,noun,1,horsecombo,positive,1,Chadian Arabic,converged,converged,-0.277470257709305,horse
+East and southeast asian,group,urak1238,noun,0,weathercombo,positive,1,Urak Lawoi',converged,converged,-0.2815743635629519,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,chan1313,noun,0,fishcombo,positive,1,Chang Naga,converged,converged,-0.28421091548134947,fish
+East and southeast asian,group,kore1280,noun,0,insectscombo,positive,1,Korean,converged,converged,-0.2845383740199058,insect
+East and southeast asian,group,bali1278,noun,1,windcombo,positive,1,Balinese,converged,converged,-0.2964623667427795,wind
+Asian,group,halh1238,noun,1,ricecombo,positive,1,Halh Mongolian,converged,converged,-0.29931780388029544,rice
+East and southeast asian,group,halh1238,noun,1,ricecombo,positive,1,Halh Mongolian,converged,converged,-0.29931780388029544,rice
+Australian languages,group,wari1262,noun,1,eelscombo,positive,1,Wariyangga,converged,converged,-0.3000501107201445,eel
+Malay,group,baba1267,"noun, adjective, verb",0,emotioncombo,positive,1,Baba Malay,converged,converged,-0.3071197842355154,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Australian languages,group,ying1247,noun,1,eelscombo,positive,1,Yinggarda,converged,converged,-0.3172946000188685,eel
+Australian languages,group,wira1265,noun,1,eelscombo,positive,1,Wirangu,converged,converged,-0.3215320985421959,eel
+Australian languages,group,gami1243,noun,1,eelscombo,positive,1,Yuwaalaraay-Gamilaraay,converged,converged,-0.3220017267193489,eel
+Arabic,group,nort3139,noun,1,horsecombo,positive,1,Levantine Arabic,converged,converged,-0.33736214914938734,horse
+East and southeast asian,group,lari1255,noun,0,weathercombo,positive,1,Larike-Wakasihu,converged,converged,-0.34362938979158897,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,akha1245,noun,0,weathercombo,positive,1,Akha,converged,converged,-0.34840099388526174,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic,group,xara1244,noun,1,windcombo,positive,1,Xârâcùù,converged,converged,-0.34866199366414513,wind
+East and southeast asian,group,yuec1235,noun,1,raincombo,positive,1,Yue Chinese,converged,converged,-0.3495663907264783,"rain, rainfall, rainwater"
+East and southeast asian,group,nucl1310,noun,0,insectscombo,positive,1,Burmese,converged,converged,-0.350877886622281,insect
+European,group,esto1258,noun,0,timecombo,positive,1,Estonian,converged,converged,-0.3531941332900987,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Australian languages,group,nugu1241,noun,1,eelscombo,positive,1,Nugunu,converged,converged,-0.354836509905503,eel
+East and southeast asian,group,cent2087,noun,1,windcombo,positive,1,Coastal-Naga Bikol,converged,converged,-0.3550370085854453,wind
+Australian languages,group,wira1265,noun,1,starscombo,positive,1,Wirangu,converged,converged,-0.3563017196301449,star
+Oceanic languages,group,ralu1237,"noun, verb",0,gardeningcombo,positive,1,Raluana,converged,converged,-0.36206786459314166,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,rovi1238,"noun, verb",0,buildingcombo,positive,1,Roviana,converged,converged,-0.36236081664350334,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,hili1240,noun,0,insectscombo,positive,1,Hiligaynon,converged,converged,-0.3642537631321872,insect
+East and southeast asian,group,kosa1249,noun,1,windcombo,positive,1,Kosarek Yale,converged,converged,-0.3733391377410202,wind
+Australian languages,group,dhal1245,noun,1,starscombo,positive,1,Dhalandji,converged,converged,-0.3751587376789724,star
+Oceanic languages,group,mele1250,"noun, verb",0,buildingcombo,positive,1,Mele-Fila,converged,converged,-0.3759517326641432,"build, construct, building, construction, dwelling, house"
+Arabic,group,gulf1241,noun,1,horsecombo,positive,1,Gulf Arabic,converged,converged,-0.3816868888121501,horse
+Arabic,group,moro1292,noun,1,smellcombo,positive,1,Moroccan Arabic,converged,converged,-0.3877028976033146,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,tetu1245,noun,1,windcombo,positive,1,Tetum,converged,converged,-0.39571481614512327,wind
+East and southeast asian,group,sema1266,noun,1,windcombo,positive,1,Semai,converged,converged,-0.3969649032175657,wind
+Navajo,single,nava1243,noun,0,insectscombo,positive,1,Navajo,converged,converged,-0.39995422680522086,insect
+Oceanic,group,vure1239,noun,1,windcombo,positive,1,Vurës,converged,converged,-0.4009644533550611,wind
+East and southeast asian,group,jeha1242,noun,0,fishcombo,positive,1,Jehai,converged,converged,-0.40974724503179466,fish
+Arabic,group,moro1292,noun,1,swordcombo,positive,1,Moroccan Arabic,converged,converged,-0.4285135819037204,sword
+Southeast asian,group,hili1240,"noun, adjective, verb",0,emotioncombo,positive,1,Hiligaynon,converged,converged,-0.43220996006950596,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Arabic,group,egyp1253,noun,1,lioncombo,positive,1,Egyptian Arabic,converged,converged,-0.43638816889681986,lion
+Australian languages,group,adny1235,noun,1,eelscombo,positive,1,Adnyamathanha,converged,converged,-0.4566167409886504,eel
+Arabic,group,moro1292,noun,1,lioncombo,positive,1,Moroccan Arabic,converged,converged,-0.4608410651430793,lion
+East and southeast asian,group,temi1246,noun,1,raincombo,positive,1,Temiar,converged,converged,-0.4666128070737203,"rain, rainfall, rainwater"
+East and southeast asian,group,kore1280,noun,1,windcombo,positive,1,Korean,converged,converged,-0.49188915145082324,wind
+Oceanic languages,group,sout2859,"noun, verb",0,buildingcombo,positive,1,Southeast Ambrym,converged,converged,-0.5114221279952865,"build, construct, building, construction, dwelling, house"
+Australian languages,group,west2443,noun,1,eelscombo,positive,1,Western Victoria,converged,converged,-0.5271473205544298,eel
+East and southeast asian,group,wers1238,noun,1,windcombo,positive,1,Wersing,converged,converged,-0.534017657712334,wind
+East and southeast asian,group,besi1244,noun,1,windcombo,positive,1,Besisi,converged,converged,-0.534537964910165,wind
+Southeast asian,group,wara1300,"noun, adjective, verb",0,emotioncombo,positive,1,Waray,converged,converged,-0.5439755915133565,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,temi1246,noun,0,weathercombo,positive,1,Temiar,converged,converged,-0.549147112046265,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,suau1242,"noun, verb",0,buildingcombo,positive,1,Suau,converged,converged,-0.5498123651248844,"build, construct, building, construction, dwelling, house"
+Arabic,group,meso1252,noun,1,honeycombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,-0.5525019533532478,honey
+Australian languages,group,muru1266,noun,1,eelscombo,positive,1,Muruwari,converged,converged,-0.5593201632731734,eel
+East and southeast asian,group,cebu1242,noun,0,insectscombo,positive,1,Cebuano,converged,converged,-0.5716661023090628,insect
+East and southeast asian,group,uigh1240,noun,0,fishcombo,positive,1,Uighur,converged,converged,-0.5753096148979282,fish
+European,group,tuvi1240,noun,0,timecombo,positive,1,Tuvinian,converged,converged,-0.5785227489832028,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,mala1533,noun,0,insectscombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,-0.5803785751079219,insect
+Australian languages,group,yiry1245,noun,1,chrysaliscombo,positive,1,Yir-Yoront,converged,converged,-0.5887890598146324,chrysalis
+Australian languages,group,yand1253,noun,1,eelscombo,positive,1,Yandruwandha,converged,converged,-0.5894919265416122,eel
+Australian languages,group,bard1255,noun,1,starscombo,positive,1,Bardi,converged,converged,-0.5907254886723493,star
+Australian languages,group,djiw1241,noun,1,starscombo,positive,1,Djiwarli,converged,converged,-0.5911487994525646,star
+Arabic,group,nort3139,noun,1,lioncombo,positive,1,Levantine Arabic,converged,converged,-0.592723701397559,lion
+Southeast asian,group,monn1252,"noun, adjective, verb",0,emotioncombo,positive,1,Mon,converged,converged,-0.597406206443919,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Arabic,group,gulf1241,noun,1,snakecombo,positive,1,Gulf Arabic,converged,converged,-0.6056470252325918,"snake, serpent, ophidian"
+Arabic,group,suda1236,noun,1,snakecombo,positive,1,Sudanese Arabic,converged,converged,-0.6118547520380546,"snake, serpent, ophidian"
+East and southeast asian,group,pang1290,noun,1,windcombo,positive,1,Pangasinan,converged,converged,-0.6145813364030536,wind
+Oceanic languages,group,tean1237,"noun, verb",0,buildingcombo,positive,1,Teanu,converged,converged,-0.6206450150112599,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,chan1313,noun,0,weathercombo,positive,1,Chang Naga,converged,converged,-0.643162914299617,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,mang1401,"noun, verb",0,buildingcombo,positive,1,Mangareva,converged,converged,-0.6435832187481962,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,sgaw1245,"noun, adjective, verb",0,emotioncombo,positive,1,S'gaw Karen,converged,converged,-0.6457749555962886,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,uigh1240,noun,0,insectscombo,positive,1,Uighur,converged,converged,-0.6497499199376137,insect
+Australian languages,group,thay1249,noun,1,eelscombo,positive,1,Thayore,converged,converged,-0.6519442989095156,eel
+East and southeast asian,group,yuec1235,noun,0,weathercombo,positive,1,Yue Chinese,converged,converged,-0.6608599483556178,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,wara1300,noun,1,raincombo,positive,1,Waray,converged,converged,-0.6711325038148914,"rain, rainfall, rainwater"
+Australian languages,group,djin1251,noun,1,eelscombo,positive,1,Jingulu,converged,converged,-0.6767144881012778,eel
+East and southeast asian,group,bali1278,noun,0,weathercombo,positive,1,Balinese,converged,converged,-0.6928834615435691,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+European,group,russ1263,noun,0,timecombo,positive,1,Russian,converged,converged,-0.6931459059927786,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic languages,group,geda1237,"noun, verb",0,buildingcombo,positive,1,Gedaged,converged,converged,-0.6944231339157529,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,chan1313,noun,1,raincombo,positive,1,Chang Naga,converged,converged,-0.6993513736141104,"rain, rainfall, rainwater"
+Australian languages,group,djin1253,noun,1,sandcombo,positive,1,Djinang,converged,converged,-0.7074910873856687,sand
+Arabic,group,chad1249,noun,1,smellcombo,positive,1,Chadian Arabic,converged,converged,-0.7207166643938724,"smell, odor, odour, aroma, scent, smelling"
+Australian languages,group,wari1262,noun,1,starscombo,positive,1,Wariyangga,converged,converged,-0.7229964318964287,star
+Arabic,group,moro1292,noun,1,snakecombo,positive,1,Moroccan Arabic,converged,converged,-0.7260829518286238,"snake, serpent, ophidian"
+East and southeast asian,group,jeha1242,noun,1,raincombo,positive,1,Jehai,converged,converged,-0.7265827606136478,"rain, rainfall, rainwater"
+Southeast asian,group,west2555,"noun, adjective, verb",0,emotioncombo,positive,1,Western Bukidnon Manobo,converged,converged,-0.7390429248347742,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Southeast asian,group,pamp1243,"noun, adjective, verb",0,emotioncombo,positive,1,Pampanga,converged,converged,-0.7405171765325543,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,chan1313,noun,1,windcombo,positive,1,Chang Naga,converged,converged,-0.7450475470089247,wind
+European,group,hung1274,noun,0,timecombo,positive,1,Hungarian,converged,converged,-0.7469882920186883,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Australian languages,group,dhar1247,noun,1,starscombo,positive,1,Dhargari,converged,converged,-0.747995014592595,star
+French,group,caju1236,noun,1,smellcombo,positive,1,Cajun French,converged,converged,-0.7556056458981306,"smell, odor, odour, aroma, scent, smelling"
+Australian languages,group,gami1243,noun,1,starscombo,positive,1,Yuwaalaraay-Gamilaraay,converged,converged,-0.7589563994954405,star
+Australian languages,group,wira1265,noun,1,sandcombo,positive,1,Wirangu,converged,converged,-0.7650573305094912,sand
+Oceanic languages,group,dehu1237,"noun, verb",0,gardeningcombo,positive,1,Dehu,converged,converged,-0.777883064435107,"garden, gardening, gardener, floriculture"
+Oceanic,group,port1286,noun,1,windcombo,positive,1,Daakie,converged,converged,-0.7793016010557248,wind
+Oceanic languages,group,hawa1245,"noun, verb",0,buildingcombo,positive,1,Hawaiian,converged,converged,-0.7805961943139628,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,akha1245,"noun, adjective, verb",0,emotioncombo,positive,1,Akha,converged,converged,-0.80559249238135755,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,laoo1244,noun,1,raincombo,positive,1,Lao,converged,converged,-0.8075606260292667,"rain, rainfall, rainwater"
+Southeast asian,group,nung1283,"noun, adjective, verb",0,emotioncombo,positive,1,Nung,converged,converged,-0.8187308842027095,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,mara1404,noun,0,weathercombo,positive,1,Maranao,converged,converged,-0.820362511604841,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,sund1252,noun,0,fishcombo,positive,1,Sundanese,converged,converged,-0.8247151069165948,fish
+East and southeast asian,group,pang1290,noun,1,raincombo,positive,1,Pangasinan,converged,converged,-0.858553764351441,"rain, rainfall, rainwater"
+European,group,uppe1395,noun,0,timecombo,positive,1,Upper Sorbian,converged,converged,-0.859353429902276,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,pamp1243,noun,1,raincombo,positive,1,Pampanga,converged,converged,-0.863245185074591,"rain, rainfall, rainwater"
+East and southeast asian,group,hili1240,noun,1,windcombo,positive,1,Hiligaynon,converged,converged,-0.871922856525263,wind
+Oceanic languages,group,hawa1245,"noun, verb",0,gardeningcombo,positive,1,Hawaiian,converged,converged,-0.8736779947235188,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,akha1245,noun,1,windcombo,positive,1,Akha,converged,converged,-0.878698226650133,wind
+East and southeast asian,group,thai1261,noun,1,raincombo,positive,1,Thai,converged,converged,-0.8789567385859537,"rain, rainfall, rainwater"
+East and southeast asian,group,wara1300,noun,0,weathercombo,positive,1,Waray,converged,converged,-0.8837017279601409,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic,group,teop1238,noun,1,windcombo,positive,1,Teop,converged,converged,-0.8931071603788804,wind
+Arabic,group,sana1295,noun,1,horsecombo,positive,1,Sanaani Arabic,converged,converged,-0.9091201660709618,horse
+Australian languages,group,rita1239,noun,1,starscombo,positive,1,Ritharrngu,converged,converged,-0.9136231533127395,star
+East and southeast asian,group,java1254,noun,0,fishcombo,positive,1,Javanese,converged,converged,-0.9231240909142914,fish
+Southeast asian,group,mind1253,"noun, adjective, verb",0,emotioncombo,positive,1,Min Dong Chinese,converged,converged,-0.9235542227104392,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,kwai1243,"noun, verb",0,buildingcombo,positive,1,Kwaio,converged,converged,-0.9311697748332799,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,hili1240,noun,1,raincombo,positive,1,Hiligaynon,converged,converged,-0.9316588579604798,"rain, rainfall, rainwater"
+Papua New Guinea,group,tokp1240,noun,0,birdcombo,positive,1,Tok Pisin,converged,converged,-0.9452362378046286,bird
+East and southeast asian,group,nucl1310,noun,1,raincombo,positive,1,Burmese,converged,converged,-0.9655323489913575,"rain, rainfall, rainwater"
+Oceanic languages,group,saaa1240,"noun, verb",0,buildingcombo,positive,1,Sa'a,converged,converged,-0.9861030402859955,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,tuvi1240,noun,0,weathercombo,positive,1,Tuvinian,converged,converged,-0.9874954355290682,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+European,group,norw1258,noun,0,timecombo,positive,1,Norwegian,converged,converged,-1.0016146911355157,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Arabic,group,meso1252,noun,1,smellcombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,-1.0027739881224738,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,rade1240,noun,1,raincombo,positive,1,Rade,converged,converged,-1.0053534389674432,"rain, rainfall, rainwater"
+East and southeast asian,group,thai1261,noun,1,windcombo,positive,1,Thai,converged,converged,-1.007663014057569,wind
+Arabic,group,suda1236,noun,1,swordcombo,positive,1,Sudanese Arabic,converged,converged,-1.0078554107457534,sword
+Southeast asian,group,mala1533,"noun, adjective, verb",0,emotioncombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,-1.0220691295117779,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,rade1240,noun,0,weathercombo,positive,1,Rade,converged,converged,-1.0322086595529547,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Asian,group,nucl1301,noun,1,ricecombo,positive,1,Turkish,converged,converged,-1.0484948218239931,rice
+Oceanic languages,group,moki1238,"noun, verb",0,buildingcombo,positive,1,Mokilese,converged,converged,-1.0617037262241207,"build, construct, building, construction, dwelling, house"
+Arabic,group,suda1236,noun,1,smellcombo,positive,1,Sudanese Arabic,converged,converged,-1.0627970828800999,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,wers1238,noun,0,weathercombo,positive,1,Wersing,converged,converged,-1.0629412963801361,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,temi1246,noun,1,windcombo,positive,1,Temiar,converged,converged,-1.0723328390675102,wind
+East and southeast asian,group,cent2087,noun,0,weathercombo,positive,1,Coastal-Naga Bikol,converged,converged,-1.0793987506666585,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,kapi1249,"noun, verb",0,gardeningcombo,positive,1,Kapingamarangi,converged,converged,-1.0916082594859815,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,moki1238,"noun, verb",0,gardeningcombo,positive,1,Mokilese,converged,converged,-1.0989788018916928,"garden, gardening, gardener, floriculture"
+Oceanic,group,louu1245,noun,1,windcombo,positive,1,Lou,converged,converged,-1.1022207317398425,wind
+Oceanic languages,group,wole1240,"noun, verb",0,buildingcombo,positive,1,Woleaian,converged,converged,-1.1076217246235198,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,tahi1242,"noun, verb",0,gardeningcombo,positive,1,Tahitian,converged,converged,-1.1103258986363436,"garden, gardening, gardener, floriculture"
+Australian languages,group,yank1247,noun,1,eelscombo,positive,1,Yankunytjatjara,converged,converged,-1.1106600880247903,eel
+European,group,stan1295,noun,0,timecombo,positive,1,German,converged,converged,-1.1111228822204537,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,mala1479,noun,1,raincombo,positive,1,Central Malay,converged,converged,-1.1112343537394105,"rain, rainfall, rainwater"
+European,group,adyg1241,noun,0,timecombo,positive,1,Adyghe,converged,converged,-1.1239683499571542,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,sema1266,noun,0,weathercombo,positive,1,Semai,converged,converged,-1.126235996238166,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,pulu1242,"noun, verb",0,buildingcombo,positive,1,Puluwatese,converged,converged,-1.1268314178627863,"build, construct, building, construction, dwelling, house"
+Australian languages,group,mudb1240,noun,1,eelscombo,positive,1,Mudburra,converged,converged,-1.1407104829136547,eel
+Arabic,group,nort3139,noun,1,honeycombo,positive,1,Levantine Arabic,converged,converged,-1.1431922834266526,honey
+Australian languages,group,wand1263,noun,1,starscombo,positive,1,Wandarang,converged,converged,-1.1520694573448715,star
+French,group,oldf1239,noun,1,smellcombo,positive,1,Old French,converged,converged,-1.1728308477846743,"smell, odor, odour, aroma, scent, smelling"
+Oceanic languages,group,niue1239,"noun, verb",0,gardeningcombo,positive,1,Niuean,converged,converged,-1.1778481351902268,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,futu1245,"noun, verb",0,buildingcombo,positive,1,Futuna-Aniwa,converged,converged,-1.1824451348110456,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,nucl1643,noun,0,fishcombo,positive,1,Japanese,converged,converged,-1.196981107789071,fish
+Australian languages,group,yand1253,noun,1,starscombo,positive,1,Yandruwandha,converged,converged,-1.1971371936383437,star
+Arabic,group,meso1252,noun,1,snakecombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,-1.2033292146673233,"snake, serpent, ophidian"
+Australian languages,group,ngan1295,noun,1,starscombo,positive,1,Ngandi,converged,converged,-1.20956066842582,star
+Oceanic languages,group,kosr1238,"noun, verb",0,gardeningcombo,positive,1,Kosraean,converged,converged,-1.220017946868684,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,lena1238,"noun, verb",0,buildingcombo,positive,1,Lenakel,converged,converged,-1.222050001490544,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,kirg1245,noun,1,raincombo,positive,1,Kirghiz,converged,converged,-1.2239877238290915,"rain, rainfall, rainwater"
+Oceanic,group,neng1238,noun,1,windcombo,positive,1,Nengone,converged,converged,-1.231094650072462,wind
+Oceanic languages,group,paam1238,"noun, verb",0,buildingcombo,positive,1,Paama,converged,converged,-1.2341450661251216,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,neng1238,"noun, verb",0,buildingcombo,positive,1,Nengone,converged,converged,-1.2366240973004186,"build, construct, building, construction, dwelling, house"
+Australian languages,group,mart1256,noun,1,sandcombo,positive,1,Martu Wangka,converged,converged,-1.2595301863646322,sand
+Oceanic languages,group,naka1262,"noun, verb",0,buildingcombo,positive,1,Nakanai,converged,converged,-1.2654465392856966,"build, construct, building, construction, dwelling, house"
+Zapotec,group,sanj1284,noun,1,smellcombo,positive,1,Western Tlacolula Valley Zapotec,converged,converged,-1.2792221632314067,"smell, odor, odour, aroma, scent, smelling"
+Arabic,group,meso1252,noun,1,swordcombo,positive,1,Gilit Mesopotamian Arabic,converged,converged,-1.2864429768689782,sword
+Lao,single,laoo1244,noun,1,tastecombo,positive,1,Lao,converged,converged,-1.29167677652178,"taste, tasting, gustation"
+Oceanic,group,tiri1258,noun,1,windcombo,positive,1,Tiri-Mea,converged,converged,-1.29202867453346,wind
+Oceanic languages,group,louu1245,"noun, verb",0,buildingcombo,positive,1,Lou,converged,converged,-1.292495460834433,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,bugh1239,"noun, verb",0,buildingcombo,positive,1,Bughotu,converged,converged,-1.3027797109415922,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,renn1242,"noun, verb",0,buildingcombo,positive,1,Rennell-Bellona,converged,converged,-1.3157923333692843,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,tetu1245,"noun, adjective, verb",0,emotioncombo,positive,1,Tetum,converged,converged,-1.3183392906241953,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,hmon1264,noun,1,windcombo,positive,1,Hmong Njua,converged,converged,-1.3314173254020276,wind
+Oceanic languages,group,area1240,"noun, verb",0,buildingcombo,positive,1,'Are'are,converged,converged,-1.3336129872183655,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,pamp1243,noun,1,windcombo,positive,1,Pampanga,converged,converged,-1.3458810357701136,wind
+East and southeast asian,group,tuvi1240,noun,1,windcombo,positive,1,Tuvinian,converged,converged,-1.3538355035303615,wind
+Southeast asian,group,pang1290,"noun, adjective, verb",0,emotioncombo,positive,1,Pangasinan,converged,converged,-1.3664911696725142,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Asian,group,tari1263,noun,1,ricecombo,positive,1,Tarifiyt-Beni-Iznasen-Eastern Middle Atlas Berber,converged,converged,-1.3667943729263923,rice
+East and southeast asian,group,mara1404,noun,1,raincombo,positive,1,Maranao,converged,converged,-1.378216391923613,"rain, rainfall, rainwater"
+Arabic,group,egyp1253,noun,1,swordcombo,positive,1,Egyptian Arabic,converged,converged,-1.3784758441552922,sword
+East and southeast asian,group,hili1240,noun,0,weathercombo,positive,1,Hiligaynon,converged,converged,-1.3793378856992102,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Arabic,group,egyp1253,noun,1,snakecombo,positive,1,Egyptian Arabic,converged,converged,-1.385156341805323,"snake, serpent, ophidian"
+Oceanic,group,tang1348,noun,1,windcombo,positive,1,Tangga,converged,converged,-1.3944938329233796,wind
+Arabic,group,suda1236,noun,1,horsecombo,positive,1,Sudanese Arabic,converged,converged,-1.3973281992908972,horse
+European,group,gali1258,noun,0,timecombo,positive,1,Galician,converged,converged,-1.4002174625671975,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic languages,group,mang1401,"noun, verb",0,gardeningcombo,positive,1,Mangareva,converged,converged,-1.404677599445781,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,java1254,noun,1,windcombo,positive,1,Javanese,converged,converged,-1.4122304317024243,wind
+Oceanic languages,group,misi1243,"noun, verb",0,buildingcombo,positive,1,Misima-Paneati,converged,converged,-1.4126416305215839,"build, construct, building, construction, dwelling, house"
+European,group,bela1254,noun,0,timecombo,positive,1,Belarusian,converged,converged,-1.417330411701961,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Thai,group,thai1261,"noun, adjective, verb",0,emotioncombo,positive,1,Thai,converged,converged,-1.418835661115664,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Southeast asian,group,thai1261,"noun, adjective, verb",0,emotioncombo,positive,1,Thai,converged,converged,-1.418835661115664,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,dehu1237,"noun, verb",0,buildingcombo,positive,1,Dehu,converged,converged,-1.420267257882345,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,kosr1238,"noun, verb",0,buildingcombo,positive,1,Kosraean,converged,converged,-1.4203735590377846,"build, construct, building, construction, dwelling, house"
+Australian languages,group,pint1250,noun,1,eelscombo,positive,1,Pintupi-Luritja,converged,converged,-1.4358849992305514,eel
+Oceanic languages,group,fiji1243,"noun, verb",0,buildingcombo,positive,1,Fijian,converged,converged,-1.4364857667871158,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,cebu1242,noun,0,weathercombo,positive,1,Cebuano,converged,converged,-1.4378281547356393,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Australian languages,group,warl1254,noun,1,eelscombo,positive,1,Warlpiri,converged,converged,-1.4425224164640071,eel
+Southeast asian,group,casi1235,"noun, adjective, verb",0,emotioncombo,positive,1,Casiguran-Nagtipunan Agta,converged,converged,-1.442611553857772,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Arabic,group,egyp1253,noun,1,smellcombo,positive,1,Egyptian Arabic,converged,converged,-1.4444296559733372,"smell, odor, odour, aroma, scent, smelling"
+Asian,group,kirg1245,noun,1,ricecombo,positive,1,Kirghiz,converged,converged,-1.4454869967593722,rice
+East and southeast asian,group,kirg1245,noun,1,ricecombo,positive,1,Kirghiz,converged,converged,-1.4454869967593722,rice
+Asian,group,nucl1302,noun,1,ricecombo,positive,1,Georgian,converged,converged,-1.4556046539669114,rice
+East and southeast asian,group,rade1240,noun,1,windcombo,positive,1,Rade,converged,converged,-1.4636315770597494,wind
+East and southeast asian,group,jeha1242,noun,0,weathercombo,positive,1,Jehai,converged,converged,-1.4773347315633794,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,xara1244,"noun, verb",0,buildingcombo,positive,1,Xârâcùù,converged,converged,-1.4805583875205943,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,gilb1244,"noun, verb",0,buildingcombo,positive,1,Gilbertese,converged,converged,-1.4836017473713956,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,hmon1264,noun,0,fishcombo,positive,1,Hmong Njua,converged,converged,-1.4860031875182083,fish
+Asian,group,angg1239,noun,1,ricecombo,positive,1,Angguruk Yali,converged,converged,-1.488853437307684,rice
+East and southeast asian,group,angg1239,noun,1,ricecombo,positive,1,Angguruk Yali,converged,converged,-1.488853437307684,rice
+East and southeast asian,group,kirg1245,noun,1,windcombo,positive,1,Kirghiz,converged,converged,-1.4937073977661193,wind
+East and southeast asian,group,jeha1242,noun,1,windcombo,positive,1,Jehai,converged,converged,-1.5145163751932254,wind
+Hindi,single,hind1269,noun,1,dancecombo,positive,1,Hindi,converged,converged,-1.5173286263915844,"dance, dancing, terpsichore"
+Southeast asian,group,lisu1250,"noun, adjective, verb",0,emotioncombo,positive,1,Lisu,converged,converged,-1.5283708899976616,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,pang1290,noun,0,weathercombo,positive,1,Pangasinan,converged,converged,-1.5356840765116606,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,tuvi1240,noun,1,raincombo,positive,1,Tuvinian,converged,converged,-1.556453760699245,"rain, rainfall, rainwater"
+Oceanic,group,daka1243,noun,1,windcombo,positive,1,Dakaka,converged,converged,-1.591983468442938,wind
+European,group,west2354,noun,0,timecombo,positive,1,Western Frisian,converged,converged,-1.6013934022810759,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,tuvi1240,noun,0,fishcombo,positive,1,Tuvinian,converged,converged,-1.6033970214431816,fish
+Oceanic,group,kosr1238,noun,1,windcombo,positive,1,Kosraean,converged,converged,-1.6175748501360927,wind
+Portuguese,group,mala1533,noun,1,horsecombo,positive,1,Malacca-Batavia Portuguese Creole,converged,converged,-1.6216673474156609,horse
+East and southeast asian,group,pamp1243,noun,0,weathercombo,positive,1,Pampanga,converged,converged,-1.6218693897720207,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+European,group,luxe1241,noun,0,timecombo,positive,1,Moselle Franconian,converged,converged,-1.6290363742289893,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Asian,group,mani1292,noun,1,ricecombo,positive,1,Manipuri,converged,converged,-1.6306866832804807,rice
+Arabic,group,gulf1241,noun,1,honeycombo,positive,1,Gulf Arabic,converged,converged,-1.6328397544106237,honey
+Oceanic languages,group,daka1243,"noun, verb",0,buildingcombo,positive,1,Dakaka,converged,converged,-1.6644638158396525,"build, construct, building, construction, dwelling, house"
+Arabic,group,nort3139,noun,1,swordcombo,positive,1,Levantine Arabic,converged,converged,-1.6675648859113013,sword
+Southeast asian,group,angg1239,"noun, adjective, verb",0,emotioncombo,positive,1,Angguruk Yali,converged,converged,-1.6725551408729238,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,taga1270,noun,1,windcombo,positive,1,Tagalog,converged,converged,-1.698032941368113,wind
+Arabic,group,sana1295,noun,1,smellcombo,positive,1,Sanaani Arabic,converged,converged,-1.700303873840734,"smell, odor, odour, aroma, scent, smelling"
+Asian,group,nucl1706,noun,1,ricecombo,positive,1,Neo-Mandaic,converged,converged,-1.7024421541756336,rice
+Arabic,group,gulf1241,noun,1,smellcombo,positive,1,Gulf Arabic,converged,converged,-1.7074873898767111,"smell, odor, odour, aroma, scent, smelling"
+Australian languages,group,ngaa1240,noun,1,eelscombo,positive,1,Ngaanyatjarra,converged,converged,-1.7153328916600945,eel
+East and southeast asian,group,java1254,noun,1,raincombo,positive,1,Javanese,converged,converged,-1.7212005354695417,"rain, rainfall, rainwater"
+Oceanic languages,group,kapi1249,"noun, verb",0,buildingcombo,positive,1,Kapingamarangi,converged,converged,-1.7427799664472285,"build, construct, building, construction, dwelling, house"
+European,group,mode1248,noun,0,timecombo,positive,1,Modern Greek,converged,converged,-1.8059613180063918,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,kirg1245,noun,0,fishcombo,positive,1,Kirghiz,converged,converged,-1.8138945748577298,fish
+Oceanic languages,group,lauu1247,"noun, verb",0,buildingcombo,positive,1,Lau,converged,converged,-1.8215043303123923,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,tiri1258,"noun, verb",0,buildingcombo,positive,1,Tiri-Mea,converged,converged,-1.8347888519122029,"build, construct, building, construction, dwelling, house"
+Asian,group,kaza1248,noun,1,ricecombo,positive,1,Kazakh,converged,converged,-1.8717102393813871,rice
+Oceanic languages,group,mota1237,"noun, verb",0,buildingcombo,positive,1,Mota,converged,converged,-1.8943060484345267,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,lari1255,"noun, adjective, verb",0,emotioncombo,positive,1,Larike-Wakasihu,converged,converged,-1.8950520852885115,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+East and southeast asian,group,tibe1272,noun,0,weathercombo,positive,1,Tibetan,converged,converged,-1.9059696247367326,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,kirg1245,noun,0,weathercombo,positive,1,Kirghiz,converged,converged,-1.9074144670893478,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Oceanic languages,group,ralu1237,"noun, verb",0,buildingcombo,positive,1,Raluana,converged,converged,-1.910410947046705,"build, construct, building, construction, dwelling, house"
+Oceanic languages,group,anei1239,"noun, verb",0,buildingcombo,positive,1,Aneityum,converged,converged,-1.9393083739925456,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,tibe1272,noun,1,raincombo,positive,1,Tibetan,converged,converged,-1.9489629629855232,"rain, rainfall, rainwater"
+East and southeast asian,group,laoo1244,noun,1,windcombo,positive,1,Lao,converged,converged,-1.9535140585785806,wind
+Asian,group,nort3139,noun,1,ricecombo,positive,1,Levantine Arabic,converged,converged,-1.9896788686487992,rice
+French,group,loui1240,noun,1,smellcombo,positive,1,Louisiana Creole French,converged,converged,-1.9928074733289283,"smell, odor, odour, aroma, scent, smelling"
+European,group,corn1251,noun,0,timecombo,positive,1,Cornish,converged,converged,-1.9950342815929432,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Oceanic languages,group,gilb1244,"noun, verb",0,gardeningcombo,positive,1,Gilbertese,converged,converged,-2.0379159349572085,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,mala1479,noun,0,insectscombo,positive,1,Central Malay,converged,converged,-2.03913063045266,insect
+Asian,group,kosa1249,noun,1,ricecombo,positive,1,Kosarek Yale,converged,converged,-2.051271635262727,rice
+East and southeast asian,group,kosa1249,noun,1,ricecombo,positive,1,Kosarek Yale,converged,converged,-2.051271635262727,rice
+Oceanic,group,sout2859,noun,1,windcombo,positive,1,Southeast Ambrym,converged,converged,-2.0551888006645966,wind
+East and southeast asian,group,laoo1244,noun,0,weathercombo,positive,1,Lao,converged,converged,-2.1137443310964876,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Hindi,single,hind1269,noun,1,doctorcombo,positive,1,Hindi,converged,converged,-2.119654252560994,"doctor, physician"
+Oceanic languages,group,port1286,"noun, verb",0,buildingcombo,positive,1,Daakie,converged,converged,-2.1254880747723175,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,tibe1272,noun,1,windcombo,positive,1,Tibetan,converged,converged,-2.1374904607445817,wind
+East and southeast asian,group,nucl1310,noun,0,weathercombo,positive,1,Burmese,converged,converged,-2.1388345535715954,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Asian,group,bodo1269,noun,1,ricecombo,positive,1,Bodo-Mech,converged,converged,-2.149203622995205,rice
+Southeast asian,group,urak1238,"noun, adjective, verb",0,emotioncombo,positive,1,Urak Lawoi',converged,converged,-2.1588876671108865,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,lonw1238,"noun, verb",0,buildingcombo,positive,1,Lonwolwol,converged,converged,-2.160715116381029,"build, construct, building, construction, dwelling, house"
+Asian,group,guja1252,noun,1,ricecombo,positive,1,Gujarati,converged,converged,-2.169567698401538,rice
+Oceanic languages,group,tiko1237,"noun, verb",0,gardeningcombo,positive,1,Tikopia,converged,converged,-2.2154910806684556,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,caro1242,"noun, verb",0,gardeningcombo,positive,1,Carolinian,converged,converged,-2.251760790369617,"garden, gardening, gardener, floriculture"
+Oceanic languages,group,urip1240,"noun, verb",0,buildingcombo,positive,1,Uripiv,converged,converged,-2.2590032513580787,"build, construct, building, construction, dwelling, house"
+Southeast asian,group,rade1240,"noun, adjective, verb",0,emotioncombo,positive,1,Rade,converged,converged,-2.27137987723831,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic,group,suau1242,noun,1,windcombo,positive,1,Suau,converged,converged,-2.305558254856027,wind
+Arabic,group,nort3139,noun,1,snakecombo,positive,1,Levantine Arabic,converged,converged,-2.3058043382051032,"snake, serpent, ophidian"
+Southeast asian,group,java1254,"noun, adjective, verb",0,emotioncombo,positive,1,Javanese,converged,converged,-2.307172108670017,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,samo1305,"noun, verb",0,gardeningcombo,positive,1,Samoan,converged,converged,-2.339785010457469,"garden, gardening, gardener, floriculture"
+European,group,scot1245,noun,0,timecombo,positive,1,Scottish Gaelic,converged,converged,-2.3600770494591634,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,kirg1245,noun,0,insectscombo,positive,1,Kirghiz,converged,converged,-2.3621487956934355,insect
+Oceanic languages,group,gela1263,"noun, verb",0,buildingcombo,positive,1,Gela,converged,converged,-2.3787059277773364,"build, construct, building, construction, dwelling, house"
+European,group,slov1269,noun,0,timecombo,positive,1,Slovak,converged,converged,-2.3829283085682156,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,java1254,noun,0,weathercombo,positive,1,Javanese,converged,converged,-2.4766100258208845,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+East and southeast asian,group,mand1415,noun,0,fishcombo,positive,1,Mandarin Chinese,converged,converged,-2.480697083932608,fish
+European,group,nort2671,noun,0,timecombo,positive,1,North Saami,converged,converged,-2.5388223136677732,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+Arabic,group,nort3139,noun,1,smellcombo,positive,1,Levantine Arabic,converged,converged,-2.5627795137688607,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,kore1280,noun,0,fishcombo,positive,1,Korean,converged,converged,-2.6019242349328504,fish
+Southeast asian,group,cent2292,"noun, adjective, verb",0,emotioncombo,positive,1,Central Bontoc,converged,converged,-2.606192794838494,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,aros1241,"noun, verb",0,buildingcombo,positive,1,Arosi,converged,converged,-2.619269162119949,"build, construct, building, construction, dwelling, house"
+East and southeast asian,group,taga1270,noun,0,insectscombo,positive,1,Tagalog,converged,converged,-2.7338204166655724,insect
+East and southeast asian,group,nucl1643,noun,0,insectscombo,positive,1,Japanese,converged,converged,-2.755529164074596,insect
+Southeast asian,group,wers1238,"noun, adjective, verb",0,emotioncombo,positive,1,Wersing,converged,converged,-2.8046969241839457,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Asian,group,nucl1235,noun,1,ricecombo,positive,1,Eastern Armenian,converged,converged,-2.8684055997503677,rice
+Southeast asian,group,laoo1244,"noun, adjective, verb",0,emotioncombo,positive,1,Lao,converged,converged,-2.904306466943528,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Oceanic languages,group,mars1254,"noun, verb",0,gardeningcombo,positive,1,Marshallese,converged,converged,-2.9559892198345854,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,kosa1249,noun,0,fishcombo,positive,1,Kosarek Yale,converged,converged,-2.9744386508728384,fish
+East and southeast asian,group,angg1239,noun,0,fishcombo,positive,1,Angguruk Yali,converged,converged,-3.0389377528177755,fish
+East and southeast asian,group,mala1479,noun,0,fishcombo,positive,1,Central Malay,converged,converged,-3.0879412965436144,fish
+Oceanic languages,group,tuam1242,"noun, verb",0,gardeningcombo,positive,1,Tuamotuan,converged,converged,-3.221889336041475,"garden, gardening, gardener, floriculture"
+East and southeast asian,group,taga1270,noun,0,weathercombo,positive,1,Tagalog,converged,converged,-3.236114632583363,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Cantonese,single,yuec1235,noun,1,smellcombo,positive,1,Yue Chinese,converged,converged,-3.3011416561744444,"smell, odor, odour, aroma, scent, smelling"
+East and southeast asian,group,thai1261,noun,0,weathercombo,positive,1,Thai,converged,converged,-3.3137503069367957,"weather, climate, thunder, lightning, wind, cloud, mist, precipitation, dew, rain, hail, snow, rainbow"
+Southeast asian,group,jeha1242,"noun, adjective, verb",0,emotioncombo,positive,1,Jehai,converged,converged,-3.532288048372066,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+Southeast asian,group,bata1298,"noun, adjective, verb",0,emotioncombo,positive,1,Batad Ifugao,converged,converged,-3.729505627558609,"anger, anxiety, envy, fear, gloomy, grief, happy, hate, hope, joy, love, pity, proud, regret, sad, shame, surprised, worry, merry, desire, good, like, bad, want, happiness"
+European,group,iris1253,noun,0,timecombo,positive,1,Irish,converged,converged,-4.342292090316595,"time, duration, period, year, season, month, week, hour, minute, second, day, night, dawn, morning, noon, midday, afternoon, evening, clock, chronology, calendar, present, past, future, yesterday, tomorrow"
+East and southeast asian,group,tibe1272,noun,0,fishcombo,positive,1,Tibetan,converged,converged,-4.349190780044572,fish
+Asian,group,stan1318,noun,1,ricecombo,positive,1,Standard Arabic,converged,converged,-4.869158578282297,rice
+Asian,group,hebr1245,noun,1,ricecombo,positive,1,Modern Hebrew,converged,converged,-5.345266110208027,rice
+Asian,group,assy1241,noun,1,ricecombo,positive,1,Assyrian Neo-Aramaic,converged,converged,-5.348203036744349,rice

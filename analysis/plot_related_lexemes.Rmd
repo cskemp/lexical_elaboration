@@ -1,0 +1,251 @@
+---
+title: "Plot related lexemes against token counts"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(testthat)
+library(ggplot2)
+library(brms)
+library(gridExtra)
+library(maps)
+
+select <- dplyr::select
+
+```
+
+This notebook explores the relationship between manual counts of related lexemes and the unigram frequencies for RAIN, SMELL, and TASTE in a selected subset of 64 non-HathiTrust dictionaries. It generates Figure S2 in the Supporting Material.
+
+First we load dictionary lexeme classification data.
+
+```{r dictionary related_lexemes, include=TRUE}
+
+# load manual counts of dictionary related_lexemes
+entrycounts <- read_csv(here("rawdata", "manuallycreated", "lexeme_classification.csv"))
+
+# explore classification
+classes <- entrycounts %>%
+  group_by(word, classification) %>%
+  summarise(counts=n()) %>%
+  ungroup() %>%
+  pivot_wider(names_from = "classification", values_from = "counts")  %>%
+  mutate(total = related + unrelated + example + other) %>%
+  mutate(related = round(related / total, 2),
+         unrelated = round(unrelated/total, 2),
+         example = round(example/total, 2),
+         other = round(other/total, 2)) %>%
+  arrange(desc(related))
+
+grouped_entrycounts <- entrycounts %>%
+  group_by(id, word) %>%
+  summarise(
+    related_lexemes = sum(classification == "related"),
+    unrelated_lexemes = sum(classification %in% c("unrelated", "example", "other"))
+  )
+
+grouped <- entrycounts %>%
+  group_by(id, word) %>%
+  summarise(
+    related = sum(classification == "related"),
+    unrelated= sum(classification == "unrelated"),
+    exampe = sum(classification == "example"),
+    other = sum(classification == "other")
+  )
+```
+
+Load word count file:
+
+```{r load data, include=TRUE}
+wordcount <- read_csv(here("data", "foranalyses", "wordcount.csv"))
+dict <- read_csv(here("data", "foranalyses", "bila_dictionaries_withenv.csv"))
+```
+
+Gather counts for terms in interest. We'll compute results for groups of related words. Note that the group of words must be identical with those in analyze_cases.R. 
+
+```{r terms in interest, include=TRUE}
+
+rain_group <- c("rain", "raindrop", "rainfall", "rainwater", "drizzle", "mizzle", "downpour", "pelter")
+smell_group <- c("smell", "odor", "scent", "effluvium", "smelling", "sniff", "snuff", "olfaction", "fragrance", "perfume", "stench")
+taste_group <- c("taste", "flavor", "savor", "savoring", "gustation", "taster", "tasting", "aftertaste", "insipidity", "savoriness", "unsavoriness", "sweetness", "sourness", "acidity")
+
+cwd <- tibble(groups=list(
+  tibble(group="rain_group", word=rain_group),
+  tibble(group="smell_group", word=smell_group),
+  tibble(group="taste_group", word=taste_group)
+  ))
+
+wordgroups <- unnest(cwd, groups)
+
+all_words <- wordgroups$word
+all_groups <- unique(wordgroups$group)
+singlewords <-  str_subset(all_groups, "_group", negate=TRUE)
+
+all_regex <-  paste0("^(", paste(all_words, collapse="|"), ")$")
+  
+cases_wordcount <- wordcount %>% 
+  select(id, matches(all_regex), dictsize_data) 
+
+cases_wordcount_long <- cases_wordcount %>% 
+  pivot_longer(cols = -c(id, dictsize_data), names_to = "word", values_to = "count") %>% 
+  right_join(wordgroups, by = "word") 
+
+cases_wordcount_grouped_long <- cases_wordcount_long %>% 
+  group_by(id, dictsize_data, group) %>% 
+  summarize(
+    count = case_when(
+      any(!is.na(count)) ~ sum(count, na.rm = TRUE),
+      TRUE ~ NA_real_
+    )
+  ) %>% 
+  ungroup()
+
+cases_wordcount <- cases_wordcount_grouped_long %>%
+  left_join(dict %>% select(id, glottocode), by="id") %>%
+  select(-glottocode) %>%
+  pivot_wider(names_from = group, values_from = count)
+
+# we'll express frequencies in terms of counts per 10000 tokens
+countunit <- 10000
+
+# d is the dataframe we'll use for our analyses
+d <- cases_wordcount %>% 
+  mutate(across(-c(id, dictsize_data), ~(.x * countunit/dictsize_data))) %>% 
+  mutate(countunit= countunit) %>% 
+  inner_join(dict, by="id") 
+
+# token counts
+token_counts <- d %>%
+  filter(id %in% grouped_entrycounts$id) %>%
+  select(id, smell_group, rain_group, taste_group, dictsize_data, glottocode, langfamily) %>%
+  pivot_longer(cols = c(smell_group, rain_group, taste_group), names_to = "word", values_to = "normalised_counts") %>%
+  mutate(word = case_when(
+    word == "smell_group" ~ "smell",
+    word == "rain_group" ~ "rain",
+    word == "taste_group" ~ "taste"
+  )) %>%
+  left_join(grouped_entrycounts, by = c("id", "word")) %>%
+  mutate(raw_counts=normalised_counts * dictsize_data / countunit) %>%
+  filter(raw_counts != 0)
+```
+
+## Plot related lexeme counts agains token counts
+
+Rain:
+
+```{r dictionary related_lexemes, include=TRUE}
+theme_font <- theme(
+  text = element_text(size = 10),  # Font size for all text elements
+  plot.title = element_text(size=10),
+  axis.title = element_text(size = 10),  # Font size for axis titles
+  axis.text = element_text(size = 9),  # Font size for axis labels
+  axis.ticks.x = element_blank(), 
+  axis.line.x = element_blank(),
+  axis.ticks.y = element_blank(), 
+  axis.line.y = element_blank()
+) 
+
+# plot dictionary related_lexemes for rain related words against token counts
+rain_related_lexemes <- token_counts %>%
+  filter(word == "rain",
+         #related_lexemes < 100,
+    !is.na(normalised_counts) & !is.na(related_lexemes)
+    ) %>%
+  left_join(dict %>% select(id, glottocode, maxmonth_pre), by="id")
+
+# token counts:
+cor.test(rain_related_lexemes$related_lexemes, rain_related_lexemes$raw_counts)
+
+rain_plot <- rain_related_lexemes %>%
+  ggplot(aes(x = raw_counts, y = related_lexemes)) +
+  geom_jitter(size=0.5) +
+  geom_smooth(method=lm, size=0.3) +
+  theme_classic()   +
+  theme_font +
+  labs(x="unigram counts", y="related lexeme counts", title="RAIN") +
+  annotate("text", x = 200, y = Inf, label = "r = 0.92***", size = 4, hjust = 1.2, vjust = 1.2)
+show(rain_plot)
+```
+
+Smell:
+
+```{r dictionary related_lexemes, include=TRUE}
+
+# plot dictionary related_lexemes for smell related words against token counts
+smell_related_lexemes <- token_counts %>%
+  filter(word == "smell",
+    !is.na(normalised_counts) & !is.na(related_lexemes)
+    ) %>%
+  left_join(dict %>% select(id, glottocode), by="id")
+
+# token counts:
+cor.test(smell_related_lexemes$related_lexemes, smell_related_lexemes$raw_counts)
+
+smell_plot <- smell_related_lexemes %>%
+  ggplot(aes(x = raw_counts, y = related_lexemes)) +
+  geom_jitter(size=0.5) +
+  geom_smooth(method=lm, size=0.3) +
+  theme_classic() + theme(axis.title.y = element_blank()) +
+  theme_font +
+  labs(x="unigram counts", y="related lexeme counts", title="SMELL") +
+  annotate("text", x = 80, y = Inf, label = "r = 0.88***", size = 4, hjust = 1.2, vjust = 1.2)
+show(smell_plot)
+```
+
+Taste:
+
+```{r dictionary related_lexemes, include=TRUE}
+# plot dictionary related_lexemes for taste related words against token counts
+taste_related_lexemes <- token_counts %>%
+  filter(word == "taste",
+    !is.na(normalised_counts) & !is.na(related_lexemes)
+    ) %>%
+  left_join(dict %>% select(id, glottocode), by="id")
+
+# token counts:
+cor.test(taste_related_lexemes$related_lexemes, taste_related_lexemes$raw_counts)
+
+taste_plot <- taste_related_lexemes %>%
+  ggplot(aes(x = raw_counts, y = related_lexemes)) +
+  geom_jitter(size=0.5) +
+  geom_smooth(method=lm, size=0.3) +
+  theme_classic()  + theme(axis.title.y = element_blank())  +
+  theme_font +
+  labs(x="unigram counts", y="related lexeme counts", title="TASTE") +
+  annotate("text", x = 35, y = Inf, label = "r = 0.64***", size = 4, hjust = 1.2, vjust = 1.2)
+show(taste_plot)
+```
+
+Make a map and combine plots:
+
+```{r make map, include=TRUE}
+langs <- token_counts %>%
+  select(id) %>% unique() %>%
+  left_join(dict, by = "id")
+
+world_map <- map_data("world")
+
+map <- ggplot() +
+  geom_map(data = world_map, map = world_map,
+           aes(long, lat, map_id = region),
+           color = "white", fill = "gray90", size = 0.1) +
+  coord_sf(xlim = c(-150, 180), ylim = c(-50, 80)) +
+  geom_point(data = langs, aes(longitude, latitude), color = "#2673B4", size = 1.5, shape = 16) +
+    theme_void() +
+    theme(legend.position = "none")
+map
+
+library(patchwork)
+combined_row <- rain_plot + smell_plot + taste_plot + plot_layout(ncol = 3, widths = c(1, 1, 1), heights = c(1.2))
+
+combined <- combined_row / map + plot_layout(nrow = 2, heights = c(1, 1.5)) +
+  plot_annotation(tag_levels = 'a', tag_suffix = ')')
+ggsave(here("output", "figures", "supplementary", "lexemes_tokens.pdf"), combined, width = 10, height = 7)
+
+```
+

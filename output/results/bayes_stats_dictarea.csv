@@ -1,0 +1,54 @@
+group,predictor,coefficient,lower_ci,upper_ci,warnings
+snow_group,avgmonth_tmp,-0.8336107843227981,-0.9314472434675546,-0.7408379233280475,
+ice_group,avgmonth_tmp,-0.5304391121683023,-0.6174599467408828,-0.44207943983485093,
+rain_group,avgmonth_tmp,0.09314255553903056,0.03918071826612812,0.1458003264240199,
+wind_group,avgmonth_tmp,-0.06052644327031651,-0.10833338868246031,-0.012448469589807332,
+smell_group,avgmonth_tmp,0.10604880460131037,0.062490483138081795,0.1479375905290263,
+taste_group,avgmonth_tmp,0.048913171410268186,-4.137548366706826e-4,0.10000898630351249,
+dance_group,avgmonth_tmp,0.08549256704149598,-2.59155029372557e-4,0.1671530820493639,
+snow_group,maxmonth_pre,-0.2870149768548402,-0.4052025827897815,-0.17330829439587564,
+ice_group,maxmonth_pre,-0.28303503734035645,-0.3668060826350682,-0.1969161392805611,"There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
+"
+rain_group,maxmonth_pre,0.03916802009996578,-0.004336442817062863,0.0845149597377804,
+wind_group,maxmonth_pre,-0.042875643150276165,-0.08258003664924324,-0.002967424236745924,
+smell_group,maxmonth_pre,0.07710097042070346,0.04037987638810218,0.11314771583612368,
+taste_group,maxmonth_pre,0.07457114573440968,0.033765535184472964,0.11302182204038733,"There were 2 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
+"
+dance_group,maxmonth_pre,0.07850931920207885,0.010615440951739713,0.1434439806558758,
+snow_group,maxmonth_wnd,0.23732269078670387,0.13224850771425486,0.3392668978358193,
+ice_group,maxmonth_wnd,0.184710444844929,0.10721678378002195,0.25940639885385675,
+rain_group,maxmonth_wnd,-0.0115653809167457,-0.053991880647739875,0.03054476400362615,
+wind_group,maxmonth_wnd,0.08880825134953395,0.05200151375582904,0.12525453620252416,
+smell_group,maxmonth_wnd,-0.02996550423310944,-0.06485362532933038,0.00544553453704701,
+taste_group,maxmonth_wnd,-0.061102249841625184,-0.09942837846668379,-0.022452712138112556,"There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
+"
+dance_group,maxmonth_wnd,-0.008023627400519482,-0.07224024082375666,0.055585060841827086,
+ice_group,subsistence,-0.18133984659713354,-0.5202910631856204,0.15542431368760376,"There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
+"
+rain_group,subsistence,-0.008402296143020125,-0.17445774980658213,0.160713978480783,"There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
+"
+wind_group,subsistence,-0.38120871954817603,-0.5262918491776485,-0.2313333924518287,"There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
+"
+smell_group,subsistence,-0.0568497549870263,-0.1941353257728864,0.08505909583893259,
+taste_group,subsistence,-0.13925496666274992,-0.30822847708924955,0.02877928231838337,
+dance_group,subsistence,0.010742329853364199,-0.23143786142918876,0.2492974850483596,
+snow_group,population,0.017133950547849795,-0.1305201380452231,0.16229913557431572,
+ice_group,population,0.20546642417575287,0.09740270465294358,0.31571302900479187,
+rain_group,population,-0.13718698887523378,-0.19142778024212515,-0.08280323977709617,
+smell_group,population,-0.04343691993329724,-0.08962027557651217,0.003815430637972134,
+taste_group,population,0.022684364320164636,-0.028242085120434805,0.07455117864588208,
+dance_group,population,-0.22270233745367962,-0.3054369751550272,-0.13702123806939728,
+snow_group,subsistence,-0.46965827493119483,-0.929613653743505,-0.0036218985605306997,
+wind_group,population,-0.10177825143731795,-0.15893546119801383,-0.04672165554223579,

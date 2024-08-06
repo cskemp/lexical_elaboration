@@ -1,0 +1,413 @@
+society_id,society_name,society_xd_id,language_glottocode,language_name,language_family,variable_id,code,code_label,focal_year,sub_case,comment
+SCCS103,Ajie,xd871,ajie1238,Ajië,Austronesian,SCCS1716,1,intensive agriculture,1845,Neje Chiefdom,"leenhardt1930 [106]: On connaît trois instruments aratoires calédoniens: l'épieu, la pioche et la pelle ...
+leenhardt1930 [107]: Tel est l'outillage. Il a suffi au Canaque pour porter à la perfection les cultures de l'igname (Dioscorea) et du taro (Colocasia).
+leenhardt1930 [110]: La grande affaire est la canalisation, weduru, le bon écoulement de l'eau, l'entretien des vannes. L'homme conduit l'eau avec beaucoup de discernement, franchissant les dépressions avec une chaussée faisant aqueduc, ou les fossés avec un tronc d'arbe creux. On voit de ces conduites d'eau avaient plusieurs kilomètres de longueur.che et l"
+SCCS114,Chekiang,xd643,wuch1236,Wu Chinese,Sino-Tibetan,SCCS1716,1,intensive agriculture,1936,"Kaihsienkung village, Chekiang","fei1946 [15]: In Kaihsienkung, according to estimates, more than ninety per cent of the land is used for rice cultivation.
+
+fei1946 [155]: In this village the chief crops cultivated are rice, rapeseeds and wheat.
+d, Morto"
+SCCS116,Koreans,xd638,kore1280,Korean,Koreanic,SCCS1716,1,intensive agriculture,1910,Kanghwa Island,"osgood1951 [60]: For the Sondup'o [focal locality] villagers, gaining a livelihood depends almost entirely upon agriculture.
+
+osgood1951 [62]: ... the people go on to fertilize their rice fields, using oxen to plow them. (...) to transplant the rice seedlings into the waiting wet fields. (...) of all the crops, rice and barley are certainly the most important on Kanghwa Island and, for that matter, in Korea as a whole.ointed t"
+SCCS117,Japanese,xd648,nucl1643,Japanese,Japonic,SCCS1716,1,intensive agriculture,1950,Southern Okayama,"beardsleyetal1959 [1]: Niiike is a small rice-growing settlement in the western half of Honshu, Japan's principal island.
+
+beardsleyetal1959 [6]: In Kamo [next higher administrative division, includes the village of Niiike], arable land makes up 69.4 per cent of the total area. The rich coastal plain farm land is so crowded with farmers that, in Niiike, a household of five to six persons controls only 2.7 acres of fields and wood lot. Less than half of its crops feed the household; the rest goes to the city markets.
+The fabulously high production from such small acreage (...) requires the most intensive farming practices. Copious fertilizer, multiple use of fields, and, above all, prodigious amounts of skilled effort coax the crops of rice, dry grains, vegetables, and fruit from the soil.
+m land i"
+SCCS150,Havasupai,xd1163,hava1249,Havasupai,Cochimi-Yuman,SCCS1716,1,intensive agriculture,1885,Tribe,"spier1928 [101]: The Havasupai are largely agriculturalists.
+
+spier1928 [101]: The fields about the village are as extensive as irrigation will permit (...)
+
+spier1928 [103]: The hoe is a wooden spade-shaped affair with a disproportionately long narrow blade with a handle in the same plane. This is used to scrape up the sand into ridges when irrigating and for scraping out weeds.
+
+spier1928 [102]: Corn, beans, and squash are the staples, the year-round food.ocial"
+SCCS153,Aztec,xd1301,clas1250,Classical Nahuatl,Uto-Aztecan,SCCS1716,1,intensive agriculture,1519,City & environs of Tenochtitlan,"murdock1934b [363]: The ancient inhabitants of this county derived their subsistence chiefly from maize, which they cultivated in fields watered by irrigation canals and protected by hedges of agave or walls of stone and adobe. They allowed exhausted lands to lie fallow for a few years and then burned them over, but otherwise they used no fertilizer.
+murdock1934b [364]: In addition to maize, the Aztecs or their subjects cultivated a wide variety of plants and trees for food and other purposes: kidney beans, squashes, gourds, chia, sweet potatoes, red peppers, cacao, vanilla, tobacco, cotton, guavas, avocados, Indian figs, and pineapples. The most universally useful native plant, however, was the agave or maguey.
+one and"
+SCCS172,Aymara,xd1375,cent2142,Central Aymara,Aymaran,SCCS1716,1,intensive agriculture,1941,Chucuito clan community in Peru,"tschopik1946 [513]: Although the staple crop varies locally, the three most important Aymara food plants at the present time are potatoes, quinoa, and barley.
+tschopik1951 [155/156]: The technology of agriculture is not only primitive but in several respects is inadequate to cope with the poor soils and rigorous environment. Except for the simple, ox-drawn Mediterranean-type plow employed on the more level fields, and the iron-bladed sickle, the farming implements are largely aboriginal. These include the digging-stick for cultivating steep hillside fields and small terraces, the adze-hoe, the stone-headed clod crusher, and the rawhide-lashed threshing pole. Although crop rotation has been practiced by the Aymara since time immemorial, some soils, particularly those of the pampas, are so poor that they must be allowed to lie fallow for 10 years between plantings. Irrigation is practiced on a small scale, but the great majority of fields are not watered.
+largely"
+SCCS18,Fon,xd186,fonn1241,Fon,Atlantic-Congo,SCCS1716,1,intensive agriculture,1890,City and environs of Abomey,"herskovits1938 [30]: The occupation most widely practised in Dahomey is the cultivation of the soil. The fields are made ready at the end of the dry season, and the amount of labor involved in the task of ""cutting the ground"" depends on whether the earth had previously been cultivated. But even where the preparation of a field means planting land in use the year before, the work is difficult enough. Baked in the heat of the dry season, the earth becomes hard and parched, and is no simple matter to hoe.
+
+herskovits1938 [39]: Agricultural produce yields the greatest proportion of Dahomean foodstuffs, while the raising of animals to provide meat is only of secondary importance.
+labor i"
+SCCS22,Bambara,xd244,bamb1269,Bambara,Mande,SCCS1716,1,intensive agriculture,1875,Segou to Bamako on Niger River,"paques1954 [64]: Les Bambara sont un peuple essentiellement agricole.
+
+[millet, corn, tobacco]
+
+Paris:"
+SCCS26,Zazzagawa Hausa,xd476,araw1280,Arawa,Afro-Asiatic,SCCS1716,1,intensive agriculture,190,Zazzagawa of Zaria,"smith1965 [121]: These pagan Hausa live in small villages of exogamous patrilineal kin, worshiping nature spirits known as bori or iskiki, and deriving their subsistence almost entirely from farming and gathering.
+
+smith1965 [123]: In August there is a brief break in the rains, when bulrush millet and maize are harvested; the first peanuts are picked in late September. Kaka (the main harvest) begins in November with wet rice, cowpeas, late millet and Guinea corn and continues until February when the sweet potatoes, cotton, sugarcane, and tobacco have all been reaped. (...) Grain is the staple diet, Guinea corn, millet, maize, and, to a lesser extent, rice being the principal varieties. Supplies permitting, the Hausa eat grain twice daily, (...)
+
+smith1965 [124]: Green manure, cattle manure, and periodic fallowing are employed, Hausa cultivation being based on a rotation of fields, except that home plots, heavily manured with household refuse, receive little rest.
+ntinues"
+SCCS29,Fur,xd466,furr1244,Fur,Furan,SCCS1716,1,intensive agriculture,1880,Jebel Marra,"felkin1885 [254]: The whole population are agriculturists. Each member of a family has a plot of land which they call their own, but notwithstanding this division the land is cultivated by the whole family together. After the ground has been cleared it is hoed with iron hoes having wooden handles. Manure is sometimes mixed with the soil. ... Wheat, tobacco, and onions require to be watered, and this is done by irrigation.
+felkin1885 [212]: Although the staple food of the Fors is dhurra, it must not be supposed that this is the only item in their bill of fare, for their larder is well stocked with fish, flesh, fowl, insects, vegetables, and fruit.
+this di"
+SCCS3,Tsonga,xd27,tson1249,Tsonga,Atlantic-Congo,SCCS1716,1,intensive agriculture,1895,Ronga subtribe,"B 33: Bantus of South Africa being mostly agriculturalists ...
+B 31,32: As regards Agriculture, it cannot be said that the Thonga tribe is in a very backward stage. Thongas, as well as most of the South African Natives, are essentially agriculturists, and they succeed in obtaining their food in abundance from the soil, although it is not very rich. The variety of their cereals is indeed remarkable, but they have never developed their cultivation to any great extent, because they did not wish to harvest more than was necessary for their immediate needs: there would have been no market for a surplus. Moreover they have never invented the plough, or thought of the use of irrigation, or of manure, those three great means of intensive production which civilised people have so long possessed. ...
+Civilisation having brought these means of progress within their reach, they show themselves, however, quite ready to take advantage of them.
+B 9: ...""Their king is the maize."" says Mboza. This cereal is indeed the most widely cultivated in Thongaland.
+B 10: Next in importance comes the mabele, ..., the millet or Kafir corn.
+B 11: ... The sorghum ... is also extensively cultivated all through Thongaland. ... Rice ... is met with in a few districts only ...  In some places another cereal is cultivated, the likoro (probably Eleusine indica). ... Three Leguminosae play a considerable part in the feeding of the tribe: the ground nut, Kafir pea and Kafir bean.
+B 13-15: Vegetables of other families also contribute to the food of the Thongas. Sweet potatoes ... Pumpkins ... Tomatoes ... a kind of onion ... sugar cane ... pine-apple ... Tobacco ... manioc ... Fruits play an important part in the diet of the Thongas, but wild fruits alone, the fruit with which Mother Earth presents them. They neither plant nor cultivate the trees ...
+Three L"
+SCCS37,Amhara,xd455,amha1245,Amharic,Afro-Asiatic,SCCS1716,1,intensive agriculture,1961,Gondar district,"hoben1973 [3]: The great majority of Amhara were (and still are) peasants living in scattered hamlets in the mountain fastness of the Ethiopian plateau and tilling the soil with iron-tipped oxdrawn plows.
+
+shack1974 [18]: The Amhara and Tigrina are predominantly agricultural with animal husbandry of secondary importance. (...) 'Tef'(Eragrostos abyssinica), an annual grass, is the preferred mainstay, though where poorer soils obtain, as in large arid regions of Tigre province, wheat and barley are grown as staples substitutes. In addition to 'tef' and millet, other principal crops grown by Amhara and Tigrina include barley, broad beens, grey beans, lentils, onions, garlic, red pepper, potatoes, the so-called ""Galla potato"", chick peas, peas, and cabbage.
+
+lipsky1962 [245]: The subsistence farmer of the plateaus uses the plow as the major agricultural implement.
+l grass,"
+SCCS42,Riffians,xd521,tari1263,Tarifiyt-Beni-Iznasen-Eastern Middle Atlas Berber,Afro-Asiatic,SCCS1716,1,intensive agriculture,1926,Entirety: Moroccan,"coon1931 [43]: Agriculture is the most important trait of Riffian life and culture. It is the basis of existence, and is worthy of intensive study, especially by economic botanists.
+
+coon1931 [50]: In July, forty-five days after having planted the maize, the farmers reap it, fertilize and water the terraces, and set out the second crop. still l"
+SCCS43,Egyptians,xd518,egyp1253,Egyptian Arabic,Afro-Asiatic,SCCS1716,1,intensive agriculture,1947,Town and environs of Silwa,"ammar1954 [17]: In Silwa, the village community under study, agriculture is the basic activity of the great majority of the population. ... more than 60 per cent of the total population are engaged in agriculture.
+ammar1954 [24]: The main crops grown are wheat and barley in winter, and millet in summer. This applies practically to every farmer in the village, as these crops provide the basis of his subsistence.
+ammar1954 [25]: The methods and implements of work are more or less the same traditional ones known to have been used by the Egyptian farmer for thousands of years. The 'touriah' or the 'fass' is the indispensable implement to any farmer. It is a kind of hoe which can be turned to many uses, such as breaking up clods of earth, digging furrows, scraping fertilizer clay from the hills, and so forth. For ploughing, he uses the Egyptian plough called 'mihrat', dragged by one or two yoked cows. The water-wheel and the 'shadoof' are used at present only for irrigating the small parcels of land which are higher than the water level in the canals. Such plots of land are very few, compared with large areas which are easily irrigated by merely opening the runnel between the field and the canal, which is filled by the water raised by the pumping machine.ilizer c"
+SCCS47,Turks,xd581,nucl1301,Turkish,Turkic,SCCS1716,1,intensive agriculture,1950,Northern Anatolian Plateau,"stirling1965 [44]: The village lives by growing crops and keeping animals. Mixed farming, which I call agriculture, though it includes horticulture and animal husbandry, is the main source of income and the main occupation. Everyone has some direct connection with it, and almost everyone puts work on the land before any other kind of work, emotionally, morally and in practice.
+Both villages grow mainly cereals. In Elbasi, the commonest is wheat, as in most plateau villages; in Sakaltutan, exceptionally, rye, though both villages grow both. They also grow some barley, and a crop of mixed wheat and rye, which produces a flour considered specially appetising for bread-making.
+stirling1965 [46]: For draught, the villagers used mainly oxen and water buffaloes.
+stirling1965 [48]: In all the villages of this area, a two-year fallow system operates. One-half of the village land is sown one year, and the other left fallow and used for pasture ... The village herds and flocks are transferred from one side to the other after the harvest, to glean the harvested fields and eat the stubble. Soon after the completion of the harvest, autumn ploughing and sowing on the fallow land begins; the fields from which the crops have been reaped become fallow for the next year.es.
+A 4"
+SCCS50,Spanish Basques,xd535,west1508,Western Low Navarrese,Basque,SCCS1716,1,intensive agriculture,1940,Village of Vera de Bidasoa,"carobaroja1944 [47]: Uno de los fenómenos más notables que en estos sesenta años últimos se ha verificado, es el de la sustitución del cultivo del trigo por el del maíz en casi todo el pueblos.
+
+carobaroja1944 [51]: La operación principal que se hace primero es la de arar naturalmente. El arado - ""golida"" - que se usó en Vera hasta las postirmerías del siglo XIX es el arado timonero que todavía se ve en otros pueblos más incomunicados de la montaña de Navarra - ""golde nabarra"".
+
+carobaroja1944 [54]: El diagrama de la página siguiente muestra la disposición con que se siembra el maíz, la alubia y el nabo (o remolacha).
+cado, es"
+SCCS51,Irish,xd543,iris1253,Irish,Indo-European,SCCS1716,1,intensive agriculture,1956,County Clare,"cresswell1969 [108]: La période de cultures comprend une rotation alternée de céréales et de racines. ... La carte dressée par Freeman fait apparaître une grande zone de production laitière dans le sud et le sud-ouest, mais également dans le nord. L'agriculture polyvalente fait trois grandes taches, mais encore faut-il distinguer entres les régions où l'accent est sur l'élevage et celles où l'accent est sur les cultures. Peut-être les deux seules régions agricoles qui correspondent aux données pédologiques ou climatologiques sont les plaines fertiles du centre-est, où prédominent les fermes à engraissage, et celle du centre-ouest, consacrée surtout à l'élevage ovin. Kinvarra se trouve incluse dans cette région, bien que dans une position très limitrophe.
+cresswell1969 [172]: En 1859 la baronnie de Kiltartan possédait 16.000 bovins, 32.000 ovins et 3.000 porcins. La moitié des terres cultivées le furent en céréales, un quart en pommes de terre, un huitième en d'autres racines, et le huitième restant en pâturage. En 1955 les quatre District Electoral Divisions qui comprennent Kinvarra ont proportionnellement autant d'ovins qu'en 1859, mais seulement la moitié de bovins. Il y a environs 10% de moins de terres cultivées, mais les proportions des différentes cultures restent à peu près les mêmes.
+
+cresswell1969 [197]: Tableau 14. - Professions. ... Farmers ... 73,8 [percent of working population]
+
+[Farmers main occupations are agriculture and cattle keeping. As most of the land in Kinvarra is used for cultivation agriculture should be the main source of income.]
+i compre"
+SCCS57,Kurd,xd576,cent1972,Central Kurdish,Indo-European,SCCS1716,1,intensive agriculture,1918,Town and environs of Rowanduz,"barth1953 [18]: Subsistence patterns of the settled population are essentially uniform over the whole South Kurdish area. (...) Subsistence is based on cereal agriculture, combined with herding ... With an average yearly rainfall of 400-800 mm., artificial irrigation is only necessary for special crops, such as rice and tobacco. - Wheat and barley are of approximately equal importance; tobacco, rice, cotton, peas, lentils, and garden patches of vegetables are subsidiary. Of these, cotton is a recent innovation, and typical only of the tenant villages with an active and interested landowner.
+barth1953 [19]: To preserve, in some measure, the fertility of the soil, the fields are left fallow alternate years. These fallow fields should however be plowed at regular intervals, obviously at considerable labor cost ... The plow itself is made of wood, with a conical iron cover over the point. It has a very low level of efficiency, and it is generally necessary to cross-plow all fields.
+ton is a"
+SCCS59,Punjabi,xd600,west2386,Western Panjabi,Indo-European,SCCS1716,1,intensive agriculture,1950,Mohla village,"eglar1960 [42]: Agriculture is the basis of Mohla's economy and land is the principal source of livelihood for all the people of this village.
+eglar1960 [50]: (...) the harvesting of the main crops - wheat, barley, and gram (...)
+eglar1960 [51]: If the soil has retained the dampness of the rains, it is easier for him to plough, but if it has not rained, the soil is dry and he has to irrigate these fields, which is extra work and takes much time.fferent"
+SCCS62,Santal,xd661,sant1410,Santali,Austroasiatic,SCCS1716,1,intensive agriculture,1940,Bankura and Berghum Districts,"dattamajumder1956 [36]: Santal economy is based on agriculture. Collecting, hunting, and fishing are subsidiary, though important, sources of living. Animal husbandry has a minor place.
+
+dattamajumder1956 [37]: Ploughing is done by cows and buffaloes. Cowdung and ashes are used as manure. Cultivation is mainly dependent on rainfall, but the Santal have also devised a system of artificial irrigation.
+of land"
+SCCS68,Lepcha,xd655,lepc1244,Lepcha,Sino-Tibetan,SCCS1716,1,intensive agriculture,1937,Lingthem and vicinity,"gorer1938 [76]: The big fields, which are cleared by burning once every eight years, where the main crops of dry rice, buckwheat and millet are raised, are mostly above the level of the houses;ccasiona"
+SCCS71,Burmese,xd709,nucl1310,Burmese,Sino-Tibetan,SCCS1716,1,intensive agriculture,1948,Nondwin village,"nash1965 [3]: Nondwin is typical of the Sagaing district, of the dry zone mixed cropping of Upper Burma.
+
+nash1965 [15]: In Nondwin an agricultural system based on the plow, the bullock, and metal tipped wood and bamboo implements forms the technological core of the society.
+
+nash1965 [17]: Nondwin grows the crop mixture common to the Myinmu region. A mayin paddy, seven varieties of beans, sesamum, cotton, maize, sorghum, a few bananas, some small gardens of mangos, and onions are planted. (...) The land is intensively used, and the crop pattern shows a good knowledge of farming possibilities and a close adjustment of land use to its most economic return, given the technology at hand. The close fit of the crop and the land is testified to by the small amount of crop failure. 17: Non"
+SCCS75,Ancient Khmer,xd722,oldk1249,Old Khmer,Austroasiatic,SCCS1716,1,intensive agriculture,1296,"City of Angkor, Capital","chou1902 [164,165]: Les cultivateurs calculent le moment où le riz est mûr, le temps de la crue, la limite qu'elle atteindra, et, suivant la terre qu'ils ont, ils ensemencent. Pour labourer, ils n'emploient pas de boeufs. Leurs charrues, faucilles et houes sont de même genre que les nôtre, mais d'une construction différente. ... Pour fumer leurs terres et cultiver les légumes, ils ne font pas usage de fumier animal; ils le dédaignent comme impur.
+chou1902 [169]: Comme plantes potagères, ils ont les oignons, la moutarde, le poireau, l'aubergine, la pastèque, la citrouille ...
+C 97: Khmer civilization, indeed the very existence of the Khmer people, depended upon an efficient irrigation system which gave abundant rice yields.
+
+rrues, f"
+SCCS8,Nyakyusa,xd123,nyak1261,Nyakyusa,Atlantic-Congo,SCCS1716,1,intensive agriculture,1880,Age villages of Mwaya and Masoko,"wilson1951b [6]: Unlike most of their neighbours in Central Africa the Nyakyusa practise fixed, not shifting, cultivation, and the land is kept in good heart by green manuring, rotation of crops, and periodic fallows.
+
+wilson1951a [253/254]: Their main foods are bananas, maize, beans, sweet potatoes, and a variety of greenstuffs, together with meat and curds from their cattle. Millet is extensively grown and is used both for making beer and for eating in the form of porridge. SCCS) t"
+SCCS94,Mee,xd785,ekar1243,Ekari,Nuclear Trans New Guinea,SCCS1716,1,intensive agriculture,1955,Botukebo village,"pospisil1963a [196]: [Val. 1,2] Kapauku agriculture methods. The Kapauku of the Kamu-Valley cultivate two basically different type of terrain and zones of vegetation: the steep mountain slopes with the mountainous lofty Debei Valley, and the low-lying flat floor of the swampy Kamu Valley. The mountainous type of terrain has relatively poor, yelowish soil and is covered mostly with secondary forest; the flat Kamu Valley floor is composed of deep, rich, black alluvial soil, covered with grasslands and occasional shrubs and trees. The Papuans utilize both envirements by different methods of cultivation. The mountain slopes are cultivated by what I called the extensive shifting method which consists of clearing vegetation by cutting and burning, without any attempt at improving the soil by fertilization, draining, or spading. Such land is used almost exclusively for cultivation of sweet potatoes, planted by means of a dibble stick. After the harvest of one crop of tubers the area is allowed to become fallow and is recultivated only after a period ranging usually from eight to twelve years. This type of shifting cultivation shows an important additional characteristic which we labeled ""extensive"". The emphasis here is on the size of the cultivated area rather than on the skill and care devoted to the plants and soil. Accordingly, although the total yields from this area, due to its large size of 140,170 square meters (81 per cent of the total cultivated land), were approximately 113,700 kilogramms,the yield per square meter was only about one half of the yield of the gardens cultivated with intensive methods.
+
+pospisil1963a [126]: [Val. 1,2] The discussion above has dealt with the three different kinds of cultivation employed by the Kapauku: the extensive shifting culivation on the mountain slopes, the intensive shifting cultivation of the floor of the Kamu-Valley, and the intensive complex cultivation on the valley floor. We have outlined the merits and liabilities of the three methods and pointed out that a healthy balance among the three seems to be the most desirable form of farming policy in the region of the Kamu Valley.
+
+pospisil1958 [14]: [Val. 3] In this environment of rich soil, luxurious vegetation, but paucity of animals, the Kapauku live by horticulture. With their neolithic polished stone axes, they clear patches of secondary growth forests and build fences around areas in order to protect the growing crops from wild, as well as domesticated, pigs. The newly cleared land is burned over and on the following day a variety of crops is planted by means of a planting stick. The Kapauku raise sweet potatoes, sugar cane, several species of greens which resemble spinach, bananas, taro, gourds, cucumber, and three different species of reeds, the young shoots and buts of which are eaten. Recently introduced tobacco and manioc are grown as well. The domesticated pigs form the important source of proteins in the native diet. Apart from supplying food, pig breeding constitutes the only way to become rich and to acquire prestige, achievements which in turn enable a man to become an influential politician.
+r cane,"
+SCCS100,Tikopia,xd881,tiko1237,Tikopia,Austronesian,SCCS1716,2,extensive agriculture,1930,Ravenga District,"firth1939 [32]: Whereas again we regard meat as a staple food the Tikopia rely primarily upon vegetable foods, either baked or compounded with coco-nut cream in a pudding, and supplemented with fish; animal meat is unknown and the flesh of birds is rarely eaten.
+
+firth1939: F"
+SCCS104,Māori,xd891,maor1246,Maori,Austronesian,SCCS1716,2,extensive agriculture,1820,Nga Puhi Tribe,"firth1959 [66]: A large amount of vegetable food was also cultivated, more particularly in the north, and for this purpose the Maori took full advantage of the varying qualities of the soil.
+
+firth1959 [68]: In general the tribes of Auckland and the north, the Bay of Plenty, Tauranga and the remainder of the East Coast, Taranaki, Nelson, and the Kaiapohia district practised agriculture.
+
+[Focus on northern tribes around the Bay of Plenty]
+gton
+
+"
+SCCS109,Trukese,xd833,chuu1238,Chuukese,Austronesian,SCCS1716,2,extensive agriculture,1899,Romonum Island,"goodenough1949 [23]: The staple food is supplied by the breadfruit tree, which is well suited to the steep slopes, its roots preventing soil erosion.
+kramer1929 [128]: Brotfrucht ... Wichtigste Frucht im Archipel ... Das Pflanzen der Bäume kann immer geschehen; junge Bäume aus Wurzeltrieben 'boénan' werden mit abgeschnittenen Wurzeln in das Land gesetzt, nachdem es geklärt und gejätet ist; auch die Krone der Setzlinge wird abgeschnitten und mit den trockenen Blättern zugebunden (dúkumi). Bei heißer Sonne Blätterschutz 'boallu', in 3-4 Jahren Früchte.
+kramer1929 [127]: Die Kokospalme 'nu' oder 'pobui nu' (von 'pobun' Baum) ist auf den Trukinseln nicht so verbreitet, wie es auf anderen Archipelen der Fall ist. Zwar sind sie fast allenthalben vorhanden, aber doch nur an einem schmalen Küstengürtel.
+kramer1929 [133]: Als Nahrungsmittel sind am wichtigsten, neben der Kokosnuß, die Brotfrucht und der Taro.
+kramer1929 [136]: Zuckerrohr 'uou'... Nach Kubary schon vor den Weißen angebaut;... Bananen... Pflanzung: Alte Bananenstämme ('bobun udj') werden abgehauen und die am Strunk erscheinenden Sprosse ('ilin') abgenommen und ausgepflanzt.
+st auf"
+SCCS11,Kikuyu,xd109,kiku1240,Kikuyu,Atlantic-Congo,SCCS1716,2,extensive agriculture,1880,Fort Hall or Metume District,"kenyatta1939 [53]: The chief occupations among the Gikuyu are agriculture and the rearing of livestock, such as cattle, sheep and goats.
+kenyatta1939 [54]: In cultivating the fields men clear the bush and cut big trees, and also break the virgin soil with digging-sticks or hoes. ... Men plant bananas, yams, sweet potato vines, sugar-canes, tobacco ... Women plant maize, various kinds of beans, millet and sweet potato vines.
+tical in"
+SCCS111,Palauans,xd824,pala1344,Palauan,Austronesian,SCCS1716,2,extensive agriculture,1873,Ulimang village,"kubary1873 [233]: Der Ackerbau beschäftigt beide Geschlechter, die Frauen bauen ausschließlich den Taro und die Männer den Rest der landwirtschaftlichen Produkte. Die Taropflanze, eine Colocasia-Art, wird in niedrigen, schlammigen Orten angebaut.
+(...) Die Knollen dieser Aroide sind nicht nur die Hauptnahrung der Insulaner, sondern sie bilden auch einen Handelsartikel.
+(...) Die Männer beschäftigen sich mit dem Bau des Tabaks, der Baumwollstaude, der Gelbwurz, des Zuckerrohrs, der Bananen, des Betel-Pfeffers und einiger durch die Schiffe eingeführter Pflanzen.uen ba"
+SCCS12,Ganda,xd124,gand1255,Ganda,Atlantic-Congo,SCCS1716,2,extensive agriculture,1890,Kyaddondo district (V: Kampala),"mair1934 [105]: The principal supplementary food is sweet potatoes; a little taro and a few yams and vegetable marros are also grown to provide alternatives to bananas in case of shortage.
+
+mair1934 [105]: The stapel food is bananas, which are eaten fresh; there is seldom any provision made for the storage of food, and what there is is copied from recent alien immigrants.
+
+mair1934 [111/112]: The first step in every agricultural process is the clearing of the ground. This is done by cutting the grass down with a knife, or if it is not too long, hacking it off short with a hoe. The grass is burnt sometimes where it lies and sometimes in a heap at the side of the patch; the stubble is then broken up with a hoe, the roots thrown out, and the clods of earth loosened by hand. The old-fashioned hoe, which is still sometimes seen in use, consisted of a stick naturally bent at an acute angle, to the short arm of which was tied a heartshaped blade.
+of the g"
+SCCS141,Hidatsa,xd1214,hida1246,Hidatsa,Siouan,SCCS1716,2,extensive agriculture,1836,Village,"bowers1965 [4]: The Hidatsa had a firm economy based on hunting and primitive hoe gardening.
+
+bowers1965 [46]: Summer was a period of intensive activity for the women and many of the older men in the gardens, planting and caring for the growing crops of corn, beans, squash, and sunflowers.h older"
+SCCS144,Huron,xd1244,wyan1247,Wyandot,Iroquoian,SCCS1716,2,extensive agriculture,1634,Bear and Cord subtribes,"trigger1969 [26-27]: There is no question that in historic times the Huron subsistence pattern was predominantly based on horticulture. Crop yields accounted for perhaps threequarters of all the food that was eaten. Maize was the most important crop, constituting the staple food of the Huron.
+
+trigger1969 [27]: The Huron women worked the soil with small wodden spades.
+
+trigger1969 [27-28]: It [the clearing of new fields] was also an unremitting task, particularly since Huron agriculture practices forced them to relocate their villages every ten to twenty years. This was necessary because without the addition of new organic material continuous use quickly depleted the fertility of the soil, and the clearance of new fields around a village eventually exhausted nearby supplies of wood that were suitable for fires and building houses.d the so"
+SCCS145,Muscogee,xd1252,cree1270,Creek,Muskogean,SCCS1716,2,extensive agriculture,180,Upper division in Alabama,"speck1907 [107]: Like the rest of the Creek tribes, the Taskigi were much concerned with agriculture. Corn was, and is to-day, their chief vegetable product.
+
+A 443: Each town, in addition to small garden plots worked by individual families, or rather by their female members, had a large common field located as near the town as possible. This was planted with corn chiefly, although beans, squashes, pumpkins, melons, potatoes, and rice are mentioned by early travelers, the last three contributions from the whites. ... Immediately they gathered with hoes and axes, and then marched in order to the field as if they were going to battle, headed by their overseer.
+town, i"
+SCCS149,Zuni,xd1280,zuni1245,Zuni,,SCCS1716,2,extensive agriculture,1880,Pueblo,"stevenson1904 [350]: These primitive Agriculturalists have observed the greatest care in developing color in corn and beans to harmonize with the six regions -...
+
+stevenson1904 [351]: Muskmelons, watermelons, squashes, and gourds are usually grown near the cornfields.
+ce
+New"
+SCCS156,Miskito,xd1325,misk1235,Mískito,Misumalpan,SCCS1716,2,extensive agriculture,1750,Vicinity: Cape Gracias a Dios,"conzemius1932 [60]: Agriculture is not as highly developed on the Mosquito Coast as in the remainder of Honduras and Nicaragua; it furnishes, nevertheless, the principal means of subsistence.
+
+The ax, machete, and 'barreta'or pointed digging stick are the only agricultural implements.
+Asang: A"
+SCCS16,Tiv,xd320,tivv1240,Tiv,Atlantic-Congo,SCCS1716,2,extensive agriculture,196,Tar of Benue Province,"bohannanandbohannan1968 [6]: The Tiv are farmers. ... Their farms-cleared and tilled with the short hoe, the matchet, and the digging stick-...
+bohannanandbohannan1968 [39]: The staple crops are yams (discorea spp), millet (pennisetum spp), and guinea corn (sorghum spp).urce not"
+SCCS160,Haitians,xd1334,hait1244,Haitian,Indo-European,SCCS1716,2,extensive agriculture,1913,Town of Mirebalais,"herskovits1937b [67]: Since the discovery by the Spaniards the wealth of Haiti lay rather in cultivating sugar than in the exploitation of gold mines, its dominant economy has been agricultural. In the valley of Mirebalais, as elsewhere in the island, the small cultivator holds the center of the economic stage. In the main he works his own land, inherited from his father or acquired through purchase. He may also cultivate additional plots of ground which he rents, since much of the land expropriated when independence was gained was retained by the State and today is leased for nominal fees.
+
+herskovits1937b [76]: The field cleared and hoed, the work of planting begins.  (...).
+
+[Maize, Congo peas, calabashes, melon vines, rice, millet, potatoes, manioc, bananas, red beans, sugar-cane, yams]
+the eco"
+SCCS163,Yanomami,xd1361,yano1261,Yanomamö,Yanomamic,SCCS1716,2,extensive agriculture,1965,Shamatari tribe,"chagnon1977 [33]: Gardening. Although the Yanomamö spend almost as much time hunting as they do gardening, the bulk of their diet comes from foods that are cultivated. Perhaps 85 percent or more of the diet consists of domesticated rather than wild foods - plantains are by far the most important food in the diet.
+
+chagnon1977 [35]: Each man's garden contains three or four varieties of both plantains and bananas. The larger portion of the cultivated land will contain plantains, as they produce a higher yield than bananas. The garden will also have a sizeable patch of seet manioc, a root crop that is boiled or refined into a rough flour by grinding it on a rock and then converting the flour into thick, round cakes of baked cassava bread. Many of the Yanomamö villages have recently obtained bitter manioc, a poisonous variety that must be leached of its toxic ingredient before it can be eaten.
+...
+Next in importance are three other root crops: taro, sweet potatoes, and mapuey. All of these resemble potatoes; they are usually boiled, but occasionally they are roasted directly over the coals.
+...
+Maize is probably next in importance, but in a special sense.
+...
+Cane for arrow manufacturing is also grown.
+
+chagnon1977 [37]: Cotton is the last plant to which major significance can be attached.
+...
+Numerous other plants are cultivated in the gardens, but are not as significant in everyday life as those discussed. They include leaf fibers, bixa pigment, avocados, drugs, water gourds and gourds for making spoons and ladles, a kind of squash whose seeds are eaten and whose yellow flowers are used by the young girls as decorations, sugar cane, cashew trees, papaya fruit, hot peppers, and a host of magical plants.
+
+
+tton is"
+SCCS165,Saramaccan ,xd1349,sara1340,Saramaccan,Indo-European,SCCS1716,2,extensive agriculture,1929,Upper Suriname River,"price1975 [24]: The Saramaka economy is based on rather full exploitation of the forest environment and on periodic work trips by men to the coast to bring back western goods. For their subsistence needs, Saramakas depend on shifting horticulture, hunting, fishing, supplemented by various wild forest products and a few key imports (e.g., salt).
+price1975 [27]: Gardens, which are cut in both virgin and secondary forest, are planted most heavily in rice, but include many other crops-manioc, taro, okra, maize, plantains, bananas, sugar cane, peanuts, and so forth.
+
+tation ì"
+SCCS166,Munduruku,xd1353,mund1330,Mundurukú,Tupian,SCCS1716,2,extensive agriculture,1850,Cabrua village,"murphyandmurphy1974 [59]: Mundurucú subsistence is derived from four basic sources: gardening, hunting, fishing, and the collection of wild fruits and nuts (in order of their importance to the total diet).f the Bu"
+SCCS167,Cubeo,xd1369,cube1242,Cubeo,Tucanoan,SCCS1716,2,extensive agriculture,1939,Village on Caduiari River,"goldman1948 [769]: Farming. - Dependence upon bitter manioc as the basic and virtually unfailing food crop is characteristic of the entire area.
+goldman1963 [64]: Compared to manioc, all other subsistence horticulture is of trifling significance.
+goldman1963 [30]: Secondary crops include sugar cane, tobacco, mihi (kaapi, a vision-inducing narcotic), coca, calabash, gourd, squash, melons, yams, sweet potatoes, and sometimes maize. There are also cultivated trees - orange, lemon, pupunha (Guilielma speciosa), pineapple, plantain, and banana. Men exclusively cultivate tobacco, (...)asic and"
+SCCS169,Shuar,xd1367,shua1257,Shuar,Chicham,SCCS1716,2,extensive agriculture,1920,Tribe,"karsten1935 [114]: The Indians of the Amazon territory appreciate vegetable and animal food equally. Their agriculture is well developed, although their methods of cultivating the soil are simple, and meat is secured to them by their domestic animals, the swine and the hens, as well as by the game they catch by hunting. Fish is also an important food.
+
+B 47: Such gardens constitute almost the exclusive source of carbohydrates for the Jivaro, providing, in terms of calories, perhaps about 65 per cent of the diet.
+
+dians of"
+SCCS175,Trumai,xd1399,trum1247,Trumai,,SCCS1716,2,extensive agriculture,1938,Village of Vanivani,"murphyandquain1955 [7]: The main subsistence of the nine village groups [of which the Trumaí are one] now living in the upper Xingú area is derived from this typically Amazonian shifting horticulture coupled with fishing in the extensive streams, lagoons, and estuaries.vers tri"
+SCCS176,Canela,xd1412,cane1242,Canela-Krahô,Nuclear-Macro-Je,SCCS1716,2,extensive agriculture,1814,Ramcocamecra or Canella,"nimuendaju1946 [57,58]: ... the Timbira when first in contact with civilization already practiced a well-defined system of tillage ... At present the Ramko'kamekra plant the following species, which shall be divided (according to their own account) into those anciently known and those adopted after intercourse with Neobrazilians. Aboriginally known: Maize ... Sweet potato ... Yam ... Manioc ... Sweet manioc ... Horse bean ... Arrowroot ... Gourd ... Ground nut ... kupá ... Cotton ... Bottle gourd ... Cuyeté ... Cuya de rama ... Urucú ... Adopted after intercourse with Neobrazilians: Rice, Watermelon, Banana, Sugar-cane, Cayenne pepper, Beans, Orange, Lemon, Mango, Papaya, Pineapple, Tobacco, Tinguy (fish poison).
+nimuendaju1946 [59]: The true plantations ... are situated in the narrow galeria forests by the brooks. Since annually new clearings are necessary, the distance of the plots from the village steadily increases. When the transportation of the crops becomes altogether too cumbersome, the Indians are obliged to move their village near the new plots.
+nimuendaju1946 [61]: Even today the Indians in part use their aboriginal planting stick ...
+, Beans,"
+SCCS184,Mapuche,xd1384,mapu1245,Mapudungun,Araucanian,SCCS1716,2,extensive agriculture,1883,Vicinity of Temuco,"faron1961b [12]: A major ecological adjustment was made after the reservation system was instituted, a modification which involved a change from desultory garden horticulture, performed by women, to field farming and the adoption of many non-Mapuche agricultural techniques.ian Chil"
+SCCS19,Ashanti,xd208,asan1239,Asante,Atlantic-Congo,SCCS1716,2,extensive agriculture,1895,Kumasi State,"manoukian1950 [18]: Original basis of subsistence
+1. Simple food farming: yams (in north the main food crop), coco-yams, plantain, by rotational fallows, the village remaining as main centre, with constant budding-off of temporary farming hamlets.
+ward1948 [29]: Shifting cultivation is universal"
+SCCS21,Wolof,xd469,nucl1347,Wolof,Atlantic-Congo,SCCS1716,2,extensive agriculture,1895,Upper and lower Salum in Gambia,"gamble1957 [30]: Villages are abandoned, and new ones founded; migration takes place from villages that have become large, with the result that periodically large tracts of farmland are temporarily abandoned and revert to secondary bush. On the other hand vegetation near the older Wolof villages is as thoroughly cleared as among the Mandinka. While Mandinka and Jola plant their groundnuts on ridges, the Wolof plant on the flat. They begin to clear their farms early in the year, taking advantages of the first heavy rain for extensive and rapid planting. For sowing groundnuts they have adopted from the Serahuli or Mandinka an adze-shaped tool (kcnko) which is held in one hand and used to make a series of holes in the ground, the seed being dropped in with the other hand. The earth is pressed down over the holes with the feet as the sower moves along.
+
+gamble1957 [29]: The Wolof grow bulrush millet and sorghum (dugub, dugup) and groundnuts (gerte) and plant relatively little rice (malo), ...
+[refers to the 1950's]
+
+[There is also ""intensive agriculture"":]
+gamble1957 [32]: A system of agriculture based on natural flooding is practised in the Senegal valley. Here large stretches of land are inundated each year and covered with a fertilizing mud. These zones, known as ""oualo"", are planted with millet, maize, beans, and tobacco as the floods recede and ripen from February to June. The uplands, ""dieri"", which have a sandy soil, are cultivated during the rainy season, a quick ripening millet which ripens in November being planted.
+
+gray1966 [380]: The history of the Gambia groundnut crop is in some respects unique amongst the histories of the economic crops in British tropical Africa. In some instances what is now a staple agricultural product of a tropical dependency was already being grown and exported, when the British assumed control of the country.
+rom Febr"
+SCCS23,Tallensi,xd277,taln1239,Talni,Atlantic-Congo,SCCS1716,2,extensive agriculture,1911,Tribe,"fortes1945 [239f]: The Tallensi were and are still sedentary cultivators, using a primitive and stationary form of hoe culture in which the volume of output is a direct product of human skill and muscle.
+D 242. The staple crop is millet (generically,'ki') of which there are three kinds, early millet ('naara': 'pennisetum typhoideum'); guinea-corn ('ki' specifically, each variety being known by a special term, e.g. 'kutok', 'kazii' &c.: 'sorghum vulgare') and late millet ('za': 'pennisetum spicatum'). These with a small amount of rice ('mui': 'oryza sativa') occupy 92 per cent. of the area cultivated in the Zuarungu district. the v"
+SCCS28,Azande,xd359,zand1248,Zande,Atlantic-Congo,SCCS1716,2,extensive agriculture,195,Yambio Chiefdom,"seligmanandseligman1932 [499]: The Zande is essentially an agriculturalist, he posseses no cattle and game is not plentiful; since he often works a plot of land only two years in succession he needs a considerable area, of which part will be under cultivation part fallow, and part returning temporally to bush.
+
+seligmanandseligman1932 [498]: Surrounding the homestead was the man's cultivation, with maize, millet, peas, and oilbearing plants; the central space of the homestead was enclosed by a garden bearing permanent crops such as sweet potato, arrowroot, banana and fig.
+gricultu"
+SCCS31,Shilluk,xd380,shil1265,Shilluk,Nilotic,SCCS1716,2,extensive agriculture,,Kingdom,"hofmayr1925 [313]: Auf gleicher Stufe mit dem Hackbau steht bei den Schilluk die Viehzucht.
+
+hofmayr1925 [310]: Der Anbau ist für die zwei hauptsächlichsten Kornarten in folgender Weise verteilt: Auf der Wellenkette längs den Dörfern hin wächst allgemein im Lande das rote Sorghum, welches im Mai gesät wird und im Oktober reift, während das spätere weiße Sorghum im Juni gesät und im November, Dezember geerntet wird.
+ational"
+SCCS4,Lozi,xd26,lozi1239,Lozi,Atlantic-Congo,SCCS1716,2,extensive agriculture,1850,Ruling Luyana,"turner1952 [17]: In this land and other places root crops are planted in heaps of soil raised above the waters. Farther towards the margin there sometimes occurs a belt of humic soil which is watered by underground seepage, but is naturally drained, and which can be cultivated in perpetuity. Beyond this, up the slope, is a belt which has some underground seepage but which has to be artificially fertilised and beyond that a further belt of dry soil, but not in bush, which is cultivable with manuring.C 1"
+SCCS6,Suku,xd41,suku1259,Suku,Atlantic-Congo,SCCS1716,2,extensive agriculture,1920,Feshi territory lineage center,"kopytoff1965 [445]: The bulk of subsistence is provided by hoe agriculture,... Cultivation is necessarily of the shifting type ...
+The agricultural staple is cassava (manioc);
+ct as a"
+SCCS69,Garo,xd696,garo1247,Garo,Sino-Tibetan,SCCS1716,2,extensive agriculture,1866,Rengsanggri village,"burling1963 [21]: Traditionally the Garos have lived by slash-and-burn agriculture, (...)
+shifting cultivators plant a wide assortment of crops including rice, millet, maize, many root crops, vegetables, and gourds, as well as the cotton, ginger, and chili peppers which are largely sold for cash.
+burling1963 [27]: In Rengsanggri, land is used for two consecutive years before being abondoned to jungle for another six or eight. The first year all the crops are planted together, but during the second the land is devoted exclusively to rice. Since a new patch is opened each year, two fields are always simultaneously under cultivation, one planted to mixed crops, the other to rice alone, (...), vegeta"
+SCCS70,Maras,xd710,mara1382,Mara Chin,Sino-Tibetan,SCCS1716,2,extensive agriculture,1920,Tribe,"parry1932 [73]: The entire tribe lives by agriculture, and the daily routine is governed by the seasons.
+
+parry1932 [75]: The Lakher methods of agriculture are most primitive. The only tools they possess are a samll inefficient hoe, a dao and an axe.
+
+parry1932 [78]: After the aoh a small house in which the workers will live during the cultivating season is built in each jhum, and they start sowing their maize, millet, cucumbers, pumpkins, and other vegetables, and then, after the full moon of the month of Pachaw, towards the end of April, they sow their paddy, the ground being scratched with a hoe and about ten seeds being dropped into each scratch.
+
+parry1932 [81]: The main crop is rice, of which there are many varieties.ficient"
+SCCS72,Lamet,xd716,lame1256,Lamet,Austroasiatic,SCCS1716,2,extensive agriculture,1938,"Tribe, Northwestern Laos","izikowitz1951 [20]: The rest however, like the Lamet, are rather primitive cultivators of forest clearings.
+
+izikowitz1951 [240]: Besides rice, the Lamet raise other kinds of grain as well, such as Eleusine, Coix and millet (Setaria italica).
+...
+Many different kinds of root crops are raised: taro, sweet potatoes, sweet manioc and yams.l.at, in"
+SCCS78,Nicobarese,xd691,carn1240,Car Nicobarese,Austroasiatic,SCCS1716,2,extensive agriculture,1871,Car Nicobar of North Islands,"man1932 [36]: Food, for example, is easily come by, for the coco-palm supplies their major requirements and next to that is the pandanus-leram that is equally easily cultivated; the soil yields abundant fruits and vegetables in return for slight labour, while pigs and poultry and fish supply them with ""savoury meat.""
+
+man1932 [34/35]: Vegetable and fruitgrowing, however, was general, although weeding and watering was seldom done. As soon as the soil ceased to yield satisfactory return resort was had to a fresh clearing of jungle.
+easily"
+SCCS81,Tanala,xd689,tana1285,Tanala,Austronesian,SCCS1716,2,extensive agriculture,1926,Menabe subtribe,"linton1933 [37]: The foundation of Tanala economic life is agriculture and the natives cannot conceive of existence without it.
+
+linton1939b [252]: The country is well adapted to agriculture by the cutting-and-burning method. Sufficient soil is available, although it is poor and requires ten to fifteen years of fallowing. The terrain has some swamp territories adapted to wet rice without irrigation.
+the Tana"
+SCCS85,Iban,xd750,iban1264,Iban,Austronesian,SCCS1716,2,extensive agriculture,1855,Ulu Ai group,"freeman1970 [152]: The subsistence economy of the Iban ... based upon the cultivation of hill rice (...)
+The method they employ is that of shifting cultivation (...)
+
+freeman1970 [153]: Almost everywhere the hills rise abruptly from the valleys, and river flats are rare. With a few negligible exeptions, there is no swamp land suitable for the growing of wet padi [rice], and in what follows therefore, we shall be dealing exclusively with the cultivation of dry, or hill, padi.
+-138
+T"
+SCCS92,Orokaiva,xd823,orok1269,Orokaiva,Nuclear Trans New Guinea,SCCS1716,2,extensive agriculture,1890,Aiga subtribe,"williams1930 [42]: Like most inhabitants of Papua the Orokaiva are essentially gardeners....; though it will not be forgotten that gardening is the first and foremost activity of the food quest....
+The principal product is taro (ba); others of importance are sweet potatoes (keroja), yam (kai), banana and Plantain (pije), sugar-cane (jou), and a variety of andropogon called ina. Coconuts (bu) and betel palms (sa) are cultivated everywhere, and the bread-fruit (oga and eumba), a food of some importance which grows wild, is also found in many villages and gardens.Though effective enough the gardener's methods are primitive and wasteful.
+first a"
+SCCS95,Kwoma,xd788,kwom1262,Kwoma,Sepik,SCCS1716,2,extensive agriculture,1937,Hongwam subtribe,"whiting1941 [178]: The uniformity of the climate throughout the solar year is such that the predominantly agricultural activities of these people know no seasons. Gardens are planted, cultivated, and harvested at any and all times of the year. The pith of the sago palm furnishes the staple food, although yams are of greater ceremonial importance.e shield"
+SCCS98,Trobriands,xd852,kili1267,Kilivila,Austronesian,SCCS1716,2,extensive agriculture,1895,Kiriwina Island,"malinowski1922 [58]: Half of the natives' working life is spent in the garden, and around it centres perhaps more than half of his interests and ambitions.
+G 25: Der fruchtbare Humus ... eignet sich offensichtlich für den intensiven Anbau von Nutzpflanzen - d.h. in der Südsee: Yams, Taro, Süßkartoffeln, Bananen und Kokosnüsse.thropolo"
+SCCS121,Chukchi,xd631,chuk1273,Chukchi,Chukotko-Kamchatkan,SCCS1716,3,animal husbandry,190,Reindeer division,"B 87: The greater part of the Chuchki gain their livelihood by reindeer-breeding, by which means existence is far less hazardous.
+bogoras1901b [27]: Within the last thirty years the breeding of reindeer has increased gradually, and even some of the Eskimo have succeeded in gathering herds of their own; but the winter of 1900-01, when we were in the field, was so unfavorable, that the reindeer were famished everywhere, and many of the northern herdsmen especially lost about one-half of their whole stock.
+B 87: Th"
+SCCS159,Wayuu,xd1331,wayu1243,Wayuu,Arawakan,SCCS1716,3,animal husbandry,1947,Tribe,"pinedagiraldo1950 [4]: Por lo mismo, la economía del guajiro y en general su vida, oscilan como péndulo entre dos extremos: verano e invierno. Su actividad principal, la gandería, necesita de la lluvia para la permanencia de los pastos y de agua en los jagüeyes y casimbas;
+
+armstrongandmetraux1948 [371]: The Goajiro are primarily nomadic cattle raisers and, consequently, depend upon the water supply. erly Bul"
+SCCS25,Wodaabe Fulani,xd474,boro1274,Bororo of Kano and Zaria,Atlantic-Congo,SCCS1716,3,animal husbandry,1890,Wodaabe of Niger,"stenning1959 [38]: Without for the moment subjecting it to a detailed analysis, there is good evidence for assuming that the simple or compound family was, in the past as now, the basic economic unit in Wodaabe society. It lived from its [cattle] herd and was responsible for the herd's safety, maintenance, and effective increase.
+
+ty among"
+SCCS36,Somali,xd426,nort3051,Northern Somali,Afro-Asiatic,SCCS1716,3,animal husbandry,1957,Dolbahanta clan or subtribe,"lewis1961 [32]: According to their capacity to endure arid conditions, the livestock of the northern pastoralists are divided into two herding units. Camels (...) which can go without water for over twenty days in dry grazing, have greater powers of endurance and mobility than sheep and goats (...), which, in the same conditions, need water every few days.e today"
+SCCS41,Tuareg Ahaggar,xd506,hogg1238,Hoggar,Afro-Asiatic,SCCS1716,3,animal husbandry,1898,Ahaggaren tribe,"nicolaisen1963 [7]: The Tuareg are Berber-speaking, nomadic stock-breeders who live in an extensive area of Western Sahara and the northern parts of the Western Sudan.
+nicolaisen1963 [404]: In Ahaggar, camels and goats are very complementary to each other. The camel supplies the Tuareg with milk, but with very few other products, and the Tuareg cannot always get milk from their she-camels which yield very little when pastures are dry. ... The economic role of goat-breeding is different. Goat-products play a very comprehensive part in Tuareg nourishment.
+nomadic"
+SCCS46,Rwala,xd588,east2690,Eastern Egyptian Bedawi Arabic,Afro-Asiatic,SCCS1716,3,animal husbandry,1913,Unspecified,"musil1948 [381]: The Bedouins are Arabs who breed camels exclusively, or at least in the main, and for ten months dwell in the interior of the desert.
+
+musil1928 [87]: Milk is the main nourishment of the Rwala. In order to secure a supply of milk for a whole year they make use of various devices.
+eneral A"
+SCCS58,Basseri,xd605,bass1257,Basseri,Indo-European,SCCS1716,3,animal husbandry,1958,Nomadic branch,"barth1961 [4]: The pastoral economy of the Basseri depends on the utilization of extensive pastures.
+
+barth1961 [6]: The Basseri keep a variety of domesticated animals. Of far the greatest economic importance are sheep and goats, the products of which provide the main subsistence.ey, B.S."
+SCCS61,Toda,xd680,toda1252,Toda,Dravidian,SCCS1716,3,animal husbandry,191,Tribe,"rivers1906 [6]: The Todas are purely pastoral people, limiting their activities almost entirely to the care of their buffaloes and to the complicated ritual which has grown up in association with these animals.
+
+murdock1934b [108,109]: The Todas practice no agriculture and few industrial arts. They devote nearly their sole attention to their herds of buffaloes, supplying the other tribes with dairy products in return for various goods and services.
+
+ective k"
+SCCS66,Khalka,xd611,halh1238,Halh Mongolian,Mongolic,SCCS1716,3,animal husbandry,1920,Narobanchin territory,"vreeland1954 [28]: General Characteristics of the Economy. The inhabitants of the Narobanchin temple territory were primarily herdsmen, depending for their subsistence on products of their domesticated animals and their own manufacture. Most of these products were consumed locally. Surpluses were traded out for both essential and luxury items. A small increment was added to subsistence by sporadic farming and hunting.
+
+vreeland1954 [28-29]: The domesticated animals which the Mongols managed were sheep, goats, horned cattle, yaks, horses, and camels. The most important of these were sheep which yielded almost all of the essentials for food, clothing, and shelter.stence o"
+SCCS108,Marshallese,xd832,rata1243,Ratak,Austronesian,SCCS1716,4,fishing,1880,Jaluit Atoll,"kramerandnevermann1938 [114]: Eßbare Fische. Die Hauptnahrung der Eingeborenen besteht aus Fischen (..), die am Außen- oder Binnenstrande oder auf See gefangen werden.
+
+
+
+i"
+SCCS118,Ainu,xd635,ainu1240,Hokkaido Ainu,Ainu,SCCS1716,4,fishing,1880,Saru Basin in Hokkaido,"watanabe1972 [1]: From north to south through the centre of the island runs a range of hills and mountains (...) in which the main rivers of Hokkaido have their sources. (...) In most of these rivers there are successive runs of salmon, Oncorhynchus masou and O. keta, from early summer to early or mid-winter ... Among larger land mammals in Hokkaido are brown bear, Ursus arctos, and deer, Cervus nippon ... The Ainu exploited these resources by hunting and fishing, and also collected wild plants.
+
+[It is difficult to decide which food-getting activity is predominant; cf. variable 7]
+nd mount"
+SCCS119,Nivkh,xd617,gily1242,Nivkh,,SCCS1716,4,fishing,1849,Sakhalin Island,"ivanovetal1964 [769]: The Nivkhi's basic occupations were fishing and sea hunting.
+
+Arctic"
+SCCS122,Deg Xit'an,xd1066,dege1248,Degexit'an,Athabaskan-Eyak-Tlingit,SCCS1716,4,fishing,1885,Shageluk village,"osgood1958 [236]: Dip net fishing. In the struggle for subsistence the Ingalik, like most of the northern Athapaskan people, look first to the water.
+
+osgood1959 [24]: The dog salmon is the most important food source of the Ingalik and hence the most important fish.s around"
+SCCS130,Eyak,xd1102,eyak1241,Eyak,Athabaskan-Eyak-Tlingit,SCCS1716,4,fishing,1890,Tribe,birketsmithanddelaguna1938 [113]: Fishing. Both our native informants and Colonel Abercrombie recognized the salmon as the most important source of food in Eyak economy.ks about
+SCCS132,Nuxalk,xd1106,bell1243,Bella Coola,Salishan,SCCS1716,4,fishing,1880,"Central group, lower B.C. River","mcilwraith1948 [I 3]: The basis of the food supply was fish. The river teemed with salmon, which enabled the country to support its relatively large population.ll-blood"
+SCCS133,Twana,xd1079,twan1247,Twana,Salishan,SCCS1716,4,fishing,1860,Tribe,"elmendorf1960 [560]: Major features of subsistence economy, normally present within any one village community, involved the following patterns: (...) men concentrating on hunting and fishing, women on vegetable-food and mollusc gathering.
+
+elmendorf1960 [57]: The most important source of food for all Twana was Pacific salmon, four species of which were common in the canal and ran in its tributary streams.
+
+elmendorf1960 [56]: Techniques for obtaining these foodstuffs may be categorized, again in general order of importance, as fishing, hunting, and gathering of molluscs and vegetable foods.t with"
+SCCS134,Yurok,xd1101,yuro1248,Yurok,Algic,SCCS1716,4,fishing,1850,Tsurai village,"kroeber1960 [56]: Food resources and subsistence patterns.
+The same classes of food are represented among the Yurok [as among the Twana], but with different ranking of importance: ... 1, Salmon; 4, Surffish, lampreys, sturgeon; 7, Sea lions;
+6, Mussels, chiefly; 8, Waterfowl; 3, Deer chiefly, elk next;
+2, Acorns; 5, Nuts, seeds, few roots.
+It is questionable whether salmon or acorns should be put first for the Yurok.
+Gesellsc"
+SCCS139,Kutenai,xd1205,kute1249,Kutenai,,SCCS1716,4,fishing,1890,Lower or eastern branch,"turneyhigh1941 [44]: The Lower Kutenai were undoubtedly more serious fishermen than their upper kinsmen. Fish formed their chief staple, (...)
+202.
+
+"
+SCCS79,Andamanese,xd686,akab1249,Aka-Bea,Great Andamanese,SCCS1716,4,fishing,1860,Aka-Bea of South Andaman,"service1963a [46]: Most of the islanders live on the coast or near the tiny streams, and the plentiful products of the sea are an important resource for them. The dugong (a large aquatic mammal), many kinds of turtles, an enormous variety of fish, and crabs, crayfish, and mollusks are among the most usual fare.tion can"
+SCCS86,Badjau Tawi-Tawi,xd736,sout2918,Southern Sama,Austronesian,SCCS1716,4,fishing,,Tawi-Tawi and adjacent islands,"nimmo1972 [15]: Fishing cycles also determine Bajau movements. During the spring tides of the full moon, seas spill over the normally exposed reefs of Bilatan to attract fish from the deeper waters of the newly available feeding grounds. (...) The deep seas to the west of the Sanga-Sanga moorages have several fishing grounds which yield large fish to the hook-and-line fisherman, some of whom engage almost exclusively in this type of fishing and rarely travel to the Bilatan reefs.
+mpit is"
+SCCS123,Aleut,xd1067,east2533,Eastern Aleut,Eskimo-Aleut,SCCS1716,5,hunting,1760,Unalaska branch,"lantis1970a [195]: The men, by hunting, provided the essential oil and meat.
+C 229: Zdeshnij klimat edvali pozvolit' razvesti kakija libo tsereal'nija rastenija; a potomu pishtshu zdeshnikh zhitelej sostavljajut edinstvenno proizvedenija zhivotnago tsarstva, i preimushtshestvenno morskikh zhivotnykh ...
+[The local climat would hardly allow any cereal plants to grow, therefore the diet of the local people consists merely of the products of the animal kingdom and mainly of sea-animals ...]
+78]
+ev"
+SCCS125,Montagnais,xd1048,mont1268,Montagnais,Algic,SCCS1716,5,hunting,1935,Lake St. John & Mistassahi band,"lips1947b [1]: The form of economy of the Lake St. John and Mistassini Indians is the acquisitive economy of the subarctic hunters. Productive economy, agriculture, or husbandry are unknown to them ...
+
+lips1947b [23]: Compared to Naskapi hunting and fishing, the gathering of plants and the picking of berries play a rather insignificant role in their economy.and gove"
+SCCS13,Mbuti,xd5,bila1255,Bila,Atlantic-Congo,SCCS1716,5,hunting,1957,"Epulu net-hunters, Ituri forest","turnbull1965c [279]: The Mbuti Pygmies of the Ituri Forest of the Congo are hunters and gatherers with a primary stress on hunting.
+
+turnbull1965a [18]: There are half a dozen different kinds of antelope that are particularly abundant, apart from supplementary sources of meat such as birds, monkeys, chimpanzees, and divers grubs and insects.itics of"
+SCCS142,Pawnee,xd1240,pawn1254,Pawnee,Caddoan,SCCS1716,5,hunting,1867,Skidi band or subtribe,"weltfish1965 [7-8]: The spring and fall of the year were the time of planting and harvesting the crops of corn, beans, and squash. During these two seasons the Pawnees lived in their earth-lodge villages that were ranged along the bank of Beaver Creek. During the summer and again in winter, the whole tribe left their villages behind and set out on a long expedition to the southwestern part of the state where large herds of buffallo followed their accustomed paths of migration. (...) They killed some thousands of buffalo on each of these expeditions, drying the meat and packaging it to take home to their villages.
+
+weltfish1965 [119]: The Pawnee women were skilled horticulturists.
+
+weltfish1965 [361]: Their top resource for industry as well as for food was the buffalo.
+
+
+[Horticulture and hunting together are the principal resources of subsistence.)
+on a lo"
+SCCS147,Comanche,xd1222,coma1245,Comanche,Uto-Aztecan,SCCS1716,5,hunting,1860,Tribe,"hoebel1940 [14]: It is usual to speak of the comanches as a tribe of hunters. Insofar as they depended primarily on game for sustenance, this is true. But it is equally true, and usually overlooked that they were just as definitely a pastoral people. Great herds of horses were accumulated.
+
+hoebel1940 [15]: In foodgetting Comanche culture was basically a buffalo culture.
+ardiner"
+SCCS173,Sirionó,xd1362,siri1273,Sirionó,Tupian,SCCS1716,5,hunting,1942,Vicinity of the Rio Blanco,"holmberg1950 [47-48]: (...), the Siriono are semi-nomadic forest dwellers who live more by hunting, fishing, and gathering than they do by farming. (...)
+In sharp contrast to the sedentary mode of life during the rainy season is it's nomadic character during the dry season. After the crops have been harvested in April and May and after the waters have begun to recede in June, the entire band may start out on a hunting and gathering expedition, wandering from lake to lake, from stream to stream, exhausting the wildlife of each as it travels. Consequently, meat, fish, and wild honey become more prominent in the diet at this season of the year (...)
+
+holmberg1950 [51]: Almost all animals of the environment except snakes are hunted (...)
+holmberg1950 [53]: The animals most frequently bagged are monkeys (...)
+holmberg1950 [55]: Next in importance to monkeys in supplying meat for the camp are the numerous land- and waterfowl of the area.
+
+holmberg1950 [63]: In the total economy collecting ranks next to hunting in importance.
+holmberg1950 [64]: Of all the products collected, palm cabbage (kisía) is the most important.
+holmberg1950 [65]: In addition to the above-mentioned palms, there are many other fruits-bearing trees which seasonally add their crops to the Siriono supply.
+hunted"
+SCCS180,Aweikoma,xd1411,xokl1240,Xokleng,Nuclear-Macro-Je,SCCS1716,5,hunting,1913,Duque de Caxias Reservation,"henry1964 [3]: Before the pacification they had no villages and instead of dividing their time between cultivating their crops and hunting in the forest as they used to do, they wandered forever in the forest and planted no crops at all.
+henry1964 [26]: Since hunting is the most vital occupation ... Although hunting is the very basis of their economy the Kaingáng, curiously enough, do not recognize differences in hunting skill.
+B 450: The only Caingang who subsisted entirely by hunting and collecting were those of the State of Santa Catarina, the so-called Botocudo or Aweikoma.
+ding the"
+SCCS186,Yahgan,xd1383,yama1264,Yámana,,SCCS1716,5,hunting,1865,Eastern and central,"gusinde1937b [366]: Sie führen den Nomadismus eines auf dem Wasser und auf den Küsten beheimateten Volkes. Weniger als Fischer, mehr als Sammler und Jäger obligen sie Ihrem Nahrungserwerb, weswegen man sie passend als ""Wassernomaden"" bezeichnet. (...) Die wichtigste Rolle fällt den großen Meeressäugetieren zu, den dort beheimateten Robbenarten und Walen. Die Fischottern und Seevögel sind nicht weniger bedeutungsvoll. Endlich ließen sich aus der Gruppe der niederen Tiere die Miesmuscheln und die großen Krabben durch etwas gleichwertiges nicht ersetzen. Diesen Dingen jagend oder sammelnd nachzugehen macht den Hauptteil der wirtschaftlichen Betätigung des Yaman-Volkes aus. Das Pflanzenreich bietet sozusagen gar nichts und demnach sind unsere Eingeborenen ausschließlich auf Fleischkost angewiesen.
+, den do"
+SCCS80,Vedda,xd690,vedd1240,Veddah,Indo-European,SCCS1716,5,hunting,1860,Danigala Forest hunting group,"seligmannandseligmann1911 [62]: A Vedda community consists of from one to five families who share rights of hunting over a tract of land, of gathering honey upon it, fishing its streams, and using the rock shelters.
+
+B 175: The Veddas lived the life of the food-gatherers and collectors from time immemorial. It served their purpose in the past.
+
+[Also: Codes 6 or 4]
+)
+An Ac"
+SCCS129,Kaska,xd1056,kask1239,Kaska,Athabaskan-Eyak-Tlingit,SCCS1716,6,gathering,180,Upper Liard River group,"honigmann1954 [32-33]: The Indians secured food through gathering, trapping, hunting, and fishing. Girls and women did the principal collecting, although men also sought vegetable products in the course of walking through a favorable area while hunting. Berries were the main items sought by collectors and included, in approximate order of frequency, the soap berry, high- and low-bush cranberry, salmon berry, raspberry, strawberry, currant, and blueberry. Other vegetable products taken from the land included fern roots in spring; lily bulbs; mushrooms, frequently stolen from a squirrel's cache; muskeg apples, that grew up in the mountains and were described as tasting somewhat like turnips; wild onions, of which only the greens were eaten; rose petals, made into a beverage by boiling; and wild rhubarb.
+n appr"
+SCCS135,Eastern Pomo,xd1116,east2545,Eastern Pomo,Pomoan,SCCS1716,6,gathering,1850,"Clear Lake, village of Cignon","loeb1926b [163]: The Pomo like other California Indians north of the Colorado river, did not practice agriculture before the coming of the whites;
+They were therefore entirely dependent on the use of wild animal and plant foods.
+
+loeb1926b [172]: Acorn meal furnished the main article of diet among the Pomo people.
+
+C:
+McL"
+SCCS136,Southern Valley Yokuts,xd1123,vall1251,Valley Yokuts,Yokutsan,SCCS1716,6,gathering,1850,Tulare Lake,"gayton1936 [73]: The sustenance which they have is of acorns, very savory wild grain, and different kinds of seeds which this country naturally produces with great abundance. The river has several kinds of tasty fish, the little pools and arroyos a kind of anchovy which the Indians catch and dry in large quantities to keep for the rigorous times of winter. And they have pine nuts which they gather in the mountains.
+[Estudillo deals with all Yokuts, time 1819]
+powers1877 [378f]: Their range of food is extensive. Around the lake they cut and dry the seed-stalks of a kind of flag (Typha) which has a head something like a teasel, thresh out the seed and make flour of it; also wild rye and wild sunflower seed. They eat grass-nuts (Cyperus) and the seeds of the same, a plant with a triangular stalk.
+gayton1948a [6]: Nothing could be more misleading than labeling the people of the San Joaquin Valley, whether the Yokuts lake tribes, the tribes of the foothills, or the Monachi of the mountains, ""seed-gatherers"" or ""seed-eaters,"" as though their diet were preponderantly vegetarian.
+(...) Acorns and seeds are not to be discounted as less important than meat, but they were not more important in daily diet.
+bealsandhester1958 [214]: The economy of the Tachi was dominated by the resources of the lake and its tributary sloughs. The tule provided essential materials for house construction and for the making of balsas which were essential for the exploitation of many of the lake resources and were used extensively in transportation as far away as the east side of the San Joaquin Valley. Tule roots and seeds provided a major part of the vegetable food, and the Tular harbored small animals and the tule elk. The major subsidiary vegetable foods apparently were the bulbs of the brodiaea, easily obtainable in quantity in sandy spots, and grass seeds.
+erials f"
+SCCS179,Shavante,xd1409,xava1240,Xavánte,Nuclear-Macro-Je,SCCS1716,6,gathering,1958,Village of Sao Domingo,"mayburylewis1967 [35]: In fact they subsisted primarily on wild roots, nuts, and fruits which they gathered in their wanderings.ie mater"
+SCCS2,!Kung,xd1,juho1239,South-Eastern Ju,Kxa,SCCS1716,6,gathering,1950,Nyai Nyae region,"marshall1976 [92]: As to food, plant food provides the major part of the !Kung diet in quantity; meat is obtained only intermittently. Lee, calculating the food intake at one of the Dobe area camps, finds the ration of meat to vegetables to be 25 percent meat to 75 percent vegetables. Our rough estimates for the Nyae Nyae area were about the same. Meat is the highly desired food, but game is not abundant. In the Nyae Nyae area many days may pass between successful hunts. Meanwhile, the women provide the daily living by gathering plant foods. The family has the security of knowing that there will be something to eat.
+ntly. Le"
+SCCS77,Semang,xd725,kens1248,Kensiu,Austroasiatic,SCCS1716,6,gathering,1925,Jehai Group or subtribe,"schebesta1927a [269]: Die Hauptnahrung der Semang bildet Pflanzenkost, nicht Fleisch. Die Jagd ist also nicht die Hauptnahrungsquelle und Hauptbeschäftigung der Semang; infolgedessen trägt die Frau den Löwenanteil zur Ernährung der Familie bei, da sie regelmäßig Tag für Tag auf Pflanzensuche geht.and Sout"
+SCCS90,Tiwi,xd778,tiwi1244,Tiwi,,SCCS1716,6,gathering,1929,Tribe: Melville Island,"hartandpilling1960 [33]: The women and children (except perhaps the five- to ten-year-old boys, who were rather useless at that age) scattered in every direction from the camp with baskets and/or babies on their backs, to spend the day gathering food, chiefly vegetable foods, grubs, worms, andd anything else edible.
+
+hartandpilling1960 [34]: Based on the observations of 1928-1929, it would appear that the Tiwi ate pretty well, especially in the larger households. Kangaroo and other marsupials, and some of the larger lizards (for example, the goanna) were very plentiful in the bush, as were fish and turtles and dugong on the coasts and wild geese in many districts. But all these were extras or dividends; the staple everyday foods were the vegetable foods gathered day after day in apparently unending quantities by the women.
+hartandpilling1960 [34]: "
+SCCS91,Northern Aranda,xd772,east2379,Eastern Arrernte,Pama-Nyungan,SCCS1716,6,gathering,1896,Alice Springs and environs,"spencerandgillen1927 [14]: The aboriginal is a pure nomad, living entirely on vegetables food and animals that he finds in the bush. Nothing comes amiss: acacia seed, lily roots and stems, yams, honey of the wild bee and honey-ant (...) He stores nothing, except for a few days, in preparation for a ceremony, and has no idea of agriculture or domestication...
+spencerandgillen1927 [7]: ... smaller animals, such as rats and lizard, are constantly caught without any difficulty by the women, who also secure large quantities of grass seeds and tubers, and, when they are in season, fruits, such as that of the quandong and native plum.
+in the"
+SCCS54,Russians,xd548,russ1263,Russian,Indo-European,SCCS1716,8,wage labor,1955,Viriatino village,"dunnanddunn1967 [39]: Soviet agriculture has two main forms. the kolkhoz, which in theory is owned and controlled by the membership, and the sovkhoz, owned and controlled by the central government, which takes all profits and assumes all risks. In this chapter, and in the study generally, we will be dealing almost exclusively with kolkhozy ...
+dunnanddunn1967 [41]: The land occupied by the kolkhoz, like all land in the USSR, is the property of the state. It is turned over to the kolkhoz, in accordance with Soviet law, for perpetual use, and cannot be bought, sold, or rented out by the collective.
+dunnanddunn1967 [42,43]: All farm buildings, agricultural equipment, working livestock, seed, and fodder necessary to carry on the public economy of the cooperative and all subsidiary enterprises, are the property of the kolkhoz as a whole. ... The agricultural work of the cooperative is carried out on a piecework basis. The administration develops, and the general meeting confirms, norms of earning for each type of agricultural work and evaluates each in labor days. The work done by each kolkhoznik is to be written up at least once a week by the brigadier and forwarded to the administration, which in its turn is to post monthly a list of kolkhozniks with the number of labor days earned by each.
+dunnanddunn1967 [69]: In 1957, four kolkhozy were allowed to introduce, as an experiment, a guaranteed annual wage paid on a regular monthly basis. About 9000 out of 37,618 kolkhozy now use this method of payment ...
+h type o"

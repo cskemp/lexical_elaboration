@@ -1,0 +1,312 @@
+---
+title: "Preliminary steps for analyses"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(testthat)
+
+select <- dplyr::select
+
+```
+
+This notebook contains preliminary steps for all subsequent analyses.
+
+First we load dictionary file and add environmental variables:
+
+```{r loaddata, include=TRUE}
+
+# load dictionary file
+dict_path <- here("data", "biladataset", "bila_dictionaries.csv")  
+dict <- read_csv(dict_path) %>%
+  select(-langname) %>%
+  rename(langname=glottolog_langname) %>%
+  select(id, glottocode, langname, langfamily, area, population, subsistence, latitude, longitude)
+
+temp_path <- here("data", "foranalyses", "environment_tmp_pre.csv")
+wind_path <- here("data", "foranalyses", "environment_wnd.csv")
+  
+environment <- read_csv(temp_path)  %>% 
+  select(-longitude, -latitude, -maxmonth_tmp, -avgmonth_pre, -minmonth_pre) %>% 
+  left_join(read_csv(wind_path) %>% select(-longitude, -latitude, -avgmonth_wnd, -minmonth_wnd), 
+            by = "glottocode")
+# no duplicates must be found 
+expect_equal(length(unique(environment$glottocode)), nrow(environment))
+
+dict <- dict %>%
+  inner_join(environment, by="glottocode") %>%
+  mutate(logpop=log(population)) %>%
+  write_csv(here("data", "foranalyses", "bila_dictionaries_withenv.csv")) %>%
+  rename(gcode_data=glottocode, langname_data=langname, langfamily_data=langfamily, area_data=area, population_data=population, subsistence_data=subsistence, latitude_data=latitude, longitude_data=longitude, avgmonth_tmp_data=avgmonth_tmp, minmonth_tmp_data=minmonth_tmp,  maxmonth_pre_data=maxmonth_pre, maxmonth_wnd_data=maxmonth_wnd, logpop_data=logpop)
+
+```
+
+Load word count file:
+
+```{r wordcount, include=TRUE}
+wordcount_path <- here("data", "biladataset", "bila_long_noun_lemmatized.csv") 
+wordcount_long <- read_csv(wordcount_path, col_types = cols(word = col_character()))
+```
+
+## Identify stop words
+
+We list the most frequent words and go through them manually to identify words that are likely to be dictionary-specific and appear in examples. We went through the first 500 most frequent words.
+
+```{r stopwords, include=TRUE}
+
+frequent_lemma <- wordcount_long %>%
+  filter(!is.na(nsenses)) %>%
+  group_by(word, nsenses) %>%
+  summarise(count = sum(count, na.rm = TRUE)) %>%
+  ungroup() %>%
+  arrange(desc(count))
+
+dictionarywords <- c("word", "name", "form", "verb", "sound", "noun", "letter", "language", "class", "case", "mark", "comp", "note", "term", "meaning", "root", "sense", "prep", "speech", "subject", "sign", "character", "prop", "dictionary", "article", "adjective", "stem", "sentence", "particle", "dial", "person", "fig", "phrase", "section", "compound", "par", "con", "sub")
+
+wordsinexamplesorexplanations <- c("thing", "place", "part", "kind", "act", "way", "cause", "set", "side", "piece", "end", "state", "use", "round", "point", "manner", "object", "change", "matter", "action", "self", "top", "cover", "measure", "bit", "sort", "type", "good", "colour", "lot", "min", "middle", "degree", "member", "house", "home", "school","work", "life", "mind", "number", "art", "world", "level", "style", "variety", "amount", "show", "specie", "man", "men", "woman", "women", "people", "family", "father", "mother", "son", "daughter", "child", "wife", "husband", "boy", "girl", "brother", "sister", "day", "night", "year", "period", "time")
+
+```
+
+In addition to dictionary-specific words and words that are likely to be used in examples, we add highly polysemous words (number of senses being more than 20) to stop words. This results in 187 stop words in total.
+
+```{r stopwords, include=TRUE}
+
+polysemouswords <- wordcount_long %>%
+  select(word, nsenses) %>%
+  unique() %>%
+  filter(nsenses >= 20) %>%
+  pull(word)
+
+stopwords <- unique(as.character(c(dictionarywords, wordsinexamplesorexplanations, polysemouswords))) 
+stopwords %>%
+  writeLines(here("data", "foranalyses", "stopwords.txt"))
+expect_equal(length(stopwords), 187)
+```
+
+Filter out stop words and then compute dictionary size:
+
+```{r prepare a dataframe, include=TRUE}
+
+wordcount <- wordcount_long  %>%
+  select(id, word, count) %>%
+  pivot_wider(names_from = word, values_from = count, values_fill = 0) %>%
+  select(-one_of(stopwords)) %>%
+  mutate(dictsize_data = select(., !(ends_with("_data") |  id)) %>% apply(1, sum, na.rm=TRUE)) %>%
+  write_csv(here("data", "foranalyses", "wordcount.csv"))
+```
+
+Add dictionary metadata to word count data frame:
+
+```{r prepare a dataframe, include=TRUE}
+ 
+wordcount <- wordcount %>% 
+  left_join(dict, by = "id")
+
+d_long <- wordcount %>% 
+  select(-(ends_with("count_data")), -all_wiktionary_filtered_data) 
+
+d_long <- d_long %>% 
+  pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
+  select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data) %>%
+  write_csv(here("data", "foranalyses", "d_long.csv"))
+```
+
+## Write data for running hierarchical model
+
+Define a subset of words on which we run logistic regression. We keep words that appear in dictionaries of more than 30 languages, which results in 7996 terms in total.
+
+```{r define subset, include=TRUE}
+
+word_nlang_lr <- d_long %>%
+  filter(count != 0) %>%
+  select(word, gcode_data) %>%
+  unique() %>%
+  group_by(word) %>%
+  summarise(nlangs = n_distinct(gcode_data)) %>%
+  ungroup() 
+
+subset_lr <- word_nlang_lr %>%
+  # keep a word if it appears in dictionaries of more than 30 languages
+  filter(!(grepl("_data$", word)), nlangs > 30, !(word %in% stopwords)) %>%
+  arrange(desc(nlangs))
+
+subset_lr <- subset_lr %>%
+  pull(word)
+expect_equal(length(subset_lr), 7996)
+
+```
+
+Prepare a data frame for running hierarchical model to compute L^lang and L^fam scores:
+
+```{r define a subset for hierarchical model, include=TRUE}
+
+d_wide <- d_long %>% 
+  mutate(dict = id, lang = gcode_data, langname = langname_data, family = langfamily_data) %>% 
+  select(dict, lang, langname, family, word, count) %>%
+  # keep words in pre-defined subset:
+  filter(word %in% subset_lr) %>%
+  group_by(dict) %>%
+  # apply smoothing
+  mutate(count = count + 1) %>% 
+  mutate(total = sum(count)) %>% 
+  ungroup() %>%
+  write_csv(here("data", "foranalyses", "d_wide.csv"))
+
+expect_equal(length(unique(d_wide$word)), length(subset_lr))
+
+```
+
+# Write data for robustness set
+
+We first keep languages from small communities alone. We went through the list of dictionaries and decided to keep languages that have less than 5 dictionaries with population size smaller than one million. We also decided to filter out languages with old dictionaries dated before 1950. This results in 443 dictionaries in 385 languages.
+
+```{r keep small community languages, include=TRUE}
+
+bila <- read_csv(dict_path) %>% 
+  group_by(glottocode) %>%
+  mutate(ndict=n()) %>%
+  ungroup() %>%
+  select(id, year, glottocode, glottolog_langname, langfamily, area, population, ndict) %>%
+  distinct() %>%
+  arrange(population)
+expect_equal(length(unique(bila$glottocode)), 617)
+
+popplot <- bila %>% 
+  mutate(popmillion=population/1000000)  %>%
+  ggplot(aes(x=popmillion, y=ndict)) +
+  geom_point() +
+  labs(x="population per million", y="number of dictionaries")
+show(popplot)
+
+pop_threshold <- 1000000 
+ndict_threshold <- 5
+year_threshold <- 1950
+
+bila_robust <- bila %>%
+  filter(population <= pop_threshold & ndict <= ndict_threshold & year > year_threshold)
+expect_equal(nrow(bila_robust), 443)
+expect_equal(length(unique(bila_robust$glottocode)), 385)
+
+bila_robust_langs <- bila_robust %>%
+  select(-id, -year) %>% 
+  unique() %>%
+  arrange(desc(ndict))
+
+bila_filtered <- bila %>%
+  anti_join(bila_robust, by="glottocode") %>%
+  arrange(desc(population))
+expect_equal(length(unique(bila_filtered$glottocode)), 232)
+
+bila_filtered_langs <- bila_filtered %>%
+  select(-id, -year) %>% 
+  unique() %>%
+  arrange(desc(ndict))
+```
+
+Next we keep dictionaries that are relatively large in size for the set of languages defined above. We take the first quartile as a threshold for all token counts and keep dictionaries with token size above this threshold. This results 257 dictionaries in 223 languages.
+
+```{r keep relatively large dictionaries, include=TRUE}
+
+dlen <- wordcount_long %>%
+  select(id, word, count) %>%
+  filter(endsWith(word, "_data")) %>%
+  unique() %>%
+  pivot_wider(names_from = word, values_from = count, values_fill = 0)
+
+dictlen_threshold <- quantile(dlen$all_token_count_data, 0.25)
+
+dlen_robust <- dlen %>%
+  filter(all_token_count_data >= dictlen_threshold)
+
+d_robust <- bila_robust %>%
+  filter(id %in% dlen_robust$id)
+  
+expect_equal(nrow(d_robust), 257)
+expect_equal(length(unique(d_robust$glottocode)), 223)
+
+robust_set <- d_robust %>%
+  select(glottocode) %>%
+  unique() %>%
+  pull(glottocode) %>%
+  writeLines(here("data", "foranalyses", "robustness_set.txt"))
+```
+
+Write count data file for robustness set.
+
+```{r prepare a dataframe, include=TRUE}
+
+wordcount_robust <- wordcount_long  %>%
+  select(id, word, count) %>%
+  filter(id %in% d_robust$id) %>%
+  pivot_wider(names_from = word, values_from = count, values_fill = 0) %>%
+  select(-one_of(stopwords)) %>%
+  mutate(dictsize_data = select(., !(ends_with("_data") |  id)) %>% apply(1, sum, na.rm=TRUE))  %>% 
+  write_csv(here("data", "foranalyses", "wordcount_robust.csv"))
+
+# write d_long for robustness check
+wordcount_robust <- wordcount_robust %>% 
+  left_join(dict, by = "id")
+
+d_long_robust <- wordcount_robust %>% 
+  select(-(ends_with("count_data")), -all_wiktionary_filtered_data) 
+
+d_long_robust <- d_long_robust %>% 
+  pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
+  select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data)  %>%
+  write_csv(here("data", "foranalyses", "d_long_robust.csv"))
+```
+
+## Write versions with verbs and adjectives.
+
+```{r verbs and adjectives, include=TRUE}
+wordcount_path <- here("data", "biladataset", "bila_long_nounverbadj.csv") 
+wordcount_long <- read_csv(wordcount_path, col_types = cols(word = col_character()))
+
+wordcount <- wordcount_long  %>%
+  select(id, word, count) %>%
+  pivot_wider(names_from = word, values_from = count, values_fill = 0) %>%
+  select(-one_of(stopwords)) %>%
+  mutate(dictsize_data = select(., !(ends_with("_data") |  id)) %>% apply(1, sum, na.rm=TRUE))
+
+wordcount <- wordcount %>% 
+  left_join(dict, by = "id")
+
+d_long <- wordcount %>% 
+  select(-(ends_with("count_data")), -all_wiktionary_filtered_data) 
+
+d_long <- d_long %>% 
+  pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
+  select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data) %>%
+  write_csv(here("data", "foranalyses", "d_long_nounverbadj.csv"))
+```
+
+Write count data file for robustness set for version with verbs and adjectives.
+
+```{r prepare a dataframe, include=TRUE}
+
+wordcount_robust <- wordcount_long  %>%
+  select(id, word, count) %>%
+  filter(id %in% d_robust$id) %>%
+  pivot_wider(names_from = word, values_from = count, values_fill = 0) %>%
+  select(-one_of(stopwords)) %>%
+  mutate(dictsize_data = select(., !(ends_with("_data") |  id)) %>% apply(1, sum, na.rm=TRUE))  %>% 
+  write_csv(here("data", "foranalyses", "wordcount_robust.csv"))
+
+# write d_long for robustness check
+wordcount_robust <- wordcount_robust %>% 
+  left_join(dict, by = "id")
+
+d_long_robust <- wordcount_robust %>% 
+  select(-(ends_with("count_data")), -all_wiktionary_filtered_data) 
+
+d_long_robust <- d_long_robust %>% 
+  pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
+  select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data)  %>%
+  write_csv(here("data", "foranalyses", "d_long_nounverbadj_robust.csv"))
+```

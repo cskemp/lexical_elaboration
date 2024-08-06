@@ -1,0 +1,10 @@
+*_counts_phase1*
+*_counts_phase2*
+noun_counts
+verb_counts
+adj_counts
+dictionary_counts_noun.csv
+dictionary_counts_verb.csv
+dictionary_counts_adj.csv
+dictionary_counts_nva.csv
+dictids.txt

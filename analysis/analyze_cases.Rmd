@@ -1,0 +1,1313 @@
+---
+title: "Analysis of case studies"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(lme4)
+library(ggrepel)
+library(sparklyr)
+library(janitor)
+library(igraph)
+library(kableExtra)
+library(glmmTMB)
+library(broom.mixed)
+source("bind_weights_par.R", local = knitr::knit_global())
+library(lingtypology)
+library(sf)
+library(testthat)
+library(ggplot2)
+library(gtable)
+library(grid)
+library(gridExtra)
+library(brms)
+library(xtable)
+library(data.table)
+library(purrr)
+
+select <- dplyr::select
+
+```
+
+This notebook contains analysis of case studies (see the main text section called "Seven case studies of lexical elaboration"). It generates Figure 2 in the main text, and Table S2, Table S3, and Figure S5 in the Supporting Material. Note that it takes several hours to generate results for Bayesian analyses.
+
+## Analyses
+
+Load word count and dictionary data (undo comment to do robustness check):
+
+```{r load data, include=TRUE}
+wordcount <- read_csv(here("data", "foranalyses", "wordcount.csv"), show_col_types = FALSE)
+#wordcount <- read_csv(here("data", "foranalyses", "wordcount_robust.csv"), show_col_types = FALSE)
+dict <- read_csv(here("data", "foranalyses", "bila_dictionaries_withenv.csv"), show_col_types = FALSE)
+```
+
+Create a list of related terms, following the guideline in /analysis/README.md.
+
+```{r terms in interest, include=TRUE}
+
+snow_group <- c("snow", "snowball", "snowstorm", "snowfall", "snowflake", "blizzard", "snowdrift", "snowfield", "sleet")
+ice_group <- c("ice", "frost", "glacier", "iceberg")
+rain_group <- c("rain", "raindrop", "rainfall", "rainwater", "drizzle", "mizzle", "downpour", "pelter")
+wind_group <- c("wind", "breeze", "gale", "gust", "squall", "zephyr", "hurricane", "windstorm", "whirlwind", "tornado", "souther", "norther", "wester", "southerly", "northerly", "westerly", "easterly", "northeaster", "southeaster", "northwester", "southwester") 
+smell_group <- c("smell", "odor", "scent", "effluvium", "smelling", "sniff", "snuff", "olfaction", "fragrance", "perfume", "stench")
+taste_group <- c("taste", "flavor", "savor", "savoring", "gustation", "taster", "tasting", "aftertaste", "insipidity", "savoriness", "unsavoriness", "sweetness", "sourness", "acidity")
+dance_group <- c("dance", "dancing", "dancer")
+```
+
+Gather counts for terms in interest. We'll compute results for groups of related words.
+
+```{r terms in interest, include=TRUE}
+
+cwd <- tibble(groups=list(
+  tibble(group="snow_group", word=snow_group),
+  tibble(group="ice_group", word=ice_group),
+  tibble(group="rain_group", word=rain_group),
+  tibble(group="wind_group", word=wind_group),
+  tibble(group="smell_group", word=smell_group),
+  tibble(group="taste_group", word=taste_group),
+  tibble(group="dance_group", word=dance_group)
+  ))
+
+wordgroups <- unnest(cwd, groups)
+
+all_words <- wordgroups$word
+all_groups <- unique(wordgroups$group)
+singlewords <-  str_subset(all_groups, "_group", negate=TRUE)
+
+all_regex <-  paste0("^(", paste(all_words, collapse="|"), ")$")
+  
+cases_wordcount <- wordcount %>% 
+  select(id, matches(all_regex), dictsize_data) 
+
+cases_wordcount_long <- cases_wordcount %>% 
+  pivot_longer(cols = -c(id, dictsize_data), names_to = "word", values_to = "count") %>% 
+  right_join(wordgroups, by = "word") 
+
+cases_wordcount_grouped_long <- cases_wordcount_long %>% 
+  group_by(id, dictsize_data, group) %>% 
+  summarize(
+    count = case_when(
+      any(!is.na(count)) ~ sum(count, na.rm = TRUE),
+      TRUE ~ NA_real_
+    ), .groups = "drop"
+  ) %>% 
+  ungroup()
+
+# take out dictionaries where wiktionary filter was applied
+filtered_combos <- read_csv(here("data", "foranalyses", "wiktionary_filtered_combinations.csv"), show_col_types = FALSE) %>%
+  filter(word %in% all_words) %>%
+  left_join(wordgroups %>% unique(), by="word") %>%
+  select(glottocode, group) %>%
+  unique()
+
+cases_wordcount <- cases_wordcount_grouped_long %>%
+  left_join(dict %>% select(id, glottocode), by="id") %>%
+  anti_join(filtered_combos, by=c("glottocode", "group")) %>%
+  select(-glottocode) %>%
+  pivot_wider(names_from = group, values_from = count) 
+
+# we'll express frequencies in terms of counts per 10000 tokens
+countunit <- 10000
+
+# d is the dataframe we'll use for our analyses
+d <- cases_wordcount %>% 
+  mutate(across(-c(id, dictsize_data), ~(.x * countunit/dictsize_data))) %>% 
+  mutate(countunit= countunit) %>% 
+  inner_join(dict, by="id") 
+```
+
+We'll compute L^lang score for individual languages as well as L^fam for language families.
+
+```{r logistic regression, include=TRUE, eval = FALSE}
+
+d_long_path <- here("data", "foranalyses", "d_long.csv")
+#d_long_path <- here("data", "foranalyses", "d_long_robust.csv")
+d_long <- read_csv(d_long_path, show_col_types = FALSE)
+
+d_wide <- d_long %>% 
+  mutate(dict = id, lang = gcode_data, langname = langname_data, family = langfamily_data, population = population_data) %>% 
+  select(dict, lang, langname, family, word, count) %>% 
+  group_by(dict) %>% 
+  # apply smoothing
+  mutate(count = count + 1) %>% 
+  mutate(total = sum(count)) %>% 
+  ungroup()
+
+compute_combo <- function(terms, combo) {
+   result <- d_wide %>%
+     filter(word %in% terms) %>%
+     group_by(dict, lang, langname, family, total) %>%
+     summarise(!!combo := sum(count), .groups = "drop") %>%
+     pivot_longer(cols = -c(dict, lang, langname, family, total), names_to = "word", values_to = "count") %>%
+     unique()
+   
+   return(result)
+}
+
+d_wide_small <- bind_rows(
+  compute_combo(snow_group, "snow_group"),
+  compute_combo(ice_group, "ice_group"),
+  compute_combo(rain_group, "rain_group"),
+  compute_combo(wind_group, "wind_group"),
+  compute_combo(smell_group, "smell_group"),
+  compute_combo(taste_group, "taste_group"),
+  compute_combo(dance_group, "dance_group")
+  )
+
+# take out dictionaries where wiktionary filter was applied
+d_wide_small <- d_wide_small  %>%
+  anti_join(filtered_combos %>% rename(lang=glottocode, word=group), by=c("lang", "word"))
+
+weights_lr_raw <- bind_weights_par(d_wide_small) 
+
+weights_lr <- weights_lr_raw %>% 
+  rename(glottocode = lang) %>% 
+  left_join(dict %>% select(langname, glottocode, area, langfamily, longitude, latitude, population, subsistence), by = "glottocode") %>%
+  arrange(desc(zeta)) %>%
+  unique() %>%
+  write_csv(here("output", "results", "cases_lr_lang.csv"))
+  #write_csv(here("output", "results", "cases_lr_lang_robust.csv"))
+
+weights_lr_fam <- bind_weights_fam(d_wide_small) %>% 
+  arrange(desc(zeta)) %>%
+  write_csv(here("output", "results", "cases_lr_fam.csv"))
+  #write_csv(here("output", "results", "cases_lr_fam_robust.csv"))
+
+```
+
+
+## Top languages and families
+
+Visualise top languages based on L^lang score.
+
+```{r map visualization, include=TRUE}
+
+library(maps)
+
+weights_lr <- read_csv(here("output", "results", "cases_lr_lang.csv"), show_col_types = FALSE) %>%
+  arrange(langname) %>%
+  arrange(word) %>%
+  group_by(word) %>%
+  mutate(quantile = quantile(zeta, probs = c(0.95))) %>%
+  ungroup()
+
+# no convergence issues must be found
+expect_equal(nrow(weights_lr %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
+
+weights_lr_fam <- read_csv(here("output", "results", "cases_lr_fam.csv"), show_col_types = FALSE)
+
+# no convergence issues must be found
+expect_equal(nrow(weights_lr_fam %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
+
+posns <- weights_lr %>%
+  select(glottocode, longitude, latitude) %>%
+  mutate(longitude = if_else(longitude > 180, longitude - 360, longitude)) %>%
+  unique()
+
+world_map <- map_data("world")
+
+plot_map <- function(word) {
+  focal_posns <- weights_lr %>%
+    filter(word == {{word}}) %>%  
+    filter(zeta > quantile) %>%
+    select(-latitude, -longitude) %>%
+    left_join(posns, by = c("glottocode"))
+  
+  map_plot <- ggplot() +
+    geom_map(data = world_map, map = world_map,
+             aes(long, lat, map_id = region),
+             color = "white", fill = "lightgray", size = 0.1) +
+    coord_sf(xlim = c(-180, 180), ylim = c(-55, 80)) +
+    geom_point(data = posns, aes(longitude, latitude), color = "grey30", size = 1, shape = 16) +
+    geom_point(data = focal_posns, aes(longitude, latitude), color = "red", size = 1, shape = 16) +
+    theme_void() +
+    theme(legend.position = "none")
+  
+  return(map_plot)
+}
+
+snow_map <- plot_map("snow_group")
+ice_map <- plot_map("ice_group")
+rain_map <- plot_map("rain_group")
+wind_map <- plot_map("wind_group")
+smell_map <- plot_map("smell_group")
+taste_map <- plot_map("taste_group")
+dance_map <- plot_map("dance_group")
+
+combined <- grid.arrange(snow_map + ggtitle("snow"),
+                         ice_map + ggtitle("ice"),
+                         rain_map + ggtitle("rain"),
+                         wind_map + ggtitle("wind"),
+                         smell_map + ggtitle("smell"),
+                         taste_map + ggtitle("taste"),
+                         dance_map + ggtitle("dance"),
+                         ncol = 2, nrow = 4)
+
+show(combined)
+
+detach("package:maps", unload = TRUE)
+```
+
+Extract top five languages and families.
+
+```{r top langs and fams, include=TRUE}
+
+top_five_langs <- weights_lr %>%
+  group_by(word) %>%
+  top_n(5, zeta) %>%
+  arrange(word, desc(zeta)) %>%
+  select(word, langname)
+
+top_five_langs %>% 
+  kbl() %>% 
+  kable_styling()
+
+top_five_fams <- weights_lr_fam %>%
+  filter(!grepl("isolate", family)) %>%
+  group_by(word) %>%
+  top_n(5, zeta) %>%
+  arrange(word, desc(zeta)) %>%
+  select(word, family)
+
+top_five_fams %>% 
+  kbl() %>% 
+  kable_styling()
+```
+
+
+## Dictionary counts against environmental variables
+
+Plot dictionary counts against environmental variables
+
+```{r weather terms, include=TRUE}
+
+# plot counts for climate terms against environment variables
+assign_env <- function(d) {  
+  plotd <- d %>%
+  pivot_longer(cols=all_of(all_groups), names_to="group", values_to="propn")  %>% 
+  mutate(environment =  case_when(
+    group == "snow_group" ~ avgmonth_tmp,
+    group == "ice_group" ~ avgmonth_tmp,
+    group == "rain_group" ~ maxmonth_pre,
+    group == "wind_group" ~ maxmonth_wnd,
+    group == "smell_group" ~ avgmonth_tmp,
+    #group == "smell_group" ~ maxmonth_pre,
+    group == "taste_group" ~ avgmonth_tmp,
+    group == "dance_group" ~ avgmonth_tmp
+  )) %>% 
+  mutate(group = factor(group, levels = all_groups))
+}
+
+plotd <- assign_env(d)
+
+climateplot <- plotd %>% 
+  ggplot(aes(x=environment, y=propn)) +
+  geom_point() +
+  facet_wrap(~group, scales = "free", ncol=4) +
+  geom_smooth(method=lm) +
+  labs(y="counts per 10000", x="environment variable")
+show(climateplot)
+
+# plot counts for climate terms against cultural variables
+subsistenceplot <- plotd %>% 
+  ggplot(aes(x=subsistence, y=propn)) +
+  geom_jitter() +
+  facet_wrap(~group, scales = "free", ncol=4) +
+  geom_boxplot() +
+  labs(y="counts per 10000", x="")
+show(subsistenceplot)
+
+populationplot <- plotd %>% 
+  ggplot(aes(x=logpop, y=propn)) +
+  geom_point() +
+  facet_wrap(~group, scales = "free", ncol=4) +
+  geom_smooth(method=lm) +
+  labs(y="counts per 10000", x="log transformed population")
+print(populationplot)
+
+```
+
+## Statistical analyses
+
+We run mixed-effects logistic regression to determine whether there is a statistically significant relationship between counts for each group of terms and the environmental variables. We run the regression twice: one including a random effect for language family to allow for historical relationships between languages, and the other including a random effect for area to allow for contacts in addition to language family. We also run Bayesian mixed-effects logistic regression.
+
+```{r mixedeffects_full, include=TRUE, eval=FALSE}
+
+dstats <- d %>% 
+  # undo conversion to counts per thousand
+  mutate(across(all_of(all_groups),  ~(round(.x * dictsize_data/countunit)))) %>% 
+  # scale all predictors
+  mutate(across(avgmonth_tmp:logpop, ~as.numeric(scale(.)))) %>%
+  pivot_longer(cols=all_of(all_groups), names_to="group", values_to="propn")  %>%
+  mutate(group = factor(group, levels = all_groups))
+
+```
+
+Write a function without dictionary as a random effect:
+
+```{r run glmmtmb function, include=TRUE, eval=FALSE}
+
+run_glmmTMB <- function(groupname, dstats, predictor_name) {
+  
+  # Filter the dataset
+  dstats_this <- dstats %>%
+    filter(group == .env$groupname) %>%
+    drop_na(propn)
+  
+  # Define formulas for models
+  formula_full <- as.formula(paste("cbind(propn, dictsize_data - propn) ~", predictor_name, "+ (1|area) + (1|langfamily) + (1|glottocode)"))
+  formula_reduced <- as.formula("cbind(propn, dictsize_data - propn) ~ (1|area) + (1|langfamily) + (1|glottocode)")
+  formula_full_noarea <- as.formula(paste("cbind(propn, dictsize_data - propn) ~", predictor_name, "+ (1|langfamily) + (1|glottocode)"))
+  formula_reduced_noarea <- as.formula("cbind(propn, dictsize_data - propn) ~ (1|langfamily) + (1|glottocode)")
+  
+  # Initialize list to store warnings
+  warnings_list <- list()
+  
+  # Function to capture warnings
+  capture_warnings <- function(expr) {
+    warnings <- NULL
+    result <- withCallingHandlers(
+      expr,
+      warning = function(w) {
+        warnings <<- c(warnings, conditionMessage(w))
+        invokeRestart("muffleWarning")
+      }
+    )
+    list(result = result, warnings = warnings)
+  }
+  
+  # Fit full model
+  full_model <- capture_warnings(glmmTMB(formula_full, data = dstats_this, family = binomial))
+  m1 <- full_model$result
+  warnings_list$m1 <- full_model$warnings
+  
+  # Fit reduced model
+  reduced_model <- capture_warnings(glmmTMB(formula_reduced, data = dstats_this, family = binomial))
+  m2 <- reduced_model$result
+  warnings_list$m2 <- reduced_model$warnings
+  
+  # Perform ANOVA
+  a <- anova(m2, m1)
+  pval <- a$`Pr(>Chisq)`[2]
+  
+  # Fit full model without area
+  full_model_noarea <- capture_warnings(glmmTMB(formula_full_noarea, data = dstats_this, family = binomial))
+  m1_a <- full_model_noarea$result
+  warnings_list$m1_a <- full_model_noarea$warnings
+  
+  # Fit reduced model without area
+  reduced_model_noarea <- capture_warnings(glmmTMB(formula_reduced_noarea, data = dstats_this, family = binomial))
+  m2_a <- reduced_model_noarea$result
+  warnings_list$m2_a <- reduced_model_noarea$warnings
+  
+  # Perform ANOVA
+  a_a <- anova(m2_a, m1_a)
+  pval_a <- a_a$`Pr(>Chisq)`[2]
+  
+  # Retrieve coefficients
+  if (predictor_name == "subsistence") {
+    envcoef <- fixef(m1)$cond["subsistenceother"]
+    envcoef_a <- fixef(m1_a)$cond["subsistenceother"]
+  } else {
+    envcoef <- fixef(m1)$cond[paste(predictor_name)]
+    envcoef_a <- fixef(m1_a)$cond[paste(predictor_name)]
+  }
+  
+  # Summarize results
+  summ <- tibble(
+    group = groupname, 
+    predictor = predictor_name, 
+    coefficient = envcoef, 
+    p_val = pval, 
+    coefficient_noarea = envcoef_a, 
+    p_val_noarea = pval_a,
+    warnings_m1 = list(warnings_list$m1),
+    warnings_m2 = list(warnings_list$m2),
+    warnings_m1_a = list(warnings_list$m1_a),
+    warnings_m2_a = list(warnings_list$m2_a)
+  )
+  
+  summ$warnings_m1 <- sapply(summ$warnings_m1, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  summ$warnings_m2 <- sapply(summ$warnings_m2, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  summ$warnings_m1_a <- sapply(summ$warnings_m1_a, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  summ$warnings_m2_a <- sapply(summ$warnings_m2_a, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  
+  return(summ)
+}
+```
+
+Run GLMM:
+
+```{r run glmer, include=TRUE, eval=FALSE}
+
+glmer_tmp <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "avgmonth_tmp") )  %>% 
+  arrange(coefficient) %>%
+  #write_csv(here("output", "results", "glmer_stats.csv"))
+  write_csv(here("output", "results", "glmer_stats_robust.csv"))
+
+glmer_pre <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_pre") )  %>% 
+  arrange(coefficient) %>%
+  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+
+glmer_wnd <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_wnd") )  %>% 
+  arrange(coefficient) %>%
+  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+
+glmer_sub <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "subsistence") )  %>% 
+  arrange(coefficient) %>%
+  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+
+glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "logpop") )  %>% 
+  arrange(coefficient) %>%
+  mutate(predictor="population") %>%
+  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+```
+
+Write a function with dictionary as a random effect:
+
+```{r run glmmtmb function, include=TRUE, eval=FALSE}
+
+run_glmmTMB <- function(groupname, dstats, predictor_name) {
+  
+  # Filter the dataset
+  dstats_this <- dstats %>%
+    filter(group == .env$groupname) %>%
+    drop_na(propn)
+  
+  # Define formulas for models
+  formula_full <- as.formula(paste("cbind(propn, dictsize_data - propn) ~", predictor_name, "+ (1|id) + (1|area) + (1|langfamily) + (1|glottocode)"))
+  formula_reduced <- as.formula("cbind(propn, dictsize_data - propn) ~ (1|id) + (1|area) + (1|langfamily) + (1|glottocode)")
+  formula_full_noarea <- as.formula(paste("cbind(propn, dictsize_data - propn) ~", predictor_name, "+ (1|id) + (1|langfamily) + (1|glottocode)"))
+  formula_reduced_noarea <- as.formula("cbind(propn, dictsize_data - propn) ~ (1|id) + (1|langfamily) + (1|glottocode)")
+  
+  # Initialize list to store warnings
+  warnings_list <- list()
+  
+  # Function to capture warnings
+  capture_warnings <- function(expr) {
+    warnings <- NULL
+    result <- withCallingHandlers(
+      expr,
+      warning = function(w) {
+        warnings <<- c(warnings, conditionMessage(w))
+        invokeRestart("muffleWarning")
+      }
+    )
+    list(result = result, warnings = warnings)
+  }
+  
+  # Fit full model
+  full_model <- capture_warnings(glmmTMB(formula_full, data = dstats_this, family = binomial))
+  m1 <- full_model$result
+  warnings_list$m1 <- full_model$warnings
+  
+  # Fit reduced model
+  reduced_model <- capture_warnings(glmmTMB(formula_reduced, data = dstats_this, family = binomial))
+  m2 <- reduced_model$result
+  warnings_list$m2 <- reduced_model$warnings
+  
+  # Perform ANOVA
+  a <- anova(m2, m1)
+  pval <- a$`Pr(>Chisq)`[2]
+  
+  # Fit full model without area
+  full_model_noarea <- capture_warnings(glmmTMB(formula_full_noarea, data = dstats_this, family = binomial))
+  m1_a <- full_model_noarea$result
+  warnings_list$m1_a <- full_model_noarea$warnings
+  
+  # Fit reduced model without area
+  reduced_model_noarea <- capture_warnings(glmmTMB(formula_reduced_noarea, data = dstats_this, family = binomial))
+  m2_a <- reduced_model_noarea$result
+  warnings_list$m2_a <- reduced_model_noarea$warnings
+  
+  # Perform ANOVA
+  a_a <- anova(m2_a, m1_a)
+  pval_a <- a_a$`Pr(>Chisq)`[2]
+  
+  # Retrieve coefficients
+  if (predictor_name == "subsistence") {
+    envcoef <- fixef(m1)$cond["subsistenceother"]
+    envcoef_a <- fixef(m1_a)$cond["subsistenceother"]
+  } else {
+    envcoef <- fixef(m1)$cond[paste(predictor_name)]
+    envcoef_a <- fixef(m1_a)$cond[paste(predictor_name)]
+  }
+  
+  # Summarize results
+  summ <- tibble(
+    group = groupname, 
+    predictor = predictor_name, 
+    coefficient = envcoef, 
+    p_val = pval, 
+    coefficient_noarea = envcoef_a, 
+    p_val_noarea = pval_a,
+    warnings_m1 = list(warnings_list$m1),
+    warnings_m2 = list(warnings_list$m2),
+    warnings_m1_a = list(warnings_list$m1_a),
+    warnings_m2_a = list(warnings_list$m2_a)
+  )
+  
+  summ$warnings_m1 <- sapply(summ$warnings_m1, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  summ$warnings_m2 <- sapply(summ$warnings_m2, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  summ$warnings_m1_a <- sapply(summ$warnings_m1_a, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  summ$warnings_m2_a <- sapply(summ$warnings_m2_a, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
+  
+  return(summ)
+}
+```
+
+Run GLMM:
+
+```{r run glmer, include=TRUE, eval=FALSE}
+
+glmer_tmp <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "avgmonth_tmp") )  %>% 
+  arrange(coefficient) %>%
+  #write_csv(here("output", "results", "glmer_stats_dict.csv"))
+  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"))
+
+glmer_pre <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_pre") )  %>% 
+  arrange(coefficient) %>%
+  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+
+glmer_wnd <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_wnd") )  %>% 
+  arrange(coefficient)  %>%
+  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+
+glmer_sub <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "subsistence") )  %>% 
+  arrange(coefficient)  %>%
+  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+
+glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "logpop") )  %>% 
+  arrange(coefficient) %>%
+  mutate(predictor="population")  %>%
+  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+```
+
+## Bayesian analyses
+
+Run Bayesian analyses without area as a random effect:
+
+```{r bayesian, include=TRUE, eval=FALSE}
+
+quiet_brm <- quietly(brm)
+
+run_bayes <- function(groupname, dstats, predictorname) {
+
+  dstats_this <- dstats %>% 
+    filter(group == .env$groupname) %>% 
+    drop_na(propn)
+  
+  formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|id) + (1|langfamily) + (1|glottocode)")
+  
+  mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
+                   #iter = 3000, chains = 2, control = list(adapt_delta = 0.95, stepsize = 0.01, max_treedepth = 15)) # used for the full set
+                   warmup = 2000, iter = 10000, chains = 2, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20)) # used for the robustness set
+  m <- mdl$result
+  
+  envcoef <- fixef(m)[2]
+  lci <- fixef(m)[6]
+  uci <- fixef(m)[8]
+  
+  summ <- tibble(
+    group = groupname,
+    predictor = predictorname,
+    coefficient = envcoef,
+    lower_ci = lci,
+    upper_ci = uci,
+    warnings = paste(mdl$warnings, collapse = " | ")
+  )
+  
+  return(summ)
+}
+
+bayes_tmp <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "avgmonth_tmp") )  %>% 
+  #write_csv(here("output", "results", "bayes_stats_dict.csv"))
+  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"))
+
+bayes_pre <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "maxmonth_pre") )  %>% 
+  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+
+bayes_wnd <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "maxmonth_wnd") )  %>% 
+  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+
+bayes_sub <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "subsistence") )  %>% 
+  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+
+bayes_pop <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "logpop") )  %>% 
+  mutate(predictor="population") %>%
+  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
+  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+
+```
+
+Run Bayesian with area as a random effect on the full set:
+
+```{r bayes with area, include=TRUE, eval=FALSE}
+
+quiet_brm <- quietly(brm)
+
+run_bayes_area <- function(groupname, dstats, predictorname) {
+
+  dstats_this <- dstats %>% 
+    filter(group == .env$groupname) %>% 
+    drop_na(propn)
+  
+  formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|id) + (1|area) + (1|langfamily) + (1|glottocode)")
+  
+  mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
+                  iter = 3000, chains = 3, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20))
+  m <- mdl$result
+  
+  envcoef <- fixef(m)[2]
+  lci <- fixef(m)[6]
+  uci <- fixef(m)[8]
+  
+  summ <- tibble(
+    group = groupname,
+    predictor = predictorname,
+    coefficient = envcoef,
+    lower_ci = lci,
+    upper_ci = uci,
+    warnings = paste(mdl$warnings, collapse = " | ")
+  )
+  
+  return(summ)
+}
+
+bayes_tmp <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "avgmonth_tmp") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"))
+
+bayes_pre <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "maxmonth_pre") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+
+bayes_wnd <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "maxmonth_wnd") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+
+all_group <- c("ice_group", "rain_group", "wind_group", "smell_group", "taste_group", "dance_group")
+
+bayes_sub <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "subsistence") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+
+all_group <- c("snow_group", "ice_group", "rain_group", "smell_group", "taste_group", "dance_group")
+
+bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>% 
+  mutate(predictor="population") %>%
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+
+# to solve divergent transition issues for snow by subsistence and wind by population, we'll use simpler model without dictionary as a random effect
+
+run_bayes_area <- function(groupname, dstats, predictorname) {
+
+  dstats_this <- dstats %>% 
+    filter(group == .env$groupname) %>% 
+    drop_na(propn)
+  
+  formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|area) + (1|langfamily) + (1|glottocode)") 
+  
+  mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
+                  iter = 8000, chains = 2, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20))
+  m <- mdl$result
+  
+  envcoef <- fixef(m)[2]
+  lci <- fixef(m)[6]
+  uci <- fixef(m)[8]
+  
+  summ <- tibble(
+    group = groupname,
+    predictor = predictorname,
+    coefficient = envcoef,
+    lower_ci = lci,
+    upper_ci = uci,
+    warnings = paste(mdl$warnings, collapse = " | ")
+  )
+  
+  return(summ)
+}
+
+all_group <- c("snow_group")
+
+bayes_sub <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "subsistence") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+
+all_group <- c("wind_group")
+
+bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>% 
+  mutate(predictor="population") %>%
+  write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+```
+
+Run Bayesian with area as a random effect on the robustness set. Because there were many divergent transition issues, we used simpler model without dictionary as a random effect by default.
+
+```{r bayes with area, include=TRUE, eval=FALSE}
+
+quiet_brm <- quietly(brm)
+
+run_bayes_area <- function(groupname, dstats, predictorname) {
+
+  dstats_this <- dstats %>% 
+    filter(group == .env$groupname) %>% 
+    drop_na(propn)
+  
+  formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|area) + (1|langfamily) + (1|glottocode)")
+  
+  mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
+                   warmup = 2000, iter = 10000, chains = 2, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20)) 
+  m <- mdl$result
+  
+  envcoef <- fixef(m)[2]
+  lci <- fixef(m)[6]
+  uci <- fixef(m)[8]
+  
+  summ <- tibble(
+    group = groupname,
+    predictor = predictorname,
+    coefficient = envcoef,
+    lower_ci = lci,
+    upper_ci = uci,
+    warnings = paste(mdl$warnings, collapse = " | ")
+  )
+  
+  return(summ)
+}
+
+bayes_tmp <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "avgmonth_tmp") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
+
+bayes_pre <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "maxmonth_pre") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), append=TRUE)
+
+bayes_wnd <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "maxmonth_wnd") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), append=TRUE)
+
+bayes_sub <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "subsistence") )  %>% 
+  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), append=TRUE)
+
+bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>% 
+  mutate(predictor="population") %>%
+  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
+```
+
+## Create figures
+
+Create plots for environmental variables:
+
+```{r env plots, include=TRUE}
+
+create_env_plot <- function(groupname, variablename, significance, plotd){
+  climateplot <- plotd %>%
+    filter(group == groupname, propn != 0) %>%
+    mutate(propn=log(propn)) %>%
+    ggplot(aes(x=environment, y=propn)) +
+    geom_point(size=0.001) +
+    geom_smooth(method=lm) +
+    labs(y="log counts per 10000", x=variablename) +
+    theme(axis.title = element_text(size = 10))
+  
+    if (significance == "three") {
+    climateplot <- climateplot +
+      annotate("text", x = Inf, y = Inf, label = "***", size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "two") {
+    climateplot <- climateplot +
+      annotate("text", x = Inf, y = Inf, label = "**", size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "one") {
+    climateplot <- climateplot +
+      annotate("text", x = Inf, y = Inf, label = "*", size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "(one)") {
+    climateplot <- climateplot +
+      annotate("text", x = Inf, y = Inf, label = expression(""^"("*"*"*""^")"), size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "none") {
+  } else {
+    stop("no significance")
+  }
+  
+  return(climateplot)
+}
+
+plot_snow_env <- create_env_plot("snow_group", "temperature (°C)", "three", plotd)
+plot_ice_env <- create_env_plot("ice_group", "temperature (°C)", "three", plotd)
+plot_rain_env <- create_env_plot("rain_group", "precipitation (mm)", "(one)", plotd)
+plot_wind_env <- create_env_plot("wind_group", "windspeed (m/s)", "three", plotd)
+plot_smell_env <- create_env_plot("smell_group", "temperature (°C)", "three", plotd)
+plot_taste_env <- create_env_plot("taste_group", "temperature (°C)", "(one)", plotd)
+plot_dance_env <- create_env_plot("dance_group", "temperature (°C)", "(one)", plotd)
+
+
+create_sub_plot <- function(groupname, significance, plotd){
+  subsistenceplot <- plotd %>%
+    filter(propn != 0) %>%
+    mutate(propn=log(propn)) %>%
+    ggplot(aes(x=subsistence, y=propn)) +
+    geom_jitter(size=0.0001) +
+    geom_boxplot(outlier.size = 0.0001) +
+    labs(y="", x="")
+  
+    if (significance == "three") {
+    subsistenceplot <- subsistenceplot +
+      annotate("text", x = Inf, y = Inf, label = "***", size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "two") {
+    subsistenceplot <- subsistenceplot +
+      annotate("text", x = Inf, y = Inf, label = "**", size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "one") {
+    subsistenceplot <- subsistenceplot +
+      annotate("text", x = Inf, y = Inf, label = "*", size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "(one)") {
+    subsistenceplot <- subsistenceplot +
+      annotate("text", x = Inf, y = Inf, label = expression(""^"("*"*"*""^")"), size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "none") {
+  } else {
+    stop("no significance")
+  }
+  
+  return(subsistenceplot)
+}
+
+plot_snow_sub <- create_sub_plot("snow_group", "none", plotd)
+plot_ice_sub <- create_sub_plot("ice_group", "none", plotd)
+plot_rain_sub <- create_sub_plot("rain_group", "none", plotd)
+plot_wind_sub <- create_sub_plot("wind_group", "three", plotd)
+plot_smell_sub <- create_sub_plot("smell_group", "none", plotd)
+plot_taste_sub <- create_sub_plot("taste_group", "(one)", plotd)
+plot_dance_sub <- create_sub_plot("dance_group", "none", plotd)
+
+create_pop_plot <- function(groupname, significance, plotd){
+  populationplot <- plotd %>%
+    filter(group == groupname, propn != 0) %>%
+    mutate(propn=log(propn)) %>%
+    ggplot(aes(x=logpop, y=propn)) +
+    geom_point(size=0.001) +
+    geom_smooth(method=lm) +
+    labs(y="log counts per 10000", x="log population") + 
+    theme_classic() +
+    theme(axis.ticks.x = element_blank(), 
+  axis.line.x = element_blank(),
+  axis.ticks.y = element_blank(), 
+  axis.line.y = element_blank()) +
+    theme(axis.title = element_text(size = 8), axis.text = element_text(size = 7))
+  
+    if (significance == "three") {
+    populationplot <- populationplot +
+      annotate("text", x = Inf, y = Inf, label = "***", size = 3, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "(three)") {
+    populationplot <- populationplot +
+      annotate("text", x = Inf, y = Inf, label = expression(""^"("*"***"*""^")"), size = 3, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "(one)") {
+    populationplot <- populationplot +
+      annotate("text", x = Inf, y = Inf, label = expression(""^"("*"*"*""^")"), size = 3, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "none") {
+  } else {
+    stop("no significance")
+  }
+  
+  return(populationplot)
+}
+
+plot_snow_pop <- create_pop_plot("snow_group", "none", plotd)
+plot_ice_pop <- create_pop_plot("ice_group", "(three)", plotd)
+plot_rain_pop <- create_pop_plot("rain_group", "(three)", plotd)
+plot_wind_pop <- create_pop_plot("wind_group", "(three)", plotd)
+plot_smell_pop <- create_pop_plot("smell_group", "(one)", plotd)
+plot_taste_pop <- create_pop_plot("taste_group", "none", plotd)
+plot_dance_pop <- create_pop_plot("dance_group", "three", plotd)
+
+```
+
+Load top language, family, and concept tables. We created them manually using top_five_langs and top_five_fams dataframes here. For the top 11 terms most strongly associated with seven concepts, we used the results obtained from running bottomup_analysis.Rmd. 
+
+```{r combine plots, include=TRUE}
+
+library(jpeg)
+top_snow <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_snow.jpg")), interpolate = TRUE)
+top_ice <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_ice.jpg")), interpolate = TRUE)
+top_rain <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_rain.jpg")), interpolate = TRUE)
+top_wind <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_wind.jpg")), interpolate = TRUE)
+top_smell <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_smell.jpg")), interpolate = TRUE)
+top_taste <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_taste.jpg")), interpolate = TRUE)
+top_dance <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_dance.jpg")), interpolate = TRUE)
+```
+
+Combine plots:
+
+```{r combine all, include=TRUE}
+
+a <- list(snow_map, top_snow, plot_snow_env, plot_snow_sub,
+          ice_map, top_ice, plot_ice_env, plot_ice_sub,
+          rain_map, top_rain, plot_rain_env, plot_rain_sub,
+          wind_map, top_wind, plot_wind_env, plot_wind_sub,
+          smell_map, top_smell, plot_smell_env, plot_smell_sub,
+          taste_map, top_taste, plot_taste_env, plot_taste_sub,
+          dance_map, top_dance, plot_dance_env, plot_dance_sub)
+
+fontsize <- gpar(fontsize = 9)
+
+ggsave(here("output", "figures", "main", "cases.pdf"), grid.arrange(
+  arrangeGrob(a[[1]], top = "map", left = textGrob("SNOW", rot = 90, gp=gpar(fontsize=9))),
+  arrangeGrob(a[[2]], top = ""),
+  arrangeGrob(a[[3]], top = "climate variable"),
+  arrangeGrob(a[[4]], top = "subsistence strategy"),
+  arrangeGrob(a[[5]], left = textGrob("ICE", rot = 90, gp=gpar(fontsize=9))),
+  a[[6]],a[[7]],a[[8]],
+  arrangeGrob(a[[9]], left = textGrob("RAIN", rot = 90, gp=gpar(fontsize=9))),
+  a[[10]],a[[11]], a[[12]],
+  arrangeGrob(a[[13]], left = textGrob("WIND", rot = 90, gp=gpar(fontsize=9))),
+  a[[14]], a[[15]],a[[16]],
+  arrangeGrob(a[[17]], left = textGrob("SMELL", rot = 90, gp=gpar(fontsize=9))),
+  a[[18]], a[[19]],a[[20]],
+  arrangeGrob(a[[21]], left = textGrob("TASTE", rot = 90, gp=gpar(fontsize=9))),
+  a[[22]],a[[23]],a[[24]],
+  arrangeGrob(a[[25]], left = textGrob("DANCE", rot = 90, gp=gpar(fontsize=9))),
+  a[[26]], a[[27]],a[[28]],
+  nrow = 7, ncol = 4,
+  heights = c(1, 1, 1, 1, 1, 1, 1), widths = c(3.5, 2, 1.75, 1.75)), 
+  width=14, height=17)
+```
+
+
+## Create supplementary figures and tables
+
+Create a table for statistical results without area as a random effect:
+
+```{r create stat table, include=TRUE}
+
+glmm <- read_csv(here("output", "results", "glmer_stats_dict.csv"), show_col_types = FALSE)
+glmm_r <- read_csv(here("output", "results", "glmer_stats_dict_robust.csv"), show_col_types = FALSE) %>%
+  mutate(case=paste(group, "by", predictor))
+
+# no convergence issues must be found for the full set
+expect_equal(nrow(glmm %>% filter(!is.na(warnings_m1_a) | !is.na(warnings_m2_a))), 0)
+
+# one convergence issue is identified for the robustness set
+withconvergence <- glmm_r %>% filter(!is.na(warnings_m1_a) | !is.na(warnings_m2_a))
+expect_equal(nrow(withconvergence), 1)
+
+# we'll use results from the analysis without a dictionary as a random effect for this case
+glmm_r_nodict <- read_csv(here("output", "results", "glmer_stats_robust.csv"), show_col_types = FALSE) %>%
+  mutate(case=paste(group, "by", predictor))
+
+convergence_case <- withconvergence$case
+
+replacement_row <- glmm_r_nodict %>%
+  filter(case %in% convergence_case)
+
+glmm_r <- glmm_r %>%
+  filter(!(case %in% convergence_case)) %>%
+  bind_rows(replacement_row)
+
+# now load results from Bayesian analyses
+bayes <- read_csv(here("output", "results", "bayes_stats_dict.csv"), show_col_types = FALSE) 
+bayes_r <- read_csv(here("output", "results", "bayes_stats_dict_robust.csv"), show_col_types = FALSE)
+
+# no convergence issues
+expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 0)
+expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 0)
+
+bayes <- bayes %>%
+  mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
+         CI = paste0("[", lower_ci, ",", upper_ci, "]"))
+
+bayes_r <- bayes_r %>%
+  mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
+         CI = paste0("[", lower_ci, ",", upper_ci, "]"))
+
+worder <- c("snow", "ice", "rain", "wind", "smell", "taste", "dance")
+porder <- c("temperature", "precipitation", "windspeed", "subsistence", "population")
+
+all_noa <- glmm %>%
+  select(group, predictor, coefficient_noarea, p_val_noarea) %>%
+  mutate(p_val_noarea = round(p_val_noarea, 2),
+         p_val_noarea = case_when(
+    p_val_noarea < 0.001 ~ as.character('< 0.001'),
+    TRUE ~ as.character(p_val_noarea)
+  )) %>%
+  rename('$\beta$ (f.)'=coefficient_noarea, '$p$'=p_val_noarea) %>%
+  left_join(glmm_r %>%
+              select(group, predictor, coefficient_noarea, p_val_noarea) %>%
+              mutate(p_val_noarea = round(p_val_noarea, 2),
+                     p_val_noarea = case_when(
+                       p_val_noarea < 0.001 ~ as.character('< 0.001'),
+                       TRUE ~ as.character(p_val_noarea))) %>%
+              rename('$\beta$ (rob.)'=coefficient_noarea, '$p$ (rob.)'=p_val_noarea),
+              by = c("group", "predictor")) %>%
+  left_join(bayes %>%
+              select(group, predictor, coefficient, CI) %>%
+              rename('$\beta$ (b.)'=coefficient, 'CI 95%'=CI)) %>%
+  left_join(bayes_r %>%
+              select(group, predictor, coefficient, CI) %>%
+              rename('$\beta$ (b.rob.)'=coefficient, 'CI 95% (robust)'=CI)) %>%
+  rename(concept = group) %>%
+  mutate(concept = str_replace(concept, "_group", ""),
+         concept = factor(concept, levels = worder),
+         predictor = case_when(
+           predictor == "avgmonth_tmp" ~ "temperature",
+           predictor == "maxmonth_pre" ~ "precipitation",
+           predictor == "maxmonth_wnd" ~ "windspeed",
+           TRUE ~ as.character(predictor)
+           ),
+         predictor = factor(predictor, levels = porder)) %>%
+  arrange(concept, predictor)
+
+# add results from bottom-up analysis:
+
+pvals <- read_csv(here("output", "results", "bottomup_stats_dict.csv"), show_col_types = FALSE) %>%
+  # remove cases with convergence issues
+  filter(is.na(warnings_m1) & is.na(warnings_m2)) %>%
+  mutate(lnpval=-log(p_val),
+         coefficient=round(coefficient, 4),
+         p_val=round(p_val, 4))
+
+pvals <- pvals %>%
+  group_by(predictor) %>%
+  mutate(sign = frank(lnpval, ties.method = "random") / max(frank(lnpval, ties.method = "random"))) %>%
+  ungroup() %>%
+  arrange(desc(lnpval))
+
+cases <- pvals %>%
+  filter(word %in% c("snow", "ice", "rain", "wind", "smell", "taste", "dance")) %>%
+  rename(concept=word, rank=sign) %>%
+  mutate(predictor = case_when(
+           predictor == "avgmonth_tmp" ~ "temperature",
+           predictor == "maxmonth_pre" ~ "precipitation",
+           predictor == "maxmonth_wnd" ~ "windspeed",
+           TRUE ~ as.character(predictor)
+           )) 
+
+pvals_rob <- read_csv(here("output", "results", "bottomup_stats_dict_robust.csv"), 
+                      show_col_types = FALSE) %>%
+  # remove cases with convergence issues
+  filter(is.na(warnings_m1) & is.na(warnings_m2)) %>%
+  mutate(lnpval=-log(p_val),
+         coefficient=round(coefficient, 4),
+         p_val=round(p_val, 4))
+
+pvals_rob <- pvals_rob %>%
+  group_by(predictor) %>%
+  mutate(sign = frank(lnpval, ties.method = "random") / max(frank(lnpval, ties.method = "random"))) %>%
+  ungroup() %>%
+  arrange(desc(lnpval))
+
+cases_rob <- pvals_rob %>%
+  filter(word %in% c("snow", "ice", "rain", "wind", "smell", "taste", "dance")) %>%
+  rename(concept=word, "rank (rob.)"=sign) %>%
+  mutate(predictor = case_when(
+           predictor == "avgmonth_tmp" ~ "temperature",
+           predictor == "maxmonth_pre" ~ "precipitation",
+           predictor == "maxmonth_wnd" ~ "windspeed",
+           TRUE ~ as.character(predictor)
+           )) 
+
+all_noa <- all_noa %>%
+  left_join(cases %>% select(concept, predictor, rank), by= c("concept", "predictor")) %>%
+  left_join(cases_rob %>% select(concept, predictor, "rank (rob.)"), by= c("concept", "predictor")) %>%
+  mutate(concept = paste0("concept{", concept, "}"))
+
+all_noa_table <- xtable(all_noa, digits=c(0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2))
+print(all_noa_table, file = here("output", "tables", "stats_noarea.tex"), include.rownames=FALSE)
+
+
+```
+
+Version with area as additional random effect:
+
+```{r with area, include=TRUE}
+
+glmm <- read_csv(here("output", "results", "glmer_stats_dict.csv"), show_col_types = FALSE)
+glmm_r <- read_csv(here("output", "results", "glmer_stats_dict_robust.csv"), show_col_types = FALSE) %>%
+  mutate(case=paste(group, "by", predictor))
+
+# no convergence issues must be found for the full set
+expect_equal(nrow(glmm %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))), 0)
+
+# 7 convergence issues identified for the robustness set
+withconvergence <- glmm_r %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
+expect_equal(nrow(withconvergence), 7)
+
+# we'll use results from the analysis without a dictionary as a random effect for these cases
+glmm_r_nodict <- read_csv(here("output", "results", "glmer_stats_robust.csv"), show_col_types = FALSE) %>%
+  mutate(case=paste(group, "by", predictor))
+
+convergence_case <- withconvergence$case
+
+replacement_row <- glmm_r_nodict %>%
+  filter(case %in% convergence_case)
+
+glmm_r <- glmm_r %>%
+  filter(!(case %in% convergence_case)) %>%
+  bind_rows(replacement_row)
+
+# now load results from Bayesian analyses
+bayes <- read_csv(here("output", "results", "bayes_stats_dictarea.csv"), show_col_types = FALSE) 
+bayes_r_raw <- read_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), show_col_types = FALSE)
+
+# there are 6 cases with 1-2 divergent transitions
+expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 6)
+# there are 18 cases with 1-13 divergent transitions, we only report those with less than 5 divergent transitions
+expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 18)
+
+bayes <- bayes %>%
+  mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
+         CI = paste0("[", lower_ci, ",", upper_ci, "]"))
+
+bayes_r <- bayes_r_raw %>%
+  mutate(model = paste(group, "by", predictor),
+         coefficient = case_when(
+           model == "wind_group by maxmonth_pre" ~ NA,
+           model == "wind_group by maxmonth_wnd" ~ NA,
+           model == "smell_group by maxmonth_wnd" ~ NA,
+           TRUE ~ coefficient
+         ),
+         lower_ci = case_when(
+           model == "wind_group by maxmonth_pre" ~ NA,
+           model == "wind_group by maxmonth_wnd" ~ NA,
+           model == "smell_group by maxmonth_wnd" ~ NA,
+           TRUE ~ lower_ci
+         ),
+         upper_ci = case_when(
+           model == "wind_group by maxmonth_pre" ~ NA,
+           model == "wind_group by maxmonth_wnd" ~ NA,
+           model == "smell_group by maxmonth_wnd" ~ NA,
+           TRUE ~ upper_ci
+         ),
+         lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
+         CI = ifelse(!is.na(lower_ci), paste0("[", lower_ci, ",", upper_ci, "]"), NA))
+
+# add results from bottom-up analysis:
+pvals_area <- read_csv(here("output", "results", "bottomup_stats_dictarea.csv"), show_col_types = FALSE) %>%
+  # remove cases with convergence issues
+  filter(is.na(warnings_m1) & is.na(warnings_m2)) %>%
+  mutate(lnpval=-log(p_val),
+         coefficient=round(coefficient, 4),
+         p_val=round(p_val, 4))
+
+pvals_area <- pvals_area %>%
+  group_by(predictor) %>%
+  mutate(sign = frank(lnpval, ties.method = "random") / max(frank(lnpval, ties.method = "random"))) %>%
+  ungroup() %>%
+  arrange(desc(lnpval))
+
+cases_area <- pvals_area %>%
+  filter(word %in% c("snow", "ice", "rain", "wind", "smell", "taste", "dance")) %>%
+  rename(concept=word, rank=sign) %>%
+  mutate(predictor = case_when(
+           predictor == "avgmonth_tmp" ~ "temperature",
+           predictor == "maxmonth_pre" ~ "precipitation",
+           predictor == "maxmonth_wnd" ~ "windspeed",
+           TRUE ~ as.character(predictor)
+           )) 
+
+pvals_area_rob <- read_csv(here("output", "results", "bottomup_stats_dictarea_robust.csv"), show_col_types = FALSE) %>%
+  # remove cases with convergence issues
+  filter(is.na(warnings_m1) & is.na(warnings_m2))
+
+# there was a converge issue for counts for ice predicted by windspeed, so we'll use simpler model without dictionary as a random effect
+pvals_nodict_rob <- read_csv(here("output", "results", "bottomup_stats_area_robust.csv"), show_col_types = FALSE) %>%
+  filter(word == "ice", predictor == "maxmonth_wnd")
+
+pvals_area_rob <- pvals_area_rob %>%
+  bind_rows(pvals_nodict_rob) %>%
+  mutate(lnpval=-log(p_val),
+         coefficient=round(coefficient, 4),
+         p_val=round(p_val, 4)) %>%
+  group_by(predictor) %>%
+  mutate(sign = frank(lnpval, ties.method = "random") / max(frank(lnpval, ties.method = "random"))) %>%
+  ungroup() %>%
+  arrange(desc(lnpval))
+
+cases_area_rob <- pvals_area_rob %>%
+  filter(word %in% c("snow", "ice", "rain", "wind", "smell", "taste", "dance")) %>%
+  rename(concept=word, "rank (rob.)"=sign) %>%
+  mutate(predictor = case_when(
+           predictor == "avgmonth_tmp" ~ "temperature",
+           predictor == "maxmonth_pre" ~ "precipitation",
+           predictor == "maxmonth_wnd" ~ "windspeed",
+           TRUE ~ as.character(predictor)
+           ))
+
+all <- glmm %>%
+  select(group, predictor, coefficient, p_val) %>%
+  mutate(p_val = round(p_val, 2),
+         p_val = case_when(
+          p_val < 0.001 ~ as.character('< 0.001'),
+          TRUE ~ as.character(p_val)
+        )) %>%
+  rename('$\beta$ (f.)'=coefficient, '$p$'=p_val) %>%
+  left_join(glmm_r %>% 
+              select(group, predictor, coefficient, p_val) %>%
+              mutate(p_val = round(p_val, 2),
+                      p_val = case_when(
+                      p_val < 0.001 ~ as.character('< 0.001'),
+                      TRUE ~ as.character(p_val))) %>%
+              rename('$\beta$ (rob.)'=coefficient, '$p$ (rob.)'=p_val),
+              by = c("group", "predictor")) %>%
+  left_join(bayes %>%
+              select(group, predictor, coefficient, CI) %>%
+              rename('$\beta$ (b.)'=coefficient, 'CI 95%'=CI)) %>%
+  left_join(bayes_r %>%
+              select(group, predictor, coefficient, CI) %>%
+              rename('$\beta$ (b.rob.)'=coefficient, 'CI 95% (rob.)'=CI)) %>%
+  rename(concept = group) %>%
+  mutate(concept = str_replace(concept, "_group", ""),
+         concept = factor(concept, levels = worder),
+         predictor = case_when(
+           predictor == "avgmonth_tmp" ~ "temperature",
+           predictor == "maxmonth_pre" ~ "precipitation",
+           predictor == "maxmonth_wnd" ~ "windspeed",
+           TRUE ~ as.character(predictor)
+           ),
+         predictor = factor(predictor, levels = porder)) %>%
+  arrange(concept, predictor)
+
+all <- all %>%
+  left_join(cases_area %>% select(concept, predictor, rank), by= c("concept", "predictor")) %>%
+  left_join(cases_area_rob %>% select(concept, predictor, "rank (rob.)"), by= c("concept", "predictor")) %>%
+    mutate(concept = paste0("concept", concept))
+
+all_table <- xtable(all, digits=c(0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2))
+print(all_table, file = here("output", "tables", "stats.tex"), include.rownames=FALSE)
+```
+
+Create a population plot:
+
+```{r popplot, include=TRUE}
+
+plot_snow_pop <- plot_snow_pop + labs(x="")
+plot_ice_pop <- plot_ice_pop + labs(y="", x="")
+plot_rain_pop <- plot_rain_pop + labs(y="", x="")
+plot_wind_pop <- plot_wind_pop + labs(y="")
+plot_taste_pop <- plot_taste_pop + labs(y="")
+plot_dance_pop <- plot_dance_pop + labs(y="")
+
+a <- list(plot_snow_pop, plot_ice_pop, plot_rain_pop,
+          plot_wind_pop, plot_smell_pop, plot_taste_pop,
+          plot_dance_pop)
+
+myfontsize <- gpar(fontsize = 8)
+
+ggsave(here("output", "figures", "supplementary", "casespop.pdf"), grid.arrange(
+  arrangeGrob(a[[1]], top = textGrob("SNOW", gp=myfontsize)),
+  arrangeGrob(a[[2]], top = textGrob("ICE", gp=myfontsize)),
+  arrangeGrob(a[[3]], top = textGrob("RAIN", gp=myfontsize)),
+  arrangeGrob(a[[4]], top = textGrob("WIND", gp=myfontsize)),
+  arrangeGrob(a[[5]], top = textGrob("SMELL", gp=myfontsize)),
+  arrangeGrob(a[[6]], top = textGrob("TASTE", gp=myfontsize)),
+  arrangeGrob(a[[7]], top = textGrob("DANCE", gp=myfontsize)),
+  nrow = 2, ncol = 4,
+  heights = c(1, 1), widths = c(2, 2, 2, 2)), 
+  width=7.5, height=4)
+
+```

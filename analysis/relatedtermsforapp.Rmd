@@ -1,0 +1,62 @@
+---
+title: "Find related terms for app"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(wordspace)
+
+select <- dplyr::select
+
+```
+
+This notebook is used to find related terms for the app.
+
+## Find nearest neighbour terms
+
+
+```{r termtermsimilarity, include=TRUE}
+
+# code based on examples here:
+# https://cran.r-project.org/web/packages/wordspace/vignettes/wordspace-intro.html
+
+#d_wide <- read_csv(here("data", "foranalyses", "d_wide.csv"))
+d_long <- read_csv(here("data", "foranalyses", "d_long_nounverbadj.csv")) %>% 
+  rename(dict = id)
+
+#docterm <- d_wide %>% select(dict, word, count) %>% 
+docterm <- d_long %>% select(dict, word, count) %>% 
+  filter(count > 0)
+
+words <- unique(docterm$word)
+
+VObj <- dsm(target=docterm$word, feature=docterm$dict, score=docterm$count, raw.freq=TRUE)
+VObj <- dsm.score(VObj, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
+VObj250 <- dsm.projection(VObj, method="svd", n=250)
+
+app_data <-  read_csv(here("output", "results", "bila_app_stats_2000.csv"))
+
+nns <- function(term) {
+  if (term %in% docterm$word) {
+    nn <- names(nearest.neighbours(VObj250, term, n = 10))
+  } else {
+    nn = character(length=10)
+  }
+  as_tibble(nn) %>% mutate(i = row_number())
+} 
+
+app_nns <- app_data %>% 
+  select(word) %>% 
+  unique() %>% 
+  mutate(neighbours = map(word, nns)) %>% 
+  unnest() %>% 
+  rename(neighbour = value)
+
+write_csv(app_nns, here("output", "results", "bila_app_nn_2000.csv"))
+```
