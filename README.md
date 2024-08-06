@@ -55,8 +55,7 @@ to install packages used by the code in this repository
 
 ## Python version
 
-This code was developed using Python 3.11
-
+This code was developed using Python 3.11. See `environment.yml` for a full specification of the environment used.
 
 ## Reproducing BILA data set
 
