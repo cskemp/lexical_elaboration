@@ -54,7 +54,7 @@ for (file_path in csv_files) {
 }
 
 left_join_df <- function(df1, df2) {
-  left_join(df1, df2, by = "glottocode")
+  left_join(df1, df2, by = "glottocode", relationship = "many-to-many")
 }
 
 # write to one file
