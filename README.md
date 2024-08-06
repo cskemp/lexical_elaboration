@@ -77,7 +77,7 @@ B. Assemble the set of dictionaries from HathiTrust (see `../preprocessing/hathi
 
 6) Convert the IDs of all volumes in the final list using `htid2rsync --from-file 02_hathi_ids.txt > 02_hathi_ids_sanitized.txt`, where `htid2rsync` is a command line utility installed as part of the htrc-feature-reader package.
 
-7) Download counts for all volumes in the final list using `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/C:/Users/tkhishigsure/OneDrive - The University of Melbourne/Documents/github/lexical_elaboration/rawdata/downloaded/hathi_raw/`. Change the file path as needed.
+7) Download counts for all volumes in the final list using `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/ C:/Users/tkhishigsure/OneDrive - The University of Melbourne/Documents/github/lexical_elaboration/rawdata/downloaded/hathi_raw/`. Change the file path as needed.
 
 
 C. Assemble unigram frequencies (see `../preprocessing/README.md`).

@@ -8,10 +8,8 @@ library(stringi)
 # https://github.com/rich-iannone/UnidecodeR
 # devtools::install_github("rich-iannone/unidecoder")
 
-# output/glottolog_variant_names.tsv was created by running
+# data/forpreprocessing/glottolog_variant_names.tsv was created by running
 # > python read_glottolog_language_names.py > ../../data/forpreprocessing/glottolog_variant_names.tsv
-
-
 
 lstring <- read_delim(here("data/forpreprocessing/glottolog_variant_names.tsv"), delim = "\t") %>%
   mutate(l_no_parens = str_replace(label, " \\(.*\\)", "")) %>%
