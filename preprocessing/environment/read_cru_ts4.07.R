@@ -11,8 +11,6 @@ select <- dplyr::select
 
 decades <- c("1961.1970.", "1971.1980.", "1981.1990.")
 
-cfile <- "../../rawdata/downloaded/cru_4.07/cru_ts4.07.1961.1970.pre.dat.nc"
-
 # First set up data frame for gcodes
 all_langs <- read_csv(here("data", "biladataset", "bila_dictionaries_full.csv"))  %>%
   select(glottocode, langname, longitude, latitude)  %>%
@@ -24,8 +22,7 @@ gcodeloc_sf <- st_as_sf(all_langs, coords = c("longitude", "latitude"),
 # Now define functions for reading CRU files
 
 read_cru_decade <- function(varname, decade, gcodeloc_sf) {
-
-  cfile <- paste0("../../rawdata/downloaded/cru_4.07/cru_ts4.07.", decade, varname, ".dat.nc")
+  cfile <- paste0(here("rawdata", "downloaded", "cru_4.07"), "/cru_ts4.07.", decade, varname, ".dat.nc")
   # to inspect variable names (and figure out which one to ask for in following line)
   #  ncd <- nc_open(cfile)
 
