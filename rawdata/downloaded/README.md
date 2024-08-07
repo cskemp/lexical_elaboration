@@ -16,7 +16,7 @@ The folder `nonhathi_raw` should include all non-HathiTrust dictionaries, which 
 * `Swadesh-1955-215.tsv`: downloaded from Concepticon (https://github.com/concepticon/concepticon-data)
 
 #### Single words occurring more than 3 times in COCA
-* `w1cs_c.txt`: downloaded from http://www.ngrams.info on January 09, 2012. The citation is Davies, Mark. (2011) N-grams data from the Corpus of Contemporary American English (COCA). Due to copyright issue, we do not put the whole file here in the repository but the first 1000 lines are included for visualizing the format. Nevertheless, this file is not needed to reproduce the BILA data set because we included the count files `wordpos.p` and `wordposcounts.p` derived from that file in the folder `../data/forpreprocessing/`.
+* `w1cs_c.txt`: downloaded from http://www.ngrams.info on January 09, 2012. The citation is Davies, Mark. (2011) N-grams data from the Corpus of Contemporary American English (COCA). We are not able to distribute the complete file  but the first 1000 lines are included here to show the format of the file and what it contains. The complete file is not needed to reproduce the BILA data set because we included the count files `wordpos.p` and `wordposcounts.p` derived from that file in the folder `../data/forpreprocessing/`.
 
 #### List of Wiktionary languages
 * `wiktionary_langs.tsv`: manually extracted from Wiktionary (https://en.wiktionary.org/wiki/Wiktionary:List_of_languages)
