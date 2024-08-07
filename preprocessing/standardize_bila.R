@@ -31,15 +31,15 @@ wordcount <-  read_csv(wordcount_path,  col_types = cols(id = col_character(),
 expect_equal(length(setdiff(d_dup$id, wordcount$id)), 0)
 expect_equal(length(setdiff(wordcount$id, d_dup$id)), 0)
 
-# the full version includes 20213 tokens of nouns, verbs, and adjectives
+# the full version includes 20192 tokens of nouns, verbs, and adjectives
 wordcount_long <-  read_csv(wordcount_long_path) %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_long$word)), 20213)
+expect_equal(length(unique(wordcount_long$word)), 20192)
 
-# the full version includes 12036 noun tokens
+# the full version includes 12021 noun tokens
 wordcount_noun <-  read_csv(wordcount_noun_path) %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_noun$word)), 12036)
+expect_equal(length(unique(wordcount_noun$word)), 12021)
 
 # Dropping small dictionaries and dictionaries with engprop <30 reduces the set of distinct glottocodes from 659 to 615 in size.
 
@@ -144,10 +144,10 @@ bila_long_nounverbadj <- read_csv( here("data", "biladataset", "bila_long_nounve
   filter(id %in% d_standard$id) %>%
   write_csv(here("data", "biladataset", "bila_long_nounverbadj.csv"))
 
-# the standard version includes 20208 tokens of nouns, verbs, and adjectives
+# the standard version includes 20187 tokens of nouns, verbs, and adjectives
 wordcount_long_standard <-  bila_long_nounverbadj %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_long_standard$word)), 20208)
+expect_equal(length(unique(wordcount_long_standard$word)), 20187)
 
 bila_matrix_noun <- read_csv( here("data", "biladataset", "bila_matrix_noun_full.csv")) %>%
   filter(id %in% d_standard$id) %>%
@@ -157,10 +157,10 @@ bila_long_noun <- read_csv( here("data", "biladataset", "bila_long_noun_full.csv
   filter(id %in% d_standard$id) %>%
   write_csv(here("data", "biladataset", "bila_long_noun.csv"))
 
-# the standard version includes 12031 noun tokens
+# the standard version includes 12016 noun tokens
 wordcount_noun_standard <-  bila_long_noun %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_noun_standard$word)), 12031)
+expect_equal(length(unique(wordcount_noun_standard$word)), 12016)
 
 # now we'll write lemmatized version for noun
 
@@ -200,7 +200,7 @@ bila_long_noun_lemmatized <- bila_long_noun %>%
   rename(word=lemmatized_word) %>%
   write_csv(here("data", "biladataset", "bila_long_noun_lemmatized.csv"))
 
-# the lemmatized version includes 8577 noun tokens
+# the lemmatized version includes 8575 noun tokens
 wordcount_lemma_standard <-  bila_long_noun_lemmatized %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_lemma_standard$word)), 8577)
+expect_equal(length(unique(wordcount_lemma_standard$word)), 8575)
