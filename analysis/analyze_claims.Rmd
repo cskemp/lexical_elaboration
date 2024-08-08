@@ -272,15 +272,23 @@ expect_equal(nrow(d_claims_distinct), 73)
 
 ##Run hierarchical model
 
-We'll run hierarchical model to compute zeta scores for unique combinations of words. 
+We'll run hierarchical model to compute L^lang scores for unique combinations of words.
 
 Load word count file:
 
 ```{r wordcount, include=TRUE}
 
-d_long_path <- here("data", "foranalyses", "d_long.csv")
-#d_long_path <- here("data", "foranalyses", "d_long_robust.csv")
-d_long <- read_csv(d_long_path, show_col_types = FALSE)
+analyses <- c("full", "robustness")
+
+for (analysis in analyses) {
+
+if (analysis == "full") {
+  d_long_path <- here("data", "foranalyses", "d_long.csv")
+  d_long <- read_csv(d_long_path, show_col_types = FALSE)
+} else if (analysis == "robustness") {
+  d_long_path <- here("data", "foranalyses", "d_long_robust.csv")
+  d_long <- read_csv(d_long_path, show_col_types = FALSE)
+}}
 
 d_wide <- d_long %>% 
   mutate(dict = id, lang = gcode_data, langname = langname_data, family = langfamily_data, population = population_data) %>% 
@@ -393,17 +401,42 @@ expect_equal(nrow(d_claims), 163)
 
 Run hierarchical model to compute L^lang score.
 
-```{r logisticregression, include=TRUE, eval=FALSE}
+```{r logisticregression, include=TRUE}
 
 weights_lr_combos <- bind_weights_par(d_combos)
 
+for (analysis in analyses) {
+
+if (analysis == "full") {
+  
 # write results for all languages in BILA
 claims_lr_full <- weights_lr_combos %>%
   rename(gcode = lang) %>%
   left_join(dict %>% select(gcode, langname, langfamily, area), by = "gcode") %>%
   rename(glottocode=gcode, combo_name=word) %>%
   arrange(desc(zeta)) %>%
-  #write_csv(here("output", "results", "claims_lr_lang_full.csv"))
+  write_csv(here("output", "results", "claims_lr_lang_full.csv"))
+
+# write results for languages that appear in the collection of claims
+claims_lr <- d_claims %>%
+  rename(groupname=langname) %>%
+  tidyr::unnest(gcode_list) %>%
+  rename(glottocode=gcode_list) %>%
+  left_join(claims_lr_full %>% select(glottocode, langname, combo_name, convergence, convergence_set, zeta), by=c("glottocode", "combo_name")) %>%
+  unique() %>%
+  arrange(desc(zeta)) %>%
+  mutate(words = map_chr(word_list, str_c, collapse = ", ")) %>%
+  select(-word_list) %>%
+  write_csv(here("output", "results", "claims_lr_lang.csv"))
+  
+} else if (analysis == "robustness") {
+  
+# write results for all languages in BILA
+claims_lr_full <- weights_lr_combos %>%
+  rename(gcode = lang) %>%
+  left_join(dict %>% select(gcode, langname, langfamily, area), by = "gcode") %>%
+  rename(glottocode=gcode, combo_name=word) %>%
+  arrange(desc(zeta)) %>%
   write_csv(here("output", "results", "claims_lr_lang_full_robust.csv"))
 
 # write results for languages that appear in the collection of claims
@@ -416,8 +449,9 @@ claims_lr <- d_claims %>%
   arrange(desc(zeta)) %>%
   mutate(words = map_chr(word_list, str_c, collapse = ", ")) %>%
   select(-word_list) %>%
-  #write_csv(here("output", "results", "claims_lr_lang.csv"))
   write_csv(here("output", "results", "claims_lr_lang_robust.csv"))
+  
+}}
 
 ```
 
@@ -892,7 +926,7 @@ default_plot
 
 Create a similar figure on robustness set and combine plots:
 
-```{r plots, include=TRUE, eval=FALSE}
+```{r plots, include=TRUE}
 
 default_robust <- default_robust %>%
   filter(rank != "NaN")  %>%
