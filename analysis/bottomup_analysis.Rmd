@@ -35,17 +35,34 @@ This notebook contains two bottom-up analyses: a) exhaustive logistic regression
 
 Load word count, dictionary, and stop words data:
 
-```{r loaddata, include=TRUE, eval=FALSE}
+```{r loaddata, include=TRUE}
 
-d_long <- read_csv(here("data", "foranalyses", "d_long.csv"), show_col_types = FALSE)
-#d_long <- read_csv(here("data", "foranalyses", "d_long_robust.csv"), show_col_types = FALSE) #for robustness set
+analyses <- c("full", "robustness")
+analyses <- c("full")
+analyses <- c("robustness")
+
+for (analysis in analyses) {
+  suffix <- ""
+  langs <- 300
+  if (analysis == "robustness") {
+  suffix <- "_robust"
+  langs <- 150
+  }
+  input_d_long <- paste0("d_long", suffix, ".csv")
+  output_dict <- paste0("bottomup_stats_dict", suffix, ".csv")
+  output_dictarea <- paste0("bottomup_stats_dictarea", suffix, ".csv")
+ 
+  # code that reads from input files, does some analyses and writes to output files
+}
+
+d_long <- read_csv(here("data", "foranalyses", input_d_long), show_col_types = FALSE)
 dict <- read_csv(here("data", "biladataset", "bila_dictionaries.csv"), show_col_types = FALSE)
 stopwords <- readLines(here("data", "foranalyses", "stopwords.txt"))
 ```
 
 Define a subset of words on which we run statistical analysis: we keep words that appear in dictionaries from more than 300 languages for the full set and 150 for the robustness set.
 
-```{r define subset, include=TRUE, eval=FALSE}
+```{r define subset, include=TRUE}
 
 word_nlang_stat <- d_long %>%
   filter(count != 0) %>%
@@ -55,246 +72,39 @@ word_nlang_stat <- d_long %>%
   summarise(nlangs = n_distinct(gcode_data)) %>%
   ungroup() 
 
-subset_stat <- word_nlang_stat %>%
-  filter(!(grepl("_data$", word)), nlangs > 300, !(word %in% stopwords)) %>%
-  #filter(!(grepl("_data$", word)), nlangs > 150, !(word %in% stopwords)) %>% #for robustness set
-  arrange(desc(nlangs))
-
-subclass <- subset_stat %>%
-  pull(word)
-
-# "snow" is absent from subset of words for robustness set, so we'll add it manually
-#subclass <- c(subclass, "snow")
-
+  subset_stat <- word_nlang_stat %>%
+    filter(!(grepl("_data$", word)), nlangs > langs, !(word %in% stopwords)) %>%
+    arrange(desc(nlangs))
+  subclass <- subset_stat %>% pull(word)
+  # robustness set does not include snow, so we include it manually
+  subclass <- c(subclass, "snow")
+  subclass <- unique(subclass)
 ```
 
 Prepare a data frame: we standardize all predictor variables except for subsistence strategy which is a categorical variable. Note that population size is first log-transformed and then standardized.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 dstats <- d_long %>%
   filter(word %in% subclass) %>%
   rename(glottocode = gcode_data, langfamily = langfamily_data, area=area_data, subsistence=subsistence_data, logpop=logpop_data, avgmonth_tmp=avgmonth_tmp_data, minmonth_tmp=minmonth_tmp_data, maxmonth_pre=maxmonth_pre_data, maxmonth_wnd=maxmonth_wnd_data) %>%
   mutate(across(avgmonth_tmp:logpop, ~as.numeric(scale(.))))
+
 ```
 
 Write a GLMM function without area as a random effect.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
-
-run_glmmTMB <- function(word, dstats, predictor_name) {
-  
-  # Filter the dataset
-  dstats_this <- dstats %>%
-    filter(word == .env$word) %>%
-    drop_na(count)
-  
-  # Define formulas for models
-  formula_full_noarea <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|langfamily) + (1|glottocode)"))
-  formula_reduced_noarea <- as.formula("cbind(count, dictsize_data - count) ~ (1|langfamily) + (1|glottocode)")
-  
-  # Initialize list to store warnings
-  warnings_list <- list()
-  
-  # Function to capture warnings
-  capture_warnings <- function(expr) {
-    warnings <- NULL
-    result <- withCallingHandlers(
-      expr,
-      warning = function(w) {
-        warnings <<- c(warnings, conditionMessage(w))
-        invokeRestart("muffleWarning")
-      }
-    )
-    list(result = result, warnings = warnings)
-  }
-  
-  # Fit full model without area
-  full_model_noarea <- capture_warnings(glmmTMB(formula_full_noarea, data = dstats_this, family = binomial))
-  m1_a <- full_model_noarea$result
-  warnings_list$m1_a <- full_model_noarea$warnings
-  
-  # Fit reduced model without area
-  reduced_model_noarea <- capture_warnings(glmmTMB(formula_reduced_noarea, data = dstats_this, family = binomial))
-  m2_a <- reduced_model_noarea$result
-  warnings_list$m2_a <- reduced_model_noarea$warnings
-  
-  # Perform ANOVA
-  a_a <- anova(m2_a, m1_a)
-  pval_a <- a_a$`Pr(>Chisq)`[2]
-  
-  # Retrieve coefficients
-  if (predictor_name == "subsistence") {
-    envcoef_a <- fixef(m1_a)$cond["subsistenceother"]
-  } else {
-    envcoef_a <- fixef(m1_a)$cond[paste(predictor_name)]
-  }
-  
-  # Summarize results
-  summ <- tibble(
-    word = word, 
-    predictor = predictor_name, 
-    coefficient = envcoef_a, 
-    p_val = pval_a,
-    warnings_m1 = list(warnings_list$m1_a),
-    warnings_m2 = list(warnings_list$m2_a)
-  )
-  
-  summ$warnings_m1 <- sapply(summ$warnings_m1, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  summ$warnings_m2 <- sapply(summ$warnings_m2, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  
-  return(summ)
-}
-```
-
-Run the GLMM function without area as a random effect.
-
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
-
-glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB(.x, dstats, "avgmonth_tmp") )  %>%
-  arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats.csv"))
-  #write_csv(here("output", "results", "bottomup_stats_robust.csv"))
-
-glmer_pre <- map_dfr(subclass, ~ run_glmmTMB(.x, dstats, "maxmonth_pre") )  %>%
-  arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_robust.csv"), append = TRUE)
-
-glmer_wnd <- map_dfr(subclass, ~ run_glmmTMB(.x, dstats, "maxmonth_wnd") )  %>% 
-  arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_robust.csv"), append = TRUE)
-
-glmer_sub <- map_dfr(subclass, ~ run_glmmTMB(.x, dstats, "subsistence") )  %>%
-  arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_robust.csv"), append = TRUE)
-
-glmer_pop <- map_dfr(subclass, ~ run_glmmTMB(.x, dstats, "logpop") )  %>%
-  arrange(coefficient) %>%
-  mutate(predictor="population") %>%
-  write_csv(here("output", "results", "bottomup_stats.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_robust.csv"), append = TRUE)
-
-```
-
-Write a GLMM function with area as a random effect.
-
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
-
-run_glmmTMB_witharea <- function(word, dstats, predictor_name) {
-  
-  # Filter the dataset
-  dstats_this <- dstats %>%
-    filter(word == .env$word) %>%
-    drop_na(count)
-  
- # Define formulas for models
-  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|area) + (1|langfamily) + (1|glottocode)"))
-  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|area) + (1|langfamily) + (1|glottocode)")
-  
-  # Initialize list to store warnings
-  warnings_list <- list()
-  
-  # Function to capture warnings
-  capture_warnings <- function(expr) {
-    warnings <- NULL
-    result <- withCallingHandlers(
-      expr,
-      warning = function(w) {
-        warnings <<- c(warnings, conditionMessage(w))
-        invokeRestart("muffleWarning")
-      }
-    )
-    list(result = result, warnings = warnings)
-  }
-  
-  # Fit full model
-  full_model <- capture_warnings(glmmTMB(formula_full, data = dstats_this, family = binomial))
-  m1 <- full_model$result
-  warnings_list$m1 <- full_model$warnings
-  
-  # Fit reduced model
-  reduced_model <- capture_warnings(glmmTMB(formula_reduced, data = dstats_this, family = binomial))
-  m2 <- reduced_model$result
-  warnings_list$m2 <- reduced_model$warnings
-  
-  # Perform ANOVA
-  a <- anova(m2, m1)
-  pval <- a$`Pr(>Chisq)`[2]
-  
-  # Retrieve coefficients
-  if (predictor_name == "subsistence") {
-    envcoef <- fixef(m1)$cond["subsistenceother"]
-  } else {
-    envcoef <- fixef(m1)$cond[paste(predictor_name)]
-  }
-  
-  # Summarize results
-  summ <- tibble(
-    word = word, 
-    predictor = predictor_name, 
-    coefficient = envcoef, 
-    p_val = pval, 
-    warnings_m1 = list(warnings_list$m1),
-    warnings_m2 = list(warnings_list$m2)
-  )
-  
-  summ$warnings_m1 <- sapply(summ$warnings_m1, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  summ$warnings_m2 <- sapply(summ$warnings_m2, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  
-  return(summ)
-}
-```
-
-Run the GLMM function with area as a random effect.
-
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
-
-glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_witharea(.x, dstats, "avgmonth_tmp") )  %>%
-  arrange(coefficient) %>%
-  #write_csv(here("output", "results", "bottomup_stats_area.csv"))
-  write_csv(here("output", "results", "bottomup_stats_area_robust.csv"))
-
-glmer_pre <- map_dfr(subclass, ~ run_glmmTMB_witharea(.x, dstats, "maxmonth_pre") )  %>%
-  arrange(coefficient) %>%
-  #write_csv(here("output", "results", "bottomup_stats_area.csv"), append = TRUE)
-  write_csv(here("output", "results", "bottomup_stats_area_robust.csv"), append = TRUE)
-
-glmer_wnd <- map_dfr(subclass, ~ run_glmmTMB_witharea(.x, dstats, "maxmonth_wnd") )  %>% 
-  arrange(coefficient) %>%
-  #write_csv(here("output", "results", "bottomup_stats_area.csv"), append = TRUE)
-  write_csv(here("output", "results", "bottomup_stats_area_robust.csv"), append = TRUE)
-
-glmer_sub <- map_dfr(subclass, ~ run_glmmTMB_witharea(.x, dstats, "subsistence") )  %>%
-  arrange(coefficient) %>%
-  #write_csv(here("output", "results", "bottomup_stats_area.csv"), append = TRUE)
-  write_csv(here("output", "results", "bottomup_stats_area_robust.csv"), append = TRUE)
-
-glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_witharea(.x, dstats, "logpop") )  %>%
-  arrange(coefficient) %>%
-  mutate(predictor="population") %>%
-  #write_csv(here("output", "results", "bottomup_stats_area.csv"), append = TRUE)
-  write_csv(here("output", "results", "bottomup_stats_area_robust.csv"), append = TRUE)
-
-```
-
-Write a GLMM function with dictionary as a random effect.
-
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 run_glmmTMB_dict <- function(word, dstats, predictor_name) {
   
   # Filter the dataset
   dstats_this <- dstats %>%
-    filter(word == "resource") %>%
-    #filter(word == .env$word) %>%
+    filter(word == .env$word) %>%
     drop_na(count)
   
  # Define formulas for models
-  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~ avgmonth_tmp + (1|id) + (1|langfamily) + (1|glottocode)"))
-  #formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|langfamily) + (1|glottocode)"))
+  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|langfamily) + (1|glottocode)"))
   formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|langfamily)")
   
   # Initialize list to store warnings
@@ -351,41 +161,36 @@ run_glmmTMB_dict <- function(word, dstats, predictor_name) {
 }
 ```
 
-Run the GLMM function with area as a random effect.
+Run the GLMM function without area as a random effect.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats_dict.csv"))
-  #write_csv(here("output", "results", "bottomup_stats_dict_robust.csv"))
+  write_csv(here("output", "results", output_dict))
 
 glmer_pre <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "maxmonth_pre") )  %>%
   arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats_dict.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dict_robust.csv"), append = TRUE)
+  write_csv(here("output", "results", output_dict), append = TRUE)
 
 glmer_wnd <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "maxmonth_wnd") )  %>% 
   arrange(coefficient)  %>%
-  write_csv(here("output", "results", "bottomup_stats_dict.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dict_robust.csv"), append = TRUE)
+  write_csv(here("output", "results", output_dict), append = TRUE)
 
 glmer_sub <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "subsistence") )  %>%
   arrange(coefficient)  %>%
-  write_csv(here("output", "results", "bottomup_stats_dict.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dict_robust.csv"), append = TRUE)
+  write_csv(here("output", "results", output_dict), append = TRUE)
 
 glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "logpop") )  %>%
   arrange(coefficient) %>%
   mutate(predictor="population")  %>%
-  write_csv(here("output", "results", "bottomup_stats_dict.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dict_robust.csv"), append = TRUE)
+  write_csv(here("output", "results", output_dict), append = TRUE)
 
 ```
 
 Write a GLMM function with dictionary and area as random effects.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 run_glmmTMB_dictarea <- function(word, dstats, predictor_name) {
   
@@ -454,33 +259,28 @@ run_glmmTMB_dictarea <- function(word, dstats, predictor_name) {
 
 Run the GLMM function with area as a random effect.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats_dictarea.csv"))
-  #write_csv(here("output", "results", "bottomup_stats_dictarea_robust.csv"))
+  write_csv(here("output", "results", output_dictarea))
 
 glmer_pre <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "maxmonth_pre") )  %>%
   arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats_dictarea.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dictarea_robust.csv"), append = TRUE)
+  write_csv(here("output", "results", output_dictarea), append = TRUE)
 
 glmer_wnd <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "maxmonth_wnd") )  %>% 
-  arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats_dictarea.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dictarea_robust.csv"), append = TRUE)
+  arrange(coefficient)  %>%
+  write_csv(here("output", "results", output_dictarea), append = TRUE)
 
 glmer_sub <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "subsistence") )  %>%
-  arrange(coefficient) %>%
-  write_csv(here("output", "results", "bottomup_stats_dictarea.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dictarea_robust.csv"), append = TRUE)
+  arrange(coefficient)  %>%
+  write_csv(here("output", "results", output_dictarea), append = TRUE)
 
 glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "logpop") )  %>%
   arrange(coefficient) %>%
-  mutate(predictor="population") %>%
-  write_csv(here("output", "results", "bottomup_stats_dictarea.csv"), append = TRUE)
-  #write_csv(here("output", "results", "bottomup_stats_dictarea_robust.csv"), append = TRUE)
+  mutate(predictor="population")  %>%
+  write_csv(here("output", "results", output_dictarea), append = TRUE)
 
 ```
 
@@ -681,12 +481,6 @@ make_plot <- function(pvals, predictorname, termlist, lowerbound, upperbound, ma
                     nudge_x = 0, nudge_y = 0.8, segment.color= "gray50", box.padding = 0.01, size = 2.5, color="black") +
     coord_cartesian(xlim = c(lowerbound, upperbound)) +
     scale_x_continuous(labels = function(x) abs(x), breaks = seq(-95, 95, by = breaknumber)) +
-    #scale_y_continuous(trans = "log10", breaks = scales::trans_breaks("log10", function(x) 10^x),
-    #                   labels = scales::trans_format("log10", scales::math_format(10^.x))) +
-                       #limits = c(0, NA)) +
-    #scale_y_continuous(trans = "log1p", breaks = scales::trans_breaks("log1p", function(x) 10^x), 
-    #                   labels = scales::label_number(), 
-    #                   limits = c(1, NA)) +
     scale_y_continuous(trans = "log1p", breaks = ggrrr::breaks_log1p()) +
     labs(x = "-ln(p-value)", y = "term counts", title = paste0(str_to_title(predictorname))) +
     theme_classic() +
