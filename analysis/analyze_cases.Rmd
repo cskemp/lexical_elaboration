@@ -39,11 +39,30 @@ This notebook contains analysis of case studies (see the main text section calle
 
 ## Analyses
 
-Load word count and dictionary data (undo comment to do robustness check):
+Load word count and dictionary data:
 
 ```{r load data, include=TRUE}
-wordcount <- read_csv(here("data", "foranalyses", "wordcount.csv"), show_col_types = FALSE)
-#wordcount <- read_csv(here("data", "foranalyses", "wordcount_robust.csv"), show_col_types = FALSE)
+
+analyses <- c("full", "robustness")
+analyses <- c("full")
+analyses <- c("robustness")
+
+for (analysis in analyses) {
+  suffix <- ""
+  if (analysis == "robustness") {
+  suffix <- "_robust"
+  }
+  input_wordcount <- paste0("wordcount", suffix, ".csv")
+  input_d_long <- paste0("d_long", suffix, ".csv")
+  output_lr_lang <- paste0("cases_lr_lang", suffix, ".csv")
+  output_lr_fam <- paste0("cases_lr_fam", suffix, ".csv")
+  output_glmm <- paste0("glmer_stats", suffix, ".csv")
+  output_glmm_dict <- paste0("glmer_stats_dict", suffix, ".csv")
+ 
+  # code that reads from input files, does some analyses and writes to output files
+}
+
+wordcount <- read_csv(here("data", "foranalyses", input_wordcount), show_col_types = FALSE)
 dict <- read_csv(here("data", "foranalyses", "bila_dictionaries_withenv.csv"), show_col_types = FALSE)
 ```
 
@@ -124,11 +143,9 @@ d <- cases_wordcount %>%
 
 We'll compute L^lang score for individual languages as well as L^fam for language families.
 
-```{r logistic regression, include=TRUE, eval = FALSE}
+```{r logistic regression, include=TRUE}
 
-d_long_path <- here("data", "foranalyses", "d_long.csv")
-#d_long_path <- here("data", "foranalyses", "d_long_robust.csv")
-d_long <- read_csv(d_long_path, show_col_types = FALSE)
+d_long <- read_csv(here("data", "foranalyses", input_d_long), show_col_types = FALSE)
 
 d_wide <- d_long %>% 
   mutate(dict = id, lang = gcode_data, langname = langname_data, family = langfamily_data, population = population_data) %>% 
@@ -171,13 +188,11 @@ weights_lr <- weights_lr_raw %>%
   left_join(dict %>% select(langname, glottocode, area, langfamily, longitude, latitude, population, subsistence), by = "glottocode") %>%
   arrange(desc(zeta)) %>%
   unique() %>%
-  write_csv(here("output", "results", "cases_lr_lang.csv"))
-  #write_csv(here("output", "results", "cases_lr_lang_robust.csv"))
+  write_csv(here("output", "results", output_lr_lang))
 
 weights_lr_fam <- bind_weights_fam(d_wide_small) %>% 
   arrange(desc(zeta)) %>%
-  write_csv(here("output", "results", "cases_lr_fam.csv"))
-  #write_csv(here("output", "results", "cases_lr_fam_robust.csv"))
+  write_csv(here("output", "results", output_lr_fam))
 
 ```
 
@@ -337,7 +352,7 @@ print(populationplot)
 
 We run mixed-effects logistic regression to determine whether there is a statistically significant relationship between counts for each group of terms and the environmental variables. We run the regression twice: one including a random effect for language family to allow for historical relationships between languages, and the other including a random effect for area to allow for contacts in addition to language family. We also run Bayesian mixed-effects logistic regression.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 dstats <- d %>% 
   # undo conversion to counts per thousand
@@ -351,7 +366,7 @@ dstats <- d %>%
 
 Write a function without dictionary as a random effect:
 
-```{r run glmmtmb function, include=TRUE, eval=FALSE}
+```{r run glmmtmb function, include=TRUE}
 
 run_glmmTMB <- function(groupname, dstats, predictor_name) {
   
@@ -444,40 +459,35 @@ run_glmmTMB <- function(groupname, dstats, predictor_name) {
 
 Run GLMM:
 
-```{r run glmer, include=TRUE, eval=FALSE}
+```{r run glmer, include=TRUE}
 
 glmer_tmp <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "avgmonth_tmp") )  %>% 
   arrange(coefficient) %>%
-  #write_csv(here("output", "results", "glmer_stats.csv"))
-  write_csv(here("output", "results", "glmer_stats_robust.csv"))
+  write_csv(here("output", "results", output_glmm))
 
 glmer_pre <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_pre") )  %>% 
   arrange(coefficient) %>%
-  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm), append=TRUE)
 
 glmer_wnd <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_wnd") )  %>% 
   arrange(coefficient) %>%
-  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm), append=TRUE)
 
 glmer_sub <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "subsistence") )  %>% 
   arrange(coefficient) %>%
-  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm), append=TRUE)
 
 glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "logpop") )  %>% 
   arrange(coefficient) %>%
   mutate(predictor="population") %>%
-  #write_csv(here("output", "results", "glmer_stats.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm), append=TRUE)
 ```
 
 Write a function with dictionary as a random effect:
 
-```{r run glmmtmb function, include=TRUE, eval=FALSE}
+```{r run glmmtmb function, include=TRUE}
 
-run_glmmTMB <- function(groupname, dstats, predictor_name) {
+run_glmmTMB_dict <- function(groupname, dstats, predictor_name) {
   
   # Filter the dataset
   dstats_this <- dstats %>%
@@ -568,33 +578,28 @@ run_glmmTMB <- function(groupname, dstats, predictor_name) {
 
 Run GLMM:
 
-```{r run glmer, include=TRUE, eval=FALSE}
+```{r run glmer, include=TRUE}
 
-glmer_tmp <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "avgmonth_tmp") )  %>% 
+glmer_tmp <- map_dfr(all_groups, ~ run_glmmTMB_dict(.x, dstats, "avgmonth_tmp") )  %>% 
   arrange(coefficient) %>%
-  #write_csv(here("output", "results", "glmer_stats_dict.csv"))
-  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"))
+  write_csv(here("output", "results", output_glmm_dict))
 
-glmer_pre <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_pre") )  %>% 
+glmer_pre <- map_dfr(all_groups, ~ run_glmmTMB_dict(.x, dstats, "maxmonth_pre") )  %>% 
   arrange(coefficient) %>%
-  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm_dict), append=TRUE)
 
-glmer_wnd <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "maxmonth_wnd") )  %>% 
+glmer_wnd <- map_dfr(all_groups, ~ run_glmmTMB_dict(.x, dstats, "maxmonth_wnd") )  %>% 
   arrange(coefficient)  %>%
-  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm_dict), append=TRUE)
 
-glmer_sub <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "subsistence") )  %>% 
+glmer_sub <- map_dfr(all_groups, ~ run_glmmTMB_dict(.x, dstats, "subsistence") )  %>% 
   arrange(coefficient)  %>%
-  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm_dict), append=TRUE)
 
-glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "logpop") )  %>% 
+glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB_dict(.x, dstats, "logpop") )  %>% 
   arrange(coefficient) %>%
   mutate(predictor="population")  %>%
-  #write_csv(here("output", "results", "glmer_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "glmer_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_glmm_dict), append=TRUE)
 ```
 
 ## Bayesian analyses
@@ -635,25 +640,20 @@ run_bayes <- function(groupname, dstats, predictorname) {
 }
 
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "avgmonth_tmp") )  %>% 
-  #write_csv(here("output", "results", "bayes_stats_dict.csv"))
-  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"))
+  write_csv(here("output", "results", output_bayes_dict))
 
 bayes_pre <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "maxmonth_pre") )  %>% 
-  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_bayes_dict), append=TRUE)
 
 bayes_wnd <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "maxmonth_wnd") )  %>% 
-  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_bayes_dict), append=TRUE)
 
 bayes_sub <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "subsistence") )  %>% 
-  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_bayes_dict), append=TRUE)
 
 bayes_pop <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "logpop") )  %>% 
   mutate(predictor="population") %>%
-  #write_csv(here("output", "results", "bayes_stats_dict.csv"), append=TRUE)
-  write_csv(here("output", "results", "bayes_stats_dict_robust.csv"), append=TRUE)
+  write_csv(here("output", "results", output_bayes_dict), append=TRUE)
 
 ```
 
@@ -690,6 +690,10 @@ run_bayes_area <- function(groupname, dstats, predictorname) {
   
   return(summ)
 }
+
+for (analysis in analyses) {
+
+if (analysis == "full") {
 
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "avgmonth_tmp") )  %>% 
   write_csv(here("output", "results", "bayes_stats_dictarea.csv"))
@@ -751,6 +755,10 @@ all_group <- c("wind_group")
 bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>% 
   mutate(predictor="population") %>%
   write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
+
+} else if (analysis == "robustness") {
+ next
+}}
 ```
 
 Run Bayesian with area as a random effect on the robustness set. Because there were many divergent transition issues, we used simpler model without dictionary as a random effect by default.
@@ -787,6 +795,12 @@ run_bayes_area <- function(groupname, dstats, predictorname) {
   return(summ)
 }
 
+for (analysis in analyses) {
+
+if (analysis == "full") {
+  next
+} else if (analysis == "robustness") {
+
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "avgmonth_tmp") )  %>% 
   write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
 
@@ -802,6 +816,8 @@ bayes_sub <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "subsistence") )  
 bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>% 
   mutate(predictor="population") %>%
   write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
+
+}}
 ```
 
 ## Create figures
