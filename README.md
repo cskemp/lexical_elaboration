@@ -59,14 +59,10 @@ This code was developed using Python 3.11. See `environment.yml` for a full spec
 
 ## Reproducing BILA data set
 
-A. Before reproducing BILA data set files, we recommend extracting information on subsistence and climate data first.
-
-1) Run `read_subsistence.R` in `../preprocessing/subsistence` to extract subsistence information.
-
-2) Run `read_cru2.R` and `read_cru_ts4.07.R` in `../preprocessing/environment` to extract temperature and precipitation information for the locations associated with BILA languages.
+Before reproducing BILA data set files, we recommend extracting information on subsistence first. Run `read_subsistence.R` in `../preprocessing/subsistence` to extract subsistence information.
 
 
-B. Assemble the set of dictionaries from HathiTrust (see `../preprocessing/hathi_trust/README.md`).
+A. Assemble the set of dictionaries from HathiTrust (see `../preprocessing/hathi_trust/README.md`).
 
 1) Run first `python read_glottolog_language_names.py > ../../data/forpreprocessing/glottolog_variant_names.tsv` and then `make_language_re.R` to collect language names and alternative names from Glottolog.
 
@@ -83,7 +79,7 @@ B. Assemble the set of dictionaries from HathiTrust (see `../preprocessing/hathi
 7) Download counts for all volumes in the final list using `rsync -av --no-relative --files-from 02_hathi_ids_sanitized.txt data.analytics.hathitrust.org::features-2020.03/ ../../rawdata/downloaded/hathi_raw/`. Change the path as needed.
 
 
-C. Assemble unigram frequencies (see `../preprocessing/README.md`). Steps 3 through 8 assemble counts for nouns, verbs and adjectives -- the same steps should be repeated using "--pos noun" to assemble counts for nouns alone.
+B. Assemble unigram frequencies (see `../preprocessing/README.md`). Steps 3 through 8 assemble counts for nouns, verbs and adjectives -- the same steps should be repeated using "--pos noun" to assemble counts for nouns alone.
 
 1) First run `python readcoca.py` to create POS tags and COCA frequencies.
 
@@ -118,18 +114,20 @@ C. Assemble unigram frequencies (see `../preprocessing/README.md`). Steps 3 thro
 
 To reproduce tables and figures in main text and supplementary materials, follow the steps below. All code is in the folder `../analysis`. Certain code chunks are set up in a way that prevents from execution when you click "Run All" because it takes several hours to finish running those chunks.  
 
-1) Run `preliminary_steps.Rmd` to produce interim outputs necessary for the next steps.
+1) Run `read_cru2.R` and `read_cru_ts4.07.R` in `../analysis/environment` to extract temperature and precipitation information for the locations associated with BILA languages.
 
-2) Run `analyze_claims.Rmd` to produce Figure 1, Table S1, and Figure S3.
+2) Run `preliminary_steps.Rmd` to produce interim outputs necessary for the next steps.
 
-3) Run `analyze_cases.Rmd` to produce Figure 2, Table S2, Table S3, and Figure S5. Note that it takes several hours to generate results for Bayesian analyses.
+3) Run `analyze_claims.Rmd` to produce Figure 1, Table S1, and Figure S3.
 
-4) Run `bottomup_analysis.Rmd` to produce Figure 3, Figure S4, and Table S4. Note that it takes several hours to generate results for exhaustive analyses. 
+4) Run `analyze_cases.Rmd` to produce Figure 2, Table S2, Table S3, and Figure S5. Note that it takes several hours to generate results for Bayesian analyses.
 
-5) Run `make_maps.R` to produce Figure S1.
+5) Run `bottomup_analysis.Rmd` to produce Figure 3, Figure S4, and Table S4. Note that it takes several hours to generate results for exhaustive analyses. 
 
-6) Run `plot_related_lexemes.Rmd` to produce Figure S2.
+6) Run `make_maps.R` to produce Figure S1.
 
-7) Run `compute_zetas_par.R` and `relatedtermsforapp.Rmd` to produce results used for the [app]( https://www.charleskemp.com/code/lexicalelaboration.html). Note that this takes an hour or so. Codes for the app are available at a separate github [repository](https://github.com/cskemp/dictionaryapp).
+7) Run `plot_related_lexemes.Rmd` to produce Figure S2.
+
+8) Run `compute_zetas_par.R` and `relatedtermsforapp.Rmd` to produce results used for the [app]( https://www.charleskemp.com/code/lexicalelaboration.html). Note that this takes an hour or so. Codes for the app are available at a separate github [repository](https://github.com/cskemp/dictionaryapp).
 
 

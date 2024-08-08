@@ -119,7 +119,7 @@ d_long <- d_long %>%
 
 ## Write data for running hierarchical model
 
-Define a subset of words on which we run logistic regression. We keep words that appear in dictionaries of more than 30 languages, which results in 7996 terms in total.
+Define a subset of words on which we run logistic regression. We keep words that appear in dictionaries of more than 30 languages, which results in 7994 terms in total.
 
 ```{r define subset, include=TRUE}
 
@@ -138,7 +138,7 @@ subset_lr <- word_nlang_lr %>%
 
 subset_lr <- subset_lr %>%
   pull(word)
-expect_equal(length(subset_lr), 7996)
+expect_equal(length(subset_lr), 7994)
 
 ```
 
