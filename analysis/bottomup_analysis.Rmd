@@ -37,23 +37,22 @@ Load word count, dictionary, and stop words data:
 
 ```{r loaddata, include=TRUE}
 
-analyses <- c("full", "robustness")
-analyses <- c("full")
-analyses <- c("robustness")
+analysis <- "full"
+# uncomment to run robustness analysis
+#analysis <- "full"
 
-for (analysis in analyses) {
-  suffix <- ""
-  langs <- 300
-  if (analysis == "robustness") {
+suffix <- ""
+langs <- 300
+
+# for robustness analysis
+if (analysis == "robustness") {
   suffix <- "_robust"
   langs <- 150
-  }
-  input_d_long <- paste0("d_long", suffix, ".csv")
-  output_dict <- paste0("bottomup_stats_dict", suffix, ".csv")
-  output_dictarea <- paste0("bottomup_stats_dictarea", suffix, ".csv")
- 
-  # code that reads from input files, does some analyses and writes to output files
 }
+
+input_d_long <- paste0("d_long", suffix, ".csv")
+output_dict <- paste0("bottomup_stats_dict", suffix, ".csv")
+output_dictarea <- paste0("bottomup_stats_dictarea", suffix, ".csv")
 
 d_long <- read_csv(here("data", "foranalyses", input_d_long), show_col_types = FALSE)
 dict <- read_csv(here("data", "biladataset", "bila_dictionaries.csv"), show_col_types = FALSE)
