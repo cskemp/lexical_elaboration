@@ -278,21 +278,19 @@ Load word count file:
 
 ```{r wordcount, include=TRUE}
 
-analyses <- c("full", "robustness")
-analyses <- c("full")
-analyses <- c("robustness")
+analysis <- "full"
+# uncomment to run robustness analysis
+#analysis <- "robustness"
 
-for (analysis in analyses) {
-  suffix <- ""
-  if (analysis == "robustness") {
+suffix <- ""
+
+if (analysis == "robustness") {
   suffix <- "_robust"
   }
-  input_file <- paste0("d_long", suffix, ".csv")
-  output_file_full <- paste0("claims_lr_lang_full", suffix, ".csv")
-  output_file <- paste0("claims_lr_lang", suffix, ".csv")
- 
-  # code that reads from input_file, does some analyses and writes to output_file
-}
+
+input_file <- paste0("d_long", suffix, ".csv")
+output_file_full <- paste0("claims_lr_lang_full", suffix, ".csv")
+output_file <- paste0("claims_lr_lang", suffix, ".csv")
 
 d_long_path <- here("data", "foranalyses", input_file)
 d_long <- read_csv(d_long_path, show_col_types = FALSE)
