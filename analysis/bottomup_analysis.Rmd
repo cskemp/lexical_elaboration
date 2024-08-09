@@ -29,7 +29,7 @@ select <- dplyr::select
 
 ```
 
-This notebook contains two bottom-up analyses: a) exhaustive logistic regression analysis on a subset of 2247 terms with natural and cultural variables as predictors, and b) identification of nearest neighbour terms. It generates Figure 3 in the main text, and Figure S4 and Table S4 in the Supporting Material. Note that it takes several hours to generate results for exhaustive analyses.
+This notebook contains two bottom-up analyses: a) exhaustive logistic regression analysis on a subset of 2246 terms with natural and cultural variables as predictors, and b) identification of nearest neighbour terms. It generates Figure 3 in the main text, and Figure S4 and Table S4 in the Supporting Material. Note that it takes several hours to generate results for exhaustive analyses.
 
 ## Run statistical analysis on a subset
 
@@ -103,8 +103,8 @@ run_glmmTMB_dict <- function(word, dstats, predictor_name) {
     drop_na(count)
   
  # Define formulas for models
-  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|langfamily) + (1|glottocode)"))
-  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|langfamily)")
+  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|glottocode) + (1|langfamily)"))
+  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|glottocode) + (1|langfamily)")
   
   # Initialize list to store warnings
   warnings_list <- list()
@@ -199,8 +199,8 @@ run_glmmTMB_dictarea <- function(word, dstats, predictor_name) {
     drop_na(count)
   
  # Define formulas for models
-  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|area) + (1|langfamily) + (1|glottocode)"))
-  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|area) + (1|langfamily) + (1|glottocode)")
+  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|glottocode) + (1|langfamily) + (1|area)"))
+  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|glottocode) + (1|langfamily) + (1|area)")
   
   # Initialize list to store warnings
   warnings_list <- list()
@@ -294,9 +294,9 @@ pvals <- read_csv(here("output", "results", "bottomup_stats_dict.csv"),
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4))
 
-# convergence issues for 5 cases
+# convergence issues for one case
 withwarnings <- pvals %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withwarnings), 5)
+expect_equal(nrow(withwarnings), 1)
 
 pvals <- pvals %>%
   # remove cases with convergence issues
@@ -334,9 +334,9 @@ pvals_rob <- read_csv(here("output", "results", "bottomup_stats_dict_robust.csv"
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4))
 
-# convergence issues for 198 cases
+# convergence issues for 118 cases
 withwarnings <- pvals_rob %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withwarnings), 198)
+expect_equal(nrow(withwarnings), 118)
 
 pvals_rob <- pvals_rob %>%
   # remove cases with convergence issues
