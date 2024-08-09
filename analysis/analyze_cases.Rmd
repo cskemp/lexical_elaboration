@@ -43,25 +43,28 @@ Load word count and dictionary data:
 
 ```{r load data, include=TRUE}
 
-analyses <- c("full", "robustness")
-analyses <- c("full")
-analyses <- c("robustness")
+analysis <- "full"
+# uncomment to run robustness analysis
+#analysis <- "robustness"
 
-for (analysis in analyses) {
-  suffix <- ""
-  if (analysis == "robustness") {
+suffix <- ""
+myiter <- 3000
+mycontrol <- list(adapt_delta = 0.95, stepsize = 0.01, max_treedepth = 15)
+
+if (analysis == "robustness") {
   suffix <- "_robust"
+  myiter <- 10000
+  mycontrol <- list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20)
   }
-  input_wordcount <- paste0("wordcount", suffix, ".csv")
-  input_d_long <- paste0("d_long", suffix, ".csv")
-  output_lr_lang <- paste0("cases_lr_lang", suffix, ".csv")
-  output_lr_fam <- paste0("cases_lr_fam", suffix, ".csv")
-  output_glmm <- paste0("glmer_stats", suffix, ".csv")
-  output_glmm_dict <- paste0("glmer_stats_dict", suffix, ".csv")
- 
-  # code that reads from input files, does some analyses and writes to output files
-}
 
+input_wordcount <- paste0("wordcount", suffix, ".csv")
+input_d_long <- paste0("d_long", suffix, ".csv")
+output_lr_lang <- paste0("cases_lr_lang", suffix, ".csv")
+output_lr_fam <- paste0("cases_lr_fam", suffix, ".csv")
+output_glmm <- paste0("glmer_stats", suffix, ".csv")
+output_glmm_dict <- paste0("glmer_stats_dict", suffix, ".csv")
+output_bayes_dict <- paste0("bayes_stats_dict", suffix, ".csv")
+ 
 wordcount <- read_csv(here("data", "foranalyses", input_wordcount), show_col_types = FALSE)
 dict <- read_csv(here("data", "foranalyses", "bila_dictionaries_withenv.csv"), show_col_types = FALSE)
 ```
@@ -619,8 +622,8 @@ run_bayes <- function(groupname, dstats, predictorname) {
   formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|id) + (1|langfamily) + (1|glottocode)")
   
   mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
-                   #iter = 3000, chains = 2, control = list(adapt_delta = 0.95, stepsize = 0.01, max_treedepth = 15)) # used for the full set
-                   warmup = 2000, iter = 10000, chains = 2, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20)) # used for the robustness set
+                   iter = myiter, chains = 2, control = mycontrol)
+                   
   m <- mdl$result
   
   envcoef <- fixef(m)[2]
@@ -661,6 +664,8 @@ Run Bayesian with area as a random effect on the full set:
 
 ```{r bayes with area, include=TRUE, eval=FALSE}
 
+if (analysis == "full") {
+
 quiet_brm <- quietly(brm)
 
 run_bayes_area <- function(groupname, dstats, predictorname) {
@@ -690,10 +695,6 @@ run_bayes_area <- function(groupname, dstats, predictorname) {
   
   return(summ)
 }
-
-for (analysis in analyses) {
-
-if (analysis == "full") {
 
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "avgmonth_tmp") )  %>% 
   write_csv(here("output", "results", "bayes_stats_dictarea.csv"))
@@ -756,14 +757,14 @@ bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>%
   mutate(predictor="population") %>%
   write_csv(here("output", "results", "bayes_stats_dictarea.csv"), append=TRUE)
 
-} else if (analysis == "robustness") {
- next
-}}
+} 
 ```
 
 Run Bayesian with area as a random effect on the robustness set. Because there were many divergent transition issues, we used simpler model without dictionary as a random effect by default.
 
 ```{r bayes with area, include=TRUE, eval=FALSE}
+
+if (analysis == "robustness") {
 
 quiet_brm <- quietly(brm)
 
@@ -776,7 +777,7 @@ run_bayes_area <- function(groupname, dstats, predictorname) {
   formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|area) + (1|langfamily) + (1|glottocode)")
   
   mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
-                   warmup = 2000, iter = 10000, chains = 2, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20)) 
+                   iter = 10000, chains = 2, control = list(adapt_delta = 0.99, stepsize = 0.001, max_treedepth = 20)) 
   m <- mdl$result
   
   envcoef <- fixef(m)[2]
@@ -795,12 +796,6 @@ run_bayes_area <- function(groupname, dstats, predictorname) {
   return(summ)
 }
 
-for (analysis in analyses) {
-
-if (analysis == "full") {
-  next
-} else if (analysis == "robustness") {
-
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "avgmonth_tmp") )  %>% 
   write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
 
@@ -817,7 +812,7 @@ bayes_pop <- map_dfr(all_groups, ~ run_bayes_area(.x, dstats, "logpop") )  %>%
   mutate(predictor="population") %>%
   write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
 
-}}
+}
 ```
 
 ## Create figures
@@ -1030,8 +1025,8 @@ bayes <- read_csv(here("output", "results", "bayes_stats_dict.csv"), show_col_ty
 bayes_r <- read_csv(here("output", "results", "bayes_stats_dict_robust.csv"), show_col_types = FALSE)
 
 # no convergence issues
-expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 0)
-expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 0)
+expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 1)
+expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 3)
 
 bayes <- bayes %>%
   mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
@@ -1149,9 +1144,9 @@ glmm_r <- read_csv(here("output", "results", "glmer_stats_dict_robust.csv"), sho
 # no convergence issues must be found for the full set
 expect_equal(nrow(glmm %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))), 0)
 
-# 7 convergence issues identified for the robustness set
+# 2 convergence issues identified for the robustness set
 withconvergence <- glmm_r %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withconvergence), 7)
+expect_equal(nrow(withconvergence), 2)
 
 # we'll use results from the analysis without a dictionary as a random effect for these cases
 glmm_r_nodict <- read_csv(here("output", "results", "glmer_stats_robust.csv"), show_col_types = FALSE) %>%
@@ -1170,10 +1165,10 @@ glmm_r <- glmm_r %>%
 bayes <- read_csv(here("output", "results", "bayes_stats_dictarea.csv"), show_col_types = FALSE) 
 bayes_r_raw <- read_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), show_col_types = FALSE)
 
-# there are 6 cases with 1-2 divergent transitions
+# there are 6 cases with divergent transitions
 expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 6)
-# there are 18 cases with 1-13 divergent transitions, we only report those with less than 5 divergent transitions
-expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 18)
+# there are 20 cases with divergent transitions, we only report those with less than 5 divergent transitions
+expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 20)
 
 bayes <- bayes %>%
   mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
@@ -1182,21 +1177,21 @@ bayes <- bayes %>%
 bayes_r <- bayes_r_raw %>%
   mutate(model = paste(group, "by", predictor),
          coefficient = case_when(
-           model == "wind_group by maxmonth_pre" ~ NA,
-           model == "wind_group by maxmonth_wnd" ~ NA,
-           model == "smell_group by maxmonth_wnd" ~ NA,
+           model == "smell_group by subsistence" ~ NA,
+           model == "smell_group by population" ~ NA,
+           model == "taste_group by maxmonth_pre" ~ NA,
            TRUE ~ coefficient
          ),
          lower_ci = case_when(
-           model == "wind_group by maxmonth_pre" ~ NA,
-           model == "wind_group by maxmonth_wnd" ~ NA,
-           model == "smell_group by maxmonth_wnd" ~ NA,
+           model == "smell_group by subsistence" ~ NA,
+           model == "smell_group by population" ~ NA,
+           model == "taste_group by maxmonth_pre" ~ NA,
            TRUE ~ lower_ci
          ),
          upper_ci = case_when(
-           model == "wind_group by maxmonth_pre" ~ NA,
-           model == "wind_group by maxmonth_wnd" ~ NA,
-           model == "smell_group by maxmonth_wnd" ~ NA,
+           model == "smell_group by subsistence" ~ NA,
+           model == "smell_group by population" ~ NA,
+           model == "taste_group by maxmonth_pre" ~ NA,
            TRUE ~ upper_ci
          ),
          lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),

@@ -40,7 +40,7 @@ Large files not uploaded to this repository need to be downloaded from [here](ht
 
     `rsync -azv data.analytics.hathitrust.org::features-2020.03/listing/file_listing.txt .`
 
-  * `rawdata_downloaded` : includes a cognate data set `CogNet-v2.0.tsv` and a Wiktionary dump file `enwiktionary-20240320-pages-articles-multistream`, which are used for Wiktionary-based filtering. If needed, the cognate data set is available [here]( https://github.com/kbatsuren/CogNet ) and the Wiktionary dump file [here]( https://dumps.wikimedia.org/enwiktionary/20240320/ ). It also includes the folder `cru_4.07` which contains climate data downloaded from https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.07/.
+  * `rawdata_downloaded` : includes a cognate data set `CogNet-v2.0.tsv` and a Wiktionary dump file `enwiktionary-20240320-pages-articles-multistream`, which are used for Wiktionary-based filtering. If needed, the cognate data set is available [here]( https://github.com/kbatsuren/CogNet ) and the Wiktionary dump file [here]( https://dumps.wikimedia.org/enwiktionary/20240320/ ). It also includes the folder `cru_4.07` which contains climate data downloaded from [here](https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.07/).
 
 Files must be put in the correct folder in order to reproduce BILA data set and results from analyses. BILA data set files should be put in `data/biladataset`, results from hierarchical model in `output/results`, HathiTrust file in `preprocessing/hathi_trust`, and the cognate, Wiktionary, and the climate data files in `rawdata/downloaded` folder.
 
@@ -58,8 +58,6 @@ to install packages used by the code in this repository
 This code was developed using Python 3.11. See `environment.yml` for a full specification of the environment used.
 
 ## Reproducing BILA data set
-
-Before reproducing BILA data set files, we recommend extracting information on subsistence first. Run `read_subsistence.R` in `../preprocessing/subsistence` to extract subsistence information.
 
 
 A. Assemble the set of dictionaries from HathiTrust (see `../preprocessing/hathi_trust/README.md`).
@@ -105,9 +103,11 @@ B. Assemble unigram frequencies (see `../preprocessing/README.md`). Steps 3 thro
 
 10) Run `wordnet_extract.ipynb` in `../preprocessing/wordnet` to extract information about number of senses from WordNet.
 
-11) Run `create_bila_dictionaries.R` to create a master file.
+11) Run `read_subsistence.R` in `../preprocessing/subsistence` to extract subsistence information.
 
-12) Run `standardize_bila.R` to create a standard version and a lemmatized version of the dataset.
+12) Run `create_bila_dictionaries.R` to create a master file.
+
+13) Run `standardize_bila.R` to create a standard version and a lemmatized version of the dataset.
 
 
 ## Reproducing results

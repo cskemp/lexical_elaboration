@@ -39,7 +39,7 @@ Load word count, dictionary, and stop words data:
 
 analysis <- "full"
 # uncomment to run robustness analysis
-#analysis <- "full"
+#analysis <- "robustness"
 
 suffix <- ""
 langs <- 300
