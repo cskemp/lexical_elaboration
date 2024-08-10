@@ -607,7 +607,7 @@ glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB_dict(.x, dstats, "logpop") )  %>%
 
 ## Bayesian analyses
 
-Run Bayesian analyses without area as a random effect:
+Write a function for Bayesian analyses without area as a random effect:
 
 ```{r bayesian, include=TRUE, eval=FALSE}
 
@@ -641,6 +641,11 @@ run_bayes <- function(groupname, dstats, predictorname) {
   
   return(summ)
 }
+```
+
+Run Bayesian analysis without area as a random effect.
+
+```{r run bayes without area, include=TRUE}
 
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "avgmonth_tmp") )  %>% 
   write_csv(here("output", "results", output_bayes_dict))
@@ -656,6 +661,67 @@ bayes_sub <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "subsistence") )  %>%
 
 bayes_pop <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "logpop") )  %>% 
   mutate(predictor="population") %>%
+  write_csv(here("output", "results", output_bayes_dict), append=TRUE)
+```
+
+Check if any warnings are present. For those with low ESS, we use more iterations.
+
+```{r re-run with more iterations, include=TRUE}
+
+bayes_all <- read_csv(here("output", "results", output_bayes_dict))
+
+# identify warnings with low ESS
+withlowess <- bayes_all %>%
+  filter(startsWith(warnings, "Bulk Effective Samples Size (ESS) is too low"))
+
+myiter <- 4000
+
+if (analysis == "robustness") {
+  myiter <- 12000
+}
+
+quiet_brm <- quietly(brm)
+
+run_bayes <- function(groupname, dstats, predictorname) {
+
+  dstats_this <- dstats %>% 
+    filter(group == .env$groupname) %>% 
+    drop_na(propn)
+  
+  formula <- paste0("propn | trials(dictsize_data) ~ ", predictorname, "+ (1|id) + (1|langfamily) + (1|glottocode)")
+  
+  mdl <- quiet_brm(formula, data = dstats_this, family = "binomial",
+                   iter = myiter, chains = 2, control = mycontrol)
+                   
+  m <- mdl$result
+  
+  envcoef <- fixef(m)[2]
+  lci <- fixef(m)[6]
+  uci <- fixef(m)[8]
+  
+  summ <- tibble(
+    group = groupname,
+    predictor = predictorname,
+    coefficient = envcoef,
+    lower_ci = lci,
+    upper_ci = uci,
+    warnings = paste(mdl$warnings, collapse = " | ")
+  )
+  
+  return(summ)
+}
+
+# run Bayesian analyses with more iterations
+bayes_add <- withlowess %>%
+  rowwise() %>%
+  mutate(summary = list(run_bayes(group, dstats, predictor))) %>%
+  select(summary) %>%
+  unnest(cols = c(summary))
+
+# check if new results do not have the same warnings
+expect_true(all(!startsWith(bayes_add$warnings, "Bulk Effective Samples Size (ESS) is too low")))
+
+bayes_add %>%
   write_csv(here("output", "results", output_bayes_dict), append=TRUE)
 
 ```
@@ -1225,12 +1291,7 @@ pvals_area_rob <- read_csv(here("output", "results", "bottomup_stats_dictarea_ro
   # remove cases with convergence issues
   filter(is.na(warnings_m1) & is.na(warnings_m2))
 
-# there was a converge issue for counts for ice predicted by windspeed, so we'll use simpler model without dictionary as a random effect
-pvals_nodict_rob <- read_csv(here("output", "results", "bottomup_stats_area_robust.csv"), show_col_types = FALSE) %>%
-  filter(word == "ice", predictor == "maxmonth_wnd")
-
 pvals_area_rob <- pvals_area_rob %>%
-  bind_rows(pvals_nodict_rob) %>%
   mutate(lnpval=-log(p_val),
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4)) %>%
@@ -1286,7 +1347,7 @@ all <- glmm %>%
 all <- all %>%
   left_join(cases_area %>% select(concept, predictor, rank), by= c("concept", "predictor")) %>%
   left_join(cases_area_rob %>% select(concept, predictor, "rank (rob.)"), by= c("concept", "predictor")) %>%
-    mutate(concept = paste0("concept", concept))
+    mutate(concept = paste0("concept{", concept, "}"))
 
 all_table <- xtable(all, digits=c(0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2))
 print(all_table, file = here("output", "tables", "stats.tex"), include.rownames=FALSE)
