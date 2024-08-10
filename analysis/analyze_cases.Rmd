@@ -1103,12 +1103,14 @@ expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 0)
 expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 1)
 
 bayes <- bayes %>%
-  mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
-         CI = paste0("[", lower_ci, ",", upper_ci, "]"))
+  mutate(lower_ci = sprintf("%.2f", lower_ci),
+         upper_ci = sprintf("%.2f", upper_ci),
+         CI = paste0("[", lower_ci, ", ", upper_ci, "]"))
 
 bayes_r <- bayes_r %>%
-  mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
-         CI = paste0("[", lower_ci, ",", upper_ci, "]"))
+  mutate(lower_ci = sprintf("%.2f", lower_ci),
+         upper_ci = sprintf("%.2f", upper_ci),
+         CI = paste0("[", lower_ci, ", ", upper_ci, "]"))
 
 worder <- c("snow", "ice", "rain", "wind", "smell", "taste", "dance")
 porder <- c("temperature", "precipitation", "windspeed", "subsistence", "population")
@@ -1244,8 +1246,9 @@ expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 11)
 expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 20)
 
 bayes <- bayes %>%
-  mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
-         CI = paste0("[", lower_ci, ",", upper_ci, "]"))
+  mutate(lower_ci = sprintf("%.2f", lower_ci),
+         upper_ci = sprintf("%.2f", upper_ci),
+         CI = paste0("[", lower_ci, ", ", upper_ci, "]"))
 
 bayes_r <- bayes_r_raw %>%
   mutate(model = paste(group, "by", predictor),
@@ -1267,8 +1270,9 @@ bayes_r <- bayes_r_raw %>%
            model == "taste_group by maxmonth_pre" ~ NA,
            TRUE ~ upper_ci
          ),
-         lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
-         CI = ifelse(!is.na(lower_ci), paste0("[", lower_ci, ",", upper_ci, "]"), NA))
+         lower_ci = sprintf("%.2f", lower_ci),
+         upper_ci = sprintf("%.2f", upper_ci),
+         CI = paste0("[", lower_ci, ", ", upper_ci, "]"))
 
 # add results from bottom-up analysis:
 pvals_area <- read_csv(here("output", "results", "bottomup_stats_dictarea.csv"), show_col_types = FALSE) %>%
