@@ -37,7 +37,7 @@ library(lemon)
 select <- dplyr::select
 ```
 
-This notebook contains analysis of existing claims (see the main text section called "Testing 163 proposed examples of lexical elaboration"). It generates Figure 1 in the main text, and Table S1 and Figure S3 in the Supporting Material.
+This notebook contains analysis of existing claims (see the main text section called "Testing 163 proposed examples of lexical elaboration"). It generates Figure 1 in the main text and Figure S3 in the Supporting Material.
 
 
 ##Assign glottocodes for language groups
@@ -761,25 +761,6 @@ print(paste0("attested = ", as.character(round(attested_diff, 3)), ", 95th perce
 ```
 
 ##Supplementary tables and figures:
-
-Create a table on a sample of existing claims.
-
-```{r createtable existing claims, include=TRUE}
-selected_rows <- c(1, 10, 15, 16, 19, 38, 46, 51, 53, 192, 74, 102, 107, 26, 
-                   116, 118, 124, 133, 149, 140, 143, 170, 198, 251, 255, 273, 284, 292, 326, 327)
-
-claimssample <- claims_full %>%
-  arrange(combo_name) %>%
-  mutate(gcode = ifelse(is.na(gcode), gcode_rule, gcode)) %>%
-  select(langname, level, gcode, concept, word_list, sign, reference) %>%
-  filter(!is.na(word_list)) %>%
-  rename("Language/Group"=langname, Level=level, Glottocode=gcode, Concept=concept, "Word list"=word_list, Sign=sign, Reference=reference) %>%
-  arrange(Concept) %>%
-  slice(selected_rows)
-
-latex_table <- xtable(claimssample)
-print(latex_table, file = here("output", "tables", "claimstable.tex"), include.rownames=FALSE)
-```
 
 We make similar tables for L^lang scores computed on robustness set.
 

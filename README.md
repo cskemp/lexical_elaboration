@@ -118,7 +118,7 @@ To reproduce tables and figures in main text and supplementary materials, follow
 
 2) Run `preliminary_steps.Rmd` to produce interim outputs necessary for the next steps.
 
-3) Run `analyze_claims.Rmd` to produce Figure 1, Table S1, and Figure S3.
+3) Run `analyze_claims.Rmd` to produce Figure 1 and Figure S3.
 
 4) Run `analyze_cases.Rmd` to produce Figure 2, Table S2, Table S3, and Figure S5. Note that it takes several hours to generate results for Bayesian analyses.
 
