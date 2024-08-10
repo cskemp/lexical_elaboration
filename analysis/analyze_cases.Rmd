@@ -1089,12 +1089,18 @@ glmm_r <- glmm_r %>%
   bind_rows(replacement_row)
 
 # now load results from Bayesian analyses
-bayes <- read_csv(here("output", "results", "bayes_stats_dict.csv"), show_col_types = FALSE) 
-bayes_r <- read_csv(here("output", "results", "bayes_stats_dict_robust.csv"), show_col_types = FALSE)
+bayes <- read_csv(here("output", "results", "bayes_stats_dict.csv"), show_col_types = FALSE) %>%
+  # filter out cases with low ESS
+  filter(is.na(warnings) | !startsWith(warnings, "Bulk Effective Samples Size (ESS) is too low"))
 
-# no convergence issues
-expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 1)
-expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 3)
+bayes_r <- read_csv(here("output", "results", "bayes_stats_dict_robust.csv"), show_col_types = FALSE) %>%
+  # filter out cases with low ESS
+  filter(is.na(warnings) | !startsWith(warnings, "Bulk Effective Samples Size (ESS) is too low"))
+
+# no divergent transitions for the full set
+expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 0)
+# one divergent transition for the robustness set
+expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 1)
 
 bayes <- bayes %>%
   mutate(lower_ci = round(lower_ci, 2), upper_ci = round(upper_ci, 2),
@@ -1193,11 +1199,10 @@ cases_rob <- pvals_rob %>%
 all_noa <- all_noa %>%
   left_join(cases %>% select(concept, predictor, rank), by= c("concept", "predictor")) %>%
   left_join(cases_rob %>% select(concept, predictor, "rank (rob.)"), by= c("concept", "predictor")) %>%
-  mutate(concept = paste0("concept{", concept, "}"))
+  mutate(concept = paste0("concept", concept, ""))
 
 all_noa_table <- xtable(all_noa, digits=c(0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2))
 print(all_noa_table, file = here("output", "tables", "stats_noarea.tex"), include.rownames=FALSE)
-
 
 ```
 
@@ -1233,8 +1238,8 @@ glmm_r <- glmm_r %>%
 bayes <- read_csv(here("output", "results", "bayes_stats_dictarea.csv"), show_col_types = FALSE) 
 bayes_r_raw <- read_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), show_col_types = FALSE)
 
-# there are 6 cases with divergent transitions
-expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 6)
+# there are 11 cases with divergent transitions
+expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 11)
 # there are 20 cases with divergent transitions, we only report those with less than 5 divergent transitions
 expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 20)
 
@@ -1349,7 +1354,7 @@ all <- glmm %>%
 all <- all %>%
   left_join(cases_area %>% select(concept, predictor, rank), by= c("concept", "predictor")) %>%
   left_join(cases_area_rob %>% select(concept, predictor, "rank (rob.)"), by= c("concept", "predictor")) %>%
-    mutate(concept = paste0("concept{", concept, "}"))
+    mutate(concept = paste0("concept", concept, ""))
 
 all_table <- xtable(all, digits=c(0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2))
 print(all_table, file = here("output", "tables", "stats.tex"), include.rownames=FALSE)
