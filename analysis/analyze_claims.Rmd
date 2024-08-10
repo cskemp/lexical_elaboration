@@ -262,7 +262,7 @@ d_claims <- d_claims_unnested %>%
 # after wiktionary filtering, 164 claims will be further analyzed
 expect_equal(nrow(d_claims), 164)
 
-# 74 unique combinations of words will be further analyzed
+# 73 unique combinations of words will be further analyzed
 d_claims_distinct <- d_claims %>%
   select(combo_name, word_list) %>%
   unique()
