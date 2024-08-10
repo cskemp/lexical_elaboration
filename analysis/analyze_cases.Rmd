@@ -645,7 +645,7 @@ run_bayes <- function(groupname, dstats, predictorname) {
 
 Run Bayesian analysis without area as a random effect.
 
-```{r run bayes without area, include=TRUE}
+```{r run bayes without area, include=TRUE, eval=FALSE}
 
 bayes_tmp <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "avgmonth_tmp") )  %>% 
   write_csv(here("output", "results", output_bayes_dict))
@@ -666,7 +666,7 @@ bayes_pop <- map_dfr(all_groups, ~ run_bayes(.x, dstats, "logpop") )  %>%
 
 Check if any warnings are present. For those with low ESS, we use more iterations.
 
-```{r re-run with more iterations, include=TRUE}
+```{r re-run with more iterations, include=TRUE, eval=FALSE}
 
 bayes_all <- read_csv(here("output", "results", output_bayes_dict))
 
@@ -713,6 +713,7 @@ run_bayes <- function(groupname, dstats, predictorname) {
 
 # run Bayesian analyses with more iterations
 bayes_add <- withlowess %>%
+  mutate(predictor = ifelse(predictor == "population", "logpop", predictor)) %>%
   rowwise() %>%
   mutate(summary = list(run_bayes(group, dstats, predictor))) %>%
   select(summary) %>%
@@ -722,6 +723,7 @@ bayes_add <- withlowess %>%
 expect_true(all(!startsWith(bayes_add$warnings, "Bulk Effective Samples Size (ESS) is too low")))
 
 bayes_add %>%
+  mutate(predictor = ifelse(predictor == "logpop", "population", predictor)) %>%
   write_csv(here("output", "results", output_bayes_dict), append=TRUE)
 
 ```
