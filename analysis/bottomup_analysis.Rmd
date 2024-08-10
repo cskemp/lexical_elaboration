@@ -162,7 +162,7 @@ run_glmmTMB_dict <- function(word, dstats, predictor_name) {
 
 Run the GLMM function without area as a random effect.
 
-```{r mixedeffects_full, include=TRUE}
+```{r mixedeffects_full, include=TRUE, eval=FALSE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
@@ -258,7 +258,7 @@ run_glmmTMB_dictarea <- function(word, dstats, predictor_name) {
 
 Run the GLMM function with area as a random effect.
 
-```{r mixedeffects_full, include=TRUE}
+```{r mixedeffects_full, include=TRUE, eval=FALSE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
@@ -268,17 +268,17 @@ glmer_pre <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "maxmonth_pre"
   arrange(coefficient) %>%
   write_csv(here("output", "results", output_dictarea), append = TRUE)
 
-glmer_wnd <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "maxmonth_wnd") )  %>% 
-  arrange(coefficient)  %>%
-  write_csv(here("output", "results", output_dictarea), append = TRUE)
-
-glmer_sub <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "subsistence") )  %>%
+glmer_wnd <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "maxmonth_wnd") )  %>%
   arrange(coefficient)  %>%
   write_csv(here("output", "results", output_dictarea), append = TRUE)
 
 glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "logpop") )  %>%
   arrange(coefficient) %>%
   mutate(predictor="population")  %>%
+  write_csv(here("output", "results", output_dictarea), append = TRUE)
+
+glmer_sub <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "subsistence") )  %>%
+  arrange(coefficient)  %>%
   write_csv(here("output", "results", output_dictarea), append = TRUE)
 
 ```
@@ -294,9 +294,9 @@ pvals <- read_csv(here("output", "results", "bottomup_stats_dict.csv"),
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4))
 
-# convergence issues for one case
+# convergence issues for 6 cases
 withwarnings <- pvals %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withwarnings), 1)
+expect_equal(nrow(withwarnings), 6)
 
 pvals <- pvals %>%
   # remove cases with convergence issues
@@ -334,9 +334,9 @@ pvals_rob <- read_csv(here("output", "results", "bottomup_stats_dict_robust.csv"
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4))
 
-# convergence issues for 118 cases
+# convergence issues for 216 cases
 withwarnings <- pvals_rob %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withwarnings), 118)
+expect_equal(nrow(withwarnings), 216)
 
 pvals_rob <- pvals_rob %>%
   # remove cases with convergence issues
@@ -443,10 +443,10 @@ ggsave(filename = here::here("output", "figures", "supplementary", "pvalcoef.pdf
 
 ```{r pval distribution, include=TRUE}
 
-#options(repos = c(
+# options(repos = c(
 #  terminological = 'https://terminological.r-universe.dev',
 #  CRAN = 'https://cloud.r-project.org'))
-#install.packages('ggrrr')
+# install.packages('ggrrr')
 
 library(ggrrr)
 
