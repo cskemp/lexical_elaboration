@@ -391,7 +391,7 @@ find_terms <- function(predictorname) {
     select(word) %>% slice(1:300) %>% pull(word) 
   
   rob <- pvals_rob %>%
-    filter(predictor == "temperature" & !(word %in% stopwords) & coefficient > 0) %>%
+    filter(predictor == paste(predictorname) & !(word %in% stopwords) & coefficient > 0) %>%
     arrange(desc(lnpval)) %>%
     select(word) %>% slice(1:300) %>% pull(word) 
     
@@ -411,7 +411,7 @@ find_invterms <- function(predictorname) {
     select(word) %>% pull(word)
   
   rob <- pvals_rob %>%
-    filter(predictor == "temperature" & !(word %in% stopwords) & coefficient < 0) %>%
+    filter(predictor == paste(predictorname) & !(word %in% stopwords) & coefficient < 0) %>%
     arrange(desc(lnpval)) %>%
     select(word) %>% pull(word)
     
