@@ -24,6 +24,7 @@ library(testthat)
 library(ggplot2)
 library(patchwork)
 library(xtable)
+source("stats_functions.R", local = knitr::knit_global())
 
 select <- dplyr::select
 
@@ -91,76 +92,7 @@ dstats <- d_long %>%
 
 ```
 
-Write a GLMM function without area as a random effect.
-
-```{r mixedeffects_full, include=TRUE}
-
-run_glmmTMB_dict <- function(word, dstats, predictor_name) {
-  
-  # Filter the dataset
-  dstats_this <- dstats %>%
-    filter(word == .env$word) %>%
-    drop_na(count)
-  
- # Define formulas for models
-  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|glottocode) + (1|langfamily)"))
-  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|glottocode) + (1|langfamily)")
-  
-  # Initialize list to store warnings
-  warnings_list <- list()
-  
-  # Function to capture warnings
-  capture_warnings <- function(expr) {
-    warnings <- NULL
-    result <- withCallingHandlers(
-      expr,
-      warning = function(w) {
-        warnings <<- c(warnings, conditionMessage(w))
-        invokeRestart("muffleWarning")
-      }
-    )
-    list(result = result, warnings = warnings)
-  }
-  
-  # Fit full model
-  full_model <- capture_warnings(glmmTMB(formula_full, data = dstats_this, family = binomial))
-  m1 <- full_model$result
-  warnings_list$m1 <- full_model$warnings
-  
-  # Fit reduced model
-  reduced_model <- capture_warnings(glmmTMB(formula_reduced, data = dstats_this, family = binomial))
-  m2 <- reduced_model$result
-  warnings_list$m2 <- reduced_model$warnings
-  
-  # Perform ANOVA
-  a <- anova(m2, m1)
-  pval <- a$`Pr(>Chisq)`[2]
-  
-  # Retrieve coefficients
-  if (predictor_name == "subsistence") {
-    envcoef <- fixef(m1)$cond["subsistenceother"]
-  } else {
-    envcoef <- fixef(m1)$cond[paste(predictor_name)]
-  }
-  
-  # Summarize results
-  summ <- tibble(
-    word = word, 
-    predictor = predictor_name, 
-    coefficient = envcoef, 
-    p_val = pval, 
-    warnings_m1 = list(warnings_list$m1),
-    warnings_m2 = list(warnings_list$m2)
-  )
-  
-  summ$warnings_m1 <- sapply(summ$warnings_m1, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  summ$warnings_m2 <- sapply(summ$warnings_m2, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  
-  return(summ)
-}
-```
-
-Run the GLMM function without area as a random effect.
+Run GLMM without area as a random effect.
 
 ```{r mixedeffects_full, include=TRUE, eval=FALSE}
 
@@ -187,76 +119,7 @@ glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "logpop") )  %>%
 
 ```
 
-Write a GLMM function with dictionary and area as random effects.
-
-```{r mixedeffects_full, include=TRUE}
-
-run_glmmTMB_dictarea <- function(word, dstats, predictor_name) {
-  
-  # Filter the dataset
-  dstats_this <- dstats %>%
-    filter(word == .env$word) %>%
-    drop_na(count)
-  
- # Define formulas for models
-  formula_full <- as.formula(paste("cbind(count, dictsize_data - count) ~", predictor_name, "+ (1|id) + (1|glottocode) + (1|langfamily) + (1|area)"))
-  formula_reduced <- as.formula("cbind(count, dictsize_data - count) ~ (1|id) + (1|glottocode) + (1|langfamily) + (1|area)")
-  
-  # Initialize list to store warnings
-  warnings_list <- list()
-  
-  # Function to capture warnings
-  capture_warnings <- function(expr) {
-    warnings <- NULL
-    result <- withCallingHandlers(
-      expr,
-      warning = function(w) {
-        warnings <<- c(warnings, conditionMessage(w))
-        invokeRestart("muffleWarning")
-      }
-    )
-    list(result = result, warnings = warnings)
-  }
-  
-  # Fit full model
-  full_model <- capture_warnings(glmmTMB(formula_full, data = dstats_this, family = binomial))
-  m1 <- full_model$result
-  warnings_list$m1 <- full_model$warnings
-  
-  # Fit reduced model
-  reduced_model <- capture_warnings(glmmTMB(formula_reduced, data = dstats_this, family = binomial))
-  m2 <- reduced_model$result
-  warnings_list$m2 <- reduced_model$warnings
-  
-  # Perform ANOVA
-  a <- anova(m2, m1)
-  pval <- a$`Pr(>Chisq)`[2]
-  
-  # Retrieve coefficients
-  if (predictor_name == "subsistence") {
-    envcoef <- fixef(m1)$cond["subsistenceother"]
-  } else {
-    envcoef <- fixef(m1)$cond[paste(predictor_name)]
-  }
-  
-  # Summarize results
-  summ <- tibble(
-    word = word, 
-    predictor = predictor_name, 
-    coefficient = envcoef, 
-    p_val = pval, 
-    warnings_m1 = list(warnings_list$m1),
-    warnings_m2 = list(warnings_list$m2)
-  )
-  
-  summ$warnings_m1 <- sapply(summ$warnings_m1, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  summ$warnings_m2 <- sapply(summ$warnings_m2, function(x) if (length(x) > 0) paste(x, collapse = ";") else "")
-  
-  return(summ)
-}
-```
-
-Run the GLMM function with area as a random effect.
+Run GLMM with area as a random effect.
 
 ```{r mixedeffects_full, include=TRUE, eval=FALSE}
 

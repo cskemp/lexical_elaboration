@@ -1,13 +1,15 @@
 ## The list of analysis files
 
-  * `read_cru2.R` and `read_cru_ts4.07.R` in `../analysis/environment`: codes to extract temperature and precipitation information
-  * `preliminary_steps.Rmd` : codes to prepare interim results used in subsequent analyses
-  * `analyze_claims.Rmd` : codes to analyze previous claims
-  * `analyze_cases.Rmd` : codes to analyze case studies 
-  * `bottomup_analysis.Rmd` : codes to run bottom-up analyses
-  * `make_maps.R` : codes to make maps of BILA languages
-  * `plot_related_lexemes.Rmd` : codes to plot related lexeme counts as a function of unigram counts
-  * `compute_zetas_par.R`, `bind_weights_par.R`, and `relatedtermsforapp.Rmd` : codes to obtain results used for the app.
+  * `read_cru2.R` and `read_cru_ts4.07.R` in `../analysis/environment`: codes to extract temperature and precipitation information.
+  * `preliminary_steps.Rmd` : codes to prepare interim results used in subsequent analyses.
+  * `analyze_claims.Rmd` : codes to analyze previous claims.
+  * `analyze_cases.Rmd` : codes to analyze case studies.
+  * `bottomup_analysis.Rmd` : codes to run bottom-up analyses.
+  * `make_maps.R` : codes to make maps of BILA languages.
+  * `plot_related_lexemes.Rmd` : codes to plot related lexeme counts as a function of unigram counts.
+  * `compute_zetas_par.R` and `relatedtermsforapp.Rmd` : codes to obtain results used for the app.
+  * `bind_weights_par.R`: functions to compute L^lang and L^fam scores.
+  *  `stats_functions.R`: functions for statistical analyses.
   
 To reproduce tables and figures, please follow the steps described in the top level `README.md`.
   
