@@ -34,6 +34,7 @@ We searched for sources that provide machine-readable bilingual dictionaries at 
 
 `glottologlink` : directs to a reference in Glottolog where the dictionary title is found.
 
+`ocr` : entered a 1 if [ABBYY FineReader](https://www.abbyy.com/) is used for implementing OCR.
 
 ## Examples of lexical elaboration
 

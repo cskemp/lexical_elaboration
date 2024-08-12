@@ -25,7 +25,7 @@ Code for preparing the data.
 
 ## Downloading pdf files for non-HathiTrust dictionaries
 
-We do not provide pdf versions of non-HathiTrust dictionaries in this repository due to copyright issues. They need to be downloaded from the sources mentioned in `rawdata/manuallycreated/nonhathi_dictionaries.csv` and put in the folder `rawdata/downloaded/nonhathi_raw` to reproduce the BILA data set.
+We do not provide pdf versions of non-HathiTrust dictionaries in this repository due to copyright issues. They need to be downloaded from the sources mentioned in `rawdata/manuallycreated/nonhathi_dictionaries.csv` and put in the folder `rawdata/downloaded/nonhathi_raw` to reproduce the BILA data set. We used [ABBYY FineReader](https://www.abbyy.com/) to implement OCR for a number of non-HathiTrust dictionaries (refer to the column `ocr` in `nonhathi_dictionaries.csv`) and produced `.docx` files, which were then used to compile counts for these dictionaries.
 
 ## Downloading other large files
 
