@@ -56,3 +56,8 @@ app_data_small <- app_data %>%
     filter(word %in% top_words_small$word) %>%
     write_csv(here("output", "results", "bila_app_stats_2000.csv"))
 
+# Compute L^dict score
+
+weights_dict <-  bind_weights_dict(d_wide) %>%
+  write_csv(here("output", "results", "hierarchical_lr_dict.csv"))
+

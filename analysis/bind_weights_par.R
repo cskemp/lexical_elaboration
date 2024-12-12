@@ -1,4 +1,4 @@
-# This R file contains logistic regression functions for computing L^lang and L^fam scores.
+# This R file contains logistic regression functions for computing L^lang, L^fam, and L^dict scores.
 
 # compute weights for languages with parallel processing
 
@@ -134,4 +134,75 @@ bind_weights_fam <- function(d) {
     unnest(output)  %>%
     left_join(allw_i, by = "word") %>%
     mutate(delta = estimate - estimate_set, zeta = delta / sqrt(se^2 + se_set^2) )
+
+}
+
+# compute weights for dictionaries with parallel processing
+
+glmmTMBplus_d <- function(d) {
+
+  model <- glmmTMB(formula = cbind(count, total-count) ~ 0, family = binomial, data = d, control = glmmTMBControl(profile=TRUE))
+
+  convergence_status <- if (model$fit$convergence == 0) {
+    "converged"
+  } else {
+    "not converged"
+  }
+
+  output <- model %>%
+    tidy() %>%
+    filter(effect == "fixed") %>%
+    rename(estimate_set = estimate, se_set = std.error) %>%
+    select(estimate_set, se_set) %>%
+    mutate(convergence_set = convergence_status)
+
+  return(output)
+}
+
+possglmmTMBplus_d = possibly(.f = glmmTMBplus_d, otherwise = NULL)
+
+glmmTMBplus_dict <- function(d) {
+
+  model <- glmmTMB(formula = cbind(count, total-count) ~ 0 + dict, family = binomial, data = d, control = glmmTMBControl(profile=TRUE))
+
+  convergence_status <- if (model$fit$convergence == 0) {
+    "converged"
+  } else {
+    "not converged"
+  }
+
+  output <- model %>%
+    tidy() %>%
+    filter(effect == "fixed") %>%
+    rename(se = std.error) %>%
+    select(term, estimate, se) %>%
+    mutate(family= str_sub(term, start = 7)) %>%
+    select(-term)  %>%
+    mutate(convergence = convergence_status)
+
+  return(output)
+}
+
+possglmmTMBplus_dict = possibly(.f = glmmTMBplus_dict, otherwise = NULL)
+
+bind_weights_dict <- function(d) {
+
+  no_cores <- (availableCores() - 1) %/% 2
+  plan(multicore, workers = no_cores)
+
+  d_nested <- d %>%
+    nest(data = c("dict", "lang", "langname", "family", "count", "total"))
+
+  allw_i <- d_nested %>%
+    mutate(output= future_map(data, possglmmTMBplus_dict, .progress = TRUE)) %>%
+    select(-data) %>%
+    unnest(output)
+
+  allw <- d_nested %>%
+    mutate(output= future_map(data, possglmmTMBplus_d, .progress = TRUE)) %>%
+    select(-data) %>%
+    unnest(output)  %>%
+    left_join(allw_i, by = "word") %>%
+    mutate(delta = estimate - estimate_set, zeta = delta / sqrt(se^2 + se_set^2) )
+
 }
