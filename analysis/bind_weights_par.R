@@ -62,7 +62,7 @@ bind_weights_par <- function(d) {
   allw <- d_nested %>%
     mutate(output= future_map(data, possglmmTMBplus, .progress = TRUE)) %>%
     select(-data) %>%
-    unnest(output)  %>%
+    unnest(output) %>%
     left_join(allw_i, by = "word") %>%
     mutate(delta = estimate - estimate_set, zeta = delta / sqrt(se^2 + se_set^2) )
 }
@@ -107,7 +107,7 @@ glmmTMBplus_fam <- function(d) {
     rename(se = std.error) %>%
     select(term, estimate, se) %>%
     mutate(family= str_sub(term, start = 7)) %>%
-    select(-term)  %>%
+    select(-term) %>%
     mutate(convergence = convergence_status)
 
   return(output)
@@ -131,7 +131,7 @@ bind_weights_fam <- function(d) {
   allw <- d_nested %>%
     mutate(output= future_map(data, possglmmTMBplus_f, .progress = TRUE)) %>%
     select(-data) %>%
-    unnest(output)  %>%
+    unnest(output) %>%
     left_join(allw_i, by = "word") %>%
     mutate(delta = estimate - estimate_set, zeta = delta / sqrt(se^2 + se_set^2) )
 
@@ -139,19 +139,18 @@ bind_weights_fam <- function(d) {
 
 # compute weights for dictionaries with parallel processing
 
-glmmTMBplus_d <- function(d) {
+glm_d <- function(d) {
 
-  model <- glmmTMB(formula = cbind(count, total-count) ~ 0, family = binomial, data = d, control = glmmTMBControl(profile=TRUE))
+  model <- glm(formula = cbind(count, total-count) ~ 1, family = binomial, data = d)
 
-  convergence_status <- if (model$fit$convergence == 0) {
+  convergence_status <- if (model$converged == TRUE) {
     "converged"
   } else {
     "not converged"
   }
 
-  output <- model %>%
-    tidy() %>%
-    filter(effect == "fixed") %>%
+  output <- broom::tidy(model) %>%
+    filter(term == "(Intercept)") %>%
     rename(estimate_set = estimate, se_set = std.error) %>%
     select(estimate_set, se_set) %>%
     mutate(convergence_set = convergence_status)
@@ -159,31 +158,29 @@ glmmTMBplus_d <- function(d) {
   return(output)
 }
 
-possglmmTMBplus_d = possibly(.f = glmmTMBplus_d, otherwise = NULL)
+possglm_d = possibly(.f = glm_d, otherwise = NULL)
 
-glmmTMBplus_dict <- function(d) {
+glm_dict <- function(d) {
 
-  model <- glmmTMB(formula = cbind(count, total-count) ~ 0 + dict, family = binomial, data = d, control = glmmTMBControl(profile=TRUE))
+  model <- glm(formula = cbind(count, total-count) ~ 0 + dict, family = binomial, data = d)
 
-  convergence_status <- if (model$fit$convergence == 0) {
+  convergence_status <- if (model$converged == TRUE) {
     "converged"
   } else {
     "not converged"
   }
 
-  output <- model %>%
-    tidy() %>%
-    filter(effect == "fixed") %>%
+  output <- broom::tidy(model) %>%
     rename(se = std.error) %>%
     select(term, estimate, se) %>%
-    mutate(family= str_sub(term, start = 7)) %>%
-    select(-term)  %>%
+    mutate(dict = term) %>%
+    select(-term) %>%
     mutate(convergence = convergence_status)
 
   return(output)
 }
 
-possglmmTMBplus_dict = possibly(.f = glmmTMBplus_dict, otherwise = NULL)
+possglm_dict = possibly(.f = glm_dict, otherwise = NULL)
 
 bind_weights_dict <- function(d) {
 
@@ -194,15 +191,17 @@ bind_weights_dict <- function(d) {
     nest(data = c("dict", "lang", "langname", "family", "count", "total"))
 
   allw_i <- d_nested %>%
-    mutate(output= future_map(data, possglmmTMBplus_dict, .progress = TRUE)) %>%
+    mutate(output= future_map(data, possglm_dict, .progress = TRUE)) %>%
     select(-data) %>%
     unnest(output)
 
   allw <- d_nested %>%
-    mutate(output= future_map(data, possglmmTMBplus_d, .progress = TRUE)) %>%
+    mutate(output= future_map(data, possglm_d, .progress = TRUE)) %>%
     select(-data) %>%
-    unnest(output)  %>%
+    unnest(output) %>%
     left_join(allw_i, by = "word") %>%
     mutate(delta = estimate - estimate_set, zeta = delta / sqrt(se^2 + se_set^2) )
+
+  return(allw)
 
 }
