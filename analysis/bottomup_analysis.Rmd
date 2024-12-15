@@ -58,6 +58,7 @@ output_dictarea <- paste0("bottomup_stats_dictarea", suffix, ".csv")
 d_long <- read_csv(here("data", "foranalyses", input_d_long), show_col_types = FALSE)
 dict <- read_csv(here("data", "biladataset", "bila_dictionaries.csv"), show_col_types = FALSE)
 stopwords <- readLines(here("data", "foranalyses", "stopwords.txt"))
+
 ```
 
 Define a subset of words on which we run statistical analysis: we keep words that appear in dictionaries from more than 300 languages for the full set and 150 for the robustness set.
@@ -72,29 +73,34 @@ word_nlang_stat <- d_long %>%
   summarise(nlangs = n_distinct(gcode_data)) %>%
   ungroup() 
 
-  subset_stat <- word_nlang_stat %>%
+subset_stat <- word_nlang_stat %>%
     filter(!(grepl("_data$", word)), nlangs > langs, !(word %in% stopwords)) %>%
     arrange(desc(nlangs))
-  subclass <- subset_stat %>% pull(word)
-  # robustness set does not include snow, so we include it manually
-  subclass <- c(subclass, "snow")
-  subclass <- unique(subclass)
+subclass <- subset_stat %>% pull(word)
+# robustness set does not include snow, so we include it manually
+subclass <- c(subclass, "snow")
+subclass <- unique(subclass)
+  
 ```
 
-Prepare a data frame: we standardize all predictor variables except for subsistence strategy which is a categorical variable. Note that population size is first log-transformed and then standardized.
+Prepare a data frame: we first take out Wiktionary filtered forms. We then standardize all predictor variables except for subsistence strategy which is a categorical variable. Note that population size is first log-transformed and then standardized.
 
 ```{r mixedeffects_full, include=TRUE}
+
+wikfilter <- read_csv(here("data", "foranalyses", "wiktionary_filtered_combinations.csv"), show_col_types = FALSE) %>%
+  select(glottocode, word) %>% unique()
 
 dstats <- d_long %>%
   filter(word %in% subclass) %>%
   rename(glottocode = gcode_data, langfamily = langfamily_data, area=area_data, subsistence=subsistence_data, logpop=logpop_data, avgmonth_tmp=avgmonth_tmp_data, minmonth_tmp=minmonth_tmp_data, maxmonth_pre=maxmonth_pre_data, maxmonth_wnd=maxmonth_wnd_data) %>%
-  mutate(across(avgmonth_tmp:logpop, ~as.numeric(scale(.))))
+  mutate(across(avgmonth_tmp:logpop, ~as.numeric(scale(.)))) %>%
+  anti_join(wikfilter, by = c("glottocode", "word"))
 
 ```
 
 Run GLMM without area as a random effect.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
@@ -121,7 +127,7 @@ glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "logpop") )  %>%
 
 Run GLMM with area as a random effect.
 
-```{r mixedeffects_full, include=TRUE, eval=FALSE}
+```{r mixedeffects_full, include=TRUE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
