@@ -131,8 +131,8 @@ d_standard <- d_dup %>%
   write_csv(here("data", "biladataset", "bila_dictionaries.csv"))
 
 # the standard version includes dictionaries in languages
-expect_equal(nrow(d_standard),1606)
-expect_equal(length(unique(d_standard$glottocode)),617)
+expect_equal(nrow(d_standard),1574)
+expect_equal(length(unique(d_standard$glottocode)),616)
 
 # write standard versions
 

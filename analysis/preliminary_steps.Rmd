@@ -115,11 +115,14 @@ d_long <- d_long %>%
   pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
   select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data) %>%
   write_csv(here("data", "foranalyses", "d_long.csv"))
+
+# notice that we do not filter out wiktionary filtered forms here because it will be filtered out in analyze_claims.Rmd and analyze_cases.Rmd later.
+
 ```
 
 ## Write data for running hierarchical model
 
-Define a subset of words on which we run logistic regression. We keep words that appear in dictionaries of more than 30 languages, which results in 7994 terms in total.
+Define a subset of words on which we run logistic regression. We keep words that appear in dictionaries of more than 30 languages, which results in 7973 terms in total.
 
 ```{r define subset, include=TRUE}
 
@@ -138,17 +141,22 @@ subset_lr <- word_nlang_lr %>%
 
 subset_lr <- subset_lr %>%
   pull(word)
-expect_equal(length(subset_lr), 7994)
+expect_equal(length(subset_lr), 7973)
 
 ```
 
-Prepare a data frame for running hierarchical model to compute L^lang and L^fam scores:
+Prepare a data frame for running hierarchical model to compute L^lang, L^fam, and L^dict scores:
 
 ```{r define a subset for hierarchical model, include=TRUE}
+
+wikfilter <- read_csv(here("data", "foranalyses", "wiktionary_filtered_combinations.csv"), show_col_types = FALSE) %>%
+  select(glottocode, word) %>% unique() %>% rename(lang = glottocode)
 
 d_wide <- d_long %>% 
   mutate(dict = id, lang = gcode_data, langname = langname_data, family = langfamily_data) %>% 
   select(dict, lang, langname, family, word, count) %>%
+  # filter out wiktionary filtered forms
+  anti_join(wikfilter, by = c("lang", "word")) %>%
   # keep words in pre-defined subset:
   filter(word %in% subset_lr) %>%
   group_by(dict) %>%
@@ -175,7 +183,7 @@ bila <- read_csv(dict_path) %>%
   select(id, year, glottocode, glottolog_langname, langfamily, area, population, ndict) %>%
   distinct() %>%
   arrange(population)
-expect_equal(length(unique(bila$glottocode)), 617)
+expect_equal(length(unique(bila$glottocode)), 616)
 
 popplot <- bila %>% 
   mutate(popmillion=population/1000000)  %>%
@@ -201,7 +209,7 @@ bila_robust_langs <- bila_robust %>%
 bila_filtered <- bila %>%
   anti_join(bila_robust, by="glottocode") %>%
   arrange(desc(population))
-expect_equal(length(unique(bila_filtered$glottocode)), 232)
+expect_equal(length(unique(bila_filtered$glottocode)), 231)
 
 bila_filtered_langs <- bila_filtered %>%
   select(-id, -year) %>% 
@@ -209,7 +217,7 @@ bila_filtered_langs <- bila_filtered %>%
   arrange(desc(ndict))
 ```
 
-Next we keep dictionaries that are relatively large in size for the set of languages defined above. We take the first quartile as a threshold for all token counts and keep dictionaries with token size above this threshold. This results 257 dictionaries in 223 languages.
+Next we keep dictionaries that are relatively large in size for the set of languages defined above. We take the first quartile as a threshold for all token counts and keep dictionaries with token size above this threshold. This results 261 dictionaries in 226 languages.
 
 ```{r keep relatively large dictionaries, include=TRUE}
 
@@ -227,8 +235,8 @@ dlen_robust <- dlen %>%
 d_robust <- bila_robust %>%
   filter(id %in% dlen_robust$id)
   
-expect_equal(nrow(d_robust), 257)
-expect_equal(length(unique(d_robust$glottocode)), 223)
+expect_equal(nrow(d_robust), 261)
+expect_equal(length(unique(d_robust$glottocode)), 226)
 
 robust_set <- d_robust %>%
   select(glottocode) %>%
@@ -260,6 +268,9 @@ d_long_robust <- d_long_robust %>%
   pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
   select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data)  %>%
   write_csv(here("data", "foranalyses", "d_long_robust.csv"))
+
+# notice that we do not filter out wiktionary filtered forms here because it will be filtered out in analyze_claims.Rmd and analyze_cases.Rmd later.
+
 ```
 
 ## Write versions with verbs and adjectives.
@@ -283,6 +294,8 @@ d_long <- wordcount %>%
 d_long <- d_long %>% 
   pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
   select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data) %>%
+  # filter out wiktionary filtered forms
+  anti_join(wikfilter %>% rename(gcode_data = lang), by = c("gcode_data", "word")) %>%
   write_csv(here("data", "foranalyses", "d_long_nounverbadj.csv"))
 ```
 
@@ -298,6 +311,8 @@ wordcount_robust <- wordcount_long  %>%
   mutate(dictsize_data = select(., !(ends_with("_data") |  id)) %>% apply(1, sum, na.rm=TRUE))  %>% 
   write_csv(here("data", "foranalyses", "wordcount_robust.csv"))
 
+# notice that we do not filter out wiktionary filtered forms here because it will be filtered out in analyze_claims.Rmd and analyze_cases.Rmd later.
+
 # write d_long for robustness check
 wordcount_robust <- wordcount_robust %>% 
   left_join(dict, by = "id")
@@ -307,6 +322,8 @@ d_long_robust <- wordcount_robust %>%
 
 d_long_robust <- d_long_robust %>% 
   pivot_longer(cols=-c("id", "langname_data", "gcode_data", "area_data", "langfamily_data", "population_data", "subsistence_data", "longitude_data", "latitude_data", "avgmonth_tmp_data", "minmonth_tmp_data", "maxmonth_pre_data", "maxmonth_wnd_data", "logpop_data", "dictsize_data"), names_to="word", values_to="count", values_drop_na = TRUE) %>% 
-  select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data)  %>%
+  select(id, langname_data, gcode_data, area_data, langfamily_data, population_data, subsistence_data, longitude_data, latitude_data, avgmonth_tmp_data, minmonth_tmp_data, maxmonth_pre_data, maxmonth_wnd_data, logpop_data, word, count, dictsize_data)   %>%
+  # filter out wiktionary filtered forms
+  anti_join(wikfilter %>% rename(gcode_data = lang), by = c("gcode_data", "word")) %>%
   write_csv(here("data", "foranalyses", "d_long_nounverbadj_robust.csv"))
 ```

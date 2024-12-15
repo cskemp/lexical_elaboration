@@ -85,8 +85,6 @@ wik_forms  <- read_tsv(wik_path, show_col_types = FALSE) %>%
   left_join(wiklangs_gcode %>% select(language_name, glottocode), by="language_name") %>%
   # omit rows where languages have no glottocodes
   filter(!is.na(glottocode)) %>%
-  # select combinations where the form doesn't have the same meaning as English form
-  filter(same_meaning == "FALSE") %>%
   select(glottocode, word) %>%
   unique()
 
@@ -169,7 +167,7 @@ filtered_counts_noun_wide <- bind_rows(final_counts_noun, na_counts_noun) %>%
   arrange(id) %>%
   write_csv(here("data","biladataset", "bila_matrix_noun_full.csv"))
 
-# forms in 202 languages were filtered
+# forms in 205 languages were filtered
 langs_filtered <- counts_long %>%
   anti_join(filtered_counts_long, by = c("id", "word")) %>%
   group_by(glottocode) %>%
@@ -177,10 +175,10 @@ langs_filtered <- counts_long %>%
   arrange(desc(words_filtered)) %>%
   left_join(dicts %>% select(glottolog_langname, glottocode), by="glottocode") %>%
   unique()
-expect_equal(nrow(langs_filtered), 202)
+expect_equal(nrow(langs_filtered), 205)
 
-# 14033 unique combinations of language and form were filtered
-# 6085 unique forms were filtered
+# 28783 unique combinations of language and form were filtered
+# 8925 unique forms were filtered
 words_filtered <- counts_long %>%
   anti_join(filtered_counts_long, by = c("id", "word")) %>%
   group_by(glottocode, word) %>%
@@ -189,6 +187,6 @@ words_filtered <- counts_long %>%
   left_join(dicts %>% select(glottolog_langname, glottocode), by="glottocode", relationship = "many-to-many") %>%
   unique() %>%
   write_csv(here("data", "foranalyses", "wiktionary_filtered_combinations.csv"))
-expect_equal(nrow(words_filtered), 14033)
-expect_equal(length(unique(words_filtered$glottocode)), 202)
-expect_equal(length(unique(words_filtered$word)), 6085)
+expect_equal(nrow(words_filtered), 28783)
+expect_equal(length(unique(words_filtered$glottocode)), 205)
+expect_equal(length(unique(words_filtered$word)), 8925)
