@@ -16,12 +16,15 @@ library(brms)
 library(gridExtra)
 library(maps)
 library(sf)
+library(kableExtra)
+library(pdftools)
+library(xtable)
 
 select <- dplyr::select
 
 ```
 
-This notebook explores the relationship between manual counts of related lexemes and the unigram frequencies for RAIN, SMELL, and TASTE in a selected subset of 64 non-HathiTrust dictionaries. It generates Figure S2 in the Supporting Material.
+This notebook explores the relationship between normalised counts of related lexemes and the unigram frequencies for RAIN, SMELL, and TASTE in a selected subset of 64 non-HathiTrust dictionaries. It generates Figure S2 and Tabe S1 in the Supporting Material.
 
 First we load dictionary lexeme classification data.
 
@@ -43,6 +46,9 @@ classes <- entrycounts %>%
          other = round(other/total, 2)) %>%
   arrange(desc(related))
 
+classes %>%
+  kable()
+
 grouped_entrycounts <- entrycounts %>%
   group_by(id, word) %>%
   summarise(
@@ -60,11 +66,31 @@ grouped <- entrycounts %>%
   )
 ```
 
+We'll approximate total lexeme counts in a given dictionary using manual lexeme counts of 20 random pages per dictionary.
+
+```{r total lex, include=TRUE}
+
+tolex <- read_csv(here("rawdata", "manuallycreated", "lexeme_count.csv"))
+
+tolex2 <- tolex %>%
+  group_by(id, total_pages) %>%
+  summarise(mean = mean(count)) %>%
+  ungroup() %>%
+  mutate(total_lex = total_pages * mean)
+
+grouped_entrycounts <- grouped_entrycounts %>%
+  left_join(tolex2 %>% select(id, total_lex)) %>%
+  mutate(norm_related_lex = related_lexemes / total_lex * 10000)
+
+```
+
 Load word count file:
 
 ```{r load data, include=TRUE}
+
 wordcount <- read_csv(here("data", "foranalyses", "wordcount.csv"))
 dict <- read_csv(here("data", "foranalyses", "bila_dictionaries_withenv.csv"))
+
 ```
 
 Gather counts for terms in interest. We'll compute results for groups of related words. Note that the group of words must be identical with those in analyze_cases.R. 
@@ -130,9 +156,7 @@ token_counts <- d %>%
     word == "rain_group" ~ "rain",
     word == "taste_group" ~ "taste"
   )) %>%
-  left_join(grouped_entrycounts, by = c("id", "word")) %>%
-  mutate(raw_counts=normalised_counts * dictsize_data / countunit) %>%
-  filter(raw_counts != 0)
+  left_join(grouped_entrycounts %>% select(id, word, norm_related_lex), by = c("id", "word"))
 ```
 
 ## Plot related lexeme counts agains token counts
@@ -140,6 +164,7 @@ token_counts <- d %>%
 Rain:
 
 ```{r dictionary related_lexemes, include=TRUE}
+
 theme_font <- theme(
   text = element_text(size = 10),  # Font size for all text elements
   plot.title = element_text(size=10),
@@ -155,21 +180,17 @@ theme_font <- theme(
 rain_related_lexemes <- token_counts %>%
   filter(word == "rain",
          #related_lexemes < 100,
-    !is.na(normalised_counts) & !is.na(related_lexemes)
-    ) %>%
-  left_join(dict %>% select(id, glottocode, maxmonth_pre), by="id")
-
-# token counts:
-cor.test(rain_related_lexemes$related_lexemes, rain_related_lexemes$raw_counts)
+    !is.na(normalised_counts) & !is.na(norm_related_lex)
+    )
 
 rain_plot <- rain_related_lexemes %>%
-  ggplot(aes(x = raw_counts, y = related_lexemes)) +
+  ggplot(aes(x = normalised_counts, y = norm_related_lex)) +
   geom_jitter(size=0.5) +
   geom_smooth(method=lm, size=0.3) +
   theme_classic()   +
   theme_font +
-  labs(x="unigram counts", y="related lexeme counts", title="RAIN") +
-  annotate("text", x = 200, y = Inf, label = "r = 0.92***", size = 4, hjust = 1.2, vjust = 1.2)
+  labs(x="normalised unigram counts", y="normalised related lexemes", title="RAIN") +
+  annotate("text", x = 80, y = Inf, label = "r = 0.70***", size = 4, hjust = 1.2, vjust = 1.2)
 show(rain_plot)
 ```
 
@@ -180,21 +201,17 @@ Smell:
 # plot dictionary related_lexemes for smell related words against token counts
 smell_related_lexemes <- token_counts %>%
   filter(word == "smell",
-    !is.na(normalised_counts) & !is.na(related_lexemes)
-    ) %>%
-  left_join(dict %>% select(id, glottocode), by="id")
-
-# token counts:
-cor.test(smell_related_lexemes$related_lexemes, smell_related_lexemes$raw_counts)
+    !is.na(normalised_counts) & !is.na(norm_related_lex)
+    )
 
 smell_plot <- smell_related_lexemes %>%
-  ggplot(aes(x = raw_counts, y = related_lexemes)) +
+  ggplot(aes(x = normalised_counts, y = norm_related_lex)) +
   geom_jitter(size=0.5) +
   geom_smooth(method=lm, size=0.3) +
   theme_classic() + theme(axis.title.y = element_blank()) +
   theme_font +
-  labs(x="unigram counts", y="related lexeme counts", title="SMELL") +
-  annotate("text", x = 80, y = Inf, label = "r = 0.88***", size = 4, hjust = 1.2, vjust = 1.2)
+  labs(x="normalised unigram counts", y="normalised related lexemes", title="SMELL") +
+  annotate("text", x = 62, y = Inf, label = "r = 0.47***", size = 4, hjust = 1.2, vjust = 1.2)
 show(smell_plot)
 ```
 
@@ -204,27 +221,24 @@ Taste:
 # plot dictionary related_lexemes for taste related words against token counts
 taste_related_lexemes <- token_counts %>%
   filter(word == "taste",
-    !is.na(normalised_counts) & !is.na(related_lexemes)
-    ) %>%
-  left_join(dict %>% select(id, glottocode), by="id")
-
-# token counts:
-cor.test(taste_related_lexemes$related_lexemes, taste_related_lexemes$raw_counts)
+    !is.na(normalised_counts) & !is.na(norm_related_lex)
+    )
 
 taste_plot <- taste_related_lexemes %>%
-  ggplot(aes(x = raw_counts, y = related_lexemes)) +
+  ggplot(aes(x = normalised_counts, y = norm_related_lex)) +
   geom_jitter(size=0.5) +
   geom_smooth(method=lm, size=0.3) +
   theme_classic()  + theme(axis.title.y = element_blank())  +
   theme_font +
-  labs(x="unigram counts", y="related lexeme counts", title="TASTE") +
-  annotate("text", x = 35, y = Inf, label = "r = 0.64***", size = 4, hjust = 1.2, vjust = 1.2)
+  labs(x="normalised unigram counts", y="normalised related lexemes", title="TASTE") +
+  annotate("text", x = 50, y = Inf, label = "r = 0.43***", size = 4, hjust = 1.2, vjust = 1.2)
 show(taste_plot)
 ```
 
 Make a map and combine plots:
 
 ```{r make map, include=TRUE}
+
 langs <- token_counts %>%
   select(id) %>% unique() %>%
   left_join(dict, by = "id")
@@ -250,3 +264,35 @@ ggsave(here("output", "figures", "supplementary", "lexemes_tokens.pdf"), combine
 
 ```
 
+## Explore correlations between normalised unigram and normalised related lexeme counts
+
+```{r explore_cor, include=TRUE}
+
+all <- rain_related_lexemes %>%
+  select(id, norm_related_lex, normalised_counts, dictsize_data) %>%
+  rename(rain_unigram = normalised_counts, rain_lexeme = norm_related_lex, dictsize = dictsize_data) %>%
+  left_join(taste_related_lexemes %>%
+               select(id, norm_related_lex, normalised_counts) %>%
+               rename(taste_unigram = normalised_counts, taste_lexeme = norm_related_lex),
+             by = "id") %>%
+  left_join(smell_related_lexemes %>%
+               select(id, norm_related_lex, normalised_counts) %>%
+               rename(smell_unigram = normalised_counts, smell_lexeme = norm_related_lex),
+             by = "id") %>%
+  unique()
+
+# check correlations
+variables <- c("smell_unigram", "smell_lexeme", "taste_unigram", "taste_lexeme", "rain_unigram", "rain_lexeme")
+data_subset <- all[, variables]
+correlation_matrix <- cor(data_subset, use = "complete.obs")
+correlation_matrix_tex <- xtable(correlation_matrix, 
+                                 caption = "Correlation matrix of normalised unigram counts and normalised related lexeme counts across three cases",
+                                 label = "tab:lex_uni_cor")
+
+
+output_file <- here("output/tables", "lex_uni_cor.tex")
+print(correlation_matrix_tex, 
+      file = output_file, 
+      type = "latex", 
+      include.rownames = TRUE)
+```
