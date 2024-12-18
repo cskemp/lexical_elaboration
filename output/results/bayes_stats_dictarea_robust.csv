@@ -1,100 +1,78 @@
 group,predictor,coefficient,lower_ci,upper_ci,warnings
-snow_group,avgmonth_tmp,-1.0583101003392343,-1.2653350288508072,-0.8497277324942787,"There were 4 divergent transitions after warmup. See
+snow_group,avgmonth_tmp,-1.0655827189903535,-1.2747577788390758,-0.8629803929525653,
+ice_group,avgmonth_tmp,-0.6910269300220564,-0.8848399638137536,-0.4937631405305614,
+rain_group,avgmonth_tmp,0.0906021117996274,-0.005175456622822653,0.18722414678769356,
+wind_group,avgmonth_tmp,-0.12512024778097594,-0.22131802949461965,-0.030329399860515378,
+smell_group,avgmonth_tmp,0.10218362837540516,0.028776325299018274,0.18214540208000815,"There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-ice_group,avgmonth_tmp,-0.6824090781479235,-0.8677953010468675,-0.4874177929773578,
-rain_group,avgmonth_tmp,0.09763093276303587,-8.222325164789367e-4,0.19358496241000395,
-wind_group,avgmonth_tmp,-0.1207234330247966,-0.2169576816301809,-0.023275886567989706,"There were 2 divergent transitions after warmup. See
+taste_group,avgmonth_tmp,0.08427030410619815,-0.015325328760168979,0.19289432884414232,
+dance_group,avgmonth_tmp,0.16296960091967996,0.010979748322512344,0.31666581970961283,
+snow_group,maxmonth_pre,-0.31185027311928387,-0.5571120533040752,-0.05930665933820822,
+ice_group,maxmonth_pre,-0.39403719334820525,-0.5861800352167821,-0.20464707359379203,
+rain_group,maxmonth_pre,0.10057013108102347,0.027722379370106735,0.17448895747760668,
+wind_group,maxmonth_pre,-0.012276067599146987,-0.0968473850392328,0.0710576014330756,"There were 3 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-smell_group,avgmonth_tmp,0.09889897952718203,0.02059555972152525,0.18032806106777577,"There were 4 divergent transitions after warmup. See
+smell_group,maxmonth_pre,0.0814156761856803,0.011543172178719864,0.14841578826860094,
+taste_group,maxmonth_pre,0.039769772927418054,-0.04734187034438296,0.12169547594613495,"There were 3 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-taste_group,avgmonth_tmp,0.07256281821008262,-0.025949392730205082,0.1806489276341044,
-dance_group,avgmonth_tmp,0.16565214490526325,0.013750270003111013,0.3177155852563626,"There were 1 divergent transitions after warmup. See
+dance_group,maxmonth_pre,0.169653696045322,0.04375190863921773,0.29290257648191775,
+snow_group,maxmonth_wnd,0.4893563885945687,0.2617978769195412,0.7188437070746824,
+ice_group,maxmonth_wnd,0.3754215771678514,0.20174139007440917,0.5485440226712932,
+rain_group,maxmonth_wnd,-0.11016350167204995,-0.18339927981514936,-0.0358208122489413,"There were 3 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-snow_group,maxmonth_pre,-0.29895998565040377,-0.55583096873213,-0.04460360113832922,
-ice_group,maxmonth_pre,-0.395136807102078,-0.5856028821738666,-0.20936619013939925,
-rain_group,maxmonth_pre,0.10463758083800598,0.033237147912124766,0.17528639202761045,
-wind_group,maxmonth_pre,-0.010218378630494431,-0.0926425611853054,0.07524024199035692,"There were 3 divergent transitions after warmup. See
+wind_group,maxmonth_wnd,0.11820300663069856,0.034417678465507966,0.2028042891568211,"There were 3 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-smell_group,maxmonth_pre,0.08300377121448888,0.013419842269629794,0.153852905637228,"There were 5 divergent transitions after warmup. See
+smell_group,maxmonth_wnd,-0.038135563189277674,-0.10798346257825585,0.030977624474729067,"There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-taste_group,maxmonth_pre,0.04599393666262404,-0.03827150119628405,0.13041848319545046,"There were 7 divergent transitions after warmup. See
+taste_group,maxmonth_wnd,-0.12308618855997837,-0.2064627671827391,-0.04409977796086331,
+dance_group,maxmonth_wnd,-0.05116316732686013,-0.1794294216912176,0.07390144075326967,"There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-dance_group,maxmonth_pre,0.16346619551249944,0.03748634447249519,0.2919362474104251,
-snow_group,maxmonth_wnd,0.49020774530588185,0.25836701730934497,0.7307962990795884,
-ice_group,maxmonth_wnd,0.37712086521868343,0.21303749549737602,0.5481485868997472,
-rain_group,maxmonth_wnd,-0.11385658597169859,-0.18872032858504365,-0.04074267403426929,"There were 2 divergent transitions after warmup. See
+snow_group,subsistence,-0.9328186191194235,-1.5890944291796472,-0.25064964631908265,
+ice_group,subsistence,-0.24360485750576277,-0.7586301891334407,0.2869665026271349,"There were 5 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-wind_group,maxmonth_wnd,0.1152802463918445,0.03414249364201417,0.19560324028411538,"There were 1 divergent transitions after warmup. See
+rain_group,subsistence,0.05568196277896003,-0.14185405611661767,0.25075730357283205,
+wind_group,subsistence,-0.3944397043267335,-0.5969814507828508,-0.18822977937621546,
+smell_group,subsistence,-0.03192832990492364,-0.21073111077306628,0.1413672773476185,"There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-smell_group,maxmonth_wnd,-0.03407179511112582,-0.10548111909528152,0.036806941163063364,"There were 3 divergent transitions after warmup. See
+taste_group,subsistence,0.038761224060995025,-0.16514157080691258,0.24511628953922995,"There were 10 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-taste_group,maxmonth_wnd,-0.12185408686558295,-0.20637360162132204,-0.041251360347703075,
-dance_group,maxmonth_wnd,-0.05838596968589792,-0.1888741405352402,0.07168499808275201,"There were 3 divergent transitions after warmup. See
+dance_group,subsistence,0.08997616026498771,-0.26170839875764745,0.43504535816416917,
+snow_group,population,-0.17116037614126287,-0.41167318750092374,0.07266475709368674,
+ice_group,population,0.01537455060758489,-0.16237957418807683,0.19068407808302573,
+rain_group,population,-0.0049965835030440445,-0.08209320462585547,0.07262299852581587,"There were 4 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-snow_group,subsistence,-0.889086676849452,-1.5355460185470657,-0.18763831312253793,
-ice_group,subsistence,-0.41235296512055536,-0.9225480082804379,0.10037426183521787,"There were 1 divergent transitions after warmup. See
+wind_group,population,-0.08482109529565603,-0.16671836303196333,-0.0016545271121373856,"There were 2 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-rain_group,subsistence,0.03496639574121571,-0.17019872121732899,0.24191337727919512,
-wind_group,subsistence,-0.41356595698698967,-0.6239189301529757,-0.205541701201891,"There were 5 divergent transitions after warmup. See
+smell_group,population,-0.006194021177447951,-0.07674458160200645,0.06090955817905391,"There were 5 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-smell_group,subsistence,-0.019301657154171783,-0.1883986794018515,0.1490000534939669,"There were 546 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
- | Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess | Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess"
-taste_group,subsistence,0.05027779682904035,-0.15655634244053435,0.26461885084686043,
-dance_group,subsistence,0.04481968322222862,-0.296734629902164,0.4055014686582325,
-snow_group,population,-0.18191859471154362,-0.42381794051107136,0.05682173611878715,"There were 2 divergent transitions after warmup. See
+taste_group,population,0.024857944324002432,-0.05584878710784499,0.1056481199792024,"There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
 "
-ice_group,population,0.03213028541270825,-0.14111382371136008,0.20266148788494107,"There were 1 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
-"
-rain_group,population,6.769798137177592e-4,-0.07931770380513227,0.07988047820709047,"There were 5 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
-"
-wind_group,population,-0.08071938062471046,-0.16562411272452104,0.0043846647253985,"There were 3 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
-"
-smell_group,population,-0.010556748348247746,-0.08130157421738976,0.05746274005682235,"There were 6 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
-"
-taste_group,population,0.024970448755546323,-0.053792973823208044,0.10493632637794145,"There were 2 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. | Examine the pairs() plot to diagnose sampling problems
-"
-dance_group,population,-0.1405272118988053,-0.2710610508982195,-0.010790537215138759,
+dance_group,population,-0.1317250316873566,-0.2571482835328165,-0.0036524870855950786,
