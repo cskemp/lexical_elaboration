@@ -30,7 +30,7 @@ select <- dplyr::select
 
 ```
 
-This notebook contains two bottom-up analyses: a) exhaustive logistic regression analysis on a subset of 2246 terms with natural and cultural variables as predictors, and b) identification of nearest neighbour terms. It generates Figure 3 in the main text, and Figure S4 and Table S4 in the Supporting Material. Note that it takes several hours to generate results for exhaustive analyses.
+This notebook contains two bottom-up analyses: a) exhaustive logistic regression analysis on a subset of 2246 terms with natural and cultural variables as predictors, and b) identification of nearest neighbour terms. It generates Figure 3 in the main text, and Figure S6 and Table S5 in the Supporting Material. Note that it takes several hours to generate results for exhaustive analyses.
 
 ## Run statistical analysis on a subset
 
@@ -163,9 +163,9 @@ pvals <- read_csv(here("output", "results", "bottomup_stats_dict.csv"),
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4))
 
-# convergence issues for 6 cases
+# convergence issues for 1 cases
 withwarnings <- pvals %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withwarnings), 6)
+expect_equal(nrow(withwarnings), 1)
 
 pvals <- pvals %>%
   # remove cases with convergence issues
@@ -203,9 +203,9 @@ pvals_rob <- read_csv(here("output", "results", "bottomup_stats_dict_robust.csv"
          coefficient=round(coefficient, 4),
          p_val=round(p_val, 4))
 
-# convergence issues for 216 cases
+# convergence issues for 233 cases
 withwarnings <- pvals_rob %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withwarnings), 216)
+expect_equal(nrow(withwarnings), 233)
 
 pvals_rob <- pvals_rob %>%
   # remove cases with convergence issues
