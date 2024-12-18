@@ -106,3 +106,44 @@ process_pdf <- function(file_path) {
 # Apply the function to each PDF file
 results <- lapply(pdf_files, process_pdf)
 
+# Randomly extract pages from these dictionaries to manually count lexemes
+
+set.seed(1234)
+
+pdf_folder <- here("rawdata", "downloaded", "nonhathi_class")
+output_folder <- here("data", "foranalyses", "random_pages")
+
+pdf_files <- list.files(pdf_folder, pattern = "\\.pdf$", full.names = TRUE)
+
+extract_random_pages <- function(pdf_file, output_folder, num_pages = 20) {
+
+  num_total_pages <- pdf_info(pdf_file)$pages
+
+  num_pages <- min(num_pages, num_total_pages)
+
+  random_pages <- sample(1:num_total_pages, num_pages)
+
+  output_file <- file.path(output_folder, paste0(basename(pdf_file)))
+
+  pdf_subset(pdf_file, pages = random_pages, output = output_file)
+
+  list(
+    id = tools::file_path_sans_ext(basename(output_file)),
+    pages = random_pages,
+    total_pages = num_total_pages
+  )
+}
+
+extracted_info <- map(pdf_files, ~ extract_random_pages(.x, output_folder))
+
+# Create annotation file
+annotation_df <- map_dfr(extracted_info, function(info) {
+  tibble(
+    id = info$id,
+    page = info$pages,
+    total_pages = info$total_pages,
+    count = NA_character_
+  )
+})
+
+write_csv(annotation_df, file = here(output_folder, "annotation_template.csv"))

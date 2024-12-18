@@ -10,6 +10,8 @@
   * `compute_zetas_par.R` and `relatedtermsforapp.Rmd` : codes to obtain results used for the app.
   * `bind_weights_par.R`: functions to compute L^lang and L^fam scores.
   *  `stats_functions.R`: functions for statistical analyses.
+  * `explore_examples.R`: explores effect of examples in Dictionaria dictionaries.
+  * `explore_dicts.R`: explores L^dict scores across languages with multiple dictionaries.
   
 To reproduce tables and figures, please follow the steps described in the top level `README.md`.
   

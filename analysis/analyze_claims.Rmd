@@ -37,7 +37,7 @@ library(lemon)
 select <- dplyr::select
 ```
 
-This notebook contains analysis of existing claims (see the main text section called "Testing 163 proposed examples of lexical elaboration"). It generates Figure 1 in the main text and Figure S3 in the Supporting Material.
+This notebook contains analysis of existing claims (see the main text section called "Testing 163 proposed examples of lexical elaboration"). It generates Figure 1 in the main text and Figure S5 in the Supporting Material.
 
 
 ##Assign glottocodes for language groups
@@ -267,6 +267,14 @@ d_claims_distinct <- d_claims %>%
   select(combo_name, word_list) %>%
   unique()
 expect_equal(nrow(d_claims_distinct), 73)
+
+output_dir <- "../data/foranalyses"
+write_claims <- function(data, path, filename) {
+  data %>%
+    mutate(word_list = sapply(word_list, paste, collapse = ", ")) %>%
+    write_csv(file = file.path(path, filename))
+}
+write_claims(d_claims_distinct, output_dir, "d_claims_distinct.csv")
 ```
 
 

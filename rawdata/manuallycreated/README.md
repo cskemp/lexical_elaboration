@@ -228,3 +228,15 @@ rank), grave (of problems, offences)’, classify it as example.
 
 17. If unsure, flag it for review.
 
+## Count of lexemes
+
+In order to approximate total lexeme counts for each dictionary of the above 64 non-HathiTrust dictionaries, we first randomly selected 20 pages from each dictionary by running `../preprocessing/pdf_search/search_pdf.R`. Next, we manually counted lexeme counts for each page and uploaded here as `lexeme_count.csv`. It has the following columns:
+
+`id`: dictionary ID
+
+`page_number`: randomly selected page number
+
+`total_pages`: total number of pages
+
+`count`: manual count of lexemes per page
+
