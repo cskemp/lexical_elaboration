@@ -24,7 +24,7 @@ select <- dplyr::select
 
 ```
 
-This notebook explores the relationship between normalised counts of related lexemes and the unigram frequencies for RAIN, SMELL, and TASTE in a selected subset of 64 non-HathiTrust dictionaries. It generates Figure S2 and Tabe S1 in the Supporting Material.
+This notebook explores the relationship between normalised counts of related lexemes and the unigram frequencies for RAIN, SMELL, and TASTE in a selected subset of 64 non-HathiTrust dictionaries. It generates Figure S2 and Table S1 in the Supporting Material.
 
 First we load dictionary lexeme classification data.
 
