@@ -296,3 +296,45 @@ print(correlation_matrix_tex,
       type = "latex", 
       include.rownames = TRUE)
 ```
+
+## Explore outliers
+
+```{r outliers, include=TRUE}
+
+# leave-one-out correlations
+leave_one_out_correlation <- function(data, col_x, col_y) {
+  results <- sapply(1:nrow(data), function(i) {
+
+    temp_data <- data[-i, ]
+    
+    cor(temp_data[[col_x]], temp_data[[col_y]], use = "complete.obs")
+  })
+  
+  return(data.frame(index = 1:nrow(data), correlation = results))
+}
+
+results_rain <- leave_one_out_correlation(all, "rain_lexeme", "rain_unigram")
+results_taste <- leave_one_out_correlation(all, "taste_lexeme", "taste_unigram")
+results_smell <- leave_one_out_correlation(all, "smell_lexeme", "smell_unigram")
+
+# leave-two-out correlations
+leave_two_out_correlation <- function(data, col_x, col_y) {
+
+  combinations <- combn(1:nrow(data), 2)
+  
+  results <- apply(combinations, 2, function(pair) {
+
+    temp_data <- data[-pair, ]
+    
+    cor(temp_data[[col_x]], temp_data[[col_y]], use = "complete.obs")
+  })
+  
+  return(data.frame(pair = apply(combinations, 2, paste, collapse = ", "), 
+                    correlation = results))
+}
+
+results_rain2 <- leave_two_out_correlation(all, "rain_lexeme", "rain_unigram")
+results_taste2 <- leave_two_out_correlation(all, "taste_lexeme", "taste_unigram")
+results_smell2 <- leave_two_out_correlation(all, "smell_lexeme", "smell_unigram")
+
+```
