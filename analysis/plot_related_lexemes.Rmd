@@ -282,7 +282,7 @@ all <- rain_related_lexemes %>%
   unique()
 
 # check correlations
-variables <- c("smell_unigram", "smell_lexeme", "taste_unigram", "taste_lexeme", "rain_unigram", "rain_lexeme")
+variables <- c("rain_unigram", "rain_lexeme", "smell_unigram", "smell_lexeme", "taste_unigram", "taste_lexeme", "dictsize")
 data_subset <- all[, variables]
 correlation_matrix <- cor(data_subset, use = "complete.obs")
 correlation_matrix_tex <- xtable(correlation_matrix, 
