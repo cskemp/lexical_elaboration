@@ -36,7 +36,7 @@ select <- dplyr::select
 
 ```
 
-This notebook contains analysis of case studies (see the main text section called "Seven case studies of lexical elaboration"). It generates Figure 2 in the main text, and Table S2, Table S3, and Figure S5 in the Supporting Material. Note that it takes several hours to generate results for Bayesian analyses.
+This notebook contains analysis of case studies (see the main text section called "Seven case studies of lexical elaboration"). It generates Figure 2 in the main text, and Table S3, Table S4, and Figure S7 in the Supporting Material. Note that it takes several hours to generate results for Bayesian analyses.
 
 ## Analyses
 
@@ -489,7 +489,7 @@ bayes_sub <- map_dfr(all_groups, ~ run_bayes_area_simple(.x, dstats, "subsistenc
 
 bayes_pop <- map_dfr(all_groups, ~ run_bayes_area_simple(.x, dstats, "logpop") )  %>% 
   mutate(predictor="population") %>%
-  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"))
+  write_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), append=TRUE)
 
 }
 ```
@@ -541,6 +541,9 @@ create_env_plot <- function(groupname, variablename, significance, plotd){
   } else if (significance == "(one)") {
     climateplot <- climateplot +
       annotate("text", x = Inf, y = Inf, label = expression(""^"("*"*"*""^")"), size = 5, hjust = 1.2, vjust = 1.2)
+  } else if (significance == "(three)") {
+    climateplot <- climateplot +
+      annotate("text", x = Inf, y = Inf, label = expression(""^"("*"***"*""^")"), size = 5, hjust = 1.2, vjust = 1.2)
   } else if (significance == "none") {
   } else {
     stop("no significance")
@@ -553,8 +556,8 @@ plot_snow_env <- create_env_plot("snow_group", "temperature (°C)", "three", plo
 plot_ice_env <- create_env_plot("ice_group", "temperature (°C)", "three", plotd)
 plot_rain_env <- create_env_plot("rain_group", "precipitation (mm)", "(one)", plotd)
 plot_wind_env <- create_env_plot("wind_group", "windspeed (m/s)", "three", plotd)
-plot_smell_env <- create_env_plot("smell_group", "temperature (°C)", "three", plotd)
-plot_taste_env <- create_env_plot("taste_group", "temperature (°C)", "(one)", plotd)
+plot_smell_env <- create_env_plot("smell_group", "temperature (°C)", "(three)", plotd)
+plot_taste_env <- create_env_plot("taste_group", "temperature (°C)", "none", plotd)
 plot_dance_env <- create_env_plot("dance_group", "temperature (°C)", "(one)", plotd)
 
 
@@ -630,10 +633,10 @@ create_pop_plot <- function(groupname, significance, plotd){
 plot_snow_pop <- create_pop_plot("snow_group", "none", plotd)
 plot_ice_pop <- create_pop_plot("ice_group", "(three)", plotd)
 plot_rain_pop <- create_pop_plot("rain_group", "(three)", plotd)
-plot_wind_pop <- create_pop_plot("wind_group", "(three)", plotd)
+plot_wind_pop <- create_pop_plot("wind_group", "three", plotd)
 plot_smell_pop <- create_pop_plot("smell_group", "(one)", plotd)
 plot_taste_pop <- create_pop_plot("taste_group", "none", plotd)
-plot_dance_pop <- create_pop_plot("dance_group", "three", plotd)
+plot_dance_pop <- create_pop_plot("dance_group", "(three)", plotd)
 
 ```
 
@@ -701,27 +704,12 @@ glmm_r <- read_csv(here("output", "results", "glmer_stats_dict_robust.csv"), sho
 # no convergence issues must be found for the full set
 expect_equal(nrow(glmm %>% filter(!is.na(warnings_m1_a) | !is.na(warnings_m2_a))), 0)
 
-# one convergence issue is identified for the robustness set
+# no convergence issue is identified for the robustness set
 withconvergence <- glmm_r %>% filter(!is.na(warnings_m1_a) | !is.na(warnings_m2_a))
-expect_equal(nrow(withconvergence), 1)
-
-# we'll use results from the analysis without a dictionary as a random effect for this case
-glmm_r_nodict <- read_csv(here("output", "results", "glmer_stats_robust.csv"), show_col_types = FALSE) %>%
-  mutate(case=paste(group, "by", predictor))
-
-convergence_case <- withconvergence$case
-
-replacement_row <- glmm_r_nodict %>%
-  filter(case %in% convergence_case)
-
-glmm_r <- glmm_r %>%
-  filter(!(case %in% convergence_case)) %>%
-  bind_rows(replacement_row)
+expect_equal(nrow(withconvergence), 0)
 
 # now load results from Bayesian analyses
-bayes <- read_csv(here("output", "results", "bayes_stats_dict.csv"), show_col_types = FALSE) %>%
-  # filter out cases with low ESS
-  filter(is.na(warnings) | !startsWith(warnings, "Bulk Effective Samples Size (ESS) is too low"))
+bayes <- read_csv(here("output", "results", "bayes_stats_dict.csv"), show_col_types = FALSE)
 
 bayes_r <- read_csv(here("output", "results", "bayes_stats_dict_robust.csv"), show_col_types = FALSE) %>%
   # filter out cases with low ESS
@@ -729,8 +717,8 @@ bayes_r <- read_csv(here("output", "results", "bayes_stats_dict_robust.csv"), sh
 
 # no divergent transitions for the full set
 expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 0)
-# one divergent transition for the robustness set
-expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 1)
+# no divergent transitions for the robustness set
+expect_equal(nrow(subset(bayes_r %>% filter(!is.na(warnings)))), 0)
 
 bayes <- bayes %>%
   mutate(lower_ci = sprintf("%.2f", lower_ci),
@@ -842,16 +830,31 @@ Version with area as additional random effect:
 
 ```{r with area, include=TRUE}
 
-glmm <- read_csv(here("output", "results", "glmer_stats_dict.csv"), show_col_types = FALSE)
+glmm <- read_csv(here("output", "results", "glmer_stats_dict.csv"), show_col_types = FALSE) %>%
+  mutate(case=paste(group, "by", predictor))
 glmm_r <- read_csv(here("output", "results", "glmer_stats_dict_robust.csv"), show_col_types = FALSE) %>%
   mutate(case=paste(group, "by", predictor))
 
-# no convergence issues must be found for the full set
-expect_equal(nrow(glmm %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))), 0)
+# 1 convergence issue identified for the full set
+withconvergence <- glmm %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
+expect_equal(nrow(glmm %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))), 1)
 
-# 2 convergence issues identified for the robustness set
+# we'll use results from the analysis without a dictionary as a random effect for these cases
+glmm_nodict <- read_csv(here("output", "results", "glmer_stats.csv"), show_col_types = FALSE) %>%
+  mutate(case=paste(group, "by", predictor))
+
+convergence_case <- withconvergence$case
+
+replacement_row <- glmm_nodict %>%
+  filter(case %in% convergence_case)
+
+glmm <- glmm %>%
+  filter(!(case %in% convergence_case)) %>%
+  bind_rows(replacement_row)
+
+# 7 convergence issues identified for the robustness set
 withconvergence <- glmm_r %>% filter(!is.na(warnings_m1) | !is.na(warnings_m2))
-expect_equal(nrow(withconvergence), 2)
+expect_equal(nrow(withconvergence), 7)
 
 # we'll use results from the analysis without a dictionary as a random effect for these cases
 glmm_r_nodict <- read_csv(here("output", "results", "glmer_stats_robust.csv"), show_col_types = FALSE) %>%
@@ -870,10 +873,10 @@ glmm_r <- glmm_r %>%
 bayes <- read_csv(here("output", "results", "bayes_stats_dictarea.csv"), show_col_types = FALSE) 
 bayes_r_raw <- read_csv(here("output", "results", "bayes_stats_dictarea_robust.csv"), show_col_types = FALSE)
 
-# there are 11 cases with divergent transitions
-expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 11)
-# there are 20 cases with divergent transitions, we only report those with less than 5 divergent transitions
-expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 20)
+# there are 9 cases with divergent transitions
+expect_equal(nrow(subset(bayes %>% filter(!is.na(warnings)))), 9)
+# there are 14 cases with divergent transitions, we only report those with less than 5 divergent transitions
+expect_equal(nrow(subset(bayes_r_raw %>% filter(!is.na(warnings)))), 14)
 
 bayes <- bayes %>%
   mutate(lower_ci = sprintf("%.2f", lower_ci),
@@ -883,21 +886,15 @@ bayes <- bayes %>%
 bayes_r <- bayes_r_raw %>%
   mutate(model = paste(group, "by", predictor),
          coefficient = case_when(
-           model == "smell_group by subsistence" ~ NA,
-           model == "smell_group by population" ~ NA,
-           model == "taste_group by maxmonth_pre" ~ NA,
+           model == "taste_group by subsistence" ~ NA,
            TRUE ~ coefficient
          ),
          lower_ci = case_when(
-           model == "smell_group by subsistence" ~ NA,
-           model == "smell_group by population" ~ NA,
-           model == "taste_group by maxmonth_pre" ~ NA,
+           model == "taste_group by subsistence" ~ NA,
            TRUE ~ lower_ci
          ),
          upper_ci = case_when(
-           model == "smell_group by subsistence" ~ NA,
-           model == "smell_group by population" ~ NA,
-           model == "taste_group by maxmonth_pre" ~ NA,
+           model == "taste_group by subsistence" ~ NA,
            TRUE ~ upper_ci
          ),
          lower_ci = sprintf("%.2f", lower_ci),
