@@ -89,6 +89,7 @@ avg_cor <- average_correlations %>%
               ungroup() %>% rename(language=lang), by = "language")
 
 mean(avg_cor$avg_correlation) #0.58
+sd(avg_cor$avg_correlation) #0.16
 
 theme_font <- theme(
   text = element_text(size = 10),  # Font size for all text elements
@@ -143,6 +144,9 @@ rank <- final_results %>%
             mean_rank_f = mean(rank_f),
             no_dicts = n_distinct(dict)) %>%
   ungroup()
+
+mean(rank$mean_rank_f) #0.96
+sd(rank$mean_rank_f) #0.05
 
 # plot results
 
