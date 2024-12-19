@@ -4,6 +4,7 @@ library(here)
 library(glmmTMB)
 library(broom.mixed)
 library(furrr)
+library(stringr)
 source("analysis/bind_weights_par.R")
 
 dictionaria_path <- here("rawdata", "downloaded", "dictionaria")
@@ -75,37 +76,7 @@ d_noex <- exw2 %>%
 d_ex <- exw2 %>%
   select(-countex, -count) %>% rename(count = countall)
 
-# First, we combine counts for seven case studies.
-
-compute_combo <- function(data, terms, combo) {
-  data %>%
-    filter(word %in% terms) %>%
-    group_by(dict, lang, langname, family, total) %>%
-    summarise(!!combo := sum(count), .groups = 'drop') %>%
-    pivot_longer(cols = !!combo, names_to = "word", values_to = "count")
-}
-
-compute_combined_results <- function(data, groups) {
-  results <- lapply(names(groups), function(group_name) {
-    compute_combo(data, groups[[group_name]], group_name)
-  })
-  bind_rows(results)
-}
-
-groups <- list(
-  snow_group = c("snow", "snowball", "snowstorm", "snowfall", "snowflake", "blizzard", "snowdrift", "snowfield", "sleet"),
-  ice_group = c("ice", "frost", "glacier", "iceberg"),
-  rain_group = c("rain", "raindrop", "rainfall", "rainwater", "drizzle", "mizzle", "downpour", "pelter"),
-  wind_group = c("wind", "breeze", "gale", "gust", "squall", "zephyr", "hurricane", "windstorm", "whirlwind", "tornado", "souther", "norther", "wester", "southerly", "northerly", "westerly", "easterly", "northeaster", "southeaster", "northwester", "southwester"),
-  smell_group = c("smell", "odor", "scent", "effluvium", "smelling", "sniff", "snuff", "olfaction", "fragrance", "perfume", "stench"),
-  taste_group = c("taste", "flavor", "savor", "savoring", "gustation", "taster", "tasting", "aftertaste", "insipidity", "savoriness", "unsavoriness", "sweetness", "sourness", "acidity"),
-  dance_group = c("dance", "dancing", "dancer")
-)
-
-cases_noex <- compute_combined_results(d_noex, groups)
-cases_ex <- compute_combined_results(d_ex, groups)
-
-# Second, we combine counts for terms in claims.
+# we combine counts for terms in claims.
 
 read_claims <- function(path, filename) {
   read_csv(file.path(path, filename)) %>%
@@ -148,13 +119,8 @@ results <- process_datasets(datasets, d_claims_distinct)
 claims_noex <- results$d_noex
 claims_ex <- results$d_ex
 
-# Third, we bind rows for terms in cases and claims.
-
-all_noex <- bind_rows(cases_noex, claims_noex)
-all_ex <- bind_rows(cases_ex, claims_ex)
-
-weights_noex <- bind_weights_par(all_noex)
-weights_ex <- bind_weights_par(all_ex)
+weights_noex <- bind_weights_par(claims_noex)
+weights_ex <- bind_weights_par(claims_ex)
 
 compare <- weights_ex %>%
   select(lang, word, zeta) %>%
@@ -164,8 +130,8 @@ compare <- weights_ex %>%
               rename(zeta_without_ex = zeta), by = c("lang", "word"))
 
 length(unique(compare$lang)) #13
-length(unique(compare$word)) #70
-cor.test(compare$zeta_with_ex, compare$zeta_without_ex) #0.78
+length(unique(compare$word)) #63 concepts are present out of 72 in the set of claims
+cor.test(compare$zeta_with_ex, compare$zeta_without_ex)
 
 theme_font <- theme(
   text = element_text(size = 10),  # Font size for all text elements
