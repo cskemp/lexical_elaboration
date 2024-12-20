@@ -556,7 +556,7 @@ plot_snow_env <- create_env_plot("snow_group", "temperature (°C)", "three", plo
 plot_ice_env <- create_env_plot("ice_group", "temperature (°C)", "three", plotd)
 plot_rain_env <- create_env_plot("rain_group", "precipitation (mm)", "(one)", plotd)
 plot_wind_env <- create_env_plot("wind_group", "windspeed (m/s)", "three", plotd)
-plot_smell_env <- create_env_plot("smell_group", "temperature (°C)", "(three)", plotd)
+plot_smell_env <- create_env_plot("smell_group", "temperature (°C)", "three", plotd)
 plot_taste_env <- create_env_plot("taste_group", "temperature (°C)", "none", plotd)
 plot_dance_env <- create_env_plot("dance_group", "temperature (°C)", "(one)", plotd)
 
@@ -636,7 +636,7 @@ plot_rain_pop <- create_pop_plot("rain_group", "(three)", plotd)
 plot_wind_pop <- create_pop_plot("wind_group", "three", plotd)
 plot_smell_pop <- create_pop_plot("smell_group", "(one)", plotd)
 plot_taste_pop <- create_pop_plot("taste_group", "none", plotd)
-plot_dance_pop <- create_pop_plot("dance_group", "(three)", plotd)
+plot_dance_pop <- create_pop_plot("dance_group", "three", plotd)
 
 ```
 
