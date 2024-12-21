@@ -645,7 +645,14 @@ Load top language, family, and concept tables. We created them manually using to
 ```{r combine plots, include=TRUE}
 
 library(jpeg)
-top_snow <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_snow.jpg")), interpolate = TRUE)
+library(svgparser)
+#top_snow <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_snow.jpg")), interpolate = TRUE)
+
+library(grImport)
+grImport::PostScriptTrace( here("output", "figures", "main", "top", "svgedit.eps"), here("output", "figures", "main", "top", "svgedit.eps.xml"))
+top_snow_pic <- grImport::readPicture( here("output", "figures", "main", "top", "svgedit.eps.xml"))
+top_snow <- grImport::pictureGrob(top_snow_pic)
+
 top_ice <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_ice.jpg")), interpolate = TRUE)
 top_rain <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_rain.jpg")), interpolate = TRUE)
 top_wind <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_wind.jpg")), interpolate = TRUE)
