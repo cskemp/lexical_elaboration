@@ -339,7 +339,7 @@ make_plot <- function(pvals, predictorname, termlist, lowerbound, upperbound, ma
     left_join(bin_counts, by = c("word", "sign", "adjusted_lnpval")) %>%
     mutate(y = log_count)
   
-  set.seed(0)
+  set.seed(15)
   combined_plot <- ggplot(combined, aes(x = adjusted_lnpval, fill = sign)) +
     geom_histogram(data = filter(combined, sign == "negative"), aes(x = adjusted_lnpval), binwidth = manualbin, 
                    boundary = 0, fill = 'grey90', col="white", alpha = 1) +
@@ -363,7 +363,7 @@ make_plot <- function(pvals, predictorname, termlist, lowerbound, upperbound, ma
 
 tmplist <- c("snow", "ice", "smell", "taste", "dance", "fruit", "tree", "winter", "seed", "frost", "palm", "mango")
 prclist <- c("rain", "smell", "rice", "summer", "umbrella", "roof", "flower", "snow", "boot", "sheep", "bamboo")
-wndlist <- c("wind", "jungle", "fruit", "ice", "chimney", "crocodile", "malaria")
+wndlist <- c("wind", "jungle", "fruit", "ice", "chimney", "bamboo", "crocodile")
 sublist <- c("wind", "smell", "taste", "dance", "meat", "bean", "berry", "crop", "merchant", "hunting", "fire", "garden")
 
 tmpplot <- make_plot(pvals, "temperature", tmplist, -84, 95, 5, 10) + theme(axis.title.x = element_blank())
