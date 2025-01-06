@@ -558,7 +558,7 @@ zmedian <- median(snowcases$zeta)
 # make alternative with 5 Inuit languages
 
 inuit_languages <- c("Eastern Canadian Inuktitut", "Western Canadian Inuktitut", "Aleut", "Central Siberian Yupik", "North Alaskan Inupiatun")
-other_snow <- c("Plains Cree", "Lakota", "Japanese", "Scots", "Navajo", "Dakota", "Ahtena", "Mi'kmaq", "North Saami", "Dena'ina", "Tibetan", "Central Carrier", "Tanacross", "Tamil", "Cebuano", "Amharic", "Sinhala")
+other_snow <- c("Plains Cree", "Lakota", "Japanese", "Scots", "Navajo", "Dakota", "Ahtena", "Mi'kmaq", "North Saami", "Dena'ina", "Tibetan", "Central Carrier", "Tamil", "Cebuano", "Amharic", "Sinhala", "Tibetan", "German", "Russian", "Swedish", "Thai", "Tagalog", "Tanacross")
 
 snowcases_inuit <- snowcases %>% 
   filter( langname %in% inuit_languages)
@@ -579,7 +579,7 @@ plot_snow_zeta_half <- snowcases %>%
   scale_color_manual(values = c("black", "red")) +
   theme(legend.position="none") + 
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
-  labs(x="", y=expression(L^{lang} * " for SNOW"), title = "") +
+  labs(x="All languages", y=expression(L^{lang} * " for SNOW"), title = "") +
   theme_font 
 plot_snow_zeta_half
 
@@ -638,7 +638,7 @@ default_plot_dot <- default_p %>%
   geom_dotplot(data = eskimosnow, binaxis = "y", stackdir = "down", dotsize = 0.05, binwidth= 0.3, fill="red", color="red")  +
   geom_text_repel(data = default_p_labeled, aes(x=1,y = rank, label = claim, color=dot_color), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
   scale_color_manual(values = c("black", "red")) +
-  labs(x="", y="rank", title = "") +
+  labs(x="All examples", y="rank", title = "") +
   theme_classic() +
   theme(legend.position="none") + 
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
@@ -714,7 +714,7 @@ compressed_plot_ids <- default_p_ids %>%
   geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.4, binwidth= 0.025)  +
   #geom_text_repel(aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 5, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0, size = 3) +
   geom_text_repel(data = default_p_ids_labeled, aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
-  labs(x="", y="rank", title = "") +
+  labs(x="Domain", y="rank", title = "") +
   coord_cartesian(xlim = c(1.2,4), clip = "off") +
   theme_classic() +
   theme(legend.position="none") + 
@@ -825,7 +825,8 @@ default_single <- default_first %>%
   rename(groupname=langname)
 
 default_group <- default_first %>% filter(level == "group")
-default_robust <- bind_rows(default_single, default_group)
+default_robust <- bind_rows(default_single, default_group) %>%
+  filter(rank != "NaN")
 
 # compressed table by concept
 compressed_robust <- default_robust %>%
