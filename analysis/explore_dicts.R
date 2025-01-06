@@ -174,7 +174,7 @@ p1 <- ggplot(avg_cor, aes(x = dict_bin, y = avg_correlation)) +
   geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth= 0.03)  +
   theme_classic() +
   theme_font +
-  labs(x = "", y = expression("Average correlation of " * L^{lang} * " with its corresponding " * L^{dict} * " scores"))
+  labs(x = "", y = expression("Average correlation of " * L^{lang} * " with its corresponding " * L[R]^{dict} * " scores"))
 
 p2 <- ggplot(rank, aes(x = dict_bin, y = mean_rank_f)) +
   #geom_violin(trim = FALSE) +
@@ -184,7 +184,7 @@ p2 <- ggplot(rank, aes(x = dict_bin, y = mean_rank_f)) +
   theme_classic() +
   theme_font + ylim(0.4,1) +
   geom_hline(yintercept = 0.5, linetype = "dashed", size = 0.5, color = "gray") +
-  labs(x = "", y = expression("Average rank based on correlations of " * L^{dict} * " with all " * L^{lang} * " scores"))
+  labs(x = "", y = expression("Average rank based on correlations of " * L[R]^{dict} * " with all " * L^{lang} * " scores"))
 
 combined <- p1 + p2 + plot_annotation(tag_levels = 'a',  tag_suffix = ')')
 ggsave(here("output/figures/supplementary/multidict.pdf"), combined, width = 12, height = 5)
