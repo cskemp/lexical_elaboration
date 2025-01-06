@@ -179,7 +179,6 @@ theme_font <- theme(
 # plot dictionary related_lexemes for rain related words against token counts
 rain_related_lexemes <- token_counts %>%
   filter(word == "rain",
-         #related_lexemes < 100,
     !is.na(normalised_counts) & !is.na(norm_related_lex)
     )
 
@@ -211,7 +210,7 @@ smell_plot <- smell_related_lexemes %>%
   theme_classic() + theme(axis.title.y = element_blank()) +
   theme_font +
   labs(x="normalised unigram counts", y="normalised related lexemes", title="SMELL") +
-  annotate("text", x = 62, y = Inf, label = "r = 0.47***", size = 4, hjust = 1.2, vjust = 1.2)
+  annotate("text", x = 62, y = Inf, label = "r = 0.48***", size = 4, hjust = 1.2, vjust = 1.2)
 show(smell_plot)
 ```
 
@@ -231,7 +230,7 @@ taste_plot <- taste_related_lexemes %>%
   theme_classic()  + theme(axis.title.y = element_blank())  +
   theme_font +
   labs(x="normalised unigram counts", y="normalised related lexemes", title="TASTE") +
-  annotate("text", x = 50, y = Inf, label = "r = 0.43***", size = 4, hjust = 1.2, vjust = 1.2)
+  annotate("text", x = 50, y = Inf, label = "r = 0.36***", size = 4, hjust = 1.2, vjust = 1.2)
 show(taste_plot)
 ```
 
@@ -284,7 +283,7 @@ all <- rain_related_lexemes %>%
 # check correlations
 variables <- c("rain_unigram", "rain_lexeme", "smell_unigram", "smell_lexeme", "taste_unigram", "taste_lexeme", "dictsize")
 data_subset <- all[, variables]
-correlation_matrix <- cor(data_subset, use = "complete.obs")
+correlation_matrix <- cor(data_subset, use = "pairwise.complete.obs")
 correlation_matrix_tex <- xtable(correlation_matrix, 
                                  caption = "Correlation matrix of normalised unigram counts and normalised related lexeme counts across three cases",
                                  label = "tab:lex_uni_cor")
@@ -307,7 +306,7 @@ leave_one_out_correlation <- function(data, col_x, col_y) {
 
     temp_data <- data[-i, ]
     
-    cor(temp_data[[col_x]], temp_data[[col_y]], use = "complete.obs")
+    cor(temp_data[[col_x]], temp_data[[col_y]], use = "pairwise.complete.obs")
   })
   
   return(data.frame(index = 1:nrow(data), correlation = results))
@@ -326,7 +325,7 @@ leave_two_out_correlation <- function(data, col_x, col_y) {
 
     temp_data <- data[-pair, ]
     
-    cor(temp_data[[col_x]], temp_data[[col_y]], use = "complete.obs")
+    cor(temp_data[[col_x]], temp_data[[col_y]], use = "pairwise.complete.obs")
   })
   
   return(data.frame(pair = apply(combinations, 2, paste, collapse = ", "), 
