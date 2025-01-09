@@ -322,8 +322,9 @@ library(ggrrr)
 make_plot <- function(pvals, predictorname, termlist, lowerbound, upperbound, manualbin, breaknumber) {
   
   combined <- pvals %>% 
-    filter(predictor == predictorname) %>%
-    mutate(sign = ifelse(coefficient > 0, "positive", "negative"),
+    filter(predictor == predictorname,
+           lnpval != 0) %>%
+    mutate(sign = ifelse(coefficient >= 0, "positive", "negative"),
            adjusted_lnpval = ifelse(sign == "negative", -lnpval, lnpval))
   
   labeled <- combined %>% filter(word %in% termlist)
