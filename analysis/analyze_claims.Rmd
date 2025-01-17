@@ -714,7 +714,7 @@ compressed_plot_ids <- default_p_ids %>%
   geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.4, binwidth= 0.025)  +
   #geom_text_repel(aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 5, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0, size = 3) +
   geom_text_repel(data = default_p_ids_labeled, aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
-  labs(x="Domain", y="rank", title = "") +
+  labs(x="Domains", y="rank", title = "") +
   coord_cartesian(xlim = c(1.2,4), clip = "off") +
   theme_classic() +
   theme(legend.position="none") + 
