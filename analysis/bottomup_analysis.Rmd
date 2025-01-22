@@ -100,7 +100,7 @@ dstats <- d_long %>%
 
 Run GLMM without area as a random effect.
 
-```{r mixedeffects_full, include=TRUE}
+```{r mixedeffects_full, include=TRUE, eval=FALSE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
@@ -127,7 +127,7 @@ glmer_pop <- map_dfr(subclass, ~ run_glmmTMB_dict(.x, dstats, "logpop") )  %>%
 
 Run GLMM with area as a random effect.
 
-```{r mixedeffects_full, include=TRUE}
+```{r mixedeffects_full, include=TRUE, eval=FALSE}
 
 glmer_tmp <- map_dfr(subclass, ~ run_glmmTMB_dictarea(.x, dstats, "avgmonth_tmp") )  %>%
   arrange(coefficient) %>%
@@ -322,10 +322,14 @@ library(ggrrr)
 make_plot <- function(pvals, predictorname, termlist, lowerbound, upperbound, manualbin, breaknumber) {
   
   combined <- pvals %>% 
-    filter(predictor == predictorname,
-           lnpval != 0) %>%
-    mutate(sign = ifelse(coefficient >= 0, "positive", "negative"),
-           adjusted_lnpval = ifelse(sign == "negative", -lnpval, lnpval))
+    filter(predictor == predictorname) %>%
+    mutate(lnpval = case_when(
+      p_val == 1 ~ abs(log(0.9999)),
+      TRUE ~ lnpval
+    ),
+    sign = ifelse(coefficient >= 0, "positive", "negative"),
+    adjusted_lnpval = ifelse(sign == "negative", -lnpval, lnpval)
+           )
   
   labeled <- combined %>% filter(word %in% termlist)
 
