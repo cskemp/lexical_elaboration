@@ -11,7 +11,7 @@ library(stringr)
 phase1_file <- here("preprocessing", "hathi_trust", "01_initial_volumes.csv")
 outfile <-  here("preprocessing", "hathi_trust", "02_with_gcodes_starter.csv")
 
-# Listing of all ids in the Extended Features data set
+# Listing of all ids in the Extracted Features data set
 ef_masterlist_path <- here("preprocessing", "hathi_trust", "ef_file_listing.txt")
 
 # ef_masterlist names have +,= and also have commas
@@ -60,7 +60,7 @@ dl <- read_csv(phase1_file) %>%
   arrange(title_strip, ef, desc(year), oclc)  %>%
   # strip titles that match up to punctuation.
   distinct(title_strip, .keep_all=TRUE) %>%
-  filter(ef == 1) %>% # around 383 dictionaries are dropped because they're not in the extended features data set
+  filter(ef == 1) %>% # around 383 dictionaries are dropped because they're not in the extracted features data set
   select(id, year, title, enumeration, imprint)
 
 longest <- function(ls) {
