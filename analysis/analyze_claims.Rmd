@@ -443,7 +443,7 @@ weights_lr_combos <- bind_weights_par(d_combos)
 
 ##Explore results
 
-We'll make summary tables in three forms--expanded, default, and compressed. Expanded table contains rank scores for single languages (those in the collection as well those comprising language groups). Default table contains 191 cases of claims, with average score calculated for each language group. Compressed table is a unique combination of sign and concept, with mean rank calculated for each combination.
+We'll make summary tables in three forms--expanded, default, and compressed. Expanded table contains rank scores for single languages (those in the collection as well those comprising language groups). Default table contains 163 cases of claims, with average score calculated for each language group. Compressed table is a unique combination of sign and concept, with mean rank calculated for each combination.
 
 ```{r make tables, include=TRUE}
 
@@ -526,9 +526,9 @@ wordsincase <- c("snowcombo", "icecombo", "raincombo", "windcombo", "smellcombo"
 set.seed(123) # for reproducibility when using geom_jitter
 
 theme_font <- theme(
-  text = element_text(size = 10),  # Font size for all text elements
-  axis.title = element_text(size = 10),  # Font size for axis titles
-  axis.text = element_text(size = 9),  # Font size for axis labels
+  text = element_text(size = 10), 
+  axis.title = element_text(size = 11), 
+  axis.text = element_text(size = 10)
 ) 
 update_geom_defaults("text", list(size = 3))
 
@@ -568,19 +568,26 @@ snowcases_labeled<- snowcases %>%
   mutate(tcolor = if_else(langname %in% inuit_languages, "red", "black"))
 
 plot_snow_zeta_half <- snowcases %>%
-  ggplot(aes(x=1, y = zeta)) +
+  ggplot(aes(x = 1, y = zeta)) +
   geom_violinhalf(flip = TRUE) +
-  xlim(-1, 4)+
-  #ggplot(aes(x=zeta)) +
-  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth= 0.3)  +
-  geom_dotplot(data = snowcases_inuit, binaxis = "y", stackdir = "down", dotsize = 1, binwidth= 0.3, fill="red", color="red")  +
+  xlim(-1, 4) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.12, binwidth = 0.3) +
+  geom_dotplot(data = snowcases_inuit, binaxis = "y", stackdir = "down", dotsize = 1, binwidth = 0.3, fill = "red", color = "red") +
   theme_classic() +
-  geom_text_repel(data = snowcases_labeled, aes(x=1,y = zeta, label = langname, color = tcolor), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  geom_text_repel(
+    data = snowcases_labeled,
+    aes(x = 1, y = zeta, label = langname, color = tcolor),
+    direction = "y", force = 1.7, 
+    hjust = 0, nudge_x = 0.1, segment.color = "gray",
+    box.padding = 0.08, 
+    point.padding = 0.2, 
+    size = 3.6
+  ) +
   scale_color_manual(values = c("black", "red")) +
-  theme(legend.position="none") + 
+  theme(legend.position = "none") +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
-  labs(x="All languages", y=expression(L^{lang} * " for SNOW"), title = "") +
-  theme_font 
+  labs(x = "All languages", y = expression(L^{lang} * " for SNOW"), title = "") +
+  theme_font
 plot_snow_zeta_half
 
 default_p <- default %>%
@@ -604,13 +611,14 @@ labela <- default_p_all %>% filter(rank < 0.48) %>% select(claim) %>% pull(claim
 
 labelb <- c("SMELL, Yue Chinese", "DOCTOR, Hindi", "DANCE, Hindi",
              "TASTE, Lao", "EMOTION, Thai", "SNAKE, Arabic", "INSECTS, Navajo",
-             "TREE, Venda", "EMOTION, Southeast Asian",
-             "ACORN, Yana", "BODY PARTS, Aleut", "FRIEND, Russian",
+             "TREE, Venda", #"EMOTION, Southeast Asian",
+             "ACORN, Yana",  "FRIEND, Russian", #"BODY PARTS, Aleut",
              "SNOW, Eskimo-Aleut", "WIND, Oceanic",
-             "ICE, Yupik", "SMELL, Thao", "TASTE, Japanese", "GLANCE, Hindi",
-             "JUDGE, Swahili", "SIGHT, Yana", "ANT, Mizo", "TREE, Mi'kmaq",
-            "BIRD, Papua New Guinea", "GARDENING, Oceanic", "TOGETHERNESS, Iraqw",
-            "STARS, Australian", "TIME OF DAY, Hausa")
+             "ICE, Yupik",  "TASTE, Japanese", "GLANCE, Hindi", #"SMELL, Thao",
+             "JUDGE, Swahili", "SIGHT, Yana", #"ANT, Mizo", "TREE, Mi'kmaq",
+            #"BIRD, Papua New Guinea", "GARDENING, Oceanic", "TOGETHERNESS, Iraqw",
+            "STARS, Australian", "TIME OF DAY, Hausa", "FISH, Palauan", "RICE, Asian",
+            "BIRD, Fore", "HORSE, Portuguese", "HONEY, Arabic", "FERN, Maori", "BEER, German")
 
 labeled <- unique(c(labela, labelb))
 
@@ -634,9 +642,9 @@ default_plot_dot <- default_p %>%
   geom_segment( aes(x=0.5, xend=1,y=0.95,yend=0.95), linetype = "dashed", size = 0.5, color = "gray") +
   geom_violinhalf(flip = TRUE, fill = NA) +
   xlim(0.5, 1.7) +
-  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.2, binwidth= 0.025)  +
-  geom_dotplot(data = eskimosnow, binaxis = "y", stackdir = "down", dotsize = 0.05, binwidth= 0.3, fill="red", color="red")  +
-  geom_text_repel(data = default_p_labeled, aes(x=1,y = rank, label = claim, color=dot_color), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.125, binwidth= 0.025)  +
+  geom_dotplot(data = eskimosnow, binaxis = "y", stackdir = "down", dotsize = 0.04, binwidth= 0.3, fill="red", color="red")  +
+  geom_text_repel(data = default_p_labeled, aes(x=1,y = rank, label = claim, color=dot_color), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.08, size = 3.6) +
   scale_color_manual(values = c("black", "red")) +
   labs(x="All examples", y="rank", title = "") +
   theme_classic() +
@@ -711,9 +719,9 @@ compressed_plot_ids <- default_p_ids %>%
   geom_segment( aes(x=0.5, xend=4,y=0.5,yend=0.5), linetype = "dashed", size = 0.5, color = "grey") +
   geom_segment( aes(x=0.5, xend=4,y=0.95,yend=0.95), linetype = "dashed", size = 0.5, color = "grey") +
   geom_violinhalf(flip = TRUE, fill = NA) +
-  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.4, binwidth= 0.025)  +
+  geom_dotplot(binaxis = "y", stackdir = "down", dotsize = 0.3, binwidth= 0.025)  +
   #geom_text_repel(aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 5, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0, size = 3) +
-  geom_text_repel(data = default_p_ids_labeled, aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.05, size = 3) +
+  geom_text_repel(data = default_p_ids_labeled, aes(x=chapter_name,y = rank, label = concept), direction = "y", force = 1, hjust = 0,  nudge_x = 0.05, segment.color= "gray", box.padding = 0.08, size = 3) +
   labs(x="Domains", y="rank", title = "") +
   coord_cartesian(xlim = c(1.2,4), clip = "off") +
   theme_classic() +
@@ -722,16 +730,15 @@ compressed_plot_ids <- default_p_ids %>%
   theme(axis.ticks.x = element_blank(), axis.line.x = element_blank()) +
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.25, 0.5, 0.75, 1), expand = expansion(add = c(0, 0.1)))  +
   coord_capped_cart(xlim = c(1.2, 4), left='top') +
-  theme_font
+  theme_font + theme(axis.text.x = element_text(size = 10))
 
 compressed_plot_ids
 
-plot_width <- c(0.25,0.27,0.48) 
+plot_width <- c(0.26,0.27,0.48) 
 combined_plots <- plot_snow_zeta_half + default_plot_dot + compressed_plot_ids +
   plot_layout(widths = plot_width) + plot_annotation(tag_levels = 'a',  tag_suffix = ')')
 
-# Save the combined plot as a PDF
-ggsave(filename = here::here("output", "figures", "main", "claims.pdf"), plot = combined_plots, device = "pdf", width = 15, height = 7)
+ggsave(filename = here::here("output", "figures", "main", "claims.pdf"), plot = combined_plots, device = "pdf", width = 14, height = 9)
 
 ```
 

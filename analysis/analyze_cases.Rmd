@@ -484,7 +484,7 @@ top_five_fams <- weights_lr_fam %>%
   arrange(word, desc(zeta)) %>%
   select(word, family)
 
-# We find the top 11 terms most strongly associated with seven concepts in a way that they appear both in the full and robustness set. These are used for Figure 2 in the main text.
+# We find the top 11 terms most strongly associated with seven concepts in a way that they appear both in the full and robustness set.
 
 # code based on examples here:
 # https://cran.r-project.org/web/packages/wordspace/vignettes/wordspace-intro.html
@@ -594,24 +594,24 @@ create_table_plot <- function(concept, top_five_langs, top_five_fams, top_terms)
   # Column 1 with background for headers
   geom_rect(
     data = header1_data,
-    aes(xmin = 0.4, xmax = 1, ymin = -Row - 0.4, ymax = -Row + 0.4),
+    aes(xmin = 0.6, xmax = 1, ymin = -Row - 0.5, ymax = -Row + 0.5),
     fill = "gray50", inherit.aes = FALSE
   ) +
-  geom_text(aes(x = 0.7, label = table_data$Column1, fontface = fontface), 
-            size = ifelse(table_data$Column1 %in% c("Top languages", "Top families"), 2.8, 2.7), 
+  geom_text(aes(x = 0.8, label = table_data$Column1, fontface = fontface), 
+            size = ifelse(table_data$Column1 %in% c("Top languages", "Top families"), 3, 2.9), 
             hjust = 0.5, 
             color = ifelse(table_data$Column1 %in% c("Top languages", "Top families"), "white", "black")) +
   geom_rect(
     data = header2_data,
-    aes(xmin = 1.01, xmax = 1.4, ymin = -Row - 0.4, ymax = -Row + 0.4),
+    aes(xmin = 1.01, xmax = 1.3, ymin = -Row - 0.5, ymax = -Row + 0.5),
     fill = "gray50", inherit.aes = FALSE
   ) +
-  geom_text(aes(x = 1.2, label = table_data$Column2), 
-            size = ifelse(table_data$Column2 == "Top terms", 2.8, 2.7), 
+  geom_text(aes(x = 1.15, label = table_data$Column2), 
+            size = ifelse(table_data$Column2 == "Top terms", 3, 2.9), 
             fontface = ifelse(table_data$Column2 == "Top terms", "bold", "plain"),
             hjust = 0.5, color = ifelse(table_data$Column2 == "Top terms", "white", "black")) +
   theme_void() +
-  scale_x_continuous(limits = c(0.4, 1.4)) +
+  scale_x_continuous(limits = c(0.6, 1.3)) +
   theme(panel.border = element_rect(fill = NA, color = "white"))
   
   return(p)
@@ -663,7 +663,7 @@ create_env_plot <- function(groupname, variablename, significance, plotd){
     mutate(propn=log(propn)) %>%
     ggplot(aes(x=environment, y=propn)) +
     geom_point(size=0.001, color = "gray20") +
-    geom_smooth(method=lm) +
+    geom_smooth(method=lm, size = 0.8) +
     labs(y="log counts per 10000", x=variablename) +
     theme(axis.title = element_text(size = 10)) +
     mytheme
@@ -708,7 +708,8 @@ create_sub_plot <- function(groupname, significance, plotd){
     geom_jitter(size=0.0001, color = "gray20") +
     geom_boxplot(outlier.size = 0.0001, color = "gray20") +
     labs(y="", x="") +
-    mytheme
+    mytheme +
+    theme(axis.text.x = element_text(size = 10))
   
     if (significance == "three") {
     subsistenceplot <- subsistenceplot +
