@@ -20,8 +20,8 @@
 
     `rsync -azv data.analytics.hathitrust.org::features-2020.03/listing/file_listing.txt .`
     
-     `filtered_to_gcode.R` keeps only one representative of each set of dictionaries with identical titles. An additional 250  
-     or so volumes are dropped because frequency data for these volumes are not included in the Hathitrust Extracted Features Dataset, which means that frequency data for these volumes are not available..
+     `filtered_to_gcode.R` keeps only one representative of each set of dictionaries with identical titles. An additional 383  
+     volumes are dropped because frequency data for these volumes are not included in the Hathitrust Extracted Features Dataset, which means that frequency data for these volumes are not available..
     
 4. We used the script `gcode_to_final_hathilist.R` to drop volumes marked for deletion in `02_with_gcodes_manual.csv` and to produce the final list of volumes `02_with_gcodes.csv`. Just the HathiTrust ids for these files are written to `02_hathi_ids.txt'. These ids are converted to paths using
 
