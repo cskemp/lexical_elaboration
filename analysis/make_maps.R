@@ -45,7 +45,7 @@ avglen_one <- langwithdict %>%
   pull(avglen)
 
 avglen_morethanten <- langwithdict %>%
-  filter(ndicts > 10) %>%
+  filter(ndicts >= 10) %>%
   left_join(dictwithcount, by="glottocode") %>%
   mutate(avglen=mean(length)) %>%
   select(avglen) %>% unique() %>%

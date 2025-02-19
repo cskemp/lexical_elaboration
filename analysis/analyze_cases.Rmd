@@ -200,95 +200,6 @@ weights_lr_fam <- bind_weights_fam(d_wide_small) %>%
 
 ```
 
-
-## Top languages and families
-
-Visualise top languages based on L^lang score.
-
-```{r map visualization, include=TRUE}
-
-library(maps)
-
-weights_lr <- read_csv(here("output", "results", "cases_lr_lang.csv"), show_col_types = FALSE) %>%
-  arrange(langname) %>%
-  arrange(word) %>%
-  group_by(word) %>%
-  mutate(quantile = quantile(zeta, probs = c(0.95))) %>%
-  ungroup()
-
-# no convergence issues must be found
-expect_equal(nrow(weights_lr %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
-
-weights_lr_fam <- read_csv(here("output", "results", "cases_lr_fam.csv"), show_col_types = FALSE)
-
-# no convergence issues must be found
-expect_equal(nrow(weights_lr_fam %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
-
-posns <- weights_lr %>%
-  select(glottocode, longitude, latitude) %>%
-  mutate(longitude = if_else(longitude > 180, longitude - 360, longitude)) %>%
-  unique()
-
-world_map <- map_data("world")
-
-plot_map <- function(word) {
-  focal_posns <- weights_lr %>%
-    filter(word == {{word}}) %>%  
-    filter(zeta > quantile) %>%
-    select(-latitude, -longitude) %>%
-    left_join(posns, by = c("glottocode"))
-  
-  map_plot <- ggplot() +
-    geom_map(data = world_map, map = world_map,
-             aes(long, lat, map_id = region),
-             color = "white", fill = "lightgray", size = 0.1) +
-    coord_sf(xlim = c(-180, 180), ylim = c(-55, 80)) +
-    geom_point(data = posns, aes(longitude, latitude), color = "grey30", size = 1, shape = 16) +
-    geom_point(data = focal_posns, aes(longitude, latitude), color = "red", size = 1, shape = 16) +
-    theme_void() +
-    theme(legend.position = "none")
-  
-  return(map_plot)
-}
-
-snow_map <- plot_map("snow_group")
-ice_map <- plot_map("ice_group")
-rain_map <- plot_map("rain_group")
-wind_map <- plot_map("wind_group")
-smell_map <- plot_map("smell_group")
-taste_map <- plot_map("taste_group")
-dance_map <- plot_map("dance_group")
-
-detach("package:maps", unload = TRUE)
-```
-
-Extract top five languages and families.
-
-```{r top langs and fams, include=TRUE}
-
-top_five_langs <- weights_lr %>%
-  group_by(word) %>%
-  top_n(5, zeta) %>%
-  arrange(word, desc(zeta)) %>%
-  select(word, langname)
-
-top_five_langs %>% 
-  kbl() %>% 
-  kable_styling()
-
-top_five_fams <- weights_lr_fam %>%
-  filter(!grepl("isolate", family)) %>%
-  group_by(word) %>%
-  top_n(5, zeta) %>%
-  arrange(word, desc(zeta)) %>%
-  select(word, family)
-
-top_five_fams %>% 
-  kbl() %>% 
-  kable_styling()
-```
-
-
 ## Statistical analyses
 
 We run mixed-effects logistic regression to determine whether there is a statistically significant relationship between counts for each group of terms and the environmental variables. We run the regression twice: one including a random effect for language family to allow for historical relationships between languages, and the other including a random effect for area to allow for contacts in addition to language family. We also run Bayesian mixed-effects logistic regression.
@@ -329,6 +240,7 @@ glmer_pop <- map_dfr(all_groups, ~ run_glmmTMB(.x, dstats, "logpop") )  %>%
   arrange(coefficient) %>%
   mutate(predictor="population") %>%
   write_csv(here("output", "results", output_glmm), append=TRUE)
+
 ```
 
 Run the full model with dictionary as a random effect:
@@ -496,9 +408,235 @@ bayes_pop <- map_dfr(all_groups, ~ run_bayes_area_simple(.x, dstats, "logpop") )
 
 ## Create figures
 
+Visualise top languages based on L^lang score.
+
+```{r map visualization, include=TRUE}
+
+library(maps)
+
+weights_lr <- read_csv(here("output", "results", "cases_lr_lang.csv"), show_col_types = FALSE) %>%
+  arrange(langname) %>%
+  arrange(word) %>%
+  group_by(word) %>%
+  mutate(quantile = quantile(zeta, probs = c(0.95))) %>%
+  ungroup()
+
+# no convergence issues must be found
+expect_equal(nrow(weights_lr %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
+
+weights_lr_fam <- read_csv(here("output", "results", "cases_lr_fam.csv"), show_col_types = FALSE)
+
+# no convergence issues must be found
+expect_equal(nrow(weights_lr_fam %>% filter(convergence != "converged" | convergence_set != "converged")), 0)
+
+posns <- weights_lr %>%
+  select(glottocode, longitude, latitude) %>%
+  mutate(longitude = if_else(longitude > 180, longitude - 360, longitude)) %>%
+  unique()
+
+world_map <- map_data("world")
+
+plot_map <- function(word) {
+  focal_posns <- weights_lr %>%
+    filter(word == {{word}}) %>%  
+    filter(zeta > quantile) %>%
+    select(-latitude, -longitude) %>%
+    left_join(posns, by = c("glottocode"))
+  
+  map_plot <- ggplot() +
+    geom_map(data = world_map, map = world_map,
+             aes(long, lat, map_id = region),
+             color = "white", fill = "gray90", size = 0.1) +
+    coord_sf(xlim = c(-180, 180), ylim = c(-55, 80)) +
+    geom_point(data = posns, aes(longitude, latitude), color = "grey30", size = 0.7, shape = 16) +
+    geom_point(data = focal_posns, aes(longitude, latitude), color = "red", size = 1, shape = 16) +
+    theme_void() +
+    theme(legend.position = "none")
+  
+  return(map_plot)
+}
+
+snow_map <- plot_map("snow_group")
+ice_map <- plot_map("ice_group")
+rain_map <- plot_map("rain_group")
+wind_map <- plot_map("wind_group")
+smell_map <- plot_map("smell_group")
+taste_map <- plot_map("taste_group")
+dance_map <- plot_map("dance_group")
+
+detach("package:maps", unload = TRUE)
+```
+
+Make table on top languages, families, and terms.
+
+```{r top langs and fams, include=TRUE}
+
+top_five_langs <- weights_lr %>%
+  group_by(word) %>%
+  top_n(5, zeta) %>%
+  arrange(word, desc(zeta)) %>%
+  select(word, langname)
+
+top_five_fams <- weights_lr_fam %>%
+  filter(!grepl("isolate", family)) %>%
+  group_by(word) %>%
+  top_n(5, zeta) %>%
+  arrange(word, desc(zeta)) %>%
+  select(word, family)
+
+# We find the top 11 terms most strongly associated with seven concepts in a way that they appear both in the full and robustness set. These are used for Figure 2 in the main text.
+
+# code based on examples here:
+# https://cran.r-project.org/web/packages/wordspace/vignettes/wordspace-intro.html
+
+library(wordspace)
+
+d_long <- read_csv(here("data", "foranalyses", "d_long_nounverbadj.csv"))
+
+d_long2 <- d_long %>%
+  rename(dict = id, glottocode = gcode_data, langfamily = langfamily_data)
+
+docterm <- d_long2 %>% select(dict, word, count, dictsize_data) %>% 
+  filter(count > 0)
+words <- unique(docterm$word)
+
+VObj <- dsm(target=docterm$word, feature=docterm$dict, score=docterm$count, raw.freq=TRUE)
+VObj <- dsm.score(VObj, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
+VObj250 <- dsm.projection(VObj, method="svd", n=250)
+
+snowterms <- capture.output(nearest.neighbours(VObj250, "snow", n=150)) 
+iceterms <- capture.output(nearest.neighbours(VObj250, "ice", n=150)) 
+rainterms <- capture.output(nearest.neighbours(VObj250, "rain", n=150)) 
+windterms <- capture.output(nearest.neighbours(VObj250, "wind", n=150)) 
+smellterms <- capture.output(nearest.neighbours(VObj250, "smell", n=150)) 
+tasteterms <- capture.output(nearest.neighbours(VObj250, "taste", n=150)) 
+danceterms <- capture.output(nearest.neighbours(VObj250, "dance", n=150)) 
+
+d_long <- read_csv(here("data", "foranalyses", "d_long_nounverbadj_robust.csv")) # for robustness set
+
+d_long2 <- d_long %>%
+  rename(dict = id, glottocode = gcode_data, langfamily = langfamily_data)
+
+docterm <- d_long2 %>% select(dict, word, count, dictsize_data) %>% 
+  filter(count > 0)
+words <- unique(docterm$word)
+
+VObj <- dsm(target=docterm$word, feature=docterm$dict, score=docterm$count, raw.freq=TRUE)
+VObj <- dsm.score(VObj, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
+VObj250 <- dsm.projection(VObj, method="svd", n=250)
+
+snowterms_rob <- capture.output(nearest.neighbours(VObj250, "snow", n=150)) 
+iceterms_rob <- capture.output(nearest.neighbours(VObj250, "ice", n=150)) 
+rainterms_rob <- capture.output(nearest.neighbours(VObj250, "rain", n=150))
+windterms_rob <- capture.output(nearest.neighbours(VObj250, "wind", n=150)) 
+smellterms_rob <- capture.output(nearest.neighbours(VObj250, "smell", n=150)) 
+tasteterms_rob <- capture.output(nearest.neighbours(VObj250, "taste", n=150)) 
+danceterms_rob <- capture.output(nearest.neighbours(VObj250, "dance", n=150)) 
+
+extract_terms <- function(output) {
+  terms <- unlist(regmatches(output, gregexpr("\\b[a-zA-Z]+\\b", output)))
+  unique(terms)
+}
+
+find_intersect <- function(term) {
+  termsinfull <- extract_terms(get(paste0(term, "terms")))
+  termsinrob <- extract_terms(get(paste0(term, "terms_rob")))
+  intersecting_terms <- intersect(termsinfull, termsinrob)
+  intersecting_terms[1:11]  
+}
+
+snowcommon <- find_intersect("snow")
+icecommon <- find_intersect("ice")
+raincommon <- find_intersect("rain")
+windcommon <- find_intersect("wind")
+smellcommon <- find_intersect("smell")
+tastecommon <- find_intersect("taste")
+dancecommon <- find_intersect("dance")
+
+create_table_plot <- function(concept, top_five_langs, top_five_fams, top_terms) {
+
+  top_languages <- top_five_langs[top_five_langs$word == paste0(concept, "_group"), "langname"] %>% pull()
+  top_families <- top_five_fams[top_five_fams$word == paste0(concept, "_group"), "family"] %>% pull()
+  
+  table_data <- data.frame(
+    Column1 = c("Top languages", top_languages, "Top families", top_families),
+    Column2 = c("Top terms", top_terms, rep("", max(0, 10 - length(top_terms))))
+  )
+  
+  table_data$Row <- seq_len(nrow(table_data))
+  
+  header1_data <- table_data[table_data$Column1 %in% c("Top languages", "Top families"), ]
+  header2_data <- table_data[table_data$Column2 == "Top terms", ]
+  
+  bold_list <- c("Top languages", "Top families", 
+                 "Eastern Canadian Inuktitut", "Lakota", "Navajo", "Plains Cree", "Dakota",
+                 "German", "Central Siberian Yupik", "Russian",
+                 "Hawaiian", "Nyanja", "Scots",
+                 "Maori", "Tuamotuan", "Fijian", "Yámana",
+                 "Sanskrit", "Zulu", "Marshallese", "Kannada", "Gilbertese",
+                 "Eastern Ojibwa", "Chippewa",
+                 "Seneca", "K'iche'", "Tangga")
+  
+  italic_list <- c("Ngalkbun", "Latin", "Mudburra", "Central Tarahumara")
+  
+  table_data$fontface <- ifelse(
+    table_data$Column1 %in% bold_list, 
+    "bold", 
+    "plain"
+  )
+  table_data$fontface <- ifelse(
+    table_data$Column1 %in% italic_list, 
+    "italic", 
+    table_data$fontface
+  )
+  
+  p <- ggplot(table_data, aes(x = 1, y = -Row)) +
+  # Column 1 with background for headers
+  geom_rect(
+    data = header1_data,
+    aes(xmin = 0.4, xmax = 1, ymin = -Row - 0.4, ymax = -Row + 0.4),
+    fill = "gray50", inherit.aes = FALSE
+  ) +
+  geom_text(aes(x = 0.7, label = table_data$Column1, fontface = fontface), 
+            size = ifelse(table_data$Column1 %in% c("Top languages", "Top families"), 2.8, 2.7), 
+            hjust = 0.5, 
+            color = ifelse(table_data$Column1 %in% c("Top languages", "Top families"), "white", "black")) +
+  geom_rect(
+    data = header2_data,
+    aes(xmin = 1.01, xmax = 1.4, ymin = -Row - 0.4, ymax = -Row + 0.4),
+    fill = "gray50", inherit.aes = FALSE
+  ) +
+  geom_text(aes(x = 1.2, label = table_data$Column2), 
+            size = ifelse(table_data$Column2 == "Top terms", 2.8, 2.7), 
+            fontface = ifelse(table_data$Column2 == "Top terms", "bold", "plain"),
+            hjust = 0.5, color = ifelse(table_data$Column2 == "Top terms", "white", "black")) +
+  theme_void() +
+  scale_x_continuous(limits = c(0.4, 1.4)) +
+  theme(panel.border = element_rect(fill = NA, color = "white"))
+  
+  return(p)
+}
+
+top_snow <- create_table_plot("snow", top_five_langs, top_five_fams, snowcommon)
+top_ice <- create_table_plot("ice", top_five_langs, top_five_fams, icecommon)
+top_rain <- create_table_plot("rain", top_five_langs, top_five_fams, raincommon)
+top_wind <- create_table_plot("wind", top_five_langs, top_five_fams, windcommon)
+top_smell <- create_table_plot("smell", top_five_langs, top_five_fams, smellcommon)
+top_taste <- create_table_plot("taste", top_five_langs, top_five_fams, tastecommon)
+top_dance <- create_table_plot("dance", top_five_langs, top_five_fams, dancecommon)
+
+```
+
 Create plots for environmental variables:
 
 ```{r env plots, include=TRUE}
+
+mytheme <- theme_classic() +
+    theme(axis.ticks.x = element_blank(), 
+          axis.line.x = element_blank(),
+          axis.ticks.y = element_blank(), 
+          axis.line.y = element_blank(),
+          panel.background = element_rect(fill = "gray97", color = NA))
 
 # plot counts for climate terms against environment variables
 assign_env <- function(d) {  
@@ -524,10 +662,11 @@ create_env_plot <- function(groupname, variablename, significance, plotd){
     filter(group == groupname, propn != 0) %>%
     mutate(propn=log(propn)) %>%
     ggplot(aes(x=environment, y=propn)) +
-    geom_point(size=0.001) +
+    geom_point(size=0.001, color = "gray20") +
     geom_smooth(method=lm) +
     labs(y="log counts per 10000", x=variablename) +
-    theme(axis.title = element_text(size = 10))
+    theme(axis.title = element_text(size = 10)) +
+    mytheme
   
     if (significance == "three") {
     climateplot <- climateplot +
@@ -566,9 +705,10 @@ create_sub_plot <- function(groupname, significance, plotd){
     filter(propn != 0) %>%
     mutate(propn=log(propn)) %>%
     ggplot(aes(x=subsistence, y=propn)) +
-    geom_jitter(size=0.0001) +
-    geom_boxplot(outlier.size = 0.0001) +
-    labs(y="", x="")
+    geom_jitter(size=0.0001, color = "gray20") +
+    geom_boxplot(outlier.size = 0.0001, color = "gray20") +
+    labs(y="", x="") +
+    mytheme
   
     if (significance == "three") {
     subsistenceplot <- subsistenceplot +
@@ -606,11 +746,7 @@ create_pop_plot <- function(groupname, significance, plotd){
     geom_point(size=0.001) +
     geom_smooth(method=lm) +
     labs(y="log counts per 10000", x="log population") + 
-    theme_classic() +
-    theme(axis.ticks.x = element_blank(), 
-  axis.line.x = element_blank(),
-  axis.ticks.y = element_blank(), 
-  axis.line.y = element_blank()) +
+    mytheme +
     theme(axis.title = element_text(size = 8), axis.text = element_text(size = 7))
   
     if (significance == "three") {
@@ -638,27 +774,6 @@ plot_smell_pop <- create_pop_plot("smell_group", "(one)", plotd)
 plot_taste_pop <- create_pop_plot("taste_group", "none", plotd)
 plot_dance_pop <- create_pop_plot("dance_group", "three", plotd)
 
-```
-
-Load top language, family, and concept tables. We created them manually using top_five_langs and top_five_fams dataframes here. For the top 11 terms most strongly associated with seven concepts, we used the results obtained from running bottomup_analysis.Rmd. 
-
-```{r combine plots, include=TRUE}
-
-library(jpeg)
-library(svgparser)
-#top_snow <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_snow.jpg")), interpolate = TRUE)
-
-library(grImport)
-grImport::PostScriptTrace( here("output", "figures", "main", "top", "svgedit.eps"), here("output", "figures", "main", "top", "svgedit.eps.xml"))
-top_snow_pic <- grImport::readPicture( here("output", "figures", "main", "top", "svgedit.eps.xml"))
-top_snow <- grImport::pictureGrob(top_snow_pic)
-
-top_ice <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_ice.jpg")), interpolate = TRUE)
-top_rain <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_rain.jpg")), interpolate = TRUE)
-top_wind <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_wind.jpg")), interpolate = TRUE)
-top_smell <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_smell.jpg")), interpolate = TRUE)
-top_taste <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_taste.jpg")), interpolate = TRUE)
-top_dance <- rasterGrob(readJPEG(here("output", "figures", "main", "top", "top_dance.jpg")), interpolate = TRUE)
 ```
 
 Combine plots:
@@ -695,8 +810,8 @@ ggsave(here("output", "figures", "main", "cases.pdf"), grid.arrange(
   nrow = 7, ncol = 4,
   heights = c(1, 1, 1, 1, 1, 1, 1), widths = c(3.5, 2, 1.75, 1.75)), 
   width=14, height=17)
-```
 
+```
 
 ## Create supplementary figures and tables
 
