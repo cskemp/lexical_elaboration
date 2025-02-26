@@ -127,7 +127,7 @@ To reproduce tables and figures in main text and supplementary materials, follow
 
 7) Run `plot_related_lexemes.Rmd` to produce Figure S2 and Table S1.
 
-8) Run `compute_zetas_par.R` and `relatedtermsforapp.Rmd` to produce results used for the [app]( https://www.charleskemp.com/code/lexicalelaboration.html) and interim outputs necessary to run `explore_dicts.R`. Note that this takes an hour or so. Code for the app is available at a separate github [repository](https://github.com/cskemp/dictionaryapp).
+8) Run `compute_zetas_par.R` and `relatedtermsforapp.Rmd` to produce results used for the [app]( https://www.charleskemp.com/code/lexicalelaboration.html) and interim outputs necessary to run `explore_dicts.R`. Note that this takes an hour or so. Code for the app is available in a separate github [repository](https://github.com/cskemp/dictionaryapp) and is archived on [Zenodo]( https://doi.org/10.5281/zenodo.14928006 ).
 
 9) Run `explore_examples.R` to produce Figure S3.
 
