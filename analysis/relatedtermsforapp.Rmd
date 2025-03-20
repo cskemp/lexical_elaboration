@@ -97,3 +97,40 @@ closest_langs <- distances_long %>%
 write_csv(closest_langs, here("output", "results", "bila_app_nl.csv"))
 
 ```
+
+CK: Another approach to finding similar languages
+
+```{r termtermsimilarity, include=TRUE}
+
+docterm <- d_long %>%
+  group_by(langname_data, word) %>%
+  summarise(count = sum(count),
+            size = sum(dictsize_data),
+            normcount = count / size) %>%
+  ungroup()
+
+langs <- unique(docterm$langname_data)
+
+VObj <- dsm(target=docterm$langname_data, feature=docterm$word, score=docterm$count, raw.freq=TRUE)
+VObj <- dsm.score(VObj, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
+# Given that there are 617 languages, 250 dimensions seems like too many. I've arbitrarily chosen a dimensionality of 50 here. It might be worth trying a couple of other values (e.g. 25, 10) to see if they give better results. 
+VObj50 <- dsm.projection(VObj, method="svd", n=50)
+
+
+nls <- function(lang) {
+  if (lang %in% docterm$langname_data) {
+    nn <- names(nearest.neighbours(VObj50, lang, n = 10))
+  } else {
+    nn = character(length=10)
+  }
+  as_tibble(nn) %>% mutate(i = row_number())
+} 
+
+app_nl <- tibble(langs)%>% 
+  mutate(neighbours = map(langs, nls)) %>% 
+  unnest(cols = c(neighbours)) %>% 
+  rename(neighbour = value)
+
+#write_csv(app_nl, here("output", "results", "bila_app_nl_2000.csv"))
+```
+
