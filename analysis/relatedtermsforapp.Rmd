@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 library(tidyverse)
 library(here)
 library(wordspace)
+library(proxy)
 
 select <- dplyr::select
 
@@ -59,4 +60,40 @@ app_nns <- app_data %>%
   rename(neighbour = value)
 
 write_csv(app_nns, here("output", "results", "bila_app_nn_2000.csv"))
+```
+
+## Find nearest languages
+
+```{r langlang, include=TRUE}
+
+d_counts <- d_long %>%
+  group_by(langname_data, word) %>%
+  summarise(count = sum(count),
+            size = sum(dictsize_data),
+            normcount = count / size) %>%
+  ungroup() %>%
+  select(-count, -size) %>%
+  pivot_wider(id_cols = langname_data, names_from = word, values_from = normcount)
+
+# data has NA values which do not necessarily correspond to zero counts, so we use pairwaise distance:
+distances <- dist(as.matrix(d_counts[, -1]), method = "euclidean", diag = TRUE, upper = TRUE, pairwise.complete.obs = TRUE)
+
+# Convert the distances to a square matrix
+distance_matrix <- as.matrix(distances)
+rownames(distance_matrix) <- d_counts$langname_data
+colnames(distance_matrix) <- d_counts$langname_data
+
+distances_long <- as_tibble(as.data.frame(distance_matrix)) %>%
+  mutate(lang_a = d_counts$langname_data) %>%
+  gather(key = "lang_b", value = "distance", -lang_a) %>%
+  filter(distance != 0)
+
+closest_langs <- distances_long %>%
+  arrange(lang_a, distance) %>%  
+  group_by(lang_a) %>%           
+  slice_head(n = 10) %>%         
+  ungroup()
+
+write_csv(closest_langs, here("output", "results", "bila_app_nl.csv"))
+
 ```
