@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 library(tidyverse)
 library(here)
 library(wordspace)
-library(proxy)
 
 select <- dplyr::select
 
@@ -62,58 +61,20 @@ app_nns <- app_data %>%
 write_csv(app_nns, here("output", "results", "bila_app_nn_2000.csv"))
 ```
 
-## Find nearest languages
-
-```{r langlang, include=TRUE}
-
-d_counts <- d_long %>%
-  group_by(langname_data, word) %>%
-  summarise(count = sum(count),
-            size = sum(dictsize_data),
-            normcount = count / size) %>%
-  ungroup() %>%
-  select(-count, -size) %>%
-  pivot_wider(id_cols = langname_data, names_from = word, values_from = normcount)
-
-# data has NA values which do not necessarily correspond to zero counts, so we use pairwaise distance:
-distances <- dist(as.matrix(d_counts[, -1]), method = "euclidean", diag = TRUE, upper = TRUE, pairwise.complete.obs = TRUE)
-
-# Convert the distances to a square matrix
-distance_matrix <- as.matrix(distances)
-rownames(distance_matrix) <- d_counts$langname_data
-colnames(distance_matrix) <- d_counts$langname_data
-
-distances_long <- as_tibble(as.data.frame(distance_matrix)) %>%
-  mutate(lang_a = d_counts$langname_data) %>%
-  gather(key = "lang_b", value = "distance", -lang_a) %>%
-  filter(distance != 0)
-
-closest_langs <- distances_long %>%
-  arrange(lang_a, distance) %>%  
-  group_by(lang_a) %>%           
-  slice_head(n = 10) %>%         
-  ungroup()
-
-write_csv(closest_langs, here("output", "results", "bila_app_nl.csv"))
-
-```
-
-CK: Another approach to finding similar languages
+## Find similar languages
 
 ```{r termtermsimilarity, include=TRUE}
 
 docterm <- d_long %>%
   group_by(langname_data, word) %>%
-  summarise(count = sum(count),
-            size = sum(dictsize_data),
-            normcount = count / size) %>%
-  ungroup()
+  summarise(count = sum(count)) %>%
+  ungroup() %>% 
+  filter(count > 0)
 
 langs <- unique(docterm$langname_data)
 
 VObj <- dsm(target=docterm$langname_data, feature=docterm$word, score=docterm$count, raw.freq=TRUE)
 VObj <- dsm.score(VObj, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
-# Given that there are 617 languages, 250 dimensions seems like too many. I've arbitrarily chosen a dimensionality of 50 here. It might be worth trying a couple of other values (e.g. 25, 10) to see if they give better results. 
 VObj50 <- dsm.projection(VObj, method="svd", n=50)
 
 
@@ -131,6 +92,6 @@ app_nl <- tibble(langs)%>%
   unnest(cols = c(neighbours)) %>% 
   rename(neighbour = value)
 
-#write_csv(app_nl, here("output", "results", "bila_app_nl_2000.csv"))
+write_csv(app_nl, here("output", "results", "bila_app_nl.csv"))
 ```
 
