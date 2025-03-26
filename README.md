@@ -133,4 +133,5 @@ To reproduce tables and figures in main text and supplementary materials, follow
 
 10) Run `explore_dicts.R` to produce Figure S4.
 
+**Note:** Just before finalizing the proofs, we discovered that the glottocode for the *Yup'ik Eskimo Dictionary* by Jacobson should be *cent2127* instead of *cent2128*. We therefore changed the language name from "Central Siberian Yupik" to "Central Alaskan Yupik" in Figures 1 and 2. However, all other results in the paper remain based on the original coding (*cent2128*), as there was not enough time to rerun the analyses before publication.
 
