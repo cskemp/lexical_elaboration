@@ -4,6 +4,10 @@ library(tidyverse)
 library(testthat)
 library(lingtypology)
 
+filter_type <- "original"
+#uncomment below if the updated Wiktionary-filtering was used
+#filter_type <- "updated"
+
 dict_path <- here("data", "biladataset", "bila_dictionaries_full.csv")
 long_path <- here("data", "biladataset", "bila_long_nounverbadj_unfiltered_full.csv")
 noun_path <- here("data", "biladataset", "bila_long_noun_unfiltered_full.csv")
@@ -26,10 +30,19 @@ iso_gcode <- read_tsv(wik_path, show_col_types = FALSE) %>%
   unique() %>%
   left_join(wik_langs %>% select('iso', 'language_name'), by='language_name') %>%
   left_join(glottolog %>% select('glottocode', 'iso'), by='iso')
+
+if (filter_type == "original"){
 expect_equal(length(unique(iso_gcode$language_name)), 814)
+} else {
+expect_equal(length(unique(iso_gcode$language_name)), 819)
+}
 
 # 65 wiktionary languages still don't have glottocodes
-expect_equal(n_distinct(subset(iso_gcode, is.na(glottocode))$language_name), 65)
+if (filter_type == "original"){
+  expect_equal(n_distinct(subset(iso_gcode, is.na(glottocode))$language_name), 65)
+} else {
+  expect_equal(n_distinct(subset(iso_gcode, is.na(glottocode))$language_name), 67)
+}
 
 # so we'll use language name
 lname_gcode <- iso_gcode %>%
@@ -38,8 +51,12 @@ lname_gcode <- iso_gcode %>%
   select(-glottocode) %>%
   left_join(glottolog %>% select('glottocode', 'language'), by="language")
 
-# 40 wiktionary languages still don't have glottocodes
-expect_equal(n_distinct(subset(lname_gcode, is.na(glottocode))$language), 40)
+# 41 wiktionary languages still don't have glottocodes
+if (filter_type == "original"){
+  expect_equal(n_distinct(subset(lname_gcode, is.na(glottocode))$language), 41)
+} else {
+  expect_equal(n_distinct(subset(lname_gcode, is.na(glottocode))$language), 43)
+}
 
 # so we'll add them manually only if they appear in BILA
 # we suggest going through wiklangs_nogcode to see if the wiktionary language appears in BILA
@@ -73,20 +90,37 @@ manual_gcode <- lname_gcode %>%
   ))
 
 # combine wiktionary languages with glottocodes
-# out of 814 languages, 785 were assigned glottocodes
+# out of 814 languages, 784 were assigned glottocodes
 wiklangs_gcode <- bind_rows(iso_gcode %>% filter(!is.na(glottocode)),
                             lname_gcode %>% filter(!is.na(glottocode)) %>% rename(language_name=language),
                             manual_gcode %>% filter(!is.na(glottocode)) %>% rename(language_name=language))
-expect_equal(length(unique(wiklangs_gcode$language_name)), 785)
+
+if (filter_type == "original"){
+  expect_equal(length(unique(wiklangs_gcode$language_name)), 784)
+} else {
+  expect_equal(length(unique(wiklangs_gcode$language_name)), 787)
+}
 
 # add glottocodes to forms file and select unique combinations of glottocode and word to be used as filter criteria
-wik_forms  <- read_tsv(wik_path, show_col_types = FALSE) %>%
-  filter(language_name != "English") %>%
-  left_join(wiklangs_gcode %>% select(language_name, glottocode), by="language_name") %>%
-  # omit rows where languages have no glottocodes
-  filter(!is.na(glottocode)) %>%
-  select(glottocode, word) %>%
-  unique()
+
+if (filter_type == "original"){
+  wik_forms  <- read_tsv(wik_path, show_col_types = FALSE) %>%
+    filter(language_name != "English") %>%
+    left_join(wiklangs_gcode %>% select(language_name, glottocode), by="language_name") %>%
+    # omit rows where languages have no glottocodes
+    filter(!is.na(glottocode)) %>%
+    select(glottocode, word) %>%
+    unique()
+} else {
+  wik_forms  <- read_tsv(wik_path, show_col_types = FALSE) %>%
+    filter(language_name != "English") %>%
+    left_join(wiklangs_gcode %>% select(language_name, glottocode), by="language_name") %>%
+    # omit rows where languages have no glottocodes
+    filter(!is.na(glottocode)) %>%
+    select(glottocode, word) %>%
+    mutate(word = str_to_lower(word)) %>%
+    unique()
+}
 
 # we'll filter long form first
 counts_long <- read_csv(long_path, show_col_types = FALSE) %>%
@@ -175,7 +209,6 @@ langs_filtered <- counts_long %>%
   arrange(desc(words_filtered)) %>%
   left_join(dicts %>% select(glottolog_langname, glottocode), by="glottocode") %>%
   unique()
-expect_equal(nrow(langs_filtered), 205)
 
 # 28783 unique combinations of language and form were filtered
 # 8925 unique forms were filtered
@@ -187,6 +220,14 @@ words_filtered <- counts_long %>%
   left_join(dicts %>% select(glottolog_langname, glottocode), by="glottocode", relationship = "many-to-many") %>%
   unique() %>%
   write_csv(here("data", "foranalyses", "wiktionary_filtered_combinations.csv"))
-expect_equal(nrow(words_filtered), 28783)
-expect_equal(length(unique(words_filtered$glottocode)), 205)
-expect_equal(length(unique(words_filtered$word)), 8925)
+
+if (filter_type == "original"){
+  expect_equal(nrow(words_filtered), 28783)
+  expect_equal(length(unique(words_filtered$glottocode)), 205)
+  expect_equal(length(unique(words_filtered$word)), 8925)
+} else {
+  expect_equal(nrow(words_filtered), 31646)
+  expect_equal(length(unique(words_filtered$glottocode)), 205)
+  expect_equal(length(unique(words_filtered$word)), 9184)
+}
+

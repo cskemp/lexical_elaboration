@@ -98,7 +98,7 @@ B. Assemble unigram frequencies (see `../preprocessing/README.md`). Steps 3 thro
 
 8) Run `Rscript combine_volumes.R nounverbadj` to combine counts across multiple volumes of the same dictionary.
 
-9) Run `wiktionary_extract.ipynb` and then `wiktionary_filter.R` to perform Wiktionary-based filtering.
+9) Run `wiktionary_extract.ipynb` and then `wiktionary_filter.R` to perform Wiktionary-based filtering. The `wiktionary_extract.ipynb` has the option to set the filtering type as *original* or *updated*. The *original* refers to the Wiktionary-filtering described in the paper and was used to produce all results reported in the paper. The *updated* refers to the Wiktionary-filtering that considers capitalized words such as German *Boot* and was used to produce results for the [app]( https://www.charleskemp.com/code/lexicalelaboration.html).
 
 10) Run `wordnet_extract.ipynb` in `../preprocessing/wordnet` to extract information about number of senses from WordNet.
 
@@ -127,11 +127,13 @@ To reproduce tables and figures in main text and supplementary materials, follow
 
 7) Run `plot_related_lexemes.Rmd` to produce Figure S2 and Table S1.
 
-8) Run `compute_zetas_par.R` and `relatedtermsforapp.Rmd` to produce results used for the [app]( https://www.charleskemp.com/code/lexicalelaboration.html) and interim outputs necessary to run `explore_dicts.R`. Note that this takes an hour or so. Code for the app is available in a separate github [repository](https://github.com/cskemp/dictionaryapp) and is archived on [Zenodo]( https://doi.org/10.5281/zenodo.14928006 ).
+8) Run `explore_examples.R` to produce Figure S3.
 
-9) Run `explore_examples.R` to produce Figure S3.
+9) Run `explore_dicts.R` to produce Figure S4.
 
-10) Run `explore_dicts.R` to produce Figure S4.
+10) Run `compute_zetas_par.R` to produce interim outputs necessary to run `explore_dicts.R`. Note that this takes an hour or so. The `compute_zetas_par.R` was based on the original Wiktionary-filtering described in the paper.
+
+11) Run `compute_zetas_par_forapp.R` and `relatedtermsforapp.Rmd` to produce results used for the app. Note that this was based on the updated Wiktionary-filtering. Code for the app is available in a separate github [repository](https://github.com/cskemp/dictionaryapp) and is archived on [Zenodo]( https://doi.org/10.5281/zenodo.14928006 ).
 
 **Note:** Just before finalizing the proofs, we discovered that the glottocode for the *Yup'ik Eskimo Dictionary* by Jacobson should be *cent2127* instead of *cent2128*. We therefore changed the language name from "Central Siberian Yupik" to "Central Alaskan Yupik" in Figures 1 and 2. However, all other results in the paper remain based on the original coding (*cent2128*), as there was not enough time to rerun the analyses before publication.
 

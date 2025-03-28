@@ -4,6 +4,10 @@ library(igraph)
 library(readxl)
 library(testthat)
 
+filter_type <- "original"
+#uncomment below if the updated Wiktionary-filtering was used
+#filter_type <- "updated"
+
 dict_path <- here("data", "biladataset", "bila_dictionaries_full.csv")
 wordcount_path <- here("data", "biladataset", "bila_matrix_nounverbadj_full.csv")
 wordcount_long_path <- here("data", "biladataset", "bila_long_nounverbadj_full.csv")
@@ -25,8 +29,8 @@ swadesh <- read_tsv(here("rawdata", "downloaded", "Swadesh-1955-215.tsv")) %>%
   mutate(word = str_replace(word, "\\*", "")) %>%
   mutate(word = map_chr(str_split(word, " "), 1))
 
-wordcount <-  read_csv(wordcount_path,  col_types = cols(id = col_character(),
-                                           .default=col_double()))
+wordcount <-  read_csv(wordcount_path,
+                       col_types = cols(id = col_character(), .default = col_double()))
 
 expect_equal(length(setdiff(d_dup$id, wordcount$id)), 0)
 expect_equal(length(setdiff(wordcount$id, d_dup$id)), 0)
@@ -45,15 +49,22 @@ expect_equal(length(unique(wordcount_noun$word)), 12021)
 
 d_counts <- wordcount %>%
   # we treat wiktionary-filtered forms as non-English forms
-  mutate(engprop_data = 100*(all_english_count_data-all_wiktionary_filtered_data)/all_token_count_data) %>%
+  mutate(
+    engprop_data = 100 * (all_english_count_data - all_wiktionary_filtered_data) /
+      all_token_count_data
+  ) %>%
   # keep only dictionaries with 5000 or more total tokens and engprop > 30
-  filter(all_token_count_data >= 5000 & engprop_data >= 30) %>%
+  filter(all_token_count_data >= 5000 &
+           engprop_data >= 30) %>%
   select(id, any_of(swadesh$word)) %>%
-  mutate(swadesh_word_count_data = select(., !(ends_with("_data") | id)) %>% apply(1, sum, na.rm=TRUE)) %>%
+  mutate(swadesh_word_count_data = select(., !(ends_with("_data") |
+                                                 id)) %>% apply(1, sum, na.rm = TRUE)) %>%
   # normalize counts across swadesh words
-  mutate(across(-c(id, ends_with("_data")), ~(.x * 1000/swadesh_word_count_data))) %>%
-  select(id,  !(ends_with("_data"))) %>%
-  mutate_all(~replace_na(., 0))
+  mutate(across(-c(id, ends_with("_data")), ~
+                  (.x * 1000 / swadesh_word_count_data))) %>%
+  select(id, !(ends_with("_data"))) %>%
+  mutate_all( ~
+                replace_na(., 0))
 
 # should be no NAs anywhere
 expect_false(any(is.na(d_counts)))
@@ -83,9 +94,33 @@ close_dictionaries <- distances_long %>%
   head(5000) %>%
   left_join(idlang, by = c("id_a" = "id")) %>%
   left_join(idlang, by = c("id_b" = "id")) %>%
-  rename(langname_a = langname.x, title_a = title.x, imprint_a = imprint.x, year_a = year.x, glottocode_a = glottocode.x,
-         langname_b = langname.y, title_b = title.y, imprint_b = imprint.y, year_b = year.y, glottocode_b = glottocode.y)  %>%
-  select(distance, langname_a, langname_b, title_a, imprint_a, year_a, title_b, imprint_b, year_b, id_a, id_b, glottocode_a, glottocode_b) %>%
+  rename(
+    langname_a = langname.x,
+    title_a = title.x,
+    imprint_a = imprint.x,
+    year_a = year.x,
+    glottocode_a = glottocode.x,
+    langname_b = langname.y,
+    title_b = title.y,
+    imprint_b = imprint.y,
+    year_b = year.y,
+    glottocode_b = glottocode.y
+  )  %>%
+  select(
+    distance,
+    langname_a,
+    langname_b,
+    title_a,
+    imprint_a,
+    year_a,
+    title_b,
+    imprint_b,
+    year_b,
+    id_a,
+    id_b,
+    glottocode_a,
+    glottocode_b
+  ) %>%
   write_csv(here("data", "forpreprocessing", "close_dictionaries.csv"))
 
 # top 1708 pairs
@@ -110,12 +145,13 @@ d <- d_dup %>%
   # drop dictionaries that were excluded from d_counts for being too small or having small engprop
   filter(id %in% d_counts$id) %>%
   mutate(cluster = row_number()) %>%
-  left_join(dict_clusters, by="id") %>%
+  left_join(dict_clusters, by =
+              "id") %>%
   mutate(cluster = if_else(!is.na(dcluster), dcluster, cluster)) %>%
   select(-dcluster) %>%
   group_by(cluster) %>%
   # take the most recent entry out of each duplicate pair
-  filter(year== max(year))  %>%
+  filter(year == max(year))  %>%
   slice(1) %>%
   ungroup()
 
@@ -131,36 +167,51 @@ d_standard <- d_dup %>%
   write_csv(here("data", "biladataset", "bila_dictionaries.csv"))
 
 # the standard version includes dictionaries in languages
-expect_equal(nrow(d_standard),1574)
-expect_equal(length(unique(d_standard$glottocode)),616)
+if (filter_type == "original") {
+  expect_equal(nrow(d_standard), 1574)
+  expect_equal(length(unique(d_standard$glottocode)), 616)
+} else {
+  expect_equal(nrow(d_standard), 1547)
+  expect_equal(length(unique(d_standard$glottocode)), 616)
+}
 
 # write standard versions
 
-bila_matrix_nounverbadj <- read_csv( here("data", "biladataset", "bila_matrix_nounverbadj_full.csv")) %>%
+bila_matrix_nounverbadj <- read_csv(here("data", "biladataset", "bila_matrix_nounverbadj_full.csv")) %>%
   filter(id %in% d_standard$id) %>%
   write_csv(here("data", "biladataset", "bila_matrix_nounverbadj.csv"))
 
-bila_long_nounverbadj <- read_csv( here("data", "biladataset", "bila_long_nounverbadj_full.csv")) %>%
+bila_long_nounverbadj <- read_csv(here("data", "biladataset", "bila_long_nounverbadj_full.csv")) %>%
   filter(id %in% d_standard$id) %>%
   write_csv(here("data", "biladataset", "bila_long_nounverbadj.csv"))
 
 # the standard version includes 20187 tokens of nouns, verbs, and adjectives
 wordcount_long_standard <-  bila_long_nounverbadj %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_long_standard$word)), 20187)
 
-bila_matrix_noun <- read_csv( here("data", "biladataset", "bila_matrix_noun_full.csv")) %>%
+if (filter_type == "original") {
+  expect_equal(length(unique(wordcount_long_standard$word)), 20187)
+} else {
+  expect_equal(length(unique(wordcount_long_standard$word)), 20185)
+}
+
+bila_matrix_noun <- read_csv(here("data", "biladataset", "bila_matrix_noun_full.csv")) %>%
   filter(id %in% d_standard$id) %>%
   write_csv(here("data", "biladataset", "bila_matrix_noun.csv"))
 
-bila_long_noun <- read_csv( here("data", "biladataset", "bila_long_noun_full.csv")) %>%
+bila_long_noun <- read_csv(here("data", "biladataset", "bila_long_noun_full.csv")) %>%
   filter(id %in% d_standard$id) %>%
   write_csv(here("data", "biladataset", "bila_long_noun.csv"))
 
 # the standard version includes 12016 noun tokens
 wordcount_noun_standard <-  bila_long_noun %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_noun_standard$word)), 12016)
+
+if (filter_type == "original") {
+  expect_equal(length(unique(wordcount_noun_standard$word)), 12016)
+} else {
+  expect_equal(length(unique(wordcount_noun_standard$word)), 12014)
+}
 
 # now we'll write lemmatized version for noun
 
@@ -169,9 +220,7 @@ feature_path <- here("data", "forpreprocessing", "lemma_features.tsv")
 # load information extracted from wordnet
 features <- read_tsv(feature_path) %>%
   rename(word = original_word) %>%
-  mutate(
-    nsenses = if_else(str_ends(word, "_data"), NA_integer_, nsenses),
-  )
+  mutate(nsenses = if_else(str_ends(word, "_data"), NA_integer_, nsenses), )
 
 # now we change lemmatized noun in UK variant with that of US variant to combine counts for, say, odor and odour
 
@@ -193,14 +242,22 @@ features <- features %>%
   ungroup()
 
 bila_long_noun_lemmatized <- bila_long_noun %>%
-  left_join(features, by="word") %>%
+  left_join(features, by =
+              "word") %>%
   group_by(id, lemmatized_word, nsenses) %>%
-  summarise(count=sum(count)) %>%
+  summarise(count =
+              sum(count)) %>%
   ungroup() %>%
-  rename(word=lemmatized_word) %>%
+  rename(word =
+           lemmatized_word) %>%
   write_csv(here("data", "biladataset", "bila_long_noun_lemmatized.csv"))
 
 # the lemmatized version includes 8575 noun tokens
 wordcount_lemma_standard <-  bila_long_noun_lemmatized %>%
   filter(!endsWith(word, "_data"))
-expect_equal(length(unique(wordcount_lemma_standard$word)), 8575)
+
+if (filter_type == "original") {
+  expect_equal(length(unique(wordcount_lemma_standard$word)), 8575)
+} else {
+  expect_equal(length(unique(wordcount_lemma_standard$word)), 8575)
+}

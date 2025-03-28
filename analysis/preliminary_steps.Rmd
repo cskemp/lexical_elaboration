@@ -22,6 +22,10 @@ First we load dictionary file and add environmental variables:
 
 ```{r loaddata, include=TRUE}
 
+filter_type <- "original"
+#uncomment below if the updated Wiktionary-filtering was used
+filter_type <- "updated"
+
 # load dictionary file
 dict_path <- here("data", "biladataset", "bila_dictionaries.csv")  
 dict <- read_csv(dict_path) %>%
@@ -141,7 +145,12 @@ subset_lr <- word_nlang_lr %>%
 
 subset_lr <- subset_lr %>%
   pull(word)
-expect_equal(length(subset_lr), 7973)
+
+if (filter_type == "original") {
+  expect_equal(length(subset_lr), 7973)
+} else {
+  expect_equal(length(subset_lr), 7955)
+}
 
 ```
 
@@ -234,9 +243,14 @@ dlen_robust <- dlen %>%
 
 d_robust <- bila_robust %>%
   filter(id %in% dlen_robust$id)
-  
-expect_equal(nrow(d_robust), 261)
-expect_equal(length(unique(d_robust$glottocode)), 226)
+
+if (filter_type == "original") {
+  expect_equal(nrow(d_robust), 261)
+  expect_equal(length(unique(d_robust$glottocode)), 226)
+} else {
+  expect_equal(nrow(d_robust), 266)
+  expect_equal(length(unique(d_robust$glottocode)), 230)
+}
 
 robust_set <- d_robust %>%
   select(glottocode) %>%
