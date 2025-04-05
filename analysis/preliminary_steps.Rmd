@@ -24,7 +24,7 @@ First we load dictionary file and add environmental variables:
 
 filter_type <- "original"
 #uncomment below if the updated Wiktionary-filtering was used
-filter_type <- "updated"
+#filter_type <- "updated"
 
 # load dictionary file
 dict_path <- here("data", "biladataset", "bila_dictionaries.csv")  
