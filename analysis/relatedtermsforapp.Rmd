@@ -26,30 +26,48 @@ This notebook is used to find related terms for the app.
 # code based on examples here:
 # https://cran.r-project.org/web/packages/wordspace/vignettes/wordspace-intro.html
 
-#d_wide <- read_csv(here("data", "foranalyses", "d_wide.csv"))
 d_long <- read_csv(here("data", "foranalyses", "d_long_nounverbadj.csv")) %>% 
   rename(dict = id)
 
-#docterm <- d_wide %>% select(dict, word, count) %>% 
 docterm <- d_long %>% select(dict, word, count) %>% 
   filter(count > 0)
-
-words <- unique(docterm$word)
 
 VObj <- dsm(target=docterm$word, feature=docterm$dict, score=docterm$count, raw.freq=TRUE)
 VObj <- dsm.score(VObj, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
 VObj250 <- dsm.projection(VObj, method="svd", n=250)
 
-app_data <-  read_csv(here("output", "results", "bila_app_stats_2000.csv"))
+d_long_rob <- read_csv(here("data", "foranalyses", "d_long_nounverbadj_robust.csv")) %>% 
+  rename(dict = id)
+
+docterm_rob <- d_long_rob %>% select(dict, word, count) %>% 
+  filter(count > 0)
+
+VObj_rob <- dsm(target=docterm_rob$word, feature=docterm_rob$dict, score=docterm_rob$count, raw.freq=TRUE)
+VObj_rob <- dsm.score(VObj_rob, score="simple-ll", transform="log", normalize=TRUE, method="euclidean")
+VObj250_rob <- dsm.projection(VObj_rob, method="svd", n=250)
 
 nns <- function(term) {
   if (term %in% docterm$word) {
-    nn <- names(nearest.neighbours(VObj250, term, n = 10))
+    nn_full <- names(nearest.neighbours(VObj250, term, n = 150))
+    nn_rob <- names(nearest.neighbours(VObj250_rob, term, n = 150))
+    nn_inter <- intersect(nn_full, nn_rob)
+    missing_n <- 10 - length(nn_inter)
+    
+    if (missing_n > 0) {
+      extras <- setdiff(nn_full, nn_inter)[1:missing_n]
+      nn <- c(nn_inter, extras)
+    } else {
+      nn <- nn_inter[1:10]
+    }
   } else {
-    nn = character(length=10)
+    nn <- character(length = 10)
   }
+  
   as_tibble(nn) %>% mutate(i = row_number())
-} 
+}
+
+
+app_data <-  read_csv(here("output", "results", "bila_app_stats_6000.csv"))
 
 app_nns <- app_data %>% 
   select(word) %>% 
@@ -58,7 +76,7 @@ app_nns <- app_data %>%
   unnest() %>% 
   rename(neighbour = value)
 
-write_csv(app_nns, here("output", "results", "bila_app_nn_2000.csv"))
+write_csv(app_nns, here("output", "results", "bila_app_nn_6000.csv"))
 ```
 
 ## Find similar languages
